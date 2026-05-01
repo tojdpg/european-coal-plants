@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>European Coal Asset Tracker</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root { --bg:#0f1419; --panel:#1a2028; --panel-2:#232b35; --border:#2f3a47;
+    --fg:#e8edf3; --muted:#8a96a8; --accent:#ff5252; --accent-2:#ffd54f; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--fg);
+    font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+  body { display:grid; grid-template-columns:360px 1fr; grid-template-rows:56px 1fr; height:100vh; }
+  header { grid-column:1/3; display:flex; align-items:center; justify-content:space-between;
+    padding:0 18px; border-bottom:1px solid var(--border); background:var(--panel); }
+  header h1 { font-size:15px; margin:0; font-weight:600; }
+  header h1 small { color:var(--muted); font-weight:400; margin-left:10px; }
+  header .totals { display:flex; gap:22px; font-size:12px; }
+  header .totals span { color:var(--muted); }
+  header .totals b { color:var(--fg); font-weight:600; }
+  aside { background:var(--panel); border-right:1px solid var(--border); overflow-y:auto; padding:16px; }
+  main { position:relative; }
+  #map { position:absolute; inset:0; }
+  h2 { font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted);
+    margin:18px 0 8px; font-weight:600; }
+  h2:first-child { margin-top:0; }
+  .row { display:flex; align-items:center; gap:8px; margin-bottom:6px; font-size:13px; }
+  .row label { flex:1; color:var(--fg); cursor:pointer; }
+  .row .count { color:var(--muted); font-variant-numeric:tabular-nums; font-size:12px; }
+  input[type=checkbox] { accent-color:var(--accent); }
+  input[type=range] { width:100%; accent-color:var(--accent); }
+  .slider-labels { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+  .ranking { font-size:12px; }
+  .ranking .item { display:flex; justify-content:space-between; padding:4px 0;
+    border-bottom:1px solid var(--border); cursor:pointer; }
+  .ranking .item:hover { background:var(--panel-2); }
+  .ranking .name { color:var(--fg); flex:1; padding-right:8px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ranking .val { color:var(--accent); font-variant-numeric:tabular-nums; font-weight:600; }
+  .summary { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:4px; }
+  .summary .stat { background:var(--panel-2); padding:10px 12px; border-radius:6px; }
+  .summary .stat .num { font-size:18px; font-weight:600; color:var(--fg); font-variant-numeric:tabular-nums; }
+  .summary .stat .lbl { font-size:11px; color:var(--muted); margin-top:2px; }
+  .leaflet-popup-content-wrapper { background:var(--panel); color:var(--fg);
+    border:1px solid var(--border); border-radius:6px; }
+  .leaflet-popup-tip { background:var(--panel); }
+  .leaflet-popup-content { margin:12px 14px; min-width:220px; }
+  .popup b { color:var(--accent-2); }
+  .popup a { color:var(--accent-2); text-decoration:none; }
+  .popup a:hover { text-decoration:underline; }
+  .popup hr { border:none; border-top:1px solid var(--border); margin:6px 0; }
+  footer { position:absolute; bottom:6px; right:10px; font-size:11px; color:var(--muted);
+    background:rgba(15,20,25,0.85); padding:4px 8px; border-radius:4px; z-index:1000; }
+  footer a { color:var(--muted); text-decoration:underline; }
+  .country-filter { max-height:220px; overflow-y:auto; padding-right:4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>European Coal Asset Tracker <small>operating - construction - mothballed</small></h1>
+  <div class="totals" id="totals"></div>
+</header>
+<aside>
+  <div class="summary">
+    <div class="stat"><div class="num" id="vis-count">-</div><div class="lbl">plants visible</div></div>
+    <div class="stat"><div class="num" id="vis-co2">-</div><div class="lbl">Mt CO2 / year</div></div>
+  </div>
+  <div class="summary">
+    <div class="stat"><div class="num" id="vis-mw">-</div><div class="lbl">GW capacity</div></div>
+    <div class="stat"><div class="num" id="vis-life">-</div><div class="lbl">Mt lifetime CO2</div></div>
+  </div>
+  <h2>Status</h2>
+  <div id="status-filter"></div>
+  <h2>Min capacity (MW)</h2>
+  <input type="range" id="cap-slider" min="0" max="6000" step="50" value="0">
+  <div class="slider-labels"><span>0</span><span id="cap-val">0</span><span>6000</span></div>
+  <h2>Country</h2>
+  <div class="country-filter" id="country-filter"></div>
+  <h2>Top emitters (visible)</h2>
+  <div class="ranking" id="rank-co2"></div>
+  <h2>Top by capacity (visible)</h2>
+  <div class="ranking" id="rank-cap"></div>
+  <h2>By owner / parent</h2>
+  <div class="ranking" id="rank-owner"></div>
+</aside>
+<main>
+  <div id="map"></div>
+  <footer>Data: <a href="https://globalenergymonitor.org/projects/global-coal-plant-tracker/" target="_blank">GEM GCPT</a>.
+    Built with Clay v1.5 + MCP. <span id="gen-date"></span></footer>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STATUS_COLORS = { "operating":"#ff5252", "construction":"#ff9800", "mothballed":"#ffd54f" };
+let DATA = null, map, markerLayer;
+const filters = { statuses:new Set(), countries:new Set(), minCap:0 };
+const fmt0 = n => n==null?"-":Math.round(n).toLocaleString();
+const fmt1 = n => n==null?"-":(Math.round(n*10)/10).toLocaleString();
+function radius(mw) { if(!mw||mw<=0) return 4; return Math.max(4, Math.min(28, Math.sqrt(mw/100)*3)); }
+function popupHtml(p) {
+  const co2 = p.annual_co2_mt||0;
+  return `<div class="popup"><b>${p.name}</b><br>
+    <span style="color:var(--muted)">${p.country} - ${p.status}</span><hr>
+    Capacity: <b>${fmt0(p.capacity_mw)} MW</b> (${p.n_units} units)<br>
+    Annual CO2: <b>${fmt1(co2)} Mt/yr</b><br>
+    Lifetime CO2: <b>${fmt1(p.lifetime_co2_mt)} Mt</b><br>
+    ${p.earliest_start?`Online since: <b>${p.earliest_start}</b><br>`:""}
+    ${p.phaseout_year?`Phaseout: <b>${p.phaseout_year}</b><br>`:""}
+    ${p.owner?`Owner: ${p.owner}<br>`:""}
+    ${p.parent?`Parent: ${p.parent}<br>`:""}<hr>
+    <a href="${p.eo_browser}" target="_blank">-> View live Sentinel-2 imagery</a></div>`;
+}
+function visiblePlants() {
+  return DATA.plants.filter(p => filters.statuses.has(p.status) &&
+    filters.countries.has(p.iso2) && p.capacity_mw >= filters.minCap);
+}
+function renderMap() {
+  markerLayer.clearLayers();
+  for (const p of visiblePlants()) {
+    L.circleMarker([p.lat, p.lon], { radius:radius(p.capacity_mw),
+      color:STATUS_COLORS[p.status]||"#888", weight:1, fillOpacity:0.75 })
+      .bindPopup(popupHtml(p))
+      .bindTooltip(`${p.name} (${fmt0(p.capacity_mw)} MW)`)
+      .addTo(markerLayer);
+  }
+}
+function renderSummary() {
+  const v = visiblePlants();
+  const co2 = v.reduce((a,p) => a+(p.annual_co2_mt||0), 0);
+  const mw = v.reduce((a,p) => a+(p.capacity_mw||0), 0);
+  const life = v.reduce((a,p) => a+(p.lifetime_co2_mt||0), 0);
+  document.getElementById("vis-count").textContent = v.length;
+  document.getElementById("vis-co2").textContent = fmt1(co2);
+  document.getElementById("vis-mw").textContent = fmt1(mw/1000);
+  document.getElementById("vis-life").textContent = fmt0(life);
+  const byCo2 = [...v].filter(p=>p.annual_co2_mt>0).sort((a,b)=>b.annual_co2_mt-a.annual_co2_mt).slice(0,8);
+  document.getElementById("rank-co2").innerHTML = byCo2.map(p =>
+    `<div class="item" data-name="${p.name}"><span class="name">${p.name}</span><span class="val">${fmt1(p.annual_co2_mt)} Mt</span></div>`).join("");
+  const byMw = [...v].sort((a,b)=>b.capacity_mw-a.capacity_mw).slice(0,8);
+  document.getElementById("rank-cap").innerHTML = byMw.map(p =>
+    `<div class="item" data-name="${p.name}"><span class="name">${p.name}</span><span class="val">${fmt0(p.capacity_mw)} MW</span></div>`).join("");
+  const parents = {};
+  for (const p of v) {
+    const key = (p.parent||p.owner||"Unknown").split(";")[0].trim();
+    parents[key] = (parents[key]||0) + p.capacity_mw;
+  }
+  const topParents = Object.entries(parents).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  document.getElementById("rank-owner").innerHTML = topParents.map(([k,mw]) =>
+    `<div class="item"><span class="name">${k.length>30?k.slice(0,28)+"...":k}</span><span class="val">${fmt0(mw)} MW</span></div>`).join("");
+  document.querySelectorAll(".ranking .item[data-name]").forEach(el => {
+    el.onclick = () => {
+      const p = DATA.plants.find(x => x.name === el.dataset.name);
+      if (p) map.flyTo([p.lat, p.lon], 11);
+    };
+  });
+}
+function renderAll() { renderMap(); renderSummary(); }
+function buildFilters() {
+  const sc = {};
+  for (const p of DATA.plants) sc[p.status] = (sc[p.status]||0)+1;
+  document.getElementById("status-filter").innerHTML = Object.entries(sc).sort((a,b)=>b[1]-a[1]).map(([s,n]) =>
+    `<div class="row"><input type="checkbox" id="s-${s}" data-status="${s}" checked>
+     <label for="s-${s}"><span style="color:${STATUS_COLORS[s]||'#888'}">●</span> ${s}</label>
+     <span class="count">${n}</span></div>`).join("");
+  filters.statuses = new Set(Object.keys(sc));
+  document.querySelectorAll('[data-status]').forEach(cb => {
+    cb.onchange = () => { cb.checked ? filters.statuses.add(cb.dataset.status) : filters.statuses.delete(cb.dataset.status); renderAll(); };
+  });
+  const cc = {};
+  for (const p of DATA.plants) { cc[p.iso2] = cc[p.iso2]||{name:p.country,n:0}; cc[p.iso2].n++; }
+  const countries = Object.entries(cc).sort((a,b)=>b[1].n-a[1].n);
+  document.getElementById("country-filter").innerHTML = countries.map(([iso,info]) =>
+    `<div class="row"><input type="checkbox" id="c-${iso}" data-iso="${iso}" checked>
+     <label for="c-${iso}">${info.name}</label><span class="count">${info.n}</span></div>`).join("");
+  filters.countries = new Set(countries.map(c=>c[0]));
+  document.querySelectorAll('[data-iso]').forEach(cb => {
+    cb.onchange = () => { cb.checked ? filters.countries.add(cb.dataset.iso) : filters.countries.delete(cb.dataset.iso); renderAll(); };
+  });
+  const slider = document.getElementById("cap-slider");
+  const capVal = document.getElementById("cap-val");
+  slider.oninput = () => { filters.minCap = +slider.value; capVal.textContent = slider.value; renderAll(); };
+}
+async function init() {
+  DATA = await fetch("data.json").then(r=>r.json());
+  document.getElementById("totals").innerHTML =
+    `<span><b>${DATA.totals.n_plants}</b> plants</span>
+     <span><b>${(DATA.totals.total_capacity_mw/1000).toFixed(1)}</b> GW</span>
+     <span><b>${DATA.totals.total_annual_co2_mt.toFixed(0)}</b> Mt CO2/yr</span>`;
+  document.getElementById("gen-date").textContent = "- " + DATA.totals.generated_at;
+  map = L.map("map", {preferCanvas:true}).setView([51,12], 5);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+    { attribution:"© OSM, © CARTO", maxZoom:18 }).addTo(map);
+  markerLayer = L.layerGroup().addTo(map);
+  buildFilters();
+  renderAll();
+}
+init();
+</script>
+</body>
+</html>
