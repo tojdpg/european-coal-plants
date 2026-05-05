@@ -32,6 +32,8 @@
   header h1 { font-size:15px; margin:0; font-weight:600; flex:1; min-width:0;
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   header h1 small { color:var(--muted); font-weight:400; margin-left:10px; }
+  header .nav-link { color:var(--accent-2); text-decoration:none; font-size:12px; flex-shrink:0; }
+  header .nav-link:hover { text-decoration:underline; }
   header .totals { display:flex; gap:22px; font-size:12px; flex-shrink:0; }
   header .totals span { color:var(--muted); }
   header .totals b { color:var(--fg); font-weight:600; }
@@ -90,6 +92,7 @@
     header { padding: 0 12px; }
     header h1 { font-size:13px; }
     header h1 small { display:none; }
+    header .nav-link { font-size:11px; }
     header .totals { gap:10px; font-size:11px; }
     header .totals span:nth-child(3) { display:none; }
     main { grid-row: 2; }
@@ -131,6 +134,7 @@
 
 <header>
   <h1>European Coal Asset Tracker <small>operating - construction - mothballed</small></h1>
+  <a class="nav-link" href="reports/">Clay reports</a>
   <div class="totals" id="totals"></div>
 </header>
 

@@ -1,0 +1,76 @@
+{
+  "title": "Janschwalde Power Station",
+  "slug": "janschwalde",
+  "generated_at": "2026-05-05T10:43:38.444744+00:00",
+  "asset": {
+    "name": "Janschwalde power station",
+    "country": "Germany",
+    "country_iso2": "DE",
+    "lat": 51.835666,
+    "lon": 14.457808,
+    "capacity_mw": 5210.0,
+    "status": "operating",
+    "annual_co2_mt": 8.040162384,
+    "lifetime_co2_mt": 24.120487152,
+    "n_units": 7,
+    "earliest_start": 1981.0,
+    "phaseout_year": 2038.0,
+    "owner": "Lausitz Energie Kraftwerke AG [100%]",
+    "parent": "EP Group AS; unknown",
+    "asset_type": "coal_power",
+    "source": "GEM-GCPT",
+    "GEM location ID": "L100000101894"
+  },
+  "lat": 51.835666,
+  "lon": 14.457808,
+  "dates": {
+    "a": "2024-06",
+    "b": "2026-05"
+  },
+  "tiles": {
+    "a": {
+      "tile_path": "/Users/thorstenjelinek/.cache/eo-mcp/imagery/sentinel-2-l2a_51.8357_14.4578_2024-06_2560.tif",
+      "sensor": "sentinel-2-l2a",
+      "capture_date": null,
+      "bands": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "cloud_pct": null,
+      "gsd": 10
+    },
+    "b": {
+      "tile_path": "/Users/thorstenjelinek/.cache/eo-mcp/imagery/sentinel-2-l2a_51.8357_14.4578_2026-05_2560.tif",
+      "sensor": "sentinel-2-l2a",
+      "capture_date": null,
+      "bands": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "cloud_pct": null,
+      "gsd": 10
+    }
+  },
+  "change": {
+    "cosine_sim": 0.9961465001106262,
+    "l2_distance": 0.3754861652851105,
+    "interpretation": "no meaningful change",
+    "tile_a": "/Users/thorstenjelinek/.cache/eo-mcp/imagery/sentinel-2-l2a_51.8357_14.4578_2024-06_2560.tif",
+    "tile_b": "/Users/thorstenjelinek/.cache/eo-mcp/imagery/sentinel-2-l2a_51.8357_14.4578_2026-05_2560.tif"
+  },
+  "emissions": {
+    "gas": "NO2",
+    "lat": 51.835666,
+    "lon": 14.457808,
+    "note": "stub"
+  },
+  "images": {
+    "a": "tile_a_rgb.png",
+    "b": "tile_b_rgb.png"
+  },
+  "conclusion": "The Clay embedding comparison indicates no meaningful visible/spectral change between the selected Sentinel-2 scenes. This supports a narrow claim of visual continuity, not a claim about generation, fuel use, or emissions without further data."
+}
