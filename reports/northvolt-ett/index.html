@@ -39,15 +39,15 @@ code{font-size:12px;word-break:break-all}
 <main class="wrap">
   <section class="panel">
     <h1>Northvolt Ett: Industrial Site Screening</h1>
-    <p class="inquiry"><span>Inquiry</span>Did Northvolt Ett show meaningful visible or spectral site transformation from pre-development conditions in 2016 to its recent industrial footprint, and did the site remain visually stable from 2024 to 2025?</p>
+    <p class="inquiry"><span>Inquiry</span>Did Northvolt Ett show meaningful visible or spectral site transformation from early Sentinel-2 baseline imagery to its recent industrial footprint, and did the site remain visually stable from 2024 to 2025?</p>
     <div class="meta">Generated 2026-05-05 · 64.7340328, 21.0870825 · OpenStreetMap Nominatim geocode: Northvolt Ett, Bergsbyn, Skelleftea, Sweden</div>
     <div class="score" aria-label="Clay comparison metrics">
-      <div class="metric"><span class="label">2016 to 2025</span><b>Major change</b></div>
-      <div class="metric"><span class="label">Cosine similarity</span><b>-0.1997</b></div>
-      <div class="metric"><span class="label">L2 distance</span><b>4.2912</b></div>
+      <div class="metric"><span class="label">2017 to 2025</span><b>Minor embedding change</b></div>
+      <div class="metric"><span class="label">Cosine similarity</span><b>0.9304</b></div>
+      <div class="metric"><span class="label">L2 distance</span><b>1.6063</b></div>
     </div>
     <div class="images">
-      <figure><img src="northvolt-ett-2016-preview.png" alt="RGB Sentinel-2 preview for Northvolt Ett in 2016"><figcaption>2016 baseline · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
+      <figure><img src="northvolt-ett-2017-preview.png" alt="RGB Sentinel-2 preview for Northvolt Ett in 2017"><figcaption>2017 baseline · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
       <figure><img src="northvolt-ett-2024-preview.png" alt="RGB Sentinel-2 preview for Northvolt Ett in 2024"><figcaption>2024 baseline · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
       <figure><img src="northvolt-ett-2025-preview.png" alt="RGB Sentinel-2 preview for Northvolt Ett in 2025"><figcaption>2025 recent · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
     </div>
@@ -56,13 +56,15 @@ code{font-size:12px;word-break:break-all}
   <div class="grid">
     <section class="panel">
       <h2>Finding</h2>
-      <p>The Clay embedding comparison indicates a major visible/spectral transformation between 2016 and 2025. This is consistent with a site-scale shift from pre-development land cover to a large industrial footprint.</p>
+      <p>The original 2016 Sentinel-2 tile was blank/all-zero and has been retired from this report. Using a valid 2017 baseline, the broad 2.56 km Clay embedding comparison indicates minor embedding change between 2017 and 2025.</p>
+      <p>The RGB previews still provide useful visual context for site development, but the Clay score should be read cautiously: the facility footprint is only part of the wider tile, so broad-tile embeddings can understate localized industrial construction.</p>
       <p>Within the later comparison window, the 2024 and 2025 embeddings remain highly similar. This supports a narrower claim of visual/spectral stability after the main industrial footprint is visible.</p>
 
       <h2>Comparison Table</h2>
       <table>
         <tr><th>Interval</th><th>Cosine similarity</th><th>L2 distance</th><th>Interpretation</th></tr>
-        <tr><td>2016 to 2025</td><td>-0.1997</td><td>4.2912</td><td>Major change</td></tr>
+        <tr><td>2017 to 2025</td><td>0.9304</td><td>1.6063</td><td>Minor embedding change</td></tr>
+        <tr><td>2018 to 2025</td><td>0.9262</td><td>1.6339</td><td>Minor embedding change</td></tr>
         <tr><td>June 2024 to July 2024</td><td>0.9971</td><td>0.3239</td><td>No meaningful change</td></tr>
         <tr><td>June 2024 to May 2025</td><td>0.9937</td><td>0.4781</td><td>No meaningful change</td></tr>
       </table>
@@ -75,13 +77,13 @@ code{font-size:12px;word-break:break-all}
       <h2>Imagery Metadata</h2>
       <table>
         <tr><th>Period</th><th>Capture date</th><th>Cloud cover</th></tr>
-        <tr><td>2016 baseline</td><td>2016-06-05</td><td>n/a</td></tr>
+        <tr><td>2017 baseline</td><td>2017-06-13</td><td>0.01713%</td></tr>
         <tr><td>2024 baseline</td><td>2024-06-04</td><td>1.744178%</td></tr>
         <tr><td>2025 recent</td><td>2025-05-18</td><td>0.000027%</td></tr>
       </table>
 
       <h2>Tile Paths</h2>
-      <p><code>sentinel-2-l2a_64.7340_21.0871_2016-06_2560.tif</code></p>
+      <p><code>sentinel-2-l2a_64.7340_21.0871_2017-06_2560.tif</code></p>
       <p><code>sentinel-2-l2a_64.7340_21.0871_2024-06_2560.tif</code></p>
       <p><code>sentinel-2-l2a_64.7340_21.0871_2025-05_2560.tif</code></p>
 

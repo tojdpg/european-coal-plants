@@ -5,10 +5,16 @@
   "type": "industrial-site-screening",
   "analysis": [
     {
-      "period": "2016 -> 2025",
-      "cosine_similarity": -0.1997,
-      "l2_distance": 4.2912,
-      "change_detected": true
+      "period": "2017 -> 2025",
+      "cosine_similarity": 0.9304,
+      "l2_distance": 1.6063,
+      "change_detected": "minor_embedding_change"
+    },
+    {
+      "period": "2018 -> 2025",
+      "cosine_similarity": 0.9262,
+      "l2_distance": 1.6339,
+      "change_detected": "minor_embedding_change"
     },
     {
       "period": "2024 -> 2024",
@@ -23,5 +29,6 @@
       "change_detected": false
     }
   ],
+  "note": "The original 2016 tile was blank/all-zero and was retired from the report.",
   "source": "Sentinel-2 Level-2A via Microsoft Planetary Computer STAC; RGB previews from B04/B03/B02; Clay v1.5"
 }
