@@ -1,7 +1,8 @@
 {
   "title": "Janschwalde Power Station",
+  "inquiry": "Did the area around Janschwalde power station show meaningful visible or spectral change between June 2024 and May 2026?",
   "slug": "janschwalde",
-  "generated_at": "2026-05-05T10:55:00.270663+00:00",
+  "generated_at": "2026-05-05T11:00:10.363473+00:00",
   "asset": {
     "name": "Janschwalde power station",
     "country": "Germany",
@@ -56,8 +57,8 @@
     }
   },
   "change": {
-    "cosine_sim": 0.9961465001106262,
-    "l2_distance": 0.3754861652851105,
+    "cosine_sim": 0.9961901903152466,
+    "l2_distance": 0.3734574615955353,
     "interpretation": "no meaningful change",
     "tile_a": "/Users/thorstenjelinek/.cache/eo-mcp/imagery/sentinel-2-l2a_51.8357_14.4578_2024-06_2560.tif",
     "tile_b": "/Users/thorstenjelinek/.cache/eo-mcp/imagery/sentinel-2-l2a_51.8357_14.4578_2026-05_2560.tif"

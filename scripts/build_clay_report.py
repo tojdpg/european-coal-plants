@@ -107,6 +107,10 @@ def build_report(args: argparse.Namespace) -> None:
     lat = float(args.lat if args.lat is not None else asset["lat"])
     lon = float(args.lon if args.lon is not None else asset["lon"])
     title = args.title or asset["name"]
+    inquiry = args.inquiry or (
+        f"Did the area around {title} show meaningful visible or spectral change "
+        f"between {args.date_a} and {args.date_b}?"
+    )
 
     tile_a = run_clay("get-imagery", "--lat", str(lat), "--lon", str(lon), "--date", args.date_a)
     tile_b = run_clay("get-imagery", "--lat", str(lat), "--lon", str(lon), "--date", args.date_b)
@@ -135,6 +139,9 @@ def build_report(args: argparse.Namespace) -> None:
         "comparison, using bands B04/B03/B02 as red/green/blue."
     )
     report_md = f"""# {title}: Clay Evidence Note
+
+## Inquiry
+{inquiry}
 
 ## Finding
 - Interpretation: {change["interpretation"]}
@@ -168,6 +175,7 @@ def build_report(args: argparse.Namespace) -> None:
 
     report = {
         "title": title,
+        "inquiry": inquiry,
         "slug": args.slug,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "asset": asset,
@@ -212,6 +220,8 @@ header {{ background:var(--accent); color:#000; padding:10px 16px; }}
 header a {{ color:#000; text-decoration:none; font-weight:bold; }}
 .wrap {{ max-width:1120px; margin:0 auto; padding:18px 16px 40px; }}
 .meta {{ color:var(--muted); font-size:12px; margin-top:4px; }}
+.inquiry {{ background:var(--soft); border-left:4px solid var(--accent); margin:12px 0 4px; padding:10px 12px; }}
+.inquiry span {{ display:block; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px; }}
 .grid {{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:18px; align-items:start; }}
 .panel {{ background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:14px; }}
 .score {{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0; }}
@@ -241,6 +251,7 @@ td:first-child {{ color:var(--muted); width:38%; padding-right:12px; }}
 <main class="wrap">
   <section class="panel">
     <h1>{escape(report["title"])}</h1>
+    <p class="inquiry"><span>Inquiry</span>{escape(report["inquiry"])}</p>
     <div class="meta">Generated {escape(report["generated_at"][:10])} · {escape(str(report["lat"]))}, {escape(str(report["lon"]))}</div>
     <div class="score" aria-label="Clay comparison metrics">
       <div class="metric"><span class="label">Interpretation</span><b>{escape(change["interpretation"])}</b></div>
@@ -299,6 +310,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--slug", required=True)
     parser.add_argument("--title")
+    parser.add_argument("--inquiry")
     parser.add_argument("--country", default="DE")
     parser.add_argument("--asset-type", default="coal_power")
     parser.add_argument("--lat", type=float)

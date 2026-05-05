@@ -1,9 +1,12 @@
 # Janschwalde Power Station: Clay Evidence Note
 
+## Inquiry
+Did the area around Janschwalde power station show meaningful visible or spectral change between June 2024 and May 2026?
+
 ## Finding
 - Interpretation: no meaningful change
-- Cosine similarity: 0.9961
-- L2 distance: 0.3755
+- Cosine similarity: 0.9962
+- L2 distance: 0.3735
 - Comparison window: 2024-06 to 2026-05
 
 ## Asset
