@@ -1,7 +1,7 @@
 {
   "title": "Janschwalde Power Station",
   "slug": "janschwalde",
-  "generated_at": "2026-05-05T10:43:38.444744+00:00",
+  "generated_at": "2026-05-05T10:55:00.270663+00:00",
   "asset": {
     "name": "Janschwalde power station",
     "country": "Germany",
@@ -72,5 +72,6 @@
     "a": "tile_a_rgb.png",
     "b": "tile_b_rgb.png"
   },
-  "conclusion": "The Clay embedding comparison indicates no meaningful visible/spectral change between the selected Sentinel-2 scenes. This supports a narrow claim of visual continuity, not a claim about generation, fuel use, or emissions without further data."
+  "conclusion": "The Clay embedding comparison indicates no meaningful visible/spectral change between the selected Sentinel-2 scenes. This supports a narrow claim of visual continuity, not a claim about generation, fuel use, or emissions without further data.",
+  "source_note": "Imagery source: Sentinel-2 Level-2A, accessed through Microsoft Planetary Computer STAC. RGB previews are generated locally from the GeoTIFF tiles used for the Clay embedding comparison, using bands B04/B03/B02 as red/green/blue."
 }

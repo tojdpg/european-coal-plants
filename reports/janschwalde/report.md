@@ -25,3 +25,6 @@
 
 ## Caution
 The Clay embedding comparison indicates no meaningful visible/spectral change between the selected Sentinel-2 scenes. This supports a narrow claim of visual continuity, not a claim about generation, fuel use, or emissions without further data.
+
+## Sources & Method
+Imagery source: Sentinel-2 Level-2A, accessed through Microsoft Planetary Computer STAC. RGB previews are generated locally from the GeoTIFF tiles used for the Clay embedding comparison, using bands B04/B03/B02 as red/green/blue.

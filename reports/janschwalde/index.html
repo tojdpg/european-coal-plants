@@ -52,8 +52,8 @@ td:first-child { color:var(--muted); width:38%; padding-right:12px; }
       <div class="metric"><span class="label">L2 distance</span><b>0.3755</b></div>
     </div>
     <div class="images">
-      <figure><img src="tile_a_rgb.png" alt="RGB Sentinel-2 preview for first comparison date"><figcaption>Tile A · 2024-06</figcaption></figure>
-      <figure><img src="tile_b_rgb.png" alt="RGB Sentinel-2 preview for second comparison date"><figcaption>Tile B · 2026-05</figcaption></figure>
+      <figure><img src="tile_a_rgb.png" alt="RGB Sentinel-2 preview for first comparison date"><figcaption>Tile A · 2024-06 · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
+      <figure><img src="tile_b_rgb.png" alt="RGB Sentinel-2 preview for second comparison date"><figcaption>Tile B · 2026-05 · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
     </div>
   </section>
   <div class="grid" style="margin-top:18px">
@@ -85,7 +85,9 @@ td:first-child { color:var(--muted); width:38%; padding-right:12px; }
 <li>Tile B cloud: n/a%</li>
 </ul>
 <h2>Caution</h2>
-<p>The Clay embedding comparison indicates no meaningful visible/spectral change between the selected Sentinel-2 scenes. This supports a narrow claim of visual continuity, not a claim about generation, fuel use, or emissions without further data.</p></section>
+<p>The Clay embedding comparison indicates no meaningful visible/spectral change between the selected Sentinel-2 scenes. This supports a narrow claim of visual continuity, not a claim about generation, fuel use, or emissions without further data.</p>
+<h2>Sources &amp; Method</h2>
+<p>Imagery source: Sentinel-2 Level-2A, accessed through Microsoft Planetary Computer STAC. RGB previews are generated locally from the GeoTIFF tiles used for the Clay embedding comparison, using bands B04/B03/B02 as red/green/blue.</p></section>
     <aside class="panel">
       <h2>Asset Metadata</h2>
       <table>
@@ -98,6 +100,8 @@ td:first-child { color:var(--muted); width:38%; padding-right:12px; }
       </table>
       <h2>Files</h2>
       <p class="links"><a href="report.json">report.json</a><a href="report.md">report.md</a></p>
+      <h2>Sources & Method</h2>
+      <p>Imagery source: Sentinel-2 Level-2A, accessed through Microsoft Planetary Computer STAC. RGB previews are generated locally from the GeoTIFF tiles used for the Clay embedding comparison, using bands B04/B03/B02 as red/green/blue.</p>
     </aside>
   </div>
 </main>

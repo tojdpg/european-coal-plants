@@ -129,6 +129,11 @@ def build_report(args: argparse.Namespace) -> None:
         "between the selected Sentinel-2 scenes. This supports a narrow claim of visual "
         "continuity, not a claim about generation, fuel use, or emissions without further data."
     )
+    source_note = (
+        "Imagery source: Sentinel-2 Level-2A, accessed through Microsoft Planetary Computer STAC. "
+        "RGB previews are generated locally from the GeoTIFF tiles used for the Clay embedding "
+        "comparison, using bands B04/B03/B02 as red/green/blue."
+    )
     report_md = f"""# {title}: Clay Evidence Note
 
 ## Finding
@@ -156,6 +161,9 @@ def build_report(args: argparse.Namespace) -> None:
 
 ## Caution
 {conclusion}
+
+## Sources & Method
+{source_note}
 """
 
     report = {
@@ -171,6 +179,7 @@ def build_report(args: argparse.Namespace) -> None:
         "emissions": emissions,
         "images": {"a": image_a.name, "b": image_b.name},
         "conclusion": conclusion,
+        "source_note": source_note,
     }
 
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -239,8 +248,8 @@ td:first-child {{ color:var(--muted); width:38%; padding-right:12px; }}
       <div class="metric"><span class="label">L2 distance</span><b>{change["l2_distance"]:.4f}</b></div>
     </div>
     <div class="images">
-      <figure><img src="{escape(report["images"]["a"])}" alt="RGB Sentinel-2 preview for first comparison date"><figcaption>Tile A · {escape(report["dates"]["a"])}</figcaption></figure>
-      <figure><img src="{escape(report["images"]["b"])}" alt="RGB Sentinel-2 preview for second comparison date"><figcaption>Tile B · {escape(report["dates"]["b"])}</figcaption></figure>
+      <figure><img src="{escape(report["images"]["a"])}" alt="RGB Sentinel-2 preview for first comparison date"><figcaption>Tile A · {escape(report["dates"]["a"])} · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
+      <figure><img src="{escape(report["images"]["b"])}" alt="RGB Sentinel-2 preview for second comparison date"><figcaption>Tile B · {escape(report["dates"]["b"])} · Sentinel-2 L2A RGB preview, bands B04/B03/B02</figcaption></figure>
     </div>
   </section>
   <div class="grid" style="margin-top:18px">
@@ -257,6 +266,8 @@ td:first-child {{ color:var(--muted); width:38%; padding-right:12px; }}
       </table>
       <h2>Files</h2>
       <p class="links"><a href="report.json">report.json</a><a href="report.md">report.md</a></p>
+      <h2>Sources & Method</h2>
+      <p>{escape(report["source_note"])}</p>
     </aside>
   </div>
 </main>
