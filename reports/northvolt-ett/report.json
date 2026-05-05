@@ -1,0 +1,27 @@
+{
+  "name": "Northvolt Ett",
+  "slug": "northvolt-ett",
+  "coordinates": [64.7340328, 21.0870825],
+  "type": "industrial-site-screening",
+  "analysis": [
+    {
+      "period": "2016 -> 2025",
+      "cosine_similarity": -0.1997,
+      "l2_distance": 4.2912,
+      "change_detected": true
+    },
+    {
+      "period": "2024 -> 2024",
+      "cosine_similarity": 0.9971,
+      "l2_distance": 0.3239,
+      "change_detected": false
+    },
+    {
+      "period": "2024 -> 2025",
+      "cosine_similarity": 0.9937,
+      "l2_distance": 0.4781,
+      "change_detected": false
+    }
+  ],
+  "source": "Sentinel-2 Level-2A via Microsoft Planetary Computer STAC; RGB previews from B04/B03/B02; Clay v1.5"
+}
