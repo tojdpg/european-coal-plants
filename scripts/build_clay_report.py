@@ -13,7 +13,7 @@ import rasterio
 from PIL import Image
 
 ROOT = Path("/Users/thorstenjelinek/projects/eo-mcp-server")
-WEB = ROOT / "web"
+WEB = Path(__file__).resolve().parents[1]
 CLAY = Path("/Users/thorstenjelinek/.openclaw/bin/openclaw-clay")
 
 
