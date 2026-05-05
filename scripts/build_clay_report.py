@@ -292,17 +292,50 @@ def build_reports_index() -> None:
     entries = []
     for path in sorted(reports_root.glob("*/report.json")):
         data = json.loads(path.read_text())
-        entries.append((path.parent.name, data["title"], data["change"]["interpretation"], data["generated_at"][:10]))
+        entries.append(
+            (
+                path.parent.name,
+                data["title"],
+                data.get("inquiry", ""),
+                data["change"]["interpretation"],
+                data["generated_at"][:10],
+            )
+        )
     rows = "\n".join(
-        f'<li><a href="{slug}/">{escape(title)}</a> <span>{escape(interp)} · {escape(date)}</span></li>'
-        for slug, title, interp, date in entries
+        f"""<article class="card">
+  <a href="{slug}/">{escape(title)}</a>
+  <p>{escape(inquiry)}</p>
+  <span>{escape(interp)} · {escape(date)}</span>
+</article>"""
+        for slug, title, inquiry, interp, date in entries
     )
     (reports_root / "index.html").write_text(f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Clay Evidence Reports</title>
-<style>body{{margin:0;background:#f6f6ef;color:#111;font:15px/1.5 Verdana,Geneva,sans-serif}}header{{background:#ff6600;padding:10px 16px}}main{{max-width:900px;margin:0 auto;padding:22px 16px}}a{{color:#000}}li{{margin:10px 0}}span{{color:#666;font-size:12px}}</style>
-</head><body><header><b>European Coal Asset Tracker</b> / Clay evidence reports</header>
-<main><h1>Clay Evidence Reports</h1><ul>{rows}</ul></main></body></html>
+<style>
+body{{margin:0;background:#f6f6ef;color:#111;font:15px/1.5 Verdana,Geneva,sans-serif}}
+header{{background:#ff6600;padding:10px 16px}}
+main{{max-width:940px;margin:0 auto;padding:24px 16px 44px}}
+a{{color:#000;font-weight:bold}}
+.lede{{max-width:720px;color:#444}}
+.grid{{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}}
+.card{{background:#fffff8;border:1px solid #d8d8c8;border-radius:4px;padding:14px}}
+.card p{{margin:8px 0;color:#333}}
+.card span{{color:#666;font-size:12px}}
+</style>
+</head><body><header><b>European Coal Asset Tracker</b> / evidence hub</header>
+<main>
+  <h1>Evidence Hub</h1>
+  <p class="lede">Start with the live European coal asset tracker, then open Clay-generated evidence notes for specific sites and comparison questions.</p>
+  <div class="grid">
+    <article class="card">
+      <a href="../">European Coal Asset Tracker</a>
+      <p>Interactive map of European coal plants, filters, rankings, and live Sentinel-2 links.</p>
+      <span>Main tracker</span>
+    </article>
+    {rows}
+  </div>
+</main></body></html>
 """)
 
 
