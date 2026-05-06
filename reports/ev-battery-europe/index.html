@@ -242,35 +242,6 @@
     border-radius:4px;
     font-size:11px;
   }
-  .map-legend {
-    position:absolute;
-    left:14px;
-    bottom:14px;
-    z-index:2;
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px 10px;
-    max-width:min(680px, calc(100% - 260px));
-    padding:8px 10px;
-    color:var(--fg);
-    background:rgba(16,21,27,0.82);
-    border:1px solid rgba(255,255,255,0.14);
-    border-radius:6px;
-    box-shadow:0 8px 28px rgba(0,0,0,0.25);
-    font-size:11px;
-  }
-  .map-legend .item {
-    display:flex;
-    align-items:center;
-    gap:5px;
-    white-space:nowrap;
-  }
-  .map-legend .swatch {
-    width:9px;
-    height:9px;
-    border:1px solid rgba(255,255,255,0.55);
-    border-radius:50%;
-  }
   .drawer-handle { display:none; }
 
   @media (max-width:760px) {
@@ -327,20 +298,13 @@
     }
     aside.open .drawer-handle span { display:none; }
     footer { top:8px; bottom:auto; right:8px; font-size:10px; }
-    .map-legend {
-      left:8px;
-      right:8px;
-      bottom:66px;
-      max-width:none;
-      font-size:10px;
-    }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back-link" href="https://tojdpg.github.io/european-coal-plants/reports/">All projects</a>
+  <a class="back-link" href="https://tojdpg.github.io/european-coal-plants/reports/">← All projects</a>
   <h1>European EV Battery Asset Tracker <small>vector basemap · live, ramping, future, cancelled</small></h1>
   <div class="totals" id="totals"></div>
 </header>
@@ -389,7 +353,6 @@
 
 <main>
   <div id="map"></div>
-  <div class="map-legend" id="map-legend" aria-label="Status legend"></div>
   <footer>Basemap: OpenFreeMap vector tiles, OpenStreetMap data. Geometry updated 2026-05-06.</footer>
 </main>
 
@@ -543,12 +506,6 @@ function renderFilters() {
   });
 }
 
-function renderLegend() {
-  document.getElementById("map-legend").innerHTML = Object.values(STATUS_META)
-    .map(meta => `<span class="item"><span class="swatch" style="background:${meta.color}"></span>${meta.label}</span>`)
-    .join("");
-}
-
 function renderTotals() {
   const totalSites = FEATURES.length;
   const totalGwh = FEATURES.reduce((sum, f) => sum + cap(f.properties), 0);
@@ -675,7 +632,6 @@ async function init() {
     fitToSites();
     renderTotals();
     renderFilters();
-    renderLegend();
     renderAll();
   });
 
