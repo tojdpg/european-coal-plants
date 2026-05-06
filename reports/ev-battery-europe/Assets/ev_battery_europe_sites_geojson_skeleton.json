@@ -32,10 +32,11 @@
         "announced_capacity_gwh": "86 current; 90 target",
         "announced_capacity_gwh_numeric": 86,
         "investment": "USD 5bn [2022]",
-        "current_output": "700,000 EV batteries/year disclosed. Approx 60 GWh-equivalent if 1m batteries corresponds to 86 GWh; exact GWh shipped not disclosed.",
-        "current_output_verdict": "Strongest evidenced European EV-cell output. Count as live, but do not assume full 86 GWh shipped without shipment data.",
+        "current_output": "Company discloses 700,000 EV batteries/year; actual shipped GWh not separately published.",
+        "current_output_verdict": "Keep 86 as current capacity and 90 as target; avoid converting unit output into verified GWh.",
         "source_refs": [
-          "S01"
+          "S01",
+          "S43"
         ],
         "lat": 51.016815,
         "lon": 16.882885,
@@ -55,7 +56,31 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "LGES Wrocław / Kobierzyce, Poland"
+        "geocode_query": "LGES Wrocław / Kobierzyce, Poland",
+        "verified_status_detail": "operating_proven",
+        "verified_capacity_note": "86 current operating capacity; 90 target/announced",
+        "verified_type": "EV battery cell/module/pack manufacturing",
+        "verified_chemistry": "Li-ion; site cathode mix not verified in audited primary source",
+        "verified_current_output": "Company discloses 700,000 EV batteries/year; actual shipped GWh not separately published.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Company page gives 86 GWh capacity and target 90 GWh by 2025.",
+        "audit_notes": "Capacity source is company site; output is units/year, not delivered GWh.",
+        "audit_recommended_change": "Keep 86 as current capacity and 90 as target; avoid converting unit output into verified GWh.",
+        "source_links": [
+          {
+            "id": "S01",
+            "title": "LG Energy Solution Wroclaw official site",
+            "url": "https://lgensol.pl/en/get-know-us/",
+            "notes": "700,000 EV batteries per year, 86 GWh current production capacity, USD 5bn investment."
+          },
+          {
+            "id": "S43",
+            "title": "GPT audit source: lgensol.pl",
+            "url": "https://lgensol.pl/en/",
+            "notes": "Added from GPT audit workbook for LGES Wrocław / Kobierzyce. Evidence: Company page gives 86 GWh capacity and target 90 GWh by 2025."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S01\", \"title\": \"LG Energy Solution Wroclaw official site\", \"url\": \"https://lgensol.pl/en/get-know-us/\", \"notes\": \"700,000 EV batteries per year, 86 GWh current production capacity, USD 5bn investment.\"}, {\"id\": \"S43\", \"title\": \"GPT audit source: lgensol.pl\", \"url\": \"https://lgensol.pl/en/\", \"notes\": \"Added from GPT audit workbook for LGES Wrocław / Kobierzyce. Evidence: Company page gives 86 GWh capacity and target 90 GWh by 2025.\"}]"
       }
     },
     {
@@ -81,10 +106,12 @@
         "announced_capacity_gwh": "8 initial permit; 14 target",
         "announced_capacity_gwh_numeric": 14,
         "investment": "EUR 1.8bn",
-        "current_output": "Serial cell production started in 2022; current GWh output not disclosed.",
-        "current_output_verdict": "Live production. Count with haircut; avoid treating 14 GWh as actual current output.",
+        "current_output": "Serial cell production started in 2022; current utilization/GWh shipments not disclosed.",
+        "current_output_verdict": "Keep live status, but set current_output to undisclosed rather than inferred.",
         "source_refs": [
-          "S02"
+          "S02",
+          "S44",
+          "S45"
         ],
         "lat": 50.862071,
         "lon": 10.948737,
@@ -104,7 +131,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "CATL Arnstadt / Erfurt, Germany"
+        "geocode_query": "CATL Arnstadt / Erfurt, Germany",
+        "verified_status_detail": "operating_output_undisclosed",
+        "verified_capacity_note": "8 initial/permitted cell capacity; 14 target/announced",
+        "verified_type": "Battery cells and modules",
+        "verified_chemistry": "Li-ion EV batteries",
+        "verified_current_output": "Serial cell production started in 2022; current utilization/GWh shipments not disclosed.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "CATL reports serial cell production; earlier approval covered initial 8 GWh.",
+        "audit_notes": "Primary CATL releases support production start and capacity limits.",
+        "audit_recommended_change": "Keep live status, but set current_output to undisclosed rather than inferred.",
+        "source_links": [
+          {
+            "id": "S02",
+            "title": "CATL German plant production kickoff",
+            "url": "https://www.prnewswire.com/news-releases/catls-german-plant-kicks-off-cell-production-301708032.html",
+            "notes": "Initial 8 GWh permit, 14 GWh future target, EUR 1.8bn investment."
+          },
+          {
+            "id": "S44",
+            "title": "GPT audit source: catl.com",
+            "url": "https://www.catl.com/en/news/1046.html",
+            "notes": "Added from GPT audit workbook for CATL Arnstadt / Erfurt. Evidence: CATL reports serial cell production; earlier approval covered initial 8 GWh."
+          },
+          {
+            "id": "S45",
+            "title": "GPT audit source: catl.com",
+            "url": "https://www.catl.com/en/news/921.html",
+            "notes": "Added from GPT audit workbook for CATL Arnstadt / Erfurt. Evidence: CATL reports serial cell production; earlier approval covered initial 8 GWh."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S02\", \"title\": \"CATL German plant production kickoff\", \"url\": \"https://www.prnewswire.com/news-releases/catls-german-plant-kicks-off-cell-production-301708032.html\", \"notes\": \"Initial 8 GWh permit, 14 GWh future target, EUR 1.8bn investment.\"}, {\"id\": \"S44\", \"title\": \"GPT audit source: catl.com\", \"url\": \"https://www.catl.com/en/news/1046.html\", \"notes\": \"Added from GPT audit workbook for CATL Arnstadt / Erfurt. Evidence: CATL reports serial cell production; earlier approval covered initial 8 GWh.\"}, {\"id\": \"S45\", \"title\": \"GPT audit source: catl.com\", \"url\": \"https://www.catl.com/en/news/921.html\", \"notes\": \"Added from GPT audit workbook for CATL Arnstadt / Erfurt. Evidence: CATL reports serial cell production; earlier approval covered initial 8 GWh.\"}]"
       }
     },
     {
@@ -130,18 +187,20 @@
         "announced_capacity_gwh": "~40",
         "announced_capacity_gwh_numeric": 40,
         "investment": "~EUR 1.3bn+ initial / expansion ongoing",
-        "current_output": "Established operating site; site-level GWh shipped not publicly disclosed.",
-        "current_output_verdict": "Live major base. Do not assume full 40 GWh utilization unless validated.",
+        "current_output": "EC decision says full production reached Jan 2022 at >6 million cells/month; current GWh output not public.",
+        "current_output_verdict": "Keep ~40 only as announced/industry-estimate capacity; mark actual production GWh uncertain.",
         "source_refs": [
-          "S03"
+          "S03",
+          "S46",
+          "S47"
         ],
         "lat": 47.6746196,
         "lon": 19.162457,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Schenek István utca 1, 2131 Göd",
+        "city": "Göd",
+        "admin1": "Pest",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "live",
@@ -153,7 +212,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Samsung SDI Göd, Hungary"
+        "geocode_query": "Samsung SDI Göd, Hungary",
+        "verified_status_detail": "operating_output_undisclosed_with_permit_controversy",
+        "verified_capacity_note": "~40 announced/secondary estimate; primary EC source verifies cell/month expansion, not GWh",
+        "verified_type": "EV battery cells",
+        "verified_chemistry": "Prismatic Li-ion; NMC/NCA reported, not fully primary-verified",
+        "verified_current_output": "EC decision says full production reached Jan 2022 at >6 million cells/month; current GWh output not public.",
+        "audit_confidence": "Medium",
+        "audit_evidence_quote": "EC source verifies full production and >6 million cells/month, not site GWh.",
+        "audit_notes": "Use caution: public permit/company sources do not cleanly verify ~40 GWh as actual output.",
+        "audit_recommended_change": "Keep ~40 only as announced/industry-estimate capacity; mark actual production GWh uncertain.",
+        "source_links": [
+          {
+            "id": "S03",
+            "title": "Samsung SDI Hungary plant capacity reporting",
+            "url": "https://www.electrive.com/2025/05/27/samsung-sdi-paves-way-for-prismatic-batteries-at-hungary-plant/",
+            "notes": "Göd capacity around 40 GWh; investment over EUR 1.3bn reported."
+          },
+          {
+            "id": "S46",
+            "title": "GPT audit source: samsungsdi.com",
+            "url": "https://www.samsungsdi.com/about-sdi/global-network.html",
+            "notes": "Added from GPT audit workbook for Samsung SDI Göd. Evidence: EC source verifies full production and >6 million cells/month, not site GWh."
+          },
+          {
+            "id": "S47",
+            "title": "GPT audit source: euraxess.ec.europa.eu",
+            "url": "https://euraxess.ec.europa.eu/worldwide/south-korea/news/state-aid-commission-approves-eu896-million-hungarian-investment-aid",
+            "notes": "Added from GPT audit workbook for Samsung SDI Göd. Evidence: EC source verifies full production and >6 million cells/month, not site GWh."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S03\", \"title\": \"Samsung SDI Hungary plant capacity reporting\", \"url\": \"https://www.electrive.com/2025/05/27/samsung-sdi-paves-way-for-prismatic-batteries-at-hungary-plant/\", \"notes\": \"Göd capacity around 40 GWh; investment over EUR 1.3bn reported.\"}, {\"id\": \"S46\", \"title\": \"GPT audit source: samsungsdi.com\", \"url\": \"https://www.samsungsdi.com/about-sdi/global-network.html\", \"notes\": \"Added from GPT audit workbook for Samsung SDI Göd. Evidence: EC source verifies full production and >6 million cells/month, not site GWh.\"}, {\"id\": \"S47\", \"title\": \"GPT audit source: euraxess.ec.europa.eu\", \"url\": \"https://euraxess.ec.europa.eu/worldwide/south-korea/news/state-aid-commission-approves-eu896-million-hungarian-investment-aid\", \"notes\": \"Added from GPT audit workbook for Samsung SDI Göd. Evidence: EC source verifies full production and >6 million cells/month, not site GWh.\"}]"
       }
     },
     {
@@ -179,10 +268,12 @@
         "announced_capacity_gwh": "~17 GWh total (7 + 10)",
         "announced_capacity_gwh_numeric": 17,
         "investment": "n/a clean total",
-        "current_output": "Komarom 2 reported mid-80% utilization; exact GWh shipments not disclosed.",
-        "current_output_verdict": "Live and likely high utilization at least for Komarom 2. Count with source-specific utilization caveat.",
+        "current_output": "Operating since 2019/2020; current GWh output not disclosed; secondary reports indicate underutilization.",
+        "current_output_verdict": "Keep operating status but avoid treating total capacity as current output.",
         "source_refs": [
-          "S04"
+          "S04",
+          "S48",
+          "S49"
         ],
         "lat": 47.7401327,
         "lon": 18.0684873,
@@ -202,7 +293,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "SK On Komárom, Hungary"
+        "geocode_query": "SK On Komárom, Hungary",
+        "verified_status_detail": "operating_output_undisclosed_possible_underutilization",
+        "verified_capacity_note": "17.0-17.3 announced capacity: 7.5 + 9.5/9.8 GWh",
+        "verified_type": "Lithium-ion battery cells, modules and packs",
+        "verified_chemistry": "Pouch Li-ion EV cells",
+        "verified_current_output": "Operating since 2019/2020; current GWh output not disclosed; secondary reports indicate underutilization.",
+        "audit_confidence": "High for capacity; Medium for current output",
+        "audit_evidence_quote": "SK sources identify Komárom plants and 7.5 + 9.5 GWh capacity.",
+        "audit_notes": "Secondary labor/industry reports suggest idled lines, but exact output is not primary-sourced.",
+        "audit_recommended_change": "Keep operating status but avoid treating total capacity as current output.",
+        "source_links": [
+          {
+            "id": "S04",
+            "title": "SK On Hungary utilization and capacity",
+            "url": "https://www.businesskorea.co.kr/news/articleView.html?idxno=267322",
+            "notes": "Komarom 7+10 GWh, Ivancsa 30 GWh, mid-80% utilization reported for Komarom 2."
+          },
+          {
+            "id": "S48",
+            "title": "GPT audit source: skbhungary.com",
+            "url": "https://www.skbhungary.com/about-us/",
+            "notes": "Added from GPT audit workbook for SK On Komárom. Evidence: SK sources identify Komárom plants and 7.5 + 9.5 GWh capacity."
+          },
+          {
+            "id": "S49",
+            "title": "GPT audit source: hipa.hu",
+            "url": "https://hipa.hu/news/gigantic-investment-of-sk-innovation-the-largest-greenfield-fdi-project-ever-to-start-in-ivancsa/",
+            "notes": "Added from GPT audit workbook for SK On Komárom. Evidence: SK sources identify Komárom plants and 7.5 + 9.5 GWh capacity."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S04\", \"title\": \"SK On Hungary utilization and capacity\", \"url\": \"https://www.businesskorea.co.kr/news/articleView.html?idxno=267322\", \"notes\": \"Komarom 7+10 GWh, Ivancsa 30 GWh, mid-80% utilization reported for Komarom 2.\"}, {\"id\": \"S48\", \"title\": \"GPT audit source: skbhungary.com\", \"url\": \"https://www.skbhungary.com/about-us/\", \"notes\": \"Added from GPT audit workbook for SK On Komárom. Evidence: SK sources identify Komárom plants and 7.5 + 9.5 GWh capacity.\"}, {\"id\": \"S49\", \"title\": \"GPT audit source: hipa.hu\", \"url\": \"https://hipa.hu/news/gigantic-investment-of-sk-innovation-the-largest-greenfield-fdi-project-ever-to-start-in-ivancsa/\", \"notes\": \"Added from GPT audit workbook for SK On Komárom. Evidence: SK sources identify Komárom plants and 7.5 + 9.5 GWh capacity.\"}]"
       }
     },
     {
@@ -228,11 +349,13 @@
         "announced_capacity_gwh": "30",
         "announced_capacity_gwh_numeric": 30,
         "investment": "USD 2.29bn",
-        "current_output": "Operating/ramping site; separate public utilization not found in this pass.",
-        "current_output_verdict": "Live but output undisclosed. Apply haircut until customer shipments/utilization are verified.",
+        "current_output": "Operating/ramping evidence exists, but public site-level GWh output was not verified.",
+        "current_output_verdict": "Keep 30 GWh as announced capacity; mark actual output undisclosed/ramping.",
         "source_refs": [
           "S04",
-          "S05"
+          "S05",
+          "S50",
+          "S48"
         ],
         "lat": 47.1473327,
         "lon": 18.8311498,
@@ -252,7 +375,43 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "SK On Iváncsa, Hungary"
+        "geocode_query": "SK On Iváncsa, Hungary",
+        "verified_status_detail": "operating_ramping_output_undisclosed",
+        "verified_capacity_note": "30 GWh announced; 31 GWh appears in later SK On/Hungary source wording",
+        "verified_type": "Lithium-ion battery cells, modules and packs",
+        "verified_chemistry": "Pouch Li-ion EV cells",
+        "verified_current_output": "Operating/ramping evidence exists, but public site-level GWh output was not verified.",
+        "audit_confidence": "Medium-High",
+        "audit_evidence_quote": "SK announced the Iváncsa plant with 30 GWh annual capacity.",
+        "audit_notes": "Reported yield stabilization is secondary/press; shipment GWh remains undisclosed.",
+        "audit_recommended_change": "Keep 30 GWh as announced capacity; mark actual output undisclosed/ramping.",
+        "source_links": [
+          {
+            "id": "S04",
+            "title": "SK On Hungary utilization and capacity",
+            "url": "https://www.businesskorea.co.kr/news/articleView.html?idxno=267322",
+            "notes": "Komarom 7+10 GWh, Ivancsa 30 GWh, mid-80% utilization reported for Komarom 2."
+          },
+          {
+            "id": "S05",
+            "title": "SK Innovation Ivancsa investment announcement",
+            "url": "https://askinno.com/global/archives/3820",
+            "notes": "Ivancsa 30 GWh, USD 2.29bn investment by 2028."
+          },
+          {
+            "id": "S50",
+            "title": "GPT audit source: skbhungary.com",
+            "url": "https://www.skbhungary.com/2021/01/29/minden-idok-legnagyobb-zoldmezos-beruhazasa-ivancsan/",
+            "notes": "Added from GPT audit workbook for SK On Iváncsa. Evidence: SK announced the Iváncsa plant with 30 GWh annual capacity."
+          },
+          {
+            "id": "S48",
+            "title": "GPT audit source: skbhungary.com",
+            "url": "https://www.skbhungary.com/about-us/",
+            "notes": "Added from GPT audit workbook for SK On Komárom. Evidence: SK sources identify Komárom plants and 7.5 + 9.5 GWh capacity."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S04\", \"title\": \"SK On Hungary utilization and capacity\", \"url\": \"https://www.businesskorea.co.kr/news/articleView.html?idxno=267322\", \"notes\": \"Komarom 7+10 GWh, Ivancsa 30 GWh, mid-80% utilization reported for Komarom 2.\"}, {\"id\": \"S05\", \"title\": \"SK Innovation Ivancsa investment announcement\", \"url\": \"https://askinno.com/global/archives/3820\", \"notes\": \"Ivancsa 30 GWh, USD 2.29bn investment by 2028.\"}, {\"id\": \"S50\", \"title\": \"GPT audit source: skbhungary.com\", \"url\": \"https://www.skbhungary.com/2021/01/29/minden-idok-legnagyobb-zoldmezos-beruhazasa-ivancsan/\", \"notes\": \"Added from GPT audit workbook for SK On Iváncsa. Evidence: SK announced the Iváncsa plant with 30 GWh annual capacity.\"}, {\"id\": \"S48\", \"title\": \"GPT audit source: skbhungary.com\", \"url\": \"https://www.skbhungary.com/about-us/\", \"notes\": \"Added from GPT audit workbook for SK On Komárom. Evidence: SK sources identify Komárom plants and 7.5 + 9.5 GWh capacity.\"}]"
       }
     },
     {
@@ -278,12 +437,13 @@
         "announced_capacity_gwh": "13-13.4 initial; 40 target",
         "announced_capacity_gwh_numeric": 40,
         "investment": "EUR 850m+ first factory; broader ACC financing",
-        "current_output": "Producing, but reporting indicates difficult ramp, high scrap and only 15,000-20,000 packs over four months in one period.",
-        "current_output_verdict": "Major haircut needed. Treat as real but materially below nameplate; likely low single-digit GWh-equivalent until updated evidence.",
+        "current_output": "Producing for Stellantis vehicles; no verified annual GWh output; Mercedes supply expected mid-2026 per Reuters.",
+        "current_output_verdict": "Separate 13/15 GWh active France blocks from legacy 40 GWh target.",
         "source_refs": [
           "S06",
           "S07",
-          "S08"
+          "S08",
+          "S51"
         ],
         "lat": 50.514481,
         "lon": 2.859626,
@@ -303,7 +463,43 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "ACC Billy-Berclau / Douvrin, France"
+        "geocode_query": "ACC Billy-Berclau / Douvrin, France",
+        "verified_status_detail": "operating_ramping",
+        "verified_capacity_note": "13+ GWh initial block; Reuters 2026 indicates France plan focuses on 13 and 15 GWh blocks; 40 GWh is historical/long-term target",
+        "verified_type": "Battery cells and modules for EVs",
+        "verified_chemistry": "High-performance Li-ion; NMC-based ACC technology indicated by industry sources",
+        "verified_current_output": "Producing for Stellantis vehicles; no verified annual GWh output; Mercedes supply expected mid-2026 per Reuters.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "ACC source gives >13 GWh initial capacity and 40 GWh by 2030.",
+        "audit_notes": "Current installed/operational scale should not be conflated with 2030 expansion target.",
+        "audit_recommended_change": "Separate 13/15 GWh active France blocks from legacy 40 GWh target.",
+        "source_links": [
+          {
+            "id": "S06",
+            "title": "Saft/ACC Billy-Berclau inauguration",
+            "url": "https://saft.com/en/media-resources/press-releases/acc-inaugurates-its-first-gigafactory-billy-berclau-douvrin-france",
+            "notes": "Initial production line above 13 GWh."
+          },
+          {
+            "id": "S07",
+            "title": "ACC production shortage / scrap-rate reporting",
+            "url": "https://www.electrive.com/2026/02/05/battery-shortage-at-acc-likely-to-impact-stellantis-production/",
+            "notes": "Reported 15,000-20,000 packs over four months and high scrap rates; use as underperformance signal."
+          },
+          {
+            "id": "S08",
+            "title": "Reuters: ACC drops Italy and Germany gigafactories",
+            "url": "https://www.reuters.com/business/stellantis-backed-acc-drops-plans-italian-german-gigafactories-union-says-2026-02-07/",
+            "notes": "ACC Kaiserslautern and Termoli cancelled/shelved; French capacity remains."
+          },
+          {
+            "id": "S51",
+            "title": "GPT audit source: acc-emotion.com",
+            "url": "https://www.acc-emotion.com/media/bbd-press-release",
+            "notes": "Added from GPT audit workbook for ACC Billy-Berclau / Douvrin. Evidence: ACC source gives >13 GWh initial capacity and 40 GWh by 2030."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S06\", \"title\": \"Saft/ACC Billy-Berclau inauguration\", \"url\": \"https://saft.com/en/media-resources/press-releases/acc-inaugurates-its-first-gigafactory-billy-berclau-douvrin-france\", \"notes\": \"Initial production line above 13 GWh.\"}, {\"id\": \"S07\", \"title\": \"ACC production shortage / scrap-rate reporting\", \"url\": \"https://www.electrive.com/2026/02/05/battery-shortage-at-acc-likely-to-impact-stellantis-production/\", \"notes\": \"Reported 15,000-20,000 packs over four months and high scrap rates; use as underperformance signal.\"}, {\"id\": \"S08\", \"title\": \"Reuters: ACC drops Italy and Germany gigafactories\", \"url\": \"https://www.reuters.com/business/stellantis-backed-acc-drops-plans-italian-german-gigafactories-union-says-2026-02-07/\", \"notes\": \"ACC Kaiserslautern and Termoli cancelled/shelved; French capacity remains.\"}, {\"id\": \"S51\", \"title\": \"GPT audit source: acc-emotion.com\", \"url\": \"https://www.acc-emotion.com/media/bbd-press-release\", \"notes\": \"Added from GPT audit workbook for ACC Billy-Berclau / Douvrin. Evidence: ACC source gives >13 GWh initial capacity and 40 GWh by 2030.\"}]"
       }
     },
     {
@@ -329,18 +525,19 @@
         "announced_capacity_gwh": "20 first step; 40 max",
         "announced_capacity_gwh_numeric": 40,
         "investment": "part of PowerCo program; site-specific capex unclear",
-        "current_output": "First standard cells started; ramp gradually through 2026. Early volumes are not nameplate.",
-        "current_output_verdict": "Strategic live ramp. Count current output as very low until volume shipment data appear.",
+        "current_output": "First Unified Cells produced/commissioned Dec 2025; ramp in 2026; no steady annual output.",
+        "current_output_verdict": "Use operating_ramping, not full-output operating; add address separately.",
         "source_refs": [
-          "S09"
+          "S09",
+          "S52"
         ],
         "lat": 52.1794484,
         "lon": 10.4411867,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Industriestraße Nord 1, 38239 Salzgitter",
+        "city": "Salzgitter",
+        "admin1": "Lower Saxony",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "ramping",
@@ -352,7 +549,31 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "PowerCo Salzgitter, Germany"
+        "geocode_query": "PowerCo Salzgitter, Germany",
+        "verified_status_detail": "operating_ramping",
+        "verified_capacity_note": "20 GWh first step; expandable to 40 GWh",
+        "verified_type": "Unified battery cells",
+        "verified_chemistry": "NMC Unified Cell",
+        "verified_current_output": "First Unified Cells produced/commissioned Dec 2025; ramp in 2026; no steady annual output.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Volkswagen says Salzgitter was commissioned and first Unified Cells were produced.",
+        "audit_notes": "Commissioned does not mean full utilization; first-step capacity remains ramping.",
+        "audit_recommended_change": "Use operating_ramping, not full-output operating; add address separately.",
+        "source_links": [
+          {
+            "id": "S09",
+            "title": "Volkswagen/PowerCo Salzgitter official production start",
+            "url": "https://www.volkswagen-group.com/en/press-releases/start-of-european-battery-cell-production-powerco-commissions-salzgitter-gigafactory-20045",
+            "notes": "Salzgitter first cells, 20 GWh first step, expandable to 40 GWh; gradual ramp."
+          },
+          {
+            "id": "S52",
+            "title": "GPT audit source: lobbyregister.bundestag.de",
+            "url": "https://www.lobbyregister.bundestag.de/suche/R006923",
+            "notes": "Added from GPT audit workbook for PowerCo Salzgitter. Evidence: Volkswagen says Salzgitter was commissioned and first Unified Cells were produced."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S09\", \"title\": \"Volkswagen/PowerCo Salzgitter official production start\", \"url\": \"https://www.volkswagen-group.com/en/press-releases/start-of-european-battery-cell-production-powerco-commissions-salzgitter-gigafactory-20045\", \"notes\": \"Salzgitter first cells, 20 GWh first step, expandable to 40 GWh; gradual ramp.\"}, {\"id\": \"S52\", \"title\": \"GPT audit source: lobbyregister.bundestag.de\", \"url\": \"https://www.lobbyregister.bundestag.de/suche/R006923\", \"notes\": \"Added from GPT audit workbook for PowerCo Salzgitter. Evidence: Volkswagen says Salzgitter was commissioned and first Unified Cells were produced.\"}]"
       }
     },
     {
@@ -378,10 +599,12 @@
         "announced_capacity_gwh": "15.8",
         "announced_capacity_gwh_numeric": 15.8,
         "investment": "~GBP 1bn+ financing; total cost around GBP 1.5bn in some documents",
-        "current_output": "Commissioned/production launch in Dec 2025; current utilization not disclosed.",
-        "current_output_verdict": "Live but ramping. Count as current output only with a ramp haircut.",
+        "current_output": "Production launch reported Dec 2025; current utilization not disclosed and media report reduced line use.",
+        "current_output_verdict": "Keep 15.8 GWh capacity but mark output as ramping/undisclosed.",
         "source_refs": [
-          "S10"
+          "S10",
+          "S53",
+          "S54"
         ],
         "lat": 54.923534,
         "lon": -1.46347,
@@ -401,7 +624,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "AESC Sunderland, United Kingdom"
+        "geocode_query": "AESC Sunderland, United Kingdom",
+        "verified_status_detail": "operating_ramping_reduced_lines",
+        "verified_capacity_note": "15.8 GWh announced/installed for new plant; legacy 1.8/1.9 GWh older plant separate",
+        "verified_type": "EV battery cells",
+        "verified_chemistry": "Li-ion EV cells; cathode chemistry not verified in primary source",
+        "verified_current_output": "Production launch reported Dec 2025; current utilization not disclosed and media report reduced line use.",
+        "audit_confidence": "Medium-High",
+        "audit_evidence_quote": "AESC UK page says second Sunderland plant will have 15.8 GWh capacity.",
+        "audit_notes": "Electrive gives production start; current utilization remains uncertain.",
+        "audit_recommended_change": "Keep 15.8 GWh capacity but mark output as ramping/undisclosed.",
+        "source_links": [
+          {
+            "id": "S10",
+            "title": "AESC Sunderland production launch",
+            "url": "https://battery-news.de/en/2025/12/19/aesc-launches-battery-cell-production-at-new-gigafactory/",
+            "notes": "15.8 GWh annual capacity, commissioned production."
+          },
+          {
+            "id": "S53",
+            "title": "GPT audit source: aesc.co.uk",
+            "url": "https://aesc.co.uk/",
+            "notes": "Added from GPT audit workbook for AESC Sunderland. Evidence: AESC UK page says second Sunderland plant will have 15.8 GWh capacity."
+          },
+          {
+            "id": "S54",
+            "title": "GPT audit source: electrive.com",
+            "url": "https://www.electrive.com/2025/12/17/aesc-opens-gigafactory-in-sunderland/",
+            "notes": "Added from GPT audit workbook for AESC Sunderland. Evidence: AESC UK page says second Sunderland plant will have 15.8 GWh capacity."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S10\", \"title\": \"AESC Sunderland production launch\", \"url\": \"https://battery-news.de/en/2025/12/19/aesc-launches-battery-cell-production-at-new-gigafactory/\", \"notes\": \"15.8 GWh annual capacity, commissioned production.\"}, {\"id\": \"S53\", \"title\": \"GPT audit source: aesc.co.uk\", \"url\": \"https://aesc.co.uk/\", \"notes\": \"Added from GPT audit workbook for AESC Sunderland. Evidence: AESC UK page says second Sunderland plant will have 15.8 GWh capacity.\"}, {\"id\": \"S54\", \"title\": \"GPT audit source: electrive.com\", \"url\": \"https://www.electrive.com/2025/12/17/aesc-opens-gigafactory-in-sunderland/\", \"notes\": \"Added from GPT audit workbook for AESC Sunderland. Evidence: AESC UK page says second Sunderland plant will have 15.8 GWh capacity.\"}]"
       }
     },
     {
@@ -416,7 +669,7 @@
       },
       "properties": {
         "asset_id": "france-aesc-douai-09",
-        "status": "live_undisclosed",
+        "status": "ramping_haircut",
         "site": "AESC Douai",
         "site_ascii": "AESC Douai",
         "country": "France",
@@ -427,22 +680,24 @@
         "announced_capacity_gwh": "10 initial; 24-30 by 2030 discussed",
         "announced_capacity_gwh_numeric": 10,
         "investment": "~EUR 1.3bn initial project",
-        "current_output": "Series production started; supplies Renault. Site-level GWh output not disclosed.",
-        "current_output_verdict": "Live but output undisclosed. Count with ramp/utilization haircut until shipments are reported.",
+        "current_output": "Start of production in 2025; up to 200,000 EVs/year potential; current GWh shipments undisclosed.",
+        "current_output_verdict": "Use 10 GWh as verified current capacity; move 24-30 GWh to note/future ambition if retained.",
         "source_refs": [
-          "S11"
+          "S11",
+          "S55",
+          "S56"
         ],
         "lat": 50.3550839,
         "lon": 3.0312981,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "567 Rue des Frères Renault, 62117 Lambres-Lez-Douai",
+        "city": "Lambres-Lez-Douai",
+        "admin1": "Hauts-de-France",
         "nuts2": "",
         "nuts3": "",
-        "operating_state": "live",
-        "output_evidence_level": "undisclosed",
+        "operating_state": "ramping",
+        "output_evidence_level": "ramping",
         "current_output_gwh_estimate": "",
         "current_output_estimate_method": "",
         "owner_origin": "",
@@ -450,7 +705,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "AESC Douai, France"
+        "geocode_query": "AESC Douai, France",
+        "verified_status_detail": "operating_ramping",
+        "verified_capacity_note": "10 GWh verified current/initial capacity; 24-30 GWh future discussion not verified as current",
+        "verified_type": "EV battery cells/modules supplying Renault",
+        "verified_chemistry": "Li-ion EV cells; cathode chemistry not verified in audited primary source",
+        "verified_current_output": "Start of production in 2025; up to 200,000 EVs/year potential; current GWh shipments undisclosed.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "AESC announced start of production at Douai with 10 GWh capacity.",
+        "audit_notes": "AESC official page was access-limited but indexed summary supports key facts; address from AESC contact page.",
+        "audit_recommended_change": "Use 10 GWh as verified current capacity; move 24-30 GWh to note/future ambition if retained.",
+        "source_links": [
+          {
+            "id": "S11",
+            "title": "AESC Douai production start",
+            "url": "https://aesc-group.com/news/at-start-of-production-aesc-hosts-president-macron-at-douai-battery-gigafactory",
+            "notes": "10 GWh annual production capacity; supplies Renault."
+          },
+          {
+            "id": "S55",
+            "title": "GPT audit source: aesc-group.com",
+            "url": "https://www.aesc-group.com/es/item/683ee4b887901401a96ac1ce/",
+            "notes": "Added from GPT audit workbook for AESC Douai. Evidence: AESC announced start of production at Douai with 10 GWh capacity."
+          },
+          {
+            "id": "S56",
+            "title": "GPT audit source: aesc-group.com",
+            "url": "https://www.aesc-group.com/fr/contact.html",
+            "notes": "Added from GPT audit workbook for AESC Douai. Evidence: AESC announced start of production at Douai with 10 GWh capacity."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S11\", \"title\": \"AESC Douai production start\", \"url\": \"https://aesc-group.com/news/at-start-of-production-aesc-hosts-president-macron-at-douai-battery-gigafactory\", \"notes\": \"10 GWh annual production capacity; supplies Renault.\"}, {\"id\": \"S55\", \"title\": \"GPT audit source: aesc-group.com\", \"url\": \"https://www.aesc-group.com/es/item/683ee4b887901401a96ac1ce/\", \"notes\": \"Added from GPT audit workbook for AESC Douai. Evidence: AESC announced start of production at Douai with 10 GWh capacity.\"}, {\"id\": \"S56\", \"title\": \"GPT audit source: aesc-group.com\", \"url\": \"https://www.aesc-group.com/fr/contact.html\", \"notes\": \"Added from GPT audit workbook for AESC Douai. Evidence: AESC announced start of production at Douai with 10 GWh capacity.\"}]"
       }
     },
     {
@@ -476,18 +761,19 @@
         "announced_capacity_gwh": "16 initial; 50 target by 2030",
         "announced_capacity_gwh_numeric": 16,
         "investment": "EUR 3bn+ financing",
-        "current_output": "Gigafactory opened; first commercial batteries planned in 2026.",
-        "current_output_verdict": "Do not count 16 GWh as current output yet; treat as early ramp / proof-of-scale pending.",
+        "current_output": "Gigafactory inaugurated Dec 2025; first commercial batteries planned in 2026; no annual output yet.",
+        "current_output_verdict": "Keep ramping status; record actual current output as zero/undisclosed until deliveries are evidenced.",
         "source_refs": [
-          "S12"
+          "S12",
+          "S57"
         ],
         "lat": 50.9663852,
         "lon": 2.193627,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "7264 route du cap horn, 59630 Bourbourg",
+        "city": "Bourbourg",
+        "admin1": "Hauts-de-France",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "ramping",
@@ -499,7 +785,31 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Verkor Dunkirk / Bourbourg, France"
+        "geocode_query": "Verkor Dunkirk / Bourbourg, France",
+        "verified_status_detail": "commissioned_pre_commercial_ramp",
+        "verified_capacity_note": "16 GWh initial; 50 GWh target by 2030",
+        "verified_type": "Low-carbon lithium-ion battery cells",
+        "verified_chemistry": "Li-ion; specific cathode chemistry not verified in audited source",
+        "verified_current_output": "Gigafactory inaugurated Dec 2025; first commercial batteries planned in 2026; no annual output yet.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Verkor says first gigafactory opened with 16 GWh initial capacity.",
+        "audit_notes": "Opened/commissioned is not the same as stable commercial output.",
+        "audit_recommended_change": "Keep ramping status; record actual current output as zero/undisclosed until deliveries are evidenced.",
+        "source_links": [
+          {
+            "id": "S12",
+            "title": "Verkor gigafactory inauguration",
+            "url": "https://verkor.com/en/verkor-reaches-a-decisive-milestone-and-opens-its-first-gigafactory/",
+            "notes": "16 GWh initial, first commercial batteries planned in 2026, >EUR 3bn financing."
+          },
+          {
+            "id": "S57",
+            "title": "GPT audit source: verkor.com",
+            "url": "https://verkor.com/en/contact/",
+            "notes": "Added from GPT audit workbook for Verkor Dunkirk / Bourbourg. Evidence: Verkor says first gigafactory opened with 16 GWh initial capacity."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S12\", \"title\": \"Verkor gigafactory inauguration\", \"url\": \"https://verkor.com/en/verkor-reaches-a-decisive-milestone-and-opens-its-first-gigafactory/\", \"notes\": \"16 GWh initial, first commercial batteries planned in 2026, >EUR 3bn financing.\"}, {\"id\": \"S57\", \"title\": \"GPT audit source: verkor.com\", \"url\": \"https://verkor.com/en/contact/\", \"notes\": \"Added from GPT audit workbook for Verkor Dunkirk / Bourbourg. Evidence: Verkor says first gigafactory opened with 16 GWh initial capacity.\"}]"
       }
     },
     {
@@ -525,20 +835,22 @@
         "announced_capacity_gwh": "1 first factory; expansion ambition much larger",
         "announced_capacity_gwh_numeric": 1,
         "investment": "n/a clean total",
-        "current_output": "Production/deliveries have begun for industrial customers; automotive offtake not yet feasible initially due low output.",
-        "current_output_verdict": "Small live cell output but not a current core EV supply source. Track separately from EV-cell totals unless automotive supply is confirmed.",
+        "current_output": "Commercial deliveries to Proventia began Apr 2026; annual GWh output not published.",
+        "current_output_verdict": "Keep 1 GWh current capacity; current_output should cite deliveries, not inferred GWh.",
         "source_refs": [
           "S31",
           "S32",
-          "S33"
+          "S33",
+          "S58",
+          "S59"
         ],
         "lat": 58.5004486,
         "lon": 8.8030393,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Kristian Birkelands Trasé 6, 4849 Arendal",
+        "city": "Arendal",
+        "admin1": "Agder",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "ramping",
@@ -550,7 +862,49 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Morrow Arendal, Norway"
+        "geocode_query": "Morrow Arendal, Norway",
+        "verified_status_detail": "operating_ramping",
+        "verified_capacity_note": "1 GWh first factory",
+        "verified_type": "Battery cells",
+        "verified_chemistry": "Prismatic LFP cells",
+        "verified_current_output": "Commercial deliveries to Proventia began Apr 2026; annual GWh output not published.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Morrow opened a 1 GWh LFP factory and later reported customer deliveries.",
+        "audit_notes": "Output is industrial/off-highway customer deliveries, not necessarily automotive EV volume.",
+        "audit_recommended_change": "Keep 1 GWh current capacity; current_output should cite deliveries, not inferred GWh.",
+        "source_links": [
+          {
+            "id": "S31",
+            "title": "Morrow Batteries official site",
+            "url": "https://www.morrowbatteries.com/about-us",
+            "notes": "Commercial production at Arendal planned/commencing in 2025."
+          },
+          {
+            "id": "S32",
+            "title": "Reuters: Morrow factory / first deliveries",
+            "url": "https://www.reuters.com/technology/norways-morrow-batteries-opens-factory-plans-first-deliveries-by-year-end-2024-08-16/",
+            "notes": "1 GWh LFP site; automotive offtake not feasible initially due limited output."
+          },
+          {
+            "id": "S33",
+            "title": "ChargedEVs: Morrow deliveries to Proventia",
+            "url": "https://chargedevs.com/newswire/morrow-begins-battery-cell-deliveries-to-proventia-as-norwegian-production-scales-up/",
+            "notes": "Morrow LFP cell deliveries to Proventia reported May 2026."
+          },
+          {
+            "id": "S58",
+            "title": "GPT audit source: news.morrowbatteries.com",
+            "url": "https://news.morrowbatteries.com/pressreleases/jonas-gahr-stoere-prime-minister-of-norway-officially-inaugurates-europes-first-lfp-battery-gigafactory-3337609",
+            "notes": "Added from GPT audit workbook for Morrow Arendal. Evidence: Morrow opened a 1 GWh LFP factory and later reported customer deliveries."
+          },
+          {
+            "id": "S59",
+            "title": "GPT audit source: mynewsdesk.com",
+            "url": "https://www.mynewsdesk.com/morrow-batteries/pressreleases/morrow-begins-cell-deliveries-to-proventia-as-arendal-production-scales-up-3442140",
+            "notes": "Added from GPT audit workbook for Morrow Arendal. Evidence: Morrow opened a 1 GWh LFP factory and later reported customer deliveries."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S31\", \"title\": \"Morrow Batteries official site\", \"url\": \"https://www.morrowbatteries.com/about-us\", \"notes\": \"Commercial production at Arendal planned/commencing in 2025.\"}, {\"id\": \"S32\", \"title\": \"Reuters: Morrow factory / first deliveries\", \"url\": \"https://www.reuters.com/technology/norways-morrow-batteries-opens-factory-plans-first-deliveries-by-year-end-2024-08-16/\", \"notes\": \"1 GWh LFP site; automotive offtake not feasible initially due limited output.\"}, {\"id\": \"S33\", \"title\": \"ChargedEVs: Morrow deliveries to Proventia\", \"url\": \"https://chargedevs.com/newswire/morrow-begins-battery-cell-deliveries-to-proventia-as-norwegian-production-scales-up/\", \"notes\": \"Morrow LFP cell deliveries to Proventia reported May 2026.\"}, {\"id\": \"S58\", \"title\": \"GPT audit source: news.morrowbatteries.com\", \"url\": \"https://news.morrowbatteries.com/pressreleases/jonas-gahr-stoere-prime-minister-of-norway-officially-inaugurates-europes-first-lfp-battery-gigafactory-3337609\", \"notes\": \"Added from GPT audit workbook for Morrow Arendal. Evidence: Morrow opened a 1 GWh LFP factory and later reported customer deliveries.\"}, {\"id\": \"S59\", \"title\": \"GPT audit source: mynewsdesk.com\", \"url\": \"https://www.mynewsdesk.com/morrow-batteries/pressreleases/morrow-begins-cell-deliveries-to-proventia-as-arendal-production-scales-up-3442140\", \"notes\": \"Added from GPT audit workbook for Morrow Arendal. Evidence: Morrow opened a 1 GWh LFP factory and later reported customer deliveries.\"}]"
       }
     },
     {
@@ -576,19 +930,21 @@
         "announced_capacity_gwh": "100",
         "announced_capacity_gwh_numeric": 100,
         "investment": "EUR 7.34bn",
-        "current_output": "Production targeted late 2025 / early 2026; no public evidence of scaled output found in this pass.",
-        "current_output_verdict": "Future/start-up capacity. Do not count 100 GWh as current output.",
+        "current_output": "No public evidence of scaled production in this audit; production start remains unconfirmed.",
+        "current_output_verdict": "Keep future_zero/under_construction until confirmed SOP or shipment evidence appears.",
         "source_refs": [
           "S13",
-          "S14"
+          "S14",
+          "S60",
+          "S61"
         ],
         "lat": 47.5256269,
         "lon": 21.6440524,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "INPARK Debrecen, 0495/267 hrsz., 4002 Debrecen",
+        "city": "Debrecen",
+        "admin1": "Hajdú-Bihar",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "future",
@@ -600,7 +956,43 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "CATL Debrecen, Hungary"
+        "geocode_query": "CATL Debrecen, Hungary",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "100 GWh planned/announced",
+        "verified_type": "Battery cells and modules",
+        "verified_chemistry": "Li-ion EV batteries",
+        "verified_current_output": "No public evidence of scaled production in this audit; production start remains unconfirmed.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "CATL announced a 100 GWh Debrecen plant on a 221 ha site.",
+        "audit_notes": "Some 2025/2026 reports discuss timing, but no confirmed production output was found.",
+        "audit_recommended_change": "Keep future_zero/under_construction until confirmed SOP or shipment evidence appears.",
+        "source_links": [
+          {
+            "id": "S13",
+            "title": "CATL Debrecen official announcement",
+            "url": "https://www.catl.com/en/news/983.html",
+            "notes": "Debrecen 100 GWh, EUR 7.34bn investment."
+          },
+          {
+            "id": "S14",
+            "title": "Reuters: CATL Hungary production timing",
+            "url": "https://www.reuters.com/business/autos-transportation/chinese-battery-maker-catl-expects-hungarian-production-start-by-early-2026-2025-09-07/",
+            "notes": "Production targeted late 2025/early 2026; 100 GWh planned."
+          },
+          {
+            "id": "S60",
+            "title": "GPT audit source: catl.com",
+            "url": "https://www.catl.com/en/news/983.html?s=31",
+            "notes": "Added from GPT audit workbook for CATL Debrecen. Evidence: CATL announced a 100 GWh Debrecen plant on a 221 ha site."
+          },
+          {
+            "id": "S61",
+            "title": "GPT audit source: catl-career.com",
+            "url": "https://www.catl-career.com/CATH/?locale=de_DE",
+            "notes": "Added from GPT audit workbook for CATL Debrecen. Evidence: CATL announced a 100 GWh Debrecen plant on a 221 ha site."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S13\", \"title\": \"CATL Debrecen official announcement\", \"url\": \"https://www.catl.com/en/news/983.html\", \"notes\": \"Debrecen 100 GWh, EUR 7.34bn investment.\"}, {\"id\": \"S14\", \"title\": \"Reuters: CATL Hungary production timing\", \"url\": \"https://www.reuters.com/business/autos-transportation/chinese-battery-maker-catl-expects-hungarian-production-start-by-early-2026-2025-09-07/\", \"notes\": \"Production targeted late 2025/early 2026; 100 GWh planned.\"}, {\"id\": \"S60\", \"title\": \"GPT audit source: catl.com\", \"url\": \"https://www.catl.com/en/news/983.html?s=31\", \"notes\": \"Added from GPT audit workbook for CATL Debrecen. Evidence: CATL announced a 100 GWh Debrecen plant on a 221 ha site.\"}, {\"id\": \"S61\", \"title\": \"GPT audit source: catl-career.com\", \"url\": \"https://www.catl-career.com/CATH/?locale=de_DE\", \"notes\": \"Added from GPT audit workbook for CATL Debrecen. Evidence: CATL announced a 100 GWh Debrecen plant on a 221 ha site.\"}]"
       }
     },
     {
@@ -626,10 +1018,12 @@
         "announced_capacity_gwh": "28",
         "announced_capacity_gwh_numeric": 28,
         "investment": "EUR 1bn+",
-        "current_output": "Plant scheduled to be running by 2026; no scaled output evidence found.",
-        "current_output_verdict": "Future/pre-ramp capacity. Count current output as zero until production/shipment evidence appears.",
+        "current_output": "Planned completion/running in 2026; no scaled production evidence found.",
+        "current_output_verdict": "Keep future_zero/under_construction; do not assign actual output.",
         "source_refs": [
-          "S36"
+          "S36",
+          "S62",
+          "S63"
         ],
         "lat": 47.4729131,
         "lon": 19.2049196,
@@ -649,7 +1043,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "EVE Power Debrecen, Hungary"
+        "geocode_query": "EVE Power Debrecen, Hungary",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "28 GWh planned",
+        "verified_type": "Cylindrical automotive battery cells",
+        "verified_chemistry": "Li-ion cylindrical cells",
+        "verified_current_output": "Planned completion/running in 2026; no scaled production evidence found.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "EVE states 28 GWh/year cylindrical battery capacity for BMW supply.",
+        "audit_notes": "Plant remains pre-output in current dataset terms.",
+        "audit_recommended_change": "Keep future_zero/under_construction; do not assign actual output.",
+        "source_links": [
+          {
+            "id": "S36",
+            "title": "HIPA: EVE Power Debrecen",
+            "url": "https://hipa.hu/news/eve-power-teams-up-with-bmw-in-debrecen-to-supply-ifactory-next-door/",
+            "notes": "EVE Power Debrecen EUR 1bn+, 28 GWh, BMW supply, running by 2026."
+          },
+          {
+            "id": "S62",
+            "title": "GPT audit source: evepower.com",
+            "url": "https://www.evepower.com/en/news-1295",
+            "notes": "Added from GPT audit workbook for EVE Power Debrecen. Evidence: EVE states 28 GWh/year cylindrical battery capacity for BMW supply."
+          },
+          {
+            "id": "S63",
+            "title": "GPT audit source: hipa.hu",
+            "url": "https://hipa.hu/hir/az-eve-power-a-bmw-vel-tarsul-debrecenben-a-szomszedos-ifactory-ellatasara/",
+            "notes": "Added from GPT audit workbook for EVE Power Debrecen. Evidence: EVE states 28 GWh/year cylindrical battery capacity for BMW supply."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S36\", \"title\": \"HIPA: EVE Power Debrecen\", \"url\": \"https://hipa.hu/news/eve-power-teams-up-with-bmw-in-debrecen-to-supply-ifactory-next-door/\", \"notes\": \"EVE Power Debrecen EUR 1bn+, 28 GWh, BMW supply, running by 2026.\"}, {\"id\": \"S62\", \"title\": \"GPT audit source: evepower.com\", \"url\": \"https://www.evepower.com/en/news-1295\", \"notes\": \"Added from GPT audit workbook for EVE Power Debrecen. Evidence: EVE states 28 GWh/year cylindrical battery capacity for BMW supply.\"}, {\"id\": \"S63\", \"title\": \"GPT audit source: hipa.hu\", \"url\": \"https://hipa.hu/hir/az-eve-power-a-bmw-vel-tarsul-debrecenben-a-szomszedos-ifactory-ellatasara/\", \"notes\": \"Added from GPT audit workbook for EVE Power Debrecen. Evidence: EVE states 28 GWh/year cylindrical battery capacity for BMW supply.\"}]"
       }
     },
     {
@@ -675,11 +1099,12 @@
         "announced_capacity_gwh": "40 projected; first cells expected 2026",
         "announced_capacity_gwh_numeric": 40,
         "investment": "EUR 3bn+ PowerCo site; larger Spanish programme broader",
-        "current_output": "Equipment installation from 2026; first cells expected around late Sep 2026, series later.",
-        "current_output_verdict": "Zero current output as of this brief. Treat as future capacity.",
+        "current_output": "Construction underway; first cells targeted in 2026; no current output.",
+        "current_output_verdict": "Keep future_zero until verified cell production; chemistry should remain uncertain unless sourced.",
         "source_refs": [
           "S29",
-          "S30"
+          "S30",
+          "S09"
         ],
         "lat": 39.6483212818109,
         "lon": -0.268406079194862,
@@ -699,7 +1124,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "PowerCo Valencia / Sagunto, Spain"
+        "geocode_query": "PowerCo Valencia / Sagunto, Spain",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "40 GWh planned initial capacity; potential expansion not quantified here",
+        "verified_type": "Unified battery cells",
+        "verified_chemistry": "Unified cell; LFP reported in media but not verified in primary VW source",
+        "verified_current_output": "Construction underway; first cells targeted in 2026; no current output.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Volkswagen/PowerCo announced Valencia construction with 40 GWh initial capacity.",
+        "audit_notes": "Current state is under construction, not production.",
+        "audit_recommended_change": "Keep future_zero until verified cell production; chemistry should remain uncertain unless sourced.",
+        "source_links": [
+          {
+            "id": "S29",
+            "title": "PowerCo Valencia construction start official",
+            "url": "https://www.volkswagen-group.com/en/press-releases/gigafactory-valencia-powerco-gives-starting-signal-for-construction-of-second-cell-factory-17033",
+            "notes": "PowerCo Valencia production targeted in 2026; 40 GWh class."
+          },
+          {
+            "id": "S30",
+            "title": "Invest in Spain: PowerCo equipment install / first cells",
+            "url": "https://www.investinspain.org/content/icex-invest/en/noticias-main/2025/powerco.html",
+            "notes": "Equipment installation from Q1 2026; first cells expected end-September 2026."
+          },
+          {
+            "id": "S09",
+            "title": "Volkswagen/PowerCo Salzgitter official production start",
+            "url": "https://www.volkswagen-group.com/en/press-releases/start-of-european-battery-cell-production-powerco-commissions-salzgitter-gigafactory-20045",
+            "notes": "Salzgitter first cells, 20 GWh first step, expandable to 40 GWh; gradual ramp."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S29\", \"title\": \"PowerCo Valencia construction start official\", \"url\": \"https://www.volkswagen-group.com/en/press-releases/gigafactory-valencia-powerco-gives-starting-signal-for-construction-of-second-cell-factory-17033\", \"notes\": \"PowerCo Valencia production targeted in 2026; 40 GWh class.\"}, {\"id\": \"S30\", \"title\": \"Invest in Spain: PowerCo equipment install / first cells\", \"url\": \"https://www.investinspain.org/content/icex-invest/en/noticias-main/2025/powerco.html\", \"notes\": \"Equipment installation from Q1 2026; first cells expected end-September 2026.\"}, {\"id\": \"S09\", \"title\": \"Volkswagen/PowerCo Salzgitter official production start\", \"url\": \"https://www.volkswagen-group.com/en/press-releases/start-of-european-battery-cell-production-powerco-commissions-salzgitter-gigafactory-20045\", \"notes\": \"Salzgitter first cells, 20 GWh first step, expandable to 40 GWh; gradual ramp.\"}]"
       }
     },
     {
@@ -725,10 +1180,12 @@
         "announced_capacity_gwh": "up to 50",
         "announced_capacity_gwh_numeric": 50,
         "investment": "EUR 4.1bn",
-        "current_output": "Production targeted by end-2026; construction/implementation phase.",
-        "current_output_verdict": "Zero current output. Future LFP capacity only.",
+        "current_output": "Construction started/groundbreaking reported; production planned by end-2026; no current output.",
+        "current_output_verdict": "Keep future_zero/under_construction; no current output.",
         "source_refs": [
-          "S15"
+          "S15",
+          "S64",
+          "S65"
         ],
         "lat": 41.641942,
         "lon": -0.950139,
@@ -748,7 +1205,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "CATL-Stellantis Zaragoza, Spain"
+        "geocode_query": "CATL-Stellantis Zaragoza, Spain",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "Up to 50 GWh planned",
+        "verified_type": "LFP battery cells/modules",
+        "verified_chemistry": "LFP",
+        "verified_current_output": "Construction started/groundbreaking reported; production planned by end-2026; no current output.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Stellantis/CATL announced a Zaragoza LFP plant with capacity up to 50 GWh.",
+        "audit_notes": "Primary company sources support capacity and chemistry.",
+        "audit_recommended_change": "Keep future_zero/under_construction; no current output.",
+        "source_links": [
+          {
+            "id": "S15",
+            "title": "CATL-Stellantis Zaragoza official announcement",
+            "url": "https://www.catl.com/en/news/6328.html",
+            "notes": "Up to 50 GWh LFP plant, EUR 4.1bn, production targeted by end-2026."
+          },
+          {
+            "id": "S64",
+            "title": "GPT audit source: stellantis.com",
+            "url": "https://www.stellantis.com/en/news/press-releases/2024/december/stellantis-and-calt-to-invest-up-to-4-1-billion-in-joint-venture-for-large-scale-lfp-battery-plant-in-spain",
+            "notes": "Added from GPT audit workbook for CATL-Stellantis Zaragoza. Evidence: Stellantis/CATL announced a Zaragoza LFP plant with capacity up to 50 GWh."
+          },
+          {
+            "id": "S65",
+            "title": "GPT audit source: catl.com",
+            "url": "https://www.catl.com/en/news/6614.html",
+            "notes": "Added from GPT audit workbook for CATL-Stellantis Zaragoza. Evidence: Stellantis/CATL announced a Zaragoza LFP plant with capacity up to 50 GWh."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S15\", \"title\": \"CATL-Stellantis Zaragoza official announcement\", \"url\": \"https://www.catl.com/en/news/6328.html\", \"notes\": \"Up to 50 GWh LFP plant, EUR 4.1bn, production targeted by end-2026.\"}, {\"id\": \"S64\", \"title\": \"GPT audit source: stellantis.com\", \"url\": \"https://www.stellantis.com/en/news/press-releases/2024/december/stellantis-and-calt-to-invest-up-to-4-1-billion-in-joint-venture-for-large-scale-lfp-battery-plant-in-spain\", \"notes\": \"Added from GPT audit workbook for CATL-Stellantis Zaragoza. Evidence: Stellantis/CATL announced a Zaragoza LFP plant with capacity up to 50 GWh.\"}, {\"id\": \"S65\", \"title\": \"GPT audit source: catl.com\", \"url\": \"https://www.catl.com/en/news/6614.html\", \"notes\": \"Added from GPT audit workbook for CATL-Stellantis Zaragoza. Evidence: Stellantis/CATL announced a Zaragoza LFP plant with capacity up to 50 GWh.\"}]"
       }
     },
     {
@@ -774,10 +1261,12 @@
         "announced_capacity_gwh": "30 target",
         "announced_capacity_gwh_numeric": 30,
         "investment": "EUR 2.5bn project",
-        "current_output": "Planned/under construction; no current production evidence.",
-        "current_output_verdict": "Zero current output. Future capacity only.",
+        "current_output": "Under construction with SOP planned around 2026; no current production.",
+        "current_output_verdict": "Keep capacity as announced/target, not current; consider adding source note for 30 GWh.",
         "source_refs": [
-          "S16"
+          "S16",
+          "S66",
+          "S55"
         ],
         "lat": 39.8928306,
         "lon": -5.5401199,
@@ -797,7 +1286,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "AESC Navalmoral de la Mata, Spain"
+        "geocode_query": "AESC Navalmoral de la Mata, Spain",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "30 GWh target from project reporting; official 2024 source confirms construction/LFP but audited source did not cleanly expose GWh",
+        "verified_type": "EV battery cells",
+        "verified_chemistry": "LFP",
+        "verified_current_output": "Under construction with SOP planned around 2026; no current production.",
+        "audit_confidence": "Medium",
+        "audit_evidence_quote": "AESC announced groundbreaking and LFP battery production in Navalmoral.",
+        "audit_notes": "Capacity claim is less strongly primary-verified than status and chemistry.",
+        "audit_recommended_change": "Keep capacity as announced/target, not current; consider adding source note for 30 GWh.",
+        "source_links": [
+          {
+            "id": "S16",
+            "title": "Reuters Europe battery factory factbox",
+            "url": "https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/",
+            "notes": "AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects."
+          },
+          {
+            "id": "S66",
+            "title": "GPT audit source: aesc-group.com",
+            "url": "https://www.aesc-group.com/es/item/668bf854f7fe5a27254fcc59/",
+            "notes": "Added from GPT audit workbook for AESC Navalmoral de la Mata. Evidence: AESC announced groundbreaking and LFP battery production in Navalmoral."
+          },
+          {
+            "id": "S55",
+            "title": "GPT audit source: aesc-group.com",
+            "url": "https://www.aesc-group.com/es/item/683ee4b887901401a96ac1ce/",
+            "notes": "Added from GPT audit workbook for AESC Douai. Evidence: AESC announced start of production at Douai with 10 GWh capacity."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S16\", \"title\": \"Reuters Europe battery factory factbox\", \"url\": \"https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/\", \"notes\": \"AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects.\"}, {\"id\": \"S66\", \"title\": \"GPT audit source: aesc-group.com\", \"url\": \"https://www.aesc-group.com/es/item/668bf854f7fe5a27254fcc59/\", \"notes\": \"Added from GPT audit workbook for AESC Navalmoral de la Mata. Evidence: AESC announced groundbreaking and LFP battery production in Navalmoral.\"}, {\"id\": \"S55\", \"title\": \"GPT audit source: aesc-group.com\", \"url\": \"https://www.aesc-group.com/es/item/683ee4b887901401a96ac1ce/\", \"notes\": \"Added from GPT audit workbook for AESC Douai. Evidence: AESC announced start of production at Douai with 10 GWh capacity.\"}]"
       }
     },
     {
@@ -823,11 +1342,13 @@
         "announced_capacity_gwh": "40",
         "announced_capacity_gwh_numeric": 40,
         "investment": "GBP 4bn-5.2bn reported; GBP 380m UK support",
-        "current_output": "Construction/development. Production may slip toward late 2027.",
-        "current_output_verdict": "Zero current output. Important future UK capacity, not current production.",
+        "current_output": "Construction milestone reached; no cell output; media indicates possible timeline slippage.",
+        "current_output_verdict": "Keep future_zero/under_construction; add delay risk note if timeline is present.",
         "source_refs": [
           "S17",
-          "S18"
+          "S18",
+          "S67",
+          "S68"
         ],
         "lat": 51.1284037,
         "lon": -3.0037793,
@@ -847,7 +1368,43 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Agratas Somerset / Bridgwater, United Kingdom"
+        "geocode_query": "Agratas Somerset / Bridgwater, United Kingdom",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "40 GWh planned",
+        "verified_type": "Battery cells for automotive and ESS",
+        "verified_chemistry": "Li-ion cells; specific chemistry not verified",
+        "verified_current_output": "Construction milestone reached; no cell output; media indicates possible timeline slippage.",
+        "audit_confidence": "Medium-High",
+        "audit_evidence_quote": "Agratas reports major construction milestone at the UK battery facility.",
+        "audit_notes": "40 GWh is widely reported; official construction update did not state capacity in retrieved text.",
+        "audit_recommended_change": "Keep future_zero/under_construction; add delay risk note if timeline is present.",
+        "source_links": [
+          {
+            "id": "S17",
+            "title": "Reuters: Agratas Somerset grant",
+            "url": "https://www.reuters.com/world/uk/uk-awards-510-million-tatas-agratas-somerset-ev-battery-gigafactory-2026-04-09/",
+            "notes": "GBP 380m public support for Tata/Agratas Somerset."
+          },
+          {
+            "id": "S18",
+            "title": "Guardian: Agratas Somerset investment and delay",
+            "url": "https://www.theguardian.com/business/2026/apr/09/somerset-battery-factory-jaguar-land-rover-government-funding",
+            "notes": "40 GWh project, GBP 4bn project, production may slip toward late 2027."
+          },
+          {
+            "id": "S67",
+            "title": "GPT audit source: agratas.com",
+            "url": "https://www.agratas.com/news/major-construction-milestone-reached-at-uk-battery-facility",
+            "notes": "Added from GPT audit workbook for Agratas Somerset / Bridgwater. Evidence: Agratas reports major construction milestone at the UK battery facility."
+          },
+          {
+            "id": "S68",
+            "title": "GPT audit source: electrive.com",
+            "url": "https://www.electrive.com/2025/02/14/tata-groups-uk-battery-cell-plant-to-open-in-2026/",
+            "notes": "Added from GPT audit workbook for Agratas Somerset / Bridgwater. Evidence: Agratas reports major construction milestone at the UK battery facility."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S17\", \"title\": \"Reuters: Agratas Somerset grant\", \"url\": \"https://www.reuters.com/world/uk/uk-awards-510-million-tatas-agratas-somerset-ev-battery-gigafactory-2026-04-09/\", \"notes\": \"GBP 380m public support for Tata/Agratas Somerset.\"}, {\"id\": \"S18\", \"title\": \"Guardian: Agratas Somerset investment and delay\", \"url\": \"https://www.theguardian.com/business/2026/apr/09/somerset-battery-factory-jaguar-land-rover-government-funding\", \"notes\": \"40 GWh project, GBP 4bn project, production may slip toward late 2027.\"}, {\"id\": \"S67\", \"title\": \"GPT audit source: agratas.com\", \"url\": \"https://www.agratas.com/news/major-construction-milestone-reached-at-uk-battery-facility\", \"notes\": \"Added from GPT audit workbook for Agratas Somerset / Bridgwater. Evidence: Agratas reports major construction milestone at the UK battery facility.\"}, {\"id\": \"S68\", \"title\": \"GPT audit source: electrive.com\", \"url\": \"https://www.electrive.com/2025/02/14/tata-groups-uk-battery-cell-plant-to-open-in-2026/\", \"notes\": \"Added from GPT audit workbook for Agratas Somerset / Bridgwater. Evidence: Agratas reports major construction milestone at the UK battery facility.\"}]"
       }
     },
     {
@@ -873,18 +1430,19 @@
         "announced_capacity_gwh": "up to 8 from 2027",
         "announced_capacity_gwh_numeric": 8,
         "investment": "nearly EUR 1bn local cell-factory investment",
-        "current_output": "Production capacity targeted from 2027; no current EV-cell output at scale.",
-        "current_output_verdict": "Zero current output for 2026 totals.",
+        "current_output": "No current EV-cell output verified; Reuters reports conditions for up to 8 GWh/year starting 2027.",
+        "current_output_verdict": "Keep current EV-cell output at zero; set status to planned/preparation for cells.",
         "source_refs": [
-          "S19"
+          "S19",
+          "S69"
         ],
         "lat": 52.3914177,
         "lon": 13.7957909,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Tesla Straße 1, 15537 Grünheide (Mark)",
+        "city": "Grünheide (Mark)",
+        "admin1": "Brandenburg",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "future",
@@ -896,7 +1454,31 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Tesla Grünheide, Germany"
+        "geocode_query": "Tesla Grünheide, Germany",
+        "verified_status_detail": "planned_preparation_zero_cells",
+        "verified_capacity_note": "Up to 8 GWh/year from 2027",
+        "verified_type": "Future battery cell production at existing vehicle gigafactory",
+        "verified_chemistry": "Cell chemistry not verified",
+        "verified_current_output": "No current EV-cell output verified; Reuters reports conditions for up to 8 GWh/year starting 2027.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Reuters reports Tesla plans up to 8 GWh/year cell capacity from 2027.",
+        "audit_notes": "Vehicle production at Grünheide should not be confused with battery-cell output.",
+        "audit_recommended_change": "Keep current EV-cell output at zero; set status to planned/preparation for cells.",
+        "source_links": [
+          {
+            "id": "S19",
+            "title": "Reuters: Tesla Grünheide cell-production plan",
+            "url": "https://www.reuters.com/business/autos-transportation/tesla-ramps-up-battery-cell-investments-german-gigafactory-2025-12-16/",
+            "notes": "Up to 8 GWh from 2027; local cell-factory investment nearly EUR 1bn."
+          },
+          {
+            "id": "S69",
+            "title": "GPT audit source: tesla.com",
+            "url": "https://www.tesla.com/de_de/contact",
+            "notes": "Added from GPT audit workbook for Tesla Grünheide. Evidence: Reuters reports Tesla plans up to 8 GWh/year cell capacity from 2027."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S19\", \"title\": \"Reuters: Tesla Grünheide cell-production plan\", \"url\": \"https://www.reuters.com/business/autos-transportation/tesla-ramps-up-battery-cell-investments-german-gigafactory-2025-12-16/\", \"notes\": \"Up to 8 GWh from 2027; local cell-factory investment nearly EUR 1bn.\"}, {\"id\": \"S69\", \"title\": \"GPT audit source: tesla.com\", \"url\": \"https://www.tesla.com/de_de/contact\", \"notes\": \"Added from GPT audit workbook for Tesla Grünheide. Evidence: Reuters reports Tesla plans up to 8 GWh/year cell capacity from 2027.\"}]"
       }
     },
     {
@@ -922,19 +1504,20 @@
         "announced_capacity_gwh": "0.8 in 2028 phase; 48 long-term ambition",
         "announced_capacity_gwh_numeric": 48,
         "investment": "EUR 5.2bn planned",
-        "current_output": "Groundbreaking in 2026; mass production roadmap starts 2028.",
-        "current_output_verdict": "Zero current output; high technology/execution risk.",
+        "current_output": "Groundbreaking in Feb 2026; no current production.",
+        "current_output_verdict": "Record first-phase capacity separately from 48 GWh potential; current output zero.",
         "source_refs": [
           "S20",
-          "S21"
+          "S21",
+          "S70"
         ],
         "lat": 50.9736624,
         "lon": 2.2080653,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "ZAC des Bassins, 124 Rue du Magasin Général, 59140 Dunkerque",
+        "city": "Dunkerque",
+        "admin1": "Hauts-de-France",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "future",
@@ -946,7 +1529,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "ProLogium Dunkirk, France"
+        "geocode_query": "ProLogium Dunkirk, France",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "0.8 GWh first phase by 2028; 4 GWh by 2030; 12 GWh by 2032; 48 GWh long-term potential",
+        "verified_type": "Solid-state battery cells",
+        "verified_chemistry": "Solid-state lithium-ceramic batteries",
+        "verified_current_output": "Groundbreaking in Feb 2026; no current production.",
+        "audit_confidence": "Medium-High",
+        "audit_evidence_quote": "ProLogium reports groundbreaking and construction of its Dunkirk gigafactory.",
+        "audit_notes": "Long-term 48 GWh is potential/ambition, not planned current output.",
+        "audit_recommended_change": "Record first-phase capacity separately from 48 GWh potential; current output zero.",
+        "source_links": [
+          {
+            "id": "S20",
+            "title": "ProLogium Dunkirk official roadmap",
+            "url": "https://prologium.com/prologium-breaks-ground-on-dunkirk-gigafactory-in-france/",
+            "notes": "Groundbreaking in 2026; 0.8 GWh phase in 2028; roadmap to 12 GWh by 2032."
+          },
+          {
+            "id": "S21",
+            "title": "ProLogium expansion roadmap",
+            "url": "https://prologium.com/manufacturing/expansion-roadmap/",
+            "notes": "EUR 5.2bn investment and 48 GWh long-term capacity ambition."
+          },
+          {
+            "id": "S70",
+            "title": "GPT audit source: prologium.com",
+            "url": "https://prologium.com/giganews-the-construction-bulletin-prologiums-gigafactory-in-dunkirk/",
+            "notes": "Added from GPT audit workbook for ProLogium Dunkirk. Evidence: ProLogium reports groundbreaking and construction of its Dunkirk gigafactory."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S20\", \"title\": \"ProLogium Dunkirk official roadmap\", \"url\": \"https://prologium.com/prologium-breaks-ground-on-dunkirk-gigafactory-in-france/\", \"notes\": \"Groundbreaking in 2026; 0.8 GWh phase in 2028; roadmap to 12 GWh by 2032.\"}, {\"id\": \"S21\", \"title\": \"ProLogium expansion roadmap\", \"url\": \"https://prologium.com/manufacturing/expansion-roadmap/\", \"notes\": \"EUR 5.2bn investment and 48 GWh long-term capacity ambition.\"}, {\"id\": \"S70\", \"title\": \"GPT audit source: prologium.com\", \"url\": \"https://prologium.com/giganews-the-construction-bulletin-prologiums-gigafactory-in-dunkirk/\", \"notes\": \"Added from GPT audit workbook for ProLogium Dunkirk. Evidence: ProLogium reports groundbreaking and construction of its Dunkirk gigafactory.\"}]"
       }
     },
     {
@@ -972,10 +1585,11 @@
         "announced_capacity_gwh": "1 first phase",
         "announced_capacity_gwh_numeric": 1,
         "investment": "Series B; amount not clearly disclosed",
-        "current_output": "Construction of 1 GWh factory starts 2026; first deliveries expected 2027.",
-        "current_output_verdict": "Zero current GWh-scale output.",
+        "current_output": "Construction/funding stage; no commercial output verified.",
+        "current_output_verdict": "Keep future_zero/under_construction; current output zero.",
         "source_refs": [
-          "S22"
+          "S22",
+          "S71"
         ],
         "lat": 46.097766,
         "lon": 19.670283,
@@ -995,7 +1609,31 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "ElevenEs Subotica, Serbia"
+        "geocode_query": "ElevenEs Subotica, Serbia",
+        "verified_status_detail": "under_construction_starting_2026",
+        "verified_capacity_note": "1 GWh first phase/mega-factory",
+        "verified_type": "Battery cells",
+        "verified_chemistry": "Prismatic LFP blade cells",
+        "verified_current_output": "Construction/funding stage; no commercial output verified.",
+        "audit_confidence": "Medium-High",
+        "audit_evidence_quote": "ElevenEs describes plans for a 1 GWh LFP battery plant in Serbia.",
+        "audit_notes": "Site is pre-output; timing depends on construction and funding.",
+        "audit_recommended_change": "Keep future_zero/under_construction; current output zero.",
+        "source_links": [
+          {
+            "id": "S22",
+            "title": "ElevenEs Subotica official update",
+            "url": "https://elevenes.com/news/elevenes-is-backed-by-caterpillar-venture-capital-inc/",
+            "notes": "Construction of 1 GWh LFP mega-factory begins February 2026."
+          },
+          {
+            "id": "S71",
+            "title": "GPT audit source: elevenes.com",
+            "url": "https://elevenes.com/news/interview-elevenes-finalising-plans-for-1-gwh-battery-plant-in-serbia/",
+            "notes": "Added from GPT audit workbook for ElevenEs Subotica. Evidence: ElevenEs describes plans for a 1 GWh LFP battery plant in Serbia."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S22\", \"title\": \"ElevenEs Subotica official update\", \"url\": \"https://elevenes.com/news/elevenes-is-backed-by-caterpillar-venture-capital-inc/\", \"notes\": \"Construction of 1 GWh LFP mega-factory begins February 2026.\"}, {\"id\": \"S71\", \"title\": \"GPT audit source: elevenes.com\", \"url\": \"https://elevenes.com/news/interview-elevenes-finalising-plans-for-1-gwh-battery-plant-in-serbia/\", \"notes\": \"Added from GPT audit workbook for ElevenEs Subotica. Evidence: ElevenEs describes plans for a 1 GWh LFP battery plant in Serbia.\"}]"
       }
     },
     {
@@ -1021,8 +1659,8 @@
         "announced_capacity_gwh": "20 initial; up to 40 potential",
         "announced_capacity_gwh_numeric": 20,
         "investment": "EUR 1.2bn+ / >EUR 1bn",
-        "current_output": "Construction underway; test production 2026, SOP/full production 2027.",
-        "current_output_verdict": "Zero current output. Future capacity only.",
+        "current_output": "Under construction; SOP/full production expected by end-2027; no current output.",
+        "current_output_verdict": "Keep future_zero/under_construction; do not aggregate potential 40 as current.",
         "source_refs": [
           "S34",
           "S35"
@@ -1045,7 +1683,31 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Gotion InoBat Šurany, Slovakia"
+        "geocode_query": "Gotion InoBat Šurany, Slovakia",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "20 GWh initial; up to 40 GWh potential",
+        "verified_type": "Battery cells",
+        "verified_chemistry": "Li-ion; exact chemistry not verified in retrieved official source",
+        "verified_current_output": "Under construction; SOP/full production expected by end-2027; no current output.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "GIB site states initial 20 GWh and potential 40 GWh near Šurany.",
+        "audit_notes": "Chemistry should remain generic unless a primary chemistry source is added.",
+        "audit_recommended_change": "Keep future_zero/under_construction; do not aggregate potential 40 as current.",
+        "source_links": [
+          {
+            "id": "S34",
+            "title": "Gotion InoBat official site",
+            "url": "https://gibenergy.com/",
+            "notes": "Šurany plant initial 20 GWh, potential 40 GWh, SOP by end-2027."
+          },
+          {
+            "id": "S35",
+            "title": "Reuters: Gotion/InoBat Slovakia",
+            "url": "https://www.reuters.com/business/autos-transportation/chinas-gotion-partner-inobat-build-slovakia-ev-battery-plant-2024-06-20/",
+            "notes": "EUR 1.2bn investment, 20 GWh initial output, production start 2027."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S34\", \"title\": \"Gotion InoBat official site\", \"url\": \"https://gibenergy.com/\", \"notes\": \"Šurany plant initial 20 GWh, potential 40 GWh, SOP by end-2027.\"}, {\"id\": \"S35\", \"title\": \"Reuters: Gotion/InoBat Slovakia\", \"url\": \"https://www.reuters.com/business/autos-transportation/chinas-gotion-partner-inobat-build-slovakia-ev-battery-plant-2024-06-20/\", \"notes\": \"EUR 1.2bn investment, 20 GWh initial output, production start 2027.\"}]"
       }
     },
     {
@@ -1071,8 +1733,8 @@
         "announced_capacity_gwh": "10 target by 2027",
         "announced_capacity_gwh_numeric": 10,
         "investment": "~EUR 700m planned",
-        "current_output": "Pilot line / development stage; no industrial EV output found.",
-        "current_output_verdict": "Zero current output. Track as technology option, not current supply.",
+        "current_output": "Pilot/prototype output only; no industrial EV cell output.",
+        "current_output_verdict": "Keep as future_zero/research until industrial production is verified.",
         "source_refs": [
           "S37",
           "S38"
@@ -1095,7 +1757,31 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Basquevolt Álava / Miñano, Spain"
+        "geocode_query": "Basquevolt Álava / Miñano, Spain",
+        "verified_status_detail": "pilot_research_pre_sop",
+        "verified_capacity_note": "10 GWh target by 2027",
+        "verified_type": "Solid-state battery cells; pilot/prototype stage",
+        "verified_chemistry": "Solid-state; composite electrolyte",
+        "verified_current_output": "Pilot/prototype output only; no industrial EV cell output.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Basquevolt launched with the aim of producing 10 GWh by 2027.",
+        "audit_notes": "Current output should remain research/pilot, not commercial capacity.",
+        "audit_recommended_change": "Keep as future_zero/research until industrial production is verified.",
+        "source_links": [
+          {
+            "id": "S37",
+            "title": "Basquevolt official announcement",
+            "url": "https://basquevolt.com/en/news/news/basquevolt-basque-solid-state-battery-initiative-stars-up-produce-10gwh-2027",
+            "notes": "10 GWh target by 2027 for solid-state cells."
+          },
+          {
+            "id": "S38",
+            "title": "EIC Scaling Club: Basquevolt update",
+            "url": "https://eicscalingclub.eu/news/basquevolt-interview",
+            "notes": "Pilot line in 2025, EUR 700m planned investment, 10 GWh by 2027 ambition."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S37\", \"title\": \"Basquevolt official announcement\", \"url\": \"https://basquevolt.com/en/news/news/basquevolt-basque-solid-state-battery-initiative-stars-up-produce-10gwh-2027\", \"notes\": \"10 GWh target by 2027 for solid-state cells.\"}, {\"id\": \"S38\", \"title\": \"EIC Scaling Club: Basquevolt update\", \"url\": \"https://eicscalingclub.eu/news/basquevolt-interview\", \"notes\": \"Pilot line in 2025, EUR 700m planned investment, 10 GWh by 2027 ambition.\"}]"
       }
     },
     {
@@ -1110,7 +1796,7 @@
       },
       "properties": {
         "asset_id": "hungary-sunwoda-nyiregyhaza-23",
-        "status": "research",
+        "status": "future_zero",
         "site": "Sunwoda Nyíregyháza",
         "site_ascii": "Sunwoda Nyiregyhaza",
         "country": "Hungary",
@@ -1121,23 +1807,25 @@
         "announced_capacity_gwh": "capacity not cleanly public in this pass",
         "announced_capacity_gwh_numeric": null,
         "investment": "EUR 245m initial / EUR 1.5bn reported broader; EUR 264m state aid approved",
-        "current_output": "Under construction/phase I; no current output evidence found.",
-        "current_output_verdict": "Do not include in current EV-cell output. Flag for further source validation before public website totals.",
+        "current_output": "No production output verified; official/EC sources describe planned greenfield plant.",
+        "current_output_verdict": "Do not invent capacity; keep capacity uncertain/blank unless a primary GWh source is added.",
         "source_refs": [
           "S39",
-          "S40"
+          "S40",
+          "S72",
+          "S73"
         ],
         "lat": 47.8935498,
         "lon": 21.7438983,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Déli Ipari Park",
+        "city": "Nyíregyháza",
+        "admin1": "Szabolcs-Szatmár-Bereg",
         "nuts2": "",
         "nuts3": "",
-        "operating_state": "research",
-        "output_evidence_level": "unknown",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
         "current_output_gwh_estimate": "",
         "current_output_estimate_method": "",
         "owner_origin": "",
@@ -1145,7 +1833,43 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Sunwoda Nyíregyháza, Hungary"
+        "geocode_query": "Sunwoda Nyíregyháza, Hungary",
+        "verified_status_detail": "under_construction_pre_sop",
+        "verified_capacity_note": "No public GWh capacity verified in this audit; €1.43bn Li-ion EV-cell plant approved",
+        "verified_type": "EV battery cells",
+        "verified_chemistry": "Li-ion battery cells",
+        "verified_current_output": "No production output verified; official/EC sources describe planned greenfield plant.",
+        "audit_confidence": "Medium",
+        "audit_evidence_quote": "EC source describes a €1.43bn greenfield EV battery plant producing Li-ion cells.",
+        "audit_notes": "Investment/jobs/chemistry are verified; GWh capacity remains unverified.",
+        "audit_recommended_change": "Do not invent capacity; keep capacity uncertain/blank unless a primary GWh source is added.",
+        "source_links": [
+          {
+            "id": "S39",
+            "title": "Sunwoda official Hungary announcement",
+            "url": "https://en.sunwoda.com/article/1345/9.html",
+            "notes": "First European factory in Hungary; phase I manufacturing/sales of lithium-ion batteries and power battery systems."
+          },
+          {
+            "id": "S40",
+            "title": "HIPA: Sunwoda Hungary investment",
+            "url": "https://hipa.hu/news/yet-another-leading-battery-manufacturer-chooses-hungary-as-investment-location/",
+            "notes": "Initial investment around EUR 245m; project details require verification."
+          },
+          {
+            "id": "S72",
+            "title": "GPT audit source: hu.sunwoda-evb.com",
+            "url": "https://hu.sunwoda-evb.com/",
+            "notes": "Added from GPT audit workbook for Sunwoda Nyíregyháza. Evidence: EC source describes a €1.43bn greenfield EV battery plant producing Li-ion cells."
+          },
+          {
+            "id": "S73",
+            "title": "GPT audit source: cna.org.cy",
+            "url": "https://www.cna.org.cy/en/press_releases/article/8887426/press-release-european-commission",
+            "notes": "Added from GPT audit workbook for Sunwoda Nyíregyháza. Evidence: EC source describes a €1.43bn greenfield EV battery plant producing Li-ion cells."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S39\", \"title\": \"Sunwoda official Hungary announcement\", \"url\": \"https://en.sunwoda.com/article/1345/9.html\", \"notes\": \"First European factory in Hungary; phase I manufacturing/sales of lithium-ion batteries and power battery systems.\"}, {\"id\": \"S40\", \"title\": \"HIPA: Sunwoda Hungary investment\", \"url\": \"https://hipa.hu/news/yet-another-leading-battery-manufacturer-chooses-hungary-as-investment-location/\", \"notes\": \"Initial investment around EUR 245m; project details require verification.\"}, {\"id\": \"S72\", \"title\": \"GPT audit source: hu.sunwoda-evb.com\", \"url\": \"https://hu.sunwoda-evb.com/\", \"notes\": \"Added from GPT audit workbook for Sunwoda Nyíregyháza. Evidence: EC source describes a €1.43bn greenfield EV battery plant producing Li-ion cells.\"}, {\"id\": \"S73\", \"title\": \"GPT audit source: cna.org.cy\", \"url\": \"https://www.cna.org.cy/en/press_releases/article/8887426/press-release-european-commission\", \"notes\": \"Added from GPT audit workbook for Sunwoda Nyíregyháza. Evidence: EC source describes a €1.43bn greenfield EV battery plant producing Li-ion cells.\"}]"
       }
     },
     {
@@ -1171,10 +1895,12 @@
         "announced_capacity_gwh": "legacy 60 plan; revised plan unclear",
         "announced_capacity_gwh_numeric": 60,
         "investment": "legacy EUR 4.5bn planned; public aid partly recovered/restructured",
-        "current_output": "No plant output. Lyten targets production around 2028.",
-        "current_output_verdict": "Zero current output. Treat as future/restructured, not bankable current EV supply.",
+        "current_output": "No current production; assets acquired by Lyten, restart/build-out timing not yet output.",
+        "current_output_verdict": "Mark legacy 60 GWh separately; current verified build-out is 15 GWh under construction.",
         "source_refs": [
-          "S26"
+          "S26",
+          "S74",
+          "S24"
         ],
         "lat": 54.195311,
         "lon": 9.056103,
@@ -1194,7 +1920,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Northvolt Drei Heide, Germany"
+        "geocode_query": "Northvolt Drei Heide, Germany",
+        "verified_status_detail": "under_construction_assets_acquired_zero",
+        "verified_capacity_note": "Lyten: 15 GWh under construction and >30 GWh scale potential; 60 GWh is legacy Northvolt ambition",
+        "verified_type": "Battery cells",
+        "verified_chemistry": "Northvolt Li-ion/NMC initially; Lyten lithium-sulfur possible later",
+        "verified_current_output": "No current production; assets acquired by Lyten, restart/build-out timing not yet output.",
+        "audit_confidence": "High for status/capacity source; Medium for future timing",
+        "audit_evidence_quote": "Lyten lists Northvolt Drei as 15 GWh under construction, with scale potential.",
+        "audit_notes": "Ownership and capacity changed materially after Northvolt insolvency.",
+        "audit_recommended_change": "Mark legacy 60 GWh separately; current verified build-out is 15 GWh under construction.",
+        "source_links": [
+          {
+            "id": "S26",
+            "title": "Electrive: Lyten Heide production target",
+            "url": "https://www.electrive.com/2026/03/18/germany-lyten-to-launch-battery-production-at-former-northvolt-site-in-heide-by-2028/",
+            "notes": "Former Northvolt Drei Heide to begin production in 2028 under Lyten."
+          },
+          {
+            "id": "S74",
+            "title": "GPT audit source: lyten.com",
+            "url": "https://lyten.com/northvolt-acquisition/",
+            "notes": "Added from GPT audit workbook for Northvolt Drei Heide. Evidence: Lyten lists Northvolt Drei as 15 GWh under construction, with scale potential."
+          },
+          {
+            "id": "S24",
+            "title": "Reuters: Lyten restart / auto-deal timing",
+            "url": "https://www.reuters.com/business/finance/lyten-says-auto-deals-will-take-time-it-takes-over-northvolt-assets-2026-02-27/",
+            "notes": "Lithium-ion restart targeted H2 2026, initially BESS/data centres/defence; auto deals take time."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S26\", \"title\": \"Electrive: Lyten Heide production target\", \"url\": \"https://www.electrive.com/2026/03/18/germany-lyten-to-launch-battery-production-at-former-northvolt-site-in-heide-by-2028/\", \"notes\": \"Former Northvolt Drei Heide to begin production in 2028 under Lyten.\"}, {\"id\": \"S74\", \"title\": \"GPT audit source: lyten.com\", \"url\": \"https://lyten.com/northvolt-acquisition/\", \"notes\": \"Added from GPT audit workbook for Northvolt Drei Heide. Evidence: Lyten lists Northvolt Drei as 15 GWh under construction, with scale potential.\"}, {\"id\": \"S24\", \"title\": \"Reuters: Lyten restart / auto-deal timing\", \"url\": \"https://www.reuters.com/business/finance/lyten-says-auto-deals-will-take-time-it-takes-over-northvolt-assets-2026-02-27/\", \"notes\": \"Lithium-ion restart targeted H2 2026, initially BESS/data centres/defence; auto deals take time.\"}]"
       }
     },
     {
@@ -1209,7 +1965,7 @@
       },
       "properties": {
         "asset_id": "sweden-northvolt-ett-skelleftea-25",
-        "status": "ramping_haircut",
+        "status": "future_zero",
         "site": "Northvolt Ett Skellefteå",
         "site_ascii": "Northvolt Ett Skelleftea",
         "country": "Sweden",
@@ -1220,24 +1976,25 @@
         "announced_capacity_gwh": "16 existing capacity acquired; 60 original ambition",
         "announced_capacity_gwh_numeric": 16,
         "investment": "multi-billion prior Northvolt financing; asset value complex",
-        "current_output": "Lyten acquired 16 GWh existing capacity, but restart targeted H2 2026 and automotive supply takes time.",
-        "current_output_verdict": "Do not count as current EV output. Possible restart output later, initially non-auto markets.",
+        "current_output": "Paused/zero current cell output after bankruptcy; Reuters says commercial Li-ion production targeted H2 2026.",
+        "current_output_verdict": "Use insolvent/acquired/restart-pending status; keep 60 GWh only as historical ambition.",
         "source_refs": [
           "S23",
           "S24",
-          "S27"
+          "S27",
+          "S74"
         ],
         "lat": 64.7340328,
         "lon": 21.0870825,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Torsgatan 122, 931 36 Skellefteå",
+        "city": "Skellefteå",
+        "admin1": "Västerbotten County",
         "nuts2": "",
         "nuts3": "",
-        "operating_state": "ramping",
-        "output_evidence_level": "ramping",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
         "current_output_gwh_estimate": "",
         "current_output_estimate_method": "",
         "owner_origin": "",
@@ -1245,7 +2002,43 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Northvolt Ett Skellefteå, Sweden"
+        "geocode_query": "Northvolt Ett Skellefteå, Sweden",
+        "verified_status_detail": "insolvent_assets_acquired_restart_pending",
+        "verified_capacity_note": "16 GWh existing operational capacity acquired; 60 GWh original ambition is legacy only",
+        "verified_type": "Battery cells",
+        "verified_chemistry": "Northvolt Li-ion/NMC initially; Lyten lithium-sulfur possible later",
+        "verified_current_output": "Paused/zero current cell output after bankruptcy; Reuters says commercial Li-ion production targeted H2 2026.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Lyten says it acquired 16 GWh operational capacity; Reuters says restart target H2 2026.",
+        "audit_notes": "Do not classify as normal operating until restart/shipments are verified.",
+        "audit_recommended_change": "Use insolvent/acquired/restart-pending status; keep 60 GWh only as historical ambition.",
+        "source_links": [
+          {
+            "id": "S23",
+            "title": "Lyten Sweden acquisition official release",
+            "url": "https://lyten.com/2026/02/26/lyten-completes-acquisition-of-northvolt-sweden-and-establishes-its-first-lyten-industrial-hub-in-sweden/",
+            "notes": "16 GWh existing manufacturing capacity acquired at Northvolt Ett."
+          },
+          {
+            "id": "S24",
+            "title": "Reuters: Lyten restart / auto-deal timing",
+            "url": "https://www.reuters.com/business/finance/lyten-says-auto-deals-will-take-time-it-takes-over-northvolt-assets-2026-02-27/",
+            "notes": "Lithium-ion restart targeted H2 2026, initially BESS/data centres/defence; auto deals take time."
+          },
+          {
+            "id": "S27",
+            "title": "Northvolt bankruptcy official statement",
+            "url": "https://northvolt.com/articles/northvolt-files-for-bankruptcy-in-sweden/",
+            "notes": "Northvolt AB filed for bankruptcy in Sweden on 12 March 2025."
+          },
+          {
+            "id": "S74",
+            "title": "GPT audit source: lyten.com",
+            "url": "https://lyten.com/northvolt-acquisition/",
+            "notes": "Added from GPT audit workbook for Northvolt Drei Heide. Evidence: Lyten lists Northvolt Drei as 15 GWh under construction, with scale potential."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S23\", \"title\": \"Lyten Sweden acquisition official release\", \"url\": \"https://lyten.com/2026/02/26/lyten-completes-acquisition-of-northvolt-sweden-and-establishes-its-first-lyten-industrial-hub-in-sweden/\", \"notes\": \"16 GWh existing manufacturing capacity acquired at Northvolt Ett.\"}, {\"id\": \"S24\", \"title\": \"Reuters: Lyten restart / auto-deal timing\", \"url\": \"https://www.reuters.com/business/finance/lyten-says-auto-deals-will-take-time-it-takes-over-northvolt-assets-2026-02-27/\", \"notes\": \"Lithium-ion restart targeted H2 2026, initially BESS/data centres/defence; auto deals take time.\"}, {\"id\": \"S27\", \"title\": \"Northvolt bankruptcy official statement\", \"url\": \"https://northvolt.com/articles/northvolt-files-for-bankruptcy-in-sweden/\", \"notes\": \"Northvolt AB filed for bankruptcy in Sweden on 12 March 2025.\"}, {\"id\": \"S74\", \"title\": \"GPT audit source: lyten.com\", \"url\": \"https://lyten.com/northvolt-acquisition/\", \"notes\": \"Added from GPT audit workbook for Northvolt Drei Heide. Evidence: Lyten lists Northvolt Drei as 15 GWh under construction, with scale potential.\"}]"
       }
     },
     {
@@ -1271,18 +2064,20 @@
         "announced_capacity_gwh": "~6 systems; expandable ~10-12",
         "announced_capacity_gwh_numeric": 6,
         "investment": "~USD 200m original expansion reported elsewhere",
-        "current_output": "BESS/systems facility; Lyten restart/sales targeted. Not cell manufacturing for EVs.",
-        "current_output_verdict": "Exclude from EV-cell output totals; show blue category only.",
+        "current_output": "Lyten reported restart/sales target; not EV-cell output.",
+        "current_output_verdict": "Flag as non_ev_cell and exclude from EV battery cell capacity totals.",
         "source_refs": [
-          "S25"
+          "S25",
+          "S75",
+          "S76"
         ],
         "lat": 54.3689542,
         "lon": 18.6964447,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Elbląska 130, 80-601 Gdańsk",
+        "city": "Gdańsk",
+        "admin1": "Pomeranian Voivodeship",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "non_ev",
@@ -1294,7 +2089,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Northvolt Dwa Gdańsk, Poland"
+        "geocode_query": "Northvolt Dwa Gdańsk, Poland",
+        "verified_status_detail": "non_ev_bess_restarting",
+        "verified_capacity_note": "6 GWh BESS systems; expandable to 10-12 GWh systems capacity",
+        "verified_type": "BESS/module/pack systems facility, not EV cell manufacturing",
+        "verified_chemistry": "Li-ion battery systems; cell chemistry not independently site-produced",
+        "verified_current_output": "Lyten reported restart/sales target; not EV-cell output.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Lyten describes Dwa as a 6 GWh BESS manufacturing facility, expandable.",
+        "audit_notes": "This is important but non-EV-cell/site aggregation should be flagged.",
+        "audit_recommended_change": "Flag as non_ev_cell and exclude from EV battery cell capacity totals.",
+        "source_links": [
+          {
+            "id": "S25",
+            "title": "Lyten Northvolt Dwa Gdansk official acquisition",
+            "url": "https://lyten.com/2025/10/15/lyten-completes-acquisition-of-northvolt-bess-manufacturing-facility-in-poland/",
+            "notes": "Northvolt Dwa is BESS manufacturing; production restart and sales targeted."
+          },
+          {
+            "id": "S75",
+            "title": "GPT audit source: businesswire.com",
+            "url": "https://www.businesswire.com/news/home/20251015600089/en/Lyten-Completes-Acquisition-of-Northvolt-BESS-Manufacturing-Facility-in-Poland",
+            "notes": "Added from GPT audit workbook for Northvolt Dwa Gdańsk. Evidence: Lyten describes Dwa as a 6 GWh BESS manufacturing facility, expandable."
+          },
+          {
+            "id": "S76",
+            "title": "GPT audit source: krs-online.com.pl",
+            "url": "https://www.krs-online.com.pl/firma/7385919-northvolt-poland-sp-z-o-o",
+            "notes": "Added from GPT audit workbook for Northvolt Dwa Gdańsk. Evidence: Lyten describes Dwa as a 6 GWh BESS manufacturing facility, expandable."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S25\", \"title\": \"Lyten Northvolt Dwa Gdansk official acquisition\", \"url\": \"https://lyten.com/2025/10/15/lyten-completes-acquisition-of-northvolt-bess-manufacturing-facility-in-poland/\", \"notes\": \"Northvolt Dwa is BESS manufacturing; production restart and sales targeted.\"}, {\"id\": \"S75\", \"title\": \"GPT audit source: businesswire.com\", \"url\": \"https://www.businesswire.com/news/home/20251015600089/en/Lyten-Completes-Acquisition-of-Northvolt-BESS-Manufacturing-Facility-in-Poland\", \"notes\": \"Added from GPT audit workbook for Northvolt Dwa Gdańsk. Evidence: Lyten describes Dwa as a 6 GWh BESS manufacturing facility, expandable.\"}, {\"id\": \"S76\", \"title\": \"GPT audit source: krs-online.com.pl\", \"url\": \"https://www.krs-online.com.pl/firma/7385919-northvolt-poland-sp-z-o-o\", \"notes\": \"Added from GPT audit workbook for Northvolt Dwa Gdańsk. Evidence: Lyten describes Dwa as a 6 GWh BESS manufacturing facility, expandable.\"}]"
       }
     },
     {
@@ -1320,11 +2145,12 @@
         "announced_capacity_gwh": "13.4 initial; 40 planned",
         "announced_capacity_gwh_numeric": 40,
         "investment": "EUR 437m grant approved previously; project cancelled",
-        "current_output": "No production; project dropped.",
-        "current_output_verdict": "Zero. Cancelled/inactive.",
+        "current_output": "No production; project definitively shelved/cancelled.",
+        "current_output_verdict": "Keep announced historical GWh but status should be cancelled_zero.",
         "source_refs": [
           "S08",
-          "S16"
+          "S16",
+          "S51"
         ],
         "lat": 49.439283,
         "lon": 7.760953,
@@ -1344,7 +2170,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "ACC Kaiserslautern, Germany"
+        "geocode_query": "ACC Kaiserslautern, Germany",
+        "verified_status_detail": "cancelled_zero",
+        "verified_capacity_note": "13.4 initial; 40 planned historical",
+        "verified_type": "Planned EV battery cells/modules",
+        "verified_chemistry": "Li-ion EV batteries",
+        "verified_current_output": "No production; project definitively shelved/cancelled.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Reuters reports ACC dropped plans for German and Italian gigafactories.",
+        "audit_notes": "Historical announced capacity should remain only as cancelled/zero-output metadata.",
+        "audit_recommended_change": "Keep announced historical GWh but status should be cancelled_zero.",
+        "source_links": [
+          {
+            "id": "S08",
+            "title": "Reuters: ACC drops Italy and Germany gigafactories",
+            "url": "https://www.reuters.com/business/stellantis-backed-acc-drops-plans-italian-german-gigafactories-union-says-2026-02-07/",
+            "notes": "ACC Kaiserslautern and Termoli cancelled/shelved; French capacity remains."
+          },
+          {
+            "id": "S16",
+            "title": "Reuters Europe battery factory factbox",
+            "url": "https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/",
+            "notes": "AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects."
+          },
+          {
+            "id": "S51",
+            "title": "GPT audit source: acc-emotion.com",
+            "url": "https://www.acc-emotion.com/media/bbd-press-release",
+            "notes": "Added from GPT audit workbook for ACC Billy-Berclau / Douvrin. Evidence: ACC source gives >13 GWh initial capacity and 40 GWh by 2030."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S08\", \"title\": \"Reuters: ACC drops Italy and Germany gigafactories\", \"url\": \"https://www.reuters.com/business/stellantis-backed-acc-drops-plans-italian-german-gigafactories-union-says-2026-02-07/\", \"notes\": \"ACC Kaiserslautern and Termoli cancelled/shelved; French capacity remains.\"}, {\"id\": \"S16\", \"title\": \"Reuters Europe battery factory factbox\", \"url\": \"https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/\", \"notes\": \"AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects.\"}, {\"id\": \"S51\", \"title\": \"GPT audit source: acc-emotion.com\", \"url\": \"https://www.acc-emotion.com/media/bbd-press-release\", \"notes\": \"Added from GPT audit workbook for ACC Billy-Berclau / Douvrin. Evidence: ACC source gives >13 GWh initial capacity and 40 GWh by 2030.\"}]"
       }
     },
     {
@@ -1370,19 +2226,20 @@
         "announced_capacity_gwh": "40 planned",
         "announced_capacity_gwh_numeric": 40,
         "investment": "part of ACC financing plan",
-        "current_output": "No production; project dropped.",
-        "current_output_verdict": "Zero. Cancelled/inactive.",
+        "current_output": "No production; Termoli project definitively shelved/cancelled.",
+        "current_output_verdict": "Keep historical capacity, but mark cancelled_zero and do not aggregate as active.",
         "source_refs": [
           "S08",
-          "S16"
+          "S16",
+          "S77"
         ],
         "lat": 41.9504918,
         "lon": 14.9993718,
         "geocode_precision": "",
         "geocode_source": "",
-        "address": "",
-        "city": "",
-        "admin1": "",
+        "address": "Via Giovanni Agnelli, Zona Industriale di Termoli, 86039 Termoli",
+        "city": "Termoli",
+        "admin1": "Molise",
         "nuts2": "",
         "nuts3": "",
         "operating_state": "cancelled",
@@ -1394,7 +2251,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "ACC Termoli, Italy"
+        "geocode_query": "ACC Termoli, Italy",
+        "verified_status_detail": "cancelled_zero",
+        "verified_capacity_note": "40 planned historical",
+        "verified_type": "Planned EV battery cells/modules",
+        "verified_chemistry": "Li-ion EV batteries",
+        "verified_current_output": "No production; Termoli project definitively shelved/cancelled.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "Reuters reports ACC dropped plans for the Italian Termoli gigafactory.",
+        "audit_notes": "Address source is permit/Seveso notice for the cancelled planned facility.",
+        "audit_recommended_change": "Keep historical capacity, but mark cancelled_zero and do not aggregate as active.",
+        "source_links": [
+          {
+            "id": "S08",
+            "title": "Reuters: ACC drops Italy and Germany gigafactories",
+            "url": "https://www.reuters.com/business/stellantis-backed-acc-drops-plans-italian-german-gigafactories-union-says-2026-02-07/",
+            "notes": "ACC Kaiserslautern and Termoli cancelled/shelved; French capacity remains."
+          },
+          {
+            "id": "S16",
+            "title": "Reuters Europe battery factory factbox",
+            "url": "https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/",
+            "notes": "AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects."
+          },
+          {
+            "id": "S77",
+            "title": "GPT audit source: portaleseveso.isprambiente.gov.it",
+            "url": "https://www.portaleseveso.isprambiente.gov.it/NotifichePubblico?CodiceUnivoco=NP012&notifica=4638",
+            "notes": "Added from GPT audit workbook for ACC Termoli. Evidence: Reuters reports ACC dropped plans for the Italian Termoli gigafactory."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S08\", \"title\": \"Reuters: ACC drops Italy and Germany gigafactories\", \"url\": \"https://www.reuters.com/business/stellantis-backed-acc-drops-plans-italian-german-gigafactories-union-says-2026-02-07/\", \"notes\": \"ACC Kaiserslautern and Termoli cancelled/shelved; French capacity remains.\"}, {\"id\": \"S16\", \"title\": \"Reuters Europe battery factory factbox\", \"url\": \"https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/\", \"notes\": \"AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects.\"}, {\"id\": \"S77\", \"title\": \"GPT audit source: portaleseveso.isprambiente.gov.it\", \"url\": \"https://www.portaleseveso.isprambiente.gov.it/NotifichePubblico?CodiceUnivoco=NP012&notifica=4638\", \"notes\": \"Added from GPT audit workbook for ACC Termoli. Evidence: Reuters reports ACC dropped plans for the Italian Termoli gigafactory.\"}]"
       }
     },
     {
@@ -1420,10 +2307,12 @@
         "announced_capacity_gwh": "~30 planned",
         "announced_capacity_gwh_numeric": 30,
         "investment": "~GBP 3.8bn planned",
-        "current_output": "No production; company collapsed.",
-        "current_output_verdict": "Zero. Failed project.",
+        "current_output": "No production; company entered administration and later liquidation.",
+        "current_output_verdict": "Keep historical announced capacity but status cancelled_zero/liquidated.",
         "source_refs": [
-          "S28"
+          "S28",
+          "S78",
+          "S79"
         ],
         "lat": 55.141667,
         "lon": -1.528611,
@@ -1443,7 +2332,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Britishvolt Blyth, United Kingdom"
+        "geocode_query": "Britishvolt Blyth, United Kingdom",
+        "verified_status_detail": "cancelled_zero_liquidated",
+        "verified_capacity_note": "~30 planned historical",
+        "verified_type": "Planned EV battery cells",
+        "verified_chemistry": "Li-ion; specific chemistry not verified",
+        "verified_current_output": "No production; company entered administration and later liquidation.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "EY administration page records Britishvolt administration and later liquidation.",
+        "audit_notes": "Project assets/site are no longer a battery factory plan in active form.",
+        "audit_recommended_change": "Keep historical announced capacity but status cancelled_zero/liquidated.",
+        "source_links": [
+          {
+            "id": "S28",
+            "title": "Guardian: Britishvolt collapse",
+            "url": "https://www.theguardian.com/business/2023/jan/20/britishvolt-britains-battery-startup-uk-car-production",
+            "notes": "Britishvolt collapsed; Blyth project not live."
+          },
+          {
+            "id": "S78",
+            "title": "GPT audit source: ey.com",
+            "url": "https://www.ey.com/en_uk/administrations/pbvadministration",
+            "notes": "Added from GPT audit workbook for Britishvolt Blyth. Evidence: EY administration page records Britishvolt administration and later liquidation."
+          },
+          {
+            "id": "S79",
+            "title": "GPT audit source: spglobal.com",
+            "url": "https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/metals/011723-uk-battery-developer-britishvolt-goes-into-administration",
+            "notes": "Added from GPT audit workbook for Britishvolt Blyth. Evidence: EY administration page records Britishvolt administration and later liquidation."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S28\", \"title\": \"Guardian: Britishvolt collapse\", \"url\": \"https://www.theguardian.com/business/2023/jan/20/britishvolt-britains-battery-startup-uk-car-production\", \"notes\": \"Britishvolt collapsed; Blyth project not live.\"}, {\"id\": \"S78\", \"title\": \"GPT audit source: ey.com\", \"url\": \"https://www.ey.com/en_uk/administrations/pbvadministration\", \"notes\": \"Added from GPT audit workbook for Britishvolt Blyth. Evidence: EY administration page records Britishvolt administration and later liquidation.\"}, {\"id\": \"S79\", \"title\": \"GPT audit source: spglobal.com\", \"url\": \"https://www.spglobal.com/commodityinsights/en/market-insights/latest-news/metals/011723-uk-battery-developer-britishvolt-goes-into-administration\", \"notes\": \"Added from GPT audit workbook for Britishvolt Blyth. Evidence: EY administration page records Britishvolt administration and later liquidation.\"}]"
       }
     },
     {
@@ -1469,10 +2388,12 @@
         "announced_capacity_gwh": "~45 planned",
         "announced_capacity_gwh_numeric": 45,
         "investment": "~EUR 3.4bn planned",
-        "current_output": "No current industrial output; inactive/postponed.",
-        "current_output_verdict": "Zero / inactive. Do not count.",
+        "current_output": "No industrial output; project reported in crisis/indefinitely postponed.",
+        "current_output_verdict": "Consider status paused_indefinitely_zero rather than cancelled_zero unless stronger legal source is added.",
         "source_refs": [
-          "S16"
+          "S16",
+          "S80",
+          "S81"
         ],
         "lat": 45.384456,
         "lon": 7.841119,
@@ -1492,7 +2413,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Italvolt Scarmagno, Italy"
+        "geocode_query": "Italvolt Scarmagno, Italy",
+        "verified_status_detail": "paused_indefinitely_zero",
+        "verified_capacity_note": "~45 planned historical",
+        "verified_type": "Planned battery cells",
+        "verified_chemistry": "Li-ion; chemistry not verified",
+        "verified_current_output": "No industrial output; project reported in crisis/indefinitely postponed.",
+        "audit_confidence": "Medium",
+        "audit_evidence_quote": "Italvolt announced 45 GWh plans; later reporting indicates failure/postponement risk.",
+        "audit_notes": "I did not find a definitive official cancellation/dissolution source in this pass.",
+        "audit_recommended_change": "Consider status paused_indefinitely_zero rather than cancelled_zero unless stronger legal source is added.",
+        "source_links": [
+          {
+            "id": "S16",
+            "title": "Reuters Europe battery factory factbox",
+            "url": "https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/",
+            "notes": "AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects."
+          },
+          {
+            "id": "S80",
+            "title": "GPT audit source: italvolt.com",
+            "url": "https://www.italvolt.com/a-binding-agreement-has-been-signed-for-the-purchase-of-the-former-olivetti-area-in-scarmagno-amounting-to-a-surface-area-of-1-million-square-metres/",
+            "notes": "Added from GPT audit workbook for Italvolt Scarmagno. Evidence: Italvolt announced 45 GWh plans; later reporting indicates failure/postponement risk."
+          },
+          {
+            "id": "S81",
+            "title": "GPT audit source: battery-news.de",
+            "url": "https://battery-news.de/en/2024/01/19/italvolt-gigafactory-in-danger-of-failing/",
+            "notes": "Added from GPT audit workbook for Italvolt Scarmagno. Evidence: Italvolt announced 45 GWh plans; later reporting indicates failure/postponement risk."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S16\", \"title\": \"Reuters Europe battery factory factbox\", \"url\": \"https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/\", \"notes\": \"AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects.\"}, {\"id\": \"S80\", \"title\": \"GPT audit source: italvolt.com\", \"url\": \"https://www.italvolt.com/a-binding-agreement-has-been-signed-for-the-purchase-of-the-former-olivetti-area-in-scarmagno-amounting-to-a-surface-area-of-1-million-square-metres/\", \"notes\": \"Added from GPT audit workbook for Italvolt Scarmagno. Evidence: Italvolt announced 45 GWh plans; later reporting indicates failure/postponement risk.\"}, {\"id\": \"S81\", \"title\": \"GPT audit source: battery-news.de\", \"url\": \"https://battery-news.de/en/2024/01/19/italvolt-gigafactory-in-danger-of-failing/\", \"notes\": \"Added from GPT audit workbook for Italvolt Scarmagno. Evidence: Italvolt announced 45 GWh plans; later reporting indicates failure/postponement risk.\"}]"
       }
     },
     {
@@ -1518,10 +2469,12 @@
         "announced_capacity_gwh": "~29 planned",
         "announced_capacity_gwh_numeric": 29,
         "investment": "~USD 1.7bn plan / assets written down",
-        "current_output": "No production; European plan abandoned/deprioritised.",
-        "current_output_verdict": "Zero. Exclude from current European EV-cell output.",
+        "current_output": "No production; European/Norwegian battery plan abandoned/deprioritized; site repurposing/sale scenarios.",
+        "current_output_verdict": "Keep historical 29 GWh; mark cancelled/repurposed_zero and exclude from active capacity.",
         "source_refs": [
-          "S16"
+          "S16",
+          "S82",
+          "S83"
         ],
         "lat": 66.3051259,
         "lon": 14.1159268,
@@ -1541,7 +2494,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "Freyr Mo i Rana / Giga Arctic, Norway"
+        "geocode_query": "Freyr Mo i Rana / Giga Arctic, Norway",
+        "verified_status_detail": "repurposed_cancelled_zero",
+        "verified_capacity_note": "~29 planned historical",
+        "verified_type": "Planned battery cells",
+        "verified_chemistry": "Li-ion; 24M semi-solid legacy plan, not active",
+        "verified_current_output": "No production; European/Norwegian battery plan abandoned/deprioritized; site repurposing/sale scenarios.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "FREYR sanctioned 29 GWh Giga Arctic; later reports describe write-down/exit.",
+        "audit_notes": "Later T1/FREYR strategy moved away from Norway battery production.",
+        "audit_recommended_change": "Keep historical 29 GWh; mark cancelled/repurposed_zero and exclude from active capacity.",
+        "source_links": [
+          {
+            "id": "S16",
+            "title": "Reuters Europe battery factory factbox",
+            "url": "https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/",
+            "notes": "AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects."
+          },
+          {
+            "id": "S82",
+            "title": "GPT audit source: ir.freyrbattery.com",
+            "url": "https://ir.freyrbattery.com/ir-news/press-releases/news-details/2022/FREYR-Battery-Sanctions-Construction-of-its-Inaugural-Gigafactory/default.aspx",
+            "notes": "Added from GPT audit workbook for Freyr Mo i Rana / Giga Arctic. Evidence: FREYR sanctioned 29 GWh Giga Arctic; later reports describe write-down/exit."
+          },
+          {
+            "id": "S83",
+            "title": "GPT audit source: businessportal-norwegen.com",
+            "url": "https://businessportal-norwegen.com/2025/03/18/ehemalige-freyr-battery-schreibt-giga-arctic-fabrik-und-kundenqualifizierungsanlage-in-norwegen-ab/",
+            "notes": "Added from GPT audit workbook for Freyr Mo i Rana / Giga Arctic. Evidence: FREYR sanctioned 29 GWh Giga Arctic; later reports describe write-down/exit."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S16\", \"title\": \"Reuters Europe battery factory factbox\", \"url\": \"https://www.reuters.com/business/autos-transportation/companies-invest-ev-battery-factories-europe-2023-05-18/\", \"notes\": \"AESC Spain, Italvolt, Freyr, ACC paused/cancelled and other European projects.\"}, {\"id\": \"S82\", \"title\": \"GPT audit source: ir.freyrbattery.com\", \"url\": \"https://ir.freyrbattery.com/ir-news/press-releases/news-details/2022/FREYR-Battery-Sanctions-Construction-of-its-Inaugural-Gigafactory/default.aspx\", \"notes\": \"Added from GPT audit workbook for Freyr Mo i Rana / Giga Arctic. Evidence: FREYR sanctioned 29 GWh Giga Arctic; later reports describe write-down/exit.\"}, {\"id\": \"S83\", \"title\": \"GPT audit source: businessportal-norwegen.com\", \"url\": \"https://businessportal-norwegen.com/2025/03/18/ehemalige-freyr-battery-schreibt-giga-arctic-fabrik-und-kundenqualifizierungsanlage-in-norwegen-ab/\", \"notes\": \"Added from GPT audit workbook for Freyr Mo i Rana / Giga Arctic. Evidence: FREYR sanctioned 29 GWh Giga Arctic; later reports describe write-down/exit.\"}]"
       }
     },
     {
@@ -1567,11 +2550,12 @@
         "announced_capacity_gwh": "24 planned",
         "announced_capacity_gwh_numeric": 24,
         "investment": "part of EUR 2bn Saarland plan",
-        "current_output": "No production; planned Linslerfeld cell factory cancelled as SVOLT ceased European operations effective Jan 2025.",
-        "current_output_verdict": "Zero. Exclude from current and future count unless project is revived under a new owner.",
+        "current_output": "No production; Saarland cell-factory plan cancelled as SVOLT exited European operations.",
+        "current_output_verdict": "Keep cancelled_zero with historical 24 GWh; exclude active capacity.",
         "source_refs": [
           "S41",
-          "S42"
+          "S42",
+          "S84"
         ],
         "lat": 49.2439,
         "lon": 6.7248,
@@ -1591,7 +2575,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "SVOLT Überherrn / Linslerfeld, Germany"
+        "geocode_query": "SVOLT Überherrn / Linslerfeld, Germany",
+        "verified_status_detail": "cancelled_zero",
+        "verified_capacity_note": "24 planned historical",
+        "verified_type": "Planned battery cells",
+        "verified_chemistry": "Li-ion EV cells",
+        "verified_current_output": "No production; Saarland cell-factory plan cancelled as SVOLT exited European operations.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "SVOLT confirmed cancellation of Saarland plans.",
+        "audit_notes": "Cancelled before production.",
+        "audit_recommended_change": "Keep cancelled_zero with historical 24 GWh; exclude active capacity.",
+        "source_links": [
+          {
+            "id": "S41",
+            "title": "SVOLT abandons European production",
+            "url": "https://battery-news.de/en/2024/10/29/svolt-abandons-plans-for-european-production/",
+            "notes": "SVOLT to cease operations in Europe effective 31 January 2025."
+          },
+          {
+            "id": "S42",
+            "title": "Electrive: SVOLT Saarland cancellation",
+            "url": "https://www.electrive.com/2024/10/28/svolt-confirms-cancellation-of-its-saarland-plans/",
+            "notes": "No Saarland cell factory or module/pack assembly; European withdrawal."
+          },
+          {
+            "id": "S84",
+            "title": "GPT audit source: electrive.com",
+            "url": "https://www.electrive.com/2024/05/27/svolt-will-not-build-battery-factory-in-germany/",
+            "notes": "Added from GPT audit workbook for SVOLT Überherrn / Linslerfeld. Evidence: SVOLT confirmed cancellation of Saarland plans."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S41\", \"title\": \"SVOLT abandons European production\", \"url\": \"https://battery-news.de/en/2024/10/29/svolt-abandons-plans-for-european-production/\", \"notes\": \"SVOLT to cease operations in Europe effective 31 January 2025.\"}, {\"id\": \"S42\", \"title\": \"Electrive: SVOLT Saarland cancellation\", \"url\": \"https://www.electrive.com/2024/10/28/svolt-confirms-cancellation-of-its-saarland-plans/\", \"notes\": \"No Saarland cell factory or module/pack assembly; European withdrawal.\"}, {\"id\": \"S84\", \"title\": \"GPT audit source: electrive.com\", \"url\": \"https://www.electrive.com/2024/05/27/svolt-will-not-build-battery-factory-in-germany/\", \"notes\": \"Added from GPT audit workbook for SVOLT Überherrn / Linslerfeld. Evidence: SVOLT confirmed cancellation of Saarland plans.\"}]"
       }
     },
     {
@@ -1617,11 +2631,12 @@
         "announced_capacity_gwh": "module/pack assembly only; no separate cell GWh",
         "announced_capacity_gwh_numeric": null,
         "investment": "part of EUR 2bn Saarland plan",
-        "current_output": "No production; planned Heusweiler/Eiweiler module and pack assembly cancelled as SVOLT ceased European operations effective Jan 2025.",
-        "current_output_verdict": "Zero. Do not add separate cell capacity; capacity belonged to the Saarland cell plan.",
+        "current_output": "No production; module/pack assembly plan cancelled with SVOLT Saarland exit.",
+        "current_output_verdict": "Set capacity_verified_gwh to no_cell_gwh; exclude from cell capacity totals.",
         "source_refs": [
           "S41",
-          "S42"
+          "S42",
+          "S84"
         ],
         "lat": 49.3630035,
         "lon": 6.9322995,
@@ -1641,7 +2656,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "SVOLT Heusweiler / Eiweiler, Germany"
+        "geocode_query": "SVOLT Heusweiler / Eiweiler, Germany",
+        "verified_status_detail": "cancelled_zero_non_cell",
+        "verified_capacity_note": "No separate cell GWh verified; module/pack assembly only",
+        "verified_type": "Planned module/pack assembly",
+        "verified_chemistry": "Battery modules/packs; no cell chemistry",
+        "verified_current_output": "No production; module/pack assembly plan cancelled with SVOLT Saarland exit.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "SVOLT cancellation covered Heusweiler/Eiweiler module and pack assembly.",
+        "audit_notes": "Not a cell GWh site.",
+        "audit_recommended_change": "Set capacity_verified_gwh to no_cell_gwh; exclude from cell capacity totals.",
+        "source_links": [
+          {
+            "id": "S41",
+            "title": "SVOLT abandons European production",
+            "url": "https://battery-news.de/en/2024/10/29/svolt-abandons-plans-for-european-production/",
+            "notes": "SVOLT to cease operations in Europe effective 31 January 2025."
+          },
+          {
+            "id": "S42",
+            "title": "Electrive: SVOLT Saarland cancellation",
+            "url": "https://www.electrive.com/2024/10/28/svolt-confirms-cancellation-of-its-saarland-plans/",
+            "notes": "No Saarland cell factory or module/pack assembly; European withdrawal."
+          },
+          {
+            "id": "S84",
+            "title": "GPT audit source: electrive.com",
+            "url": "https://www.electrive.com/2024/05/27/svolt-will-not-build-battery-factory-in-germany/",
+            "notes": "Added from GPT audit workbook for SVOLT Überherrn / Linslerfeld. Evidence: SVOLT confirmed cancellation of Saarland plans."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S41\", \"title\": \"SVOLT abandons European production\", \"url\": \"https://battery-news.de/en/2024/10/29/svolt-abandons-plans-for-european-production/\", \"notes\": \"SVOLT to cease operations in Europe effective 31 January 2025.\"}, {\"id\": \"S42\", \"title\": \"Electrive: SVOLT Saarland cancellation\", \"url\": \"https://www.electrive.com/2024/10/28/svolt-confirms-cancellation-of-its-saarland-plans/\", \"notes\": \"No Saarland cell factory or module/pack assembly; European withdrawal.\"}, {\"id\": \"S84\", \"title\": \"GPT audit source: electrive.com\", \"url\": \"https://www.electrive.com/2024/05/27/svolt-will-not-build-battery-factory-in-germany/\", \"notes\": \"Added from GPT audit workbook for SVOLT Überherrn / Linslerfeld. Evidence: SVOLT confirmed cancellation of Saarland plans.\"}]"
       }
     },
     {
@@ -1667,11 +2712,12 @@
         "announced_capacity_gwh": "16 planned",
         "announced_capacity_gwh_numeric": 16,
         "investment": "Brandenburg conversion of former Vestas site; capex not clearly disclosed",
-        "current_output": "No production; planned Lauchhammer cell factory cancelled in 2024 before SVOLT ceased European operations.",
-        "current_output_verdict": "Zero. Exclude from current and future count unless project is revived under a new owner.",
+        "current_output": "No production; Lauchhammer plan cancelled in 2024.",
+        "current_output_verdict": "Keep historical 16 GWh; status cancelled_zero.",
         "source_refs": [
           "S41",
-          "S42"
+          "S42",
+          "S84"
         ],
         "lat": 51.4748633,
         "lon": 13.7779604,
@@ -1691,7 +2737,37 @@
         "nearest_oem_cluster_km": "",
         "nearest_port_km": "",
         "grid_or_energy_note": "",
-        "geocode_query": "SVOLT Lauchhammer, Germany"
+        "geocode_query": "SVOLT Lauchhammer, Germany",
+        "verified_status_detail": "cancelled_zero",
+        "verified_capacity_note": "16 planned historical",
+        "verified_type": "Planned battery cells",
+        "verified_chemistry": "Li-ion EV cells",
+        "verified_current_output": "No production; Lauchhammer plan cancelled in 2024.",
+        "audit_confidence": "High",
+        "audit_evidence_quote": "SVOLT will not build the Lauchhammer battery factory.",
+        "audit_notes": "Cancelled before production.",
+        "audit_recommended_change": "Keep historical 16 GWh; status cancelled_zero.",
+        "source_links": [
+          {
+            "id": "S41",
+            "title": "SVOLT abandons European production",
+            "url": "https://battery-news.de/en/2024/10/29/svolt-abandons-plans-for-european-production/",
+            "notes": "SVOLT to cease operations in Europe effective 31 January 2025."
+          },
+          {
+            "id": "S42",
+            "title": "Electrive: SVOLT Saarland cancellation",
+            "url": "https://www.electrive.com/2024/10/28/svolt-confirms-cancellation-of-its-saarland-plans/",
+            "notes": "No Saarland cell factory or module/pack assembly; European withdrawal."
+          },
+          {
+            "id": "S84",
+            "title": "GPT audit source: electrive.com",
+            "url": "https://www.electrive.com/2024/05/27/svolt-will-not-build-battery-factory-in-germany/",
+            "notes": "Added from GPT audit workbook for SVOLT Überherrn / Linslerfeld. Evidence: SVOLT confirmed cancellation of Saarland plans."
+          }
+        ],
+        "source_links_json": "[{\"id\": \"S41\", \"title\": \"SVOLT abandons European production\", \"url\": \"https://battery-news.de/en/2024/10/29/svolt-abandons-plans-for-european-production/\", \"notes\": \"SVOLT to cease operations in Europe effective 31 January 2025.\"}, {\"id\": \"S42\", \"title\": \"Electrive: SVOLT Saarland cancellation\", \"url\": \"https://www.electrive.com/2024/10/28/svolt-confirms-cancellation-of-its-saarland-plans/\", \"notes\": \"No Saarland cell factory or module/pack assembly; European withdrawal.\"}, {\"id\": \"S84\", \"title\": \"GPT audit source: electrive.com\", \"url\": \"https://www.electrive.com/2024/05/27/svolt-will-not-build-battery-factory-in-germany/\", \"notes\": \"Added from GPT audit workbook for SVOLT Überherrn / Linslerfeld. Evidence: SVOLT confirmed cancellation of Saarland plans.\"}]"
       }
     }
   ]

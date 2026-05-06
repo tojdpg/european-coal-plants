@@ -223,9 +223,9 @@
     font-size:12px;
   }
   .maplibregl-popup-content {
-    min-width:250px;
-    max-width:340px;
-    padding:12px 14px;
+    min-width:300px;
+    max-width:390px;
+    padding:0;
     color:var(--fg);
     background:var(--panel);
     border:1px solid var(--border);
@@ -234,10 +234,77 @@
   }
   .maplibregl-popup-tip { border-top-color:var(--panel) !important; }
   .maplibregl-popup-close-button { color:var(--muted); font-size:18px; }
+  .popup { padding:12px 14px 14px; }
   .popup b { color:var(--accent-2); }
   .popup .muted { color:var(--muted); }
-  .popup hr { margin:7px 0; border:none; border-top:1px solid var(--border); }
-  .popup .verdict { margin-top:6px; color:#d7dee8; }
+  .popup .title {
+    margin-right:18px;
+    color:var(--fg);
+    font-size:14px;
+    font-weight:750;
+    line-height:1.25;
+  }
+  .popup .meta {
+    margin-top:3px;
+    color:var(--muted);
+    font-size:11px;
+  }
+  .popup .badge {
+    display:inline-block;
+    margin-left:6px;
+    padding:1px 6px;
+    color:#10151b;
+    background:var(--accent);
+    border-radius:999px;
+    font-size:10px;
+    font-weight:750;
+    text-transform:uppercase;
+  }
+  .popup .section {
+    margin-top:9px;
+    padding-top:8px;
+    border-top:1px solid var(--border);
+  }
+  .popup .section h3 {
+    margin:0 0 4px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:750;
+    letter-spacing:0.8px;
+    text-transform:uppercase;
+  }
+  .popup .kv {
+    display:grid;
+    grid-template-columns:88px 1fr;
+    gap:4px 8px;
+    font-size:12px;
+  }
+  .popup .kv span:nth-child(odd) { color:var(--muted); }
+  .popup .quote {
+    margin-top:5px;
+    color:#d7dee8;
+    font-size:12px;
+    line-height:1.35;
+  }
+  .popup .sources {
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+  }
+  .popup .sources a {
+    display:inline-block;
+    max-width:100%;
+    overflow:hidden;
+    padding:3px 6px;
+    color:#10151b;
+    background:var(--accent-2);
+    border-radius:4px;
+    font-size:11px;
+    font-weight:700;
+    text-decoration:none;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
   footer {
     position:absolute;
     right:10px;
@@ -387,19 +454,73 @@ const fmt1 = n => n == null ? "-" : (Math.round(Number(n) * 10) / 10).toLocaleSt
 const cap = p => Number(p.announced_capacity_gwh_numeric || 0);
 const statusLabel = s => STATUS_META[s]?.label || s || "Unknown";
 const statusColor = s => STATUS_META[s]?.color || "#9ca3af";
+const hasText = value => value != null && String(value).trim() !== "";
+const clean = value => hasText(value) ? String(value).trim() : "";
+const escapeHtml = value => clean(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+const clip = (value, max = 220) => {
+  const text = clean(value);
+  return text.length > max ? `${text.slice(0, max - 1)}…` : text;
+};
+function asArray(value) {
+  if (Array.isArray(value)) return value;
+  if (!hasText(value)) return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+function kv(label, value) {
+  return hasText(value) ? `<span>${escapeHtml(label)}</span><span>${escapeHtml(value)}</span>` : "";
+}
+function section(title, body) {
+  return hasText(body) ? `<div class="section"><h3>${escapeHtml(title)}</h3>${body}</div>` : "";
+}
 
 function popupHtml(feature) {
   const p = feature.properties;
+  const rawLinks = asArray(p.source_links).length ? asArray(p.source_links) : asArray(p.source_links_json);
+  const links = rawLinks
+    .filter(link => link && hasText(link.url))
+    .slice(0, 5);
+  const sourceHtml = links.length
+    ? `<div class="sources">${links.map(link =>
+        `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.id || "source")}</a>`
+      ).join("")}</div>`
+    : "";
+  const capacityBody = `<div class="kv">
+    ${kv("Announced", p.announced_capacity_gwh)}
+    ${kv("Nominal", hasText(p.announced_capacity_gwh_numeric) ? `${fmt1(cap(p))} GWh` : "")}
+    ${kv("Verified", p.verified_capacity_note)}
+  </div>`;
+  const outputBody = `<div class="kv">
+    ${kv("Verified", p.verified_current_output || p.current_output)}
+    ${kv("Verdict", p.current_output_verdict)}
+    ${kv("Change", p.audit_recommended_change)}
+  </div>`;
+  const auditBody = `<div class="kv">
+    ${kv("Confidence", p.audit_confidence)}
+    ${kv("Detail", p.verified_status_detail)}
+  </div>${hasText(p.audit_evidence_quote) ? `<div class="quote">“${escapeHtml(clip(p.audit_evidence_quote, 260))}”</div>` : ""}`;
+  const locationBody = `<div class="kv">
+    ${kv("Address", p.address)}
+    ${kv("Precision", p.geocode_precision)}
+    ${kv("Source", p.geocode_source)}
+  </div>`;
   return `<div class="popup">
-    <b>${p.site}</b><br>
-    <span class="muted">${p.country} · ${statusLabel(p.status)}</span><hr>
-    Nominal capacity: <b>${fmt1(cap(p))} GWh</b><br>
-    Type: ${p.type || "-"}<br>
-    Chemistry: ${p.chemistry || "-"}<br>
-    Owner: ${p.owner || "-"}<br>
-    Precision: ${p.geocode_precision || "-"}<br>
-    ${p.address ? `Location: ${p.address}<br>` : ""}
-    <div class="verdict">${p.current_output_verdict || ""}</div>
+    <div class="title">${escapeHtml(p.site)}</div>
+    <div class="meta">${escapeHtml(p.country)} · ${escapeHtml(p.owner || "Unknown owner")} <span class="badge">${escapeHtml(statusLabel(p.status))}</span></div>
+    ${section("Capacity", capacityBody)}
+    ${section("Current Output", outputBody)}
+    ${section("Audit Note", auditBody)}
+    ${section("Location", locationBody)}
+    ${section("Sources", sourceHtml)}
   </div>`;
 }
 
