@@ -222,6 +222,32 @@
     border-radius:6px;
     font-size:12px;
   }
+  .status-defs {
+    margin-top:9px;
+    padding-top:8px;
+    border-top:1px solid var(--border);
+  }
+  .status-def {
+    display:grid;
+    grid-template-columns:12px 1fr;
+    gap:7px;
+    margin-top:6px;
+  }
+  .status-def .legend-dot {
+    margin-top:4px;
+  }
+  .status-def b {
+    display:block;
+    color:var(--fg);
+    font-size:11px;
+    line-height:1.25;
+  }
+  .status-def span {
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.3;
+  }
   .maplibregl-popup-content {
     min-width:300px;
     max-width:390px;
@@ -423,7 +449,10 @@
   <h2>By owner (visible)</h2>
   <div class="ranking" id="rank-owner"></div>
 
-  <div class="note">Bubble size is announced or nameplate capacity. It is not current output. Cancelled, non-EV, and future projects are mapped for diligence context.</div>
+  <div class="note">
+    Bubble size is announced or nameplate capacity. It is not current output. Cancelled, non-EV, and future projects are mapped for diligence context.
+    <div class="status-defs" id="status-defs"></div>
+  </div>
 </aside>
 
 <main>
@@ -434,13 +463,13 @@
 <script src="https://unpkg.com/maplibre-gl@5.9.0/dist/maplibre-gl.js"></script>
 <script>
 const STATUS_META = {
-  live_proven: { label:"Live, proven", color:"#16a34a" },
-  live_undisclosed: { label:"Live, undisclosed", color:"#0284c7" },
-  ramping_haircut: { label:"Ramping", color:"#d97706" },
-  future_zero: { label:"Future, zero output", color:"#7c3aed" },
-  cancelled_zero: { label:"Cancelled", color:"#e11d48" },
-  non_ev_cell: { label:"Non-EV cell", color:"#64748b" },
-  research: { label:"Research / unresolved", color:"#ea580c" }
+  live_proven: { label:"Live, proven", color:"#16a34a", definition:"Operating site with stronger public evidence of output." },
+  live_undisclosed: { label:"Live, undisclosed", color:"#0284c7", definition:"Operating site, but site-level GWh output is not public." },
+  ramping_haircut: { label:"Ramping", color:"#d97706", definition:"Commissioned or starting up; nameplate needs a utilization haircut." },
+  future_zero: { label:"Future, zero output", color:"#7c3aed", definition:"Planned, under construction, or restart-pending; no current output counted." },
+  cancelled_zero: { label:"Cancelled", color:"#e11d48", definition:"Cancelled, shelved, liquidated, or inactive; historical capacity only." },
+  non_ev_cell: { label:"Non-EV cell", color:"#64748b", definition:"Battery systems or non-EV activity; excluded from EV cell output." },
+  research: { label:"Research / unresolved", color:"#ea580c", definition:"Incomplete or unresolved evidence; keep out of headline totals." }
 };
 const STATUS_COLORS = Object.fromEntries(Object.entries(STATUS_META).map(([key, value]) => [key, value.color]));
 const EMPTY_COLLECTION = { type:"FeatureCollection", features:[] };
@@ -635,6 +664,15 @@ function renderFilters() {
   });
 }
 
+function renderStatusDefinitions() {
+  document.getElementById("status-defs").innerHTML = Object.entries(STATUS_META)
+    .map(([status, meta]) => `<div class="status-def">
+      <span class="legend-dot" style="background:${statusColor(status)}"></span>
+      <div><b>${escapeHtml(meta.label)}</b><span>${escapeHtml(meta.definition)}</span></div>
+    </div>`)
+    .join("");
+}
+
 function renderTotals() {
   const totalSites = FEATURES.length;
   const totalGwh = FEATURES.reduce((sum, f) => sum + cap(f.properties), 0);
@@ -761,6 +799,7 @@ async function init() {
     fitToSites();
     renderTotals();
     renderFilters();
+    renderStatusDefinitions();
     renderAll();
   });
 
