@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>European EV Battery Asset Tracker</title>
+<meta name="description" content="Interactive vector map of European EV battery manufacturing sites, planned capacity, operating status, and geocoding confidence.">
+<meta property="og:title" content="European EV Battery Asset Tracker">
+<meta property="og:description" content="Interactive vector map of European EV battery manufacturing sites, planned capacity, operating status, and geocoding confidence.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#10151b">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.9.0/dist/maplibre-gl.css">
+<style>
+  :root {
+    --bg:#10151b;
+    --panel:#18202a;
+    --panel-2:#222c38;
+    --panel-3:#10151bcc;
+    --border:#314052;
+    --fg:#ecf2f8;
+    --muted:#94a3b8;
+    --accent:#5eead4;
+    --accent-2:#fbbf24;
+    --aside-w:380px;
+    --header-h:58px;
+  }
+  * { box-sizing:border-box; }
+  html, body {
+    margin:0;
+    height:100%;
+    background:var(--bg);
+    color:var(--fg);
+    font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    overscroll-behavior:none;
+  }
+  body {
+    display:grid;
+    grid-template-columns:var(--aside-w) 1fr;
+    grid-template-rows:var(--header-h) 1fr;
+    height:100vh;
+    height:100dvh;
+  }
+  header {
+    grid-column:1/3;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding:0 18px;
+    background:var(--panel);
+    border-bottom:1px solid var(--border);
+  }
+  header h1 {
+    margin:0;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:15px;
+    font-weight:650;
+  }
+  header h1 small {
+    margin-left:10px;
+    color:var(--muted);
+    font-weight:400;
+  }
+  header .totals {
+    display:flex;
+    flex-shrink:0;
+    gap:20px;
+    color:var(--muted);
+    font-size:12px;
+  }
+  header .totals b {
+    color:var(--fg);
+    font-weight:650;
+    font-variant-numeric:tabular-nums;
+  }
+  aside {
+    padding:16px;
+    overflow-y:auto;
+    background:var(--panel);
+    border-right:1px solid var(--border);
+    -webkit-overflow-scrolling:touch;
+  }
+  main { position:relative; }
+  #map { position:absolute; inset:0; }
+  h2 {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:18px 0 8px;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.1px;
+    text-transform:uppercase;
+  }
+  h2:first-child { margin-top:0; }
+  .summary {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:4px;
+  }
+  .stat {
+    padding:10px 12px;
+    background:var(--panel-2);
+    border:1px solid rgba(255,255,255,0.04);
+    border-radius:6px;
+  }
+  .stat .num {
+    color:var(--fg);
+    font-size:18px;
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+  }
+  .stat .lbl {
+    margin-top:2px;
+    color:var(--muted);
+    font-size:11px;
+  }
+  .row {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+    font-size:13px;
+  }
+  .row label {
+    flex:1;
+    min-width:0;
+    overflow:hidden;
+    color:var(--fg);
+    cursor:pointer;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .row .count {
+    flex-shrink:0;
+    color:var(--muted);
+    font-size:12px;
+    font-variant-numeric:tabular-nums;
+  }
+  input[type=checkbox] { flex-shrink:0; accent-color:var(--accent); }
+  input[type=range] { width:100%; accent-color:var(--accent); }
+  .slider-labels {
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:11px;
+  }
+  .toggle-all {
+    padding:2px 6px;
+    color:var(--accent);
+    border-radius:4px;
+    cursor:pointer;
+    font-size:10px;
+    letter-spacing:0;
+    text-transform:none;
+    user-select:none;
+  }
+  .toggle-all:hover { background:var(--panel-2); }
+  .toggle-all .sep { margin:0 4px; color:var(--muted); }
+  .country-filter {
+    max-height:220px;
+    overflow-y:auto;
+    padding-right:4px;
+  }
+  .ranking { font-size:12px; }
+  .ranking .item {
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    padding:4px 0;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+  }
+  .ranking .item:hover { background:var(--panel-2); }
+  .ranking .name {
+    flex:1;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .ranking .val {
+    flex-shrink:0;
+    color:var(--accent);
+    font-weight:650;
+    font-variant-numeric:tabular-nums;
+  }
+  .legend-dot {
+    display:inline-block;
+    width:10px;
+    height:10px;
+    border:1px solid rgba(255,255,255,0.45);
+    border-radius:50%;
+  }
+  .note {
+    margin-top:14px;
+    padding:10px 12px;
+    color:var(--muted);
+    background:rgba(255,255,255,0.025);
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-size:12px;
+  }
+  .maplibregl-popup-content {
+    min-width:250px;
+    max-width:340px;
+    padding:12px 14px;
+    color:var(--fg);
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:6px;
+    box-shadow:0 10px 32px rgba(0,0,0,0.32);
+  }
+  .maplibregl-popup-tip { border-top-color:var(--panel) !important; }
+  .maplibregl-popup-close-button { color:var(--muted); font-size:18px; }
+  .popup b { color:var(--accent-2); }
+  .popup .muted { color:var(--muted); }
+  .popup hr { margin:7px 0; border:none; border-top:1px solid var(--border); }
+  .popup .verdict { margin-top:6px; color:#d7dee8; }
+  footer {
+    position:absolute;
+    right:10px;
+    bottom:8px;
+    z-index:2;
+    max-width:calc(100% - 20px);
+    padding:5px 8px;
+    color:var(--muted);
+    background:var(--panel-3);
+    border-radius:4px;
+    font-size:11px;
+  }
+  .drawer-handle { display:none; }
+
+  @media (max-width:760px) {
+    body { grid-template-columns:1fr; grid-template-rows:var(--header-h) 1fr; }
+    header { padding:0 12px; gap:10px; }
+    header h1 { font-size:13px; }
+    header h1 small { display:none; }
+    header .totals { gap:10px; font-size:11px; }
+    header .totals span:nth-child(3) { display:none; }
+    main { grid-row:2; }
+    aside {
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:5;
+      height:40vh;
+      max-height:72vh;
+      padding-top:42px;
+      border-right:none;
+      border-top:1px solid var(--border);
+      border-radius:14px 14px 0 0;
+      box-shadow:0 -8px 24px rgba(0,0,0,0.4);
+      transform:translateY(calc(100% - 58px));
+      transition:transform 0.25s ease;
+    }
+    aside.open { transform:translateY(0); }
+    .drawer-handle {
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--accent);
+      cursor:pointer;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      user-select:none;
+    }
+    .drawer-handle::before {
+      content:"";
+      position:absolute;
+      top:8px;
+      width:48px;
+      height:4px;
+      background:var(--border);
+      border-radius:2px;
+    }
+    aside.open .drawer-handle span { display:none; }
+    footer { top:8px; bottom:auto; right:8px; font-size:10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>European EV Battery Asset Tracker <small>vector basemap · live, ramping, future, cancelled</small></h1>
+  <div class="totals" id="totals"></div>
+</header>
+
+<aside id="aside">
+  <div class="drawer-handle" id="drawer-handle"><span>tap for filters</span></div>
+
+  <div class="summary">
+    <div class="stat"><div class="num" id="vis-count">-</div><div class="lbl">sites visible</div></div>
+    <div class="stat"><div class="num" id="vis-gwh">-</div><div class="lbl">nominal GWh</div></div>
+  </div>
+  <div class="summary">
+    <div class="stat"><div class="num" id="vis-live">-</div><div class="lbl">live nameplate GWh</div></div>
+    <div class="stat"><div class="num" id="vis-cancel">-</div><div class="lbl">cancelled GWh</div></div>
+  </div>
+
+  <h2>Status
+    <span class="toggle-all">
+      <span data-action="all-status">all</span><span class="sep">·</span><span data-action="none-status">none</span>
+    </span>
+  </h2>
+  <div id="status-filter"></div>
+
+  <h2>Min nominal capacity (GWh)</h2>
+  <input type="range" id="cap-slider" min="0" max="100" step="1" value="0">
+  <div class="slider-labels"><span>0</span><span id="cap-val">0</span><span>100</span></div>
+
+  <h2>Country
+    <span class="toggle-all">
+      <span data-action="all-country">all</span><span class="sep">·</span><span data-action="none-country">none</span>
+    </span>
+  </h2>
+  <div class="country-filter" id="country-filter"></div>
+
+  <h2>Top capacity (visible)</h2>
+  <div class="ranking" id="rank-cap"></div>
+
+  <h2>Country capacity (visible)</h2>
+  <div class="ranking" id="rank-country"></div>
+
+  <h2>By owner (visible)</h2>
+  <div class="ranking" id="rank-owner"></div>
+
+  <div class="note">Bubble size is announced or nameplate capacity. It is not current output. Cancelled, non-EV, and future projects are mapped for diligence context.</div>
+</aside>
+
+<main>
+  <div id="map"></div>
+  <footer>Basemap: OpenFreeMap vector tiles, OpenStreetMap data. Geometry updated 2026-05-06.</footer>
+</main>
+
+<script src="https://unpkg.com/maplibre-gl@5.9.0/dist/maplibre-gl.js"></script>
+<script>
+const STATUS_META = {
+  live_proven: { label:"Live, proven", color:"#16a34a" },
+  live_undisclosed: { label:"Live, undisclosed", color:"#0284c7" },
+  ramping_haircut: { label:"Ramping", color:"#d97706" },
+  future_zero: { label:"Future, zero output", color:"#7c3aed" },
+  cancelled_zero: { label:"Cancelled", color:"#e11d48" },
+  non_ev_cell: { label:"Non-EV cell", color:"#64748b" },
+  research: { label:"Research / unresolved", color:"#ea580c" }
+};
+const STATUS_COLORS = Object.fromEntries(Object.entries(STATUS_META).map(([key, value]) => [key, value.color]));
+const EMPTY_COLLECTION = { type:"FeatureCollection", features:[] };
+
+let DATA = EMPTY_COLLECTION;
+let FEATURES = [];
+let map;
+let hoveredId = null;
+const filters = { statuses:new Set(), countries:new Set(), minCap:0 };
+const fmt1 = n => n == null ? "-" : (Math.round(Number(n) * 10) / 10).toLocaleString();
+const cap = p => Number(p.announced_capacity_gwh_numeric || 0);
+const statusLabel = s => STATUS_META[s]?.label || s || "Unknown";
+const statusColor = s => STATUS_META[s]?.color || "#9ca3af";
+
+function popupHtml(feature) {
+  const p = feature.properties;
+  return `<div class="popup">
+    <b>${p.site}</b><br>
+    <span class="muted">${p.country} · ${statusLabel(p.status)}</span><hr>
+    Nominal capacity: <b>${fmt1(cap(p))} GWh</b><br>
+    Type: ${p.type || "-"}<br>
+    Chemistry: ${p.chemistry || "-"}<br>
+    Owner: ${p.owner || "-"}<br>
+    Precision: ${p.geocode_precision || "-"}<br>
+    ${p.address ? `Location: ${p.address}<br>` : ""}
+    <div class="verdict">${p.current_output_verdict || ""}</div>
+  </div>`;
+}
+
+function visibleFeatures() {
+  return FEATURES.filter(f => {
+    const p = f.properties;
+    return filters.statuses.has(p.status) &&
+      filters.countries.has(p.country) &&
+      cap(p) >= filters.minCap;
+  });
+}
+
+function visibleCollection() {
+  return { type:"FeatureCollection", features:visibleFeatures() };
+}
+
+function updateMapSource() {
+  const source = map?.getSource("sites");
+  if (source) source.setData(visibleCollection());
+}
+
+function renderSummary() {
+  const visible = visibleFeatures();
+  const total = visible.reduce((sum, f) => sum + cap(f.properties), 0);
+  const live = visible
+    .filter(f => f.properties.status === "live_proven" || f.properties.status === "live_undisclosed")
+    .reduce((sum, f) => sum + cap(f.properties), 0);
+  const cancelled = visible
+    .filter(f => f.properties.status === "cancelled_zero")
+    .reduce((sum, f) => sum + cap(f.properties), 0);
+
+  document.getElementById("vis-count").textContent = visible.length;
+  document.getElementById("vis-gwh").textContent = fmt1(total);
+  document.getElementById("vis-live").textContent = fmt1(live);
+  document.getElementById("vis-cancel").textContent = fmt1(cancelled);
+
+  document.getElementById("rank-cap").innerHTML = [...visible]
+    .sort((a, b) => cap(b.properties) - cap(a.properties))
+    .slice(0, 9)
+    .map(f => `<div class="item" data-id="${f.id}"><span class="name">${f.properties.site}</span><span class="val">${fmt1(cap(f.properties))}</span></div>`)
+    .join("");
+
+  const countries = {};
+  for (const f of visible) countries[f.properties.country] = (countries[f.properties.country] || 0) + cap(f.properties);
+  document.getElementById("rank-country").innerHTML = Object.entries(countries)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 9)
+    .map(([name, gwh]) => `<div class="item"><span class="name">${name}</span><span class="val">${fmt1(gwh)}</span></div>`)
+    .join("");
+
+  const owners = {};
+  for (const f of visible) {
+    const owner = (f.properties.owner || "Unknown").split("/")[0].trim();
+    owners[owner] = (owners[owner] || 0) + cap(f.properties);
+  }
+  document.getElementById("rank-owner").innerHTML = Object.entries(owners)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 9)
+    .map(([name, gwh]) => `<div class="item"><span class="name">${name}</span><span class="val">${fmt1(gwh)}</span></div>`)
+    .join("");
+
+  document.querySelectorAll(".ranking .item[data-id]").forEach(el => {
+    el.onclick = () => {
+      const feature = FEATURES.find(f => f.id === el.dataset.id);
+      if (!feature) return;
+      const [lon, lat] = feature.geometry.coordinates;
+      map.flyTo({ center:[lon, lat], zoom:10, duration:900 });
+      document.getElementById("aside").classList.remove("open");
+    };
+  });
+}
+
+function renderFilters() {
+  const statusCounts = {};
+  const countryCounts = {};
+  for (const f of FEATURES) {
+    statusCounts[f.properties.status] = (statusCounts[f.properties.status] || 0) + 1;
+    countryCounts[f.properties.country] = (countryCounts[f.properties.country] || 0) + 1;
+  }
+
+  const statusOrder = Object.keys(STATUS_META).filter(status => statusCounts[status]);
+  document.getElementById("status-filter").innerHTML = statusOrder.map(status =>
+    `<div class="row">
+      <input type="checkbox" data-status="${status}" id="status-${status}" checked>
+      <span class="legend-dot" style="background:${statusColor(status)}"></span>
+      <label for="status-${status}">${statusLabel(status)}</label>
+      <span class="count">${statusCounts[status]}</span>
+    </div>`
+  ).join("");
+
+  document.getElementById("country-filter").innerHTML = Object.entries(countryCounts)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([country, count]) =>
+      `<div class="row">
+        <input type="checkbox" data-country="${country}" id="country-${country.replaceAll(" ", "-")}" checked>
+        <label for="country-${country.replaceAll(" ", "-")}">${country}</label>
+        <span class="count">${count}</span>
+      </div>`
+    ).join("");
+
+  document.querySelectorAll("[data-status]").forEach(cb => {
+    cb.onchange = () => {
+      cb.checked ? filters.statuses.add(cb.dataset.status) : filters.statuses.delete(cb.dataset.status);
+      renderAll();
+    };
+  });
+  document.querySelectorAll("[data-country]").forEach(cb => {
+    cb.onchange = () => {
+      cb.checked ? filters.countries.add(cb.dataset.country) : filters.countries.delete(cb.dataset.country);
+      renderAll();
+    };
+  });
+}
+
+function renderTotals() {
+  const totalSites = FEATURES.length;
+  const totalGwh = FEATURES.reduce((sum, f) => sum + cap(f.properties), 0);
+  const liveGwh = FEATURES
+    .filter(f => f.properties.status === "live_proven" || f.properties.status === "live_undisclosed")
+    .reduce((sum, f) => sum + cap(f.properties), 0);
+  document.getElementById("totals").innerHTML =
+    `<span><b>${totalSites}</b> sites</span><span><b>${fmt1(totalGwh)}</b> nominal GWh</span><span><b>${fmt1(liveGwh)}</b> live nameplate GWh</span>`;
+}
+
+function renderAll() {
+  updateMapSource();
+  renderSummary();
+}
+
+function setStatusChecked(checked) {
+  document.querySelectorAll("[data-status]").forEach(cb => {
+    cb.checked = checked;
+    checked ? filters.statuses.add(cb.dataset.status) : filters.statuses.delete(cb.dataset.status);
+  });
+  renderAll();
+}
+
+function setCountryChecked(checked) {
+  document.querySelectorAll("[data-country]").forEach(cb => {
+    cb.checked = checked;
+    checked ? filters.countries.add(cb.dataset.country) : filters.countries.delete(cb.dataset.country);
+  });
+  renderAll();
+}
+
+function addSiteLayers() {
+  map.addSource("sites", {
+    type:"geojson",
+    data:visibleCollection(),
+    promoteId:"asset_id"
+  });
+
+  map.addLayer({
+    id:"site-halo",
+    type:"circle",
+    source:"sites",
+    paint:{
+      "circle-radius":["interpolate", ["linear"], ["coalesce", ["to-number", ["get", "announced_capacity_gwh_numeric"]], 0], 0, 8, 20, 18, 50, 30, 100, 42],
+      "circle-color":"#ffffff",
+      "circle-opacity":0.18,
+      "circle-blur":0.35
+    }
+  });
+
+  map.addLayer({
+    id:"site-circle",
+    type:"circle",
+    source:"sites",
+    paint:{
+      "circle-radius":["interpolate", ["linear"], ["coalesce", ["to-number", ["get", "announced_capacity_gwh_numeric"]], 0], 0, 4, 20, 9, 50, 15, 100, 22],
+      "circle-color":["match", ["get", "status"],
+        "live_proven", STATUS_COLORS.live_proven,
+        "live_undisclosed", STATUS_COLORS.live_undisclosed,
+        "ramping_haircut", STATUS_COLORS.ramping_haircut,
+        "future_zero", STATUS_COLORS.future_zero,
+        "cancelled_zero", STATUS_COLORS.cancelled_zero,
+        "non_ev_cell", STATUS_COLORS.non_ev_cell,
+        "research", STATUS_COLORS.research,
+        "#9ca3af"
+      ],
+      "circle-opacity":0.82,
+      "circle-stroke-color":"#ffffff",
+      "circle-stroke-width":["case", ["boolean", ["feature-state", "hover"], false], 3, 1],
+      "circle-stroke-opacity":0.86
+    }
+  });
+
+  map.on("mouseenter", "site-circle", event => {
+    map.getCanvas().style.cursor = "pointer";
+    if (event.features.length > 0) {
+      if (hoveredId !== null) map.setFeatureState({ source:"sites", id:hoveredId }, { hover:false });
+      hoveredId = event.features[0].id;
+      map.setFeatureState({ source:"sites", id:hoveredId }, { hover:true });
+    }
+  });
+  map.on("mouseleave", "site-circle", () => {
+    map.getCanvas().style.cursor = "";
+    if (hoveredId !== null) map.setFeatureState({ source:"sites", id:hoveredId }, { hover:false });
+    hoveredId = null;
+  });
+  map.on("click", "site-circle", event => {
+    const feature = event.features[0];
+    new maplibregl.Popup({ closeButton:true, maxWidth:"360px" })
+      .setLngLat(feature.geometry.coordinates)
+      .setHTML(popupHtml(feature))
+      .addTo(map);
+  });
+}
+
+function fitToSites() {
+  const bounds = new maplibregl.LngLatBounds();
+  for (const f of FEATURES) bounds.extend(f.geometry.coordinates);
+  map.fitBounds(bounds, { padding:{ top:40, right:40, bottom:40, left:40 }, duration:0 });
+}
+
+async function init() {
+  const response = await fetch("Assets/ev_battery_europe_sites_geojson_skeleton.json");
+  DATA = await response.json();
+  FEATURES = DATA.features.filter(f => f.geometry && Array.isArray(f.geometry.coordinates));
+
+  for (const f of FEATURES) {
+    filters.statuses.add(f.properties.status);
+    filters.countries.add(f.properties.country);
+  }
+
+  map = new maplibregl.Map({
+    container:"map",
+    style:"https://tiles.openfreemap.org/styles/liberty",
+    center:[10, 52],
+    zoom:3.7,
+    attributionControl:false
+  });
+  map.addControl(new maplibregl.NavigationControl({ showCompass:false }), "top-right");
+  map.addControl(new maplibregl.AttributionControl({ compact:true }), "bottom-right");
+
+  map.on("load", () => {
+    addSiteLayers();
+    fitToSites();
+    renderTotals();
+    renderFilters();
+    renderAll();
+  });
+
+  document.getElementById("cap-slider").oninput = event => {
+    filters.minCap = Number(event.target.value);
+    document.getElementById("cap-val").textContent = filters.minCap;
+    renderAll();
+  };
+  document.querySelector("[data-action='all-status']").onclick = () => setStatusChecked(true);
+  document.querySelector("[data-action='none-status']").onclick = () => setStatusChecked(false);
+  document.querySelector("[data-action='all-country']").onclick = () => setCountryChecked(true);
+  document.querySelector("[data-action='none-country']").onclick = () => setCountryChecked(false);
+  document.getElementById("drawer-handle").onclick = () => document.getElementById("aside").classList.toggle("open");
+}
+
+init().catch(error => {
+  document.getElementById("map").innerHTML = `<div style="padding:20px;color:#fb7185">Failed to load EV battery map data: ${error.message}</div>`;
+  console.error(error);
+});
+</script>
+</body>
+</html>

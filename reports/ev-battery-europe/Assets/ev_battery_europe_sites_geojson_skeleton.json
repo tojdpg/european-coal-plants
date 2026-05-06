@@ -1,0 +1,1698 @@
+{
+  "type": "FeatureCollection",
+  "name": "ev_battery_europe_sites_geojson_skeleton",
+  "metadata": {
+    "source": "ev_battery_europe_sites_v0.json",
+    "created_from_source_updated": "2026-05-06",
+    "note": "Geometry is populated from validated geocoding results. Nameplate capacity is not current output.",
+    "geometry_source": "01-data-acquisition-results-fixed.json",
+    "geometry_updated": "2026-05-06"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "poland-lges-wroclaw-kobierzyce-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.882885,
+          51.016815
+        ]
+      },
+      "properties": {
+        "asset_id": "poland-lges-wroclaw-kobierzyce-01",
+        "status": "live_proven",
+        "site": "LGES Wrocław / Kobierzyce",
+        "site_ascii": "LGES Wroclaw / Kobierzyce",
+        "country": "Poland",
+        "owner": "LG Energy Solution",
+        "ownership": "LG Energy Solution",
+        "type": "EV cells/modules",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "86 current; 90 target",
+        "announced_capacity_gwh_numeric": 86,
+        "investment": "USD 5bn [2022]",
+        "current_output": "700,000 EV batteries/year disclosed. Approx 60 GWh-equivalent if 1m batteries corresponds to 86 GWh; exact GWh shipped not disclosed.",
+        "current_output_verdict": "Strongest evidenced European EV-cell output. Count as live, but do not assume full 86 GWh shipped without shipment data.",
+        "source_refs": [
+          "S01"
+        ],
+        "lat": 51.016815,
+        "lon": 16.882885,
+        "geocode_precision": "address",
+        "geocode_source": "manual_web_lookup",
+        "address": "LG 1a, 55-040 Biskupice Podgórne, Kobierzyce, Poland",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "live",
+        "output_evidence_level": "proven",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "LGES Wrocław / Kobierzyce, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-catl-arnstadt-erfurt-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.948737,
+          50.862071
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-catl-arnstadt-erfurt-02",
+        "status": "live_undisclosed",
+        "site": "CATL Arnstadt / Erfurt",
+        "site_ascii": "CATL Arnstadt / Erfurt",
+        "country": "Germany",
+        "owner": "CATL",
+        "ownership": "CATL",
+        "type": "EV cells/modules",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "8 initial permit; 14 target",
+        "announced_capacity_gwh_numeric": 14,
+        "investment": "EUR 1.8bn",
+        "current_output": "Serial cell production started in 2022; current GWh output not disclosed.",
+        "current_output_verdict": "Live production. Count with haircut; avoid treating 14 GWh as actual current output.",
+        "source_refs": [
+          "S02"
+        ],
+        "lat": 50.862071,
+        "lon": 10.948737,
+        "geocode_precision": "amenity",
+        "geocode_source": "",
+        "address": "Werkfeuerwehr CATL, 99310 Arnstadt, Germany",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "live",
+        "output_evidence_level": "undisclosed",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "CATL Arnstadt / Erfurt, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hungary-samsung-sdi-god-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.162457,
+          47.6746196
+        ]
+      },
+      "properties": {
+        "asset_id": "hungary-samsung-sdi-god-03",
+        "status": "live_undisclosed",
+        "site": "Samsung SDI Göd",
+        "site_ascii": "Samsung SDI God",
+        "country": "Hungary",
+        "owner": "Samsung SDI",
+        "ownership": "Samsung SDI",
+        "type": "EV cells",
+        "chemistry": "Prismatic Li-ion",
+        "announced_capacity_gwh": "~40",
+        "announced_capacity_gwh_numeric": 40,
+        "investment": "~EUR 1.3bn+ initial / expansion ongoing",
+        "current_output": "Established operating site; site-level GWh shipped not publicly disclosed.",
+        "current_output_verdict": "Live major base. Do not assume full 40 GWh utilization unless validated.",
+        "source_refs": [
+          "S03"
+        ],
+        "lat": 47.6746196,
+        "lon": 19.162457,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "live",
+        "output_evidence_level": "undisclosed",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Samsung SDI Göd, Hungary"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hungary-sk-on-komarom-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.0684873,
+          47.7401327
+        ]
+      },
+      "properties": {
+        "asset_id": "hungary-sk-on-komarom-04",
+        "status": "live_proven",
+        "site": "SK On Komárom",
+        "site_ascii": "SK On Komarom",
+        "country": "Hungary",
+        "owner": "SK On",
+        "ownership": "SK On",
+        "type": "EV cells/modules",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "~17 GWh total (7 + 10)",
+        "announced_capacity_gwh_numeric": 17,
+        "investment": "n/a clean total",
+        "current_output": "Komarom 2 reported mid-80% utilization; exact GWh shipments not disclosed.",
+        "current_output_verdict": "Live and likely high utilization at least for Komarom 2. Count with source-specific utilization caveat.",
+        "source_refs": [
+          "S04"
+        ],
+        "lat": 47.7401327,
+        "lon": 18.0684873,
+        "geocode_precision": "amenity",
+        "geocode_source": "",
+        "address": "SK Battery, Komárom, Zemplén Géza utca, 2903, Hungary",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "live",
+        "output_evidence_level": "proven",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "SK On Komárom, Hungary"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hungary-sk-on-ivancsa-05",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.8311498,
+          47.1473327
+        ]
+      },
+      "properties": {
+        "asset_id": "hungary-sk-on-ivancsa-05",
+        "status": "live_undisclosed",
+        "site": "SK On Iváncsa",
+        "site_ascii": "SK On Ivancsa",
+        "country": "Hungary",
+        "owner": "SK On",
+        "ownership": "SK On",
+        "type": "EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "30",
+        "announced_capacity_gwh_numeric": 30,
+        "investment": "USD 2.29bn",
+        "current_output": "Operating/ramping site; separate public utilization not found in this pass.",
+        "current_output_verdict": "Live but output undisclosed. Apply haircut until customer shipments/utilization are verified.",
+        "source_refs": [
+          "S04",
+          "S05"
+        ],
+        "lat": 47.1473327,
+        "lon": 18.8311498,
+        "geocode_precision": "postcode",
+        "geocode_source": "",
+        "address": "Iváncsa, Central Transdanubia, Hungary",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "live",
+        "output_evidence_level": "undisclosed",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "SK On Iváncsa, Hungary"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "france-acc-billy-berclau-douvrin-06",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.859626,
+          50.514481
+        ]
+      },
+      "properties": {
+        "asset_id": "france-acc-billy-berclau-douvrin-06",
+        "status": "ramping_haircut",
+        "site": "ACC Billy-Berclau / Douvrin",
+        "site_ascii": "ACC Billy-Berclau / Douvrin",
+        "country": "France",
+        "owner": "ACC (Stellantis / Mercedes-Benz / TotalEnergies-Saft)",
+        "ownership": "ACC JV",
+        "type": "EV cells",
+        "chemistry": "NMC",
+        "announced_capacity_gwh": "13-13.4 initial; 40 target",
+        "announced_capacity_gwh_numeric": 40,
+        "investment": "EUR 850m+ first factory; broader ACC financing",
+        "current_output": "Producing, but reporting indicates difficult ramp, high scrap and only 15,000-20,000 packs over four months in one period.",
+        "current_output_verdict": "Major haircut needed. Treat as real but materially below nameplate; likely low single-digit GWh-equivalent until updated evidence.",
+        "source_refs": [
+          "S06",
+          "S07",
+          "S08"
+        ],
+        "lat": 50.514481,
+        "lon": 2.859626,
+        "geocode_precision": "city",
+        "geocode_source": "",
+        "address": "Billy-Berclau, France",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "ramping",
+        "output_evidence_level": "ramping",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "ACC Billy-Berclau / Douvrin, France"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-powerco-salzgitter-07",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.4411867,
+          52.1794484
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-powerco-salzgitter-07",
+        "status": "ramping_haircut",
+        "site": "PowerCo Salzgitter",
+        "site_ascii": "PowerCo Salzgitter",
+        "country": "Germany",
+        "owner": "PowerCo / Volkswagen",
+        "ownership": "VW in-house / PowerCo",
+        "type": "EV cells",
+        "chemistry": "NMC initially; LFP variants later",
+        "announced_capacity_gwh": "20 first step; 40 max",
+        "announced_capacity_gwh_numeric": 40,
+        "investment": "part of PowerCo program; site-specific capex unclear",
+        "current_output": "First standard cells started; ramp gradually through 2026. Early volumes are not nameplate.",
+        "current_output_verdict": "Strategic live ramp. Count current output as very low until volume shipment data appear.",
+        "source_refs": [
+          "S09"
+        ],
+        "lat": 52.1794484,
+        "lon": 10.4411867,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "ramping",
+        "output_evidence_level": "ramping",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "PowerCo Salzgitter, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "united-kingdom-aesc-sunderland-08",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.46347,
+          54.923534
+        ]
+      },
+      "properties": {
+        "asset_id": "united-kingdom-aesc-sunderland-08",
+        "status": "ramping_haircut",
+        "site": "AESC Sunderland",
+        "site_ascii": "AESC Sunderland",
+        "country": "United Kingdom",
+        "owner": "AESC / Envision",
+        "ownership": "AESC / Envision",
+        "type": "EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "15.8",
+        "announced_capacity_gwh_numeric": 15.8,
+        "investment": "~GBP 1bn+ financing; total cost around GBP 1.5bn in some documents",
+        "current_output": "Commissioned/production launch in Dec 2025; current utilization not disclosed.",
+        "current_output_verdict": "Live but ramping. Count as current output only with a ramp haircut.",
+        "source_refs": [
+          "S10"
+        ],
+        "lat": 54.923534,
+        "lon": -1.46347,
+        "geocode_precision": "postcode",
+        "geocode_source": "manual_web_lookup",
+        "address": "AESC UK, Washington Road, Sunderland, Tyne & Wear SR5 3NS, United Kingdom",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "ramping",
+        "output_evidence_level": "ramping",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "AESC Sunderland, United Kingdom"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "france-aesc-douai-09",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.0312981,
+          50.3550839
+        ]
+      },
+      "properties": {
+        "asset_id": "france-aesc-douai-09",
+        "status": "live_undisclosed",
+        "site": "AESC Douai",
+        "site_ascii": "AESC Douai",
+        "country": "France",
+        "owner": "AESC / Envision",
+        "ownership": "AESC / Envision",
+        "type": "EV cells/modules",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "10 initial; 24-30 by 2030 discussed",
+        "announced_capacity_gwh_numeric": 10,
+        "investment": "~EUR 1.3bn initial project",
+        "current_output": "Series production started; supplies Renault. Site-level GWh output not disclosed.",
+        "current_output_verdict": "Live but output undisclosed. Count with ramp/utilization haircut until shipments are reported.",
+        "source_refs": [
+          "S11"
+        ],
+        "lat": 50.3550839,
+        "lon": 3.0312981,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "live",
+        "output_evidence_level": "undisclosed",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "AESC Douai, France"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "france-verkor-dunkirk-bourbourg-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.193627,
+          50.9663852
+        ]
+      },
+      "properties": {
+        "asset_id": "france-verkor-dunkirk-bourbourg-10",
+        "status": "ramping_haircut",
+        "site": "Verkor Dunkirk / Bourbourg",
+        "site_ascii": "Verkor Dunkirk / Bourbourg",
+        "country": "France",
+        "owner": "Verkor",
+        "ownership": "Verkor",
+        "type": "EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "16 initial; 50 target by 2030",
+        "announced_capacity_gwh_numeric": 16,
+        "investment": "EUR 3bn+ financing",
+        "current_output": "Gigafactory opened; first commercial batteries planned in 2026.",
+        "current_output_verdict": "Do not count 16 GWh as current output yet; treat as early ramp / proof-of-scale pending.",
+        "source_refs": [
+          "S12"
+        ],
+        "lat": 50.9663852,
+        "lon": 2.193627,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "ramping",
+        "output_evidence_level": "ramping",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Verkor Dunkirk / Bourbourg, France"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "norway-morrow-arendal-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.8030393,
+          58.5004486
+        ]
+      },
+      "properties": {
+        "asset_id": "norway-morrow-arendal-11",
+        "status": "ramping_haircut",
+        "site": "Morrow Arendal",
+        "site_ascii": "Morrow Arendal",
+        "country": "Norway",
+        "owner": "Morrow Batteries",
+        "ownership": "Morrow Batteries",
+        "type": "Cells; industrial/ESS first, not core EV offtake yet",
+        "chemistry": "LFP",
+        "announced_capacity_gwh": "1 first factory; expansion ambition much larger",
+        "announced_capacity_gwh_numeric": 1,
+        "investment": "n/a clean total",
+        "current_output": "Production/deliveries have begun for industrial customers; automotive offtake not yet feasible initially due low output.",
+        "current_output_verdict": "Small live cell output but not a current core EV supply source. Track separately from EV-cell totals unless automotive supply is confirmed.",
+        "source_refs": [
+          "S31",
+          "S32",
+          "S33"
+        ],
+        "lat": 58.5004486,
+        "lon": 8.8030393,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "ramping",
+        "output_evidence_level": "ramping",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Morrow Arendal, Norway"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hungary-catl-debrecen-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.6440524,
+          47.5256269
+        ]
+      },
+      "properties": {
+        "asset_id": "hungary-catl-debrecen-12",
+        "status": "future_zero",
+        "site": "CATL Debrecen",
+        "site_ascii": "CATL Debrecen",
+        "country": "Hungary",
+        "owner": "CATL",
+        "ownership": "CATL",
+        "type": "EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "100",
+        "announced_capacity_gwh_numeric": 100,
+        "investment": "EUR 7.34bn",
+        "current_output": "Production targeted late 2025 / early 2026; no public evidence of scaled output found in this pass.",
+        "current_output_verdict": "Future/start-up capacity. Do not count 100 GWh as current output.",
+        "source_refs": [
+          "S13",
+          "S14"
+        ],
+        "lat": 47.5256269,
+        "lon": 21.6440524,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "CATL Debrecen, Hungary"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hungary-eve-power-debrecen-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.2049196,
+          47.4729131
+        ]
+      },
+      "properties": {
+        "asset_id": "hungary-eve-power-debrecen-13",
+        "status": "future_zero",
+        "site": "EVE Power Debrecen",
+        "site_ascii": "EVE Power Debrecen",
+        "country": "Hungary",
+        "owner": "EVE Energy / EVE Power",
+        "ownership": "EVE Power; BMW supply ecosystem",
+        "type": "EV cells",
+        "chemistry": "Cylindrical Li-ion",
+        "announced_capacity_gwh": "28",
+        "announced_capacity_gwh_numeric": 28,
+        "investment": "EUR 1bn+",
+        "current_output": "Plant scheduled to be running by 2026; no scaled output evidence found.",
+        "current_output_verdict": "Future/pre-ramp capacity. Count current output as zero until production/shipment evidence appears.",
+        "source_refs": [
+          "S36"
+        ],
+        "lat": 47.4729131,
+        "lon": 19.2049196,
+        "geocode_precision": "amenity",
+        "geocode_source": "",
+        "address": "4. Környezetvédelmi siker 140 éve, Budapest, Régivám utca, 1106, Hungary",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "EVE Power Debrecen, Hungary"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "spain-powerco-valencia-sagunto-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.268406079194862,
+          39.6483212818109
+        ]
+      },
+      "properties": {
+        "asset_id": "spain-powerco-valencia-sagunto-14",
+        "status": "future_zero",
+        "site": "PowerCo Valencia / Sagunto",
+        "site_ascii": "PowerCo Valencia / Sagunto",
+        "country": "Spain",
+        "owner": "PowerCo / Volkswagen",
+        "ownership": "VW in-house / PowerCo",
+        "type": "EV cells",
+        "chemistry": "Unified cell",
+        "announced_capacity_gwh": "40 projected; first cells expected 2026",
+        "announced_capacity_gwh_numeric": 40,
+        "investment": "EUR 3bn+ PowerCo site; larger Spanish programme broader",
+        "current_output": "Equipment installation from 2026; first cells expected around late Sep 2026, series later.",
+        "current_output_verdict": "Zero current output as of this brief. Treat as future capacity.",
+        "source_refs": [
+          "S29",
+          "S30"
+        ],
+        "lat": 39.6483212818109,
+        "lon": -0.268406079194862,
+        "geocode_precision": "parcel_centroid",
+        "geocode_source": "official_spanish_catastro",
+        "address": "AR LOGISTICA PARC SAGUNT 2, Polígono 101 Parcela 2 IN-3 GAUSA, Sagunto/Sagunt, Valencia, Spain",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "PowerCo Valencia / Sagunto, Spain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "spain-catl-stellantis-zaragoza-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.950139,
+          41.641942
+        ]
+      },
+      "properties": {
+        "asset_id": "spain-catl-stellantis-zaragoza-15",
+        "status": "future_zero",
+        "site": "CATL-Stellantis Zaragoza",
+        "site_ascii": "CATL-Stellantis Zaragoza",
+        "country": "Spain",
+        "owner": "CATL-Stellantis JV",
+        "ownership": "equal JV",
+        "type": "EV cells",
+        "chemistry": "LFP",
+        "announced_capacity_gwh": "up to 50",
+        "announced_capacity_gwh_numeric": 50,
+        "investment": "EUR 4.1bn",
+        "current_output": "Production targeted by end-2026; construction/implementation phase.",
+        "current_output_verdict": "Zero current output. Future LFP capacity only.",
+        "source_refs": [
+          "S15"
+        ],
+        "lat": 41.641942,
+        "lon": -0.950139,
+        "geocode_precision": "amenity",
+        "geocode_source": "",
+        "address": "Stellantis &You, 50012 Zaragoza, Spain",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "CATL-Stellantis Zaragoza, Spain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "spain-aesc-navalmoral-de-la-mata-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.5401199,
+          39.8928306
+        ]
+      },
+      "properties": {
+        "asset_id": "spain-aesc-navalmoral-de-la-mata-16",
+        "status": "future_zero",
+        "site": "AESC Navalmoral de la Mata",
+        "site_ascii": "AESC Navalmoral de la Mata",
+        "country": "Spain",
+        "owner": "AESC / Envision",
+        "ownership": "AESC / Envision",
+        "type": "EV cells",
+        "chemistry": "Li-ion / LFP reported",
+        "announced_capacity_gwh": "30 target",
+        "announced_capacity_gwh_numeric": 30,
+        "investment": "EUR 2.5bn project",
+        "current_output": "Planned/under construction; no current production evidence.",
+        "current_output_verdict": "Zero current output. Future capacity only.",
+        "source_refs": [
+          "S16"
+        ],
+        "lat": 39.8928306,
+        "lon": -5.5401199,
+        "geocode_precision": "postcode",
+        "geocode_source": "",
+        "address": "Navalmoral de la Mata, EX, Spain",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "AESC Navalmoral de la Mata, Spain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "united-kingdom-agratas-somerset-bridgwater-17",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.0037793,
+          51.1284037
+        ]
+      },
+      "properties": {
+        "asset_id": "united-kingdom-agratas-somerset-bridgwater-17",
+        "status": "future_zero",
+        "site": "Agratas Somerset / Bridgwater",
+        "site_ascii": "Agratas Somerset / Bridgwater",
+        "country": "United Kingdom",
+        "owner": "Agratas / Tata Group",
+        "ownership": "Tata Group battery arm; JLR anchor demand",
+        "type": "EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "40",
+        "announced_capacity_gwh_numeric": 40,
+        "investment": "GBP 4bn-5.2bn reported; GBP 380m UK support",
+        "current_output": "Construction/development. Production may slip toward late 2027.",
+        "current_output_verdict": "Zero current output. Important future UK capacity, not current production.",
+        "source_refs": [
+          "S17",
+          "S18"
+        ],
+        "lat": 51.1284037,
+        "lon": -3.0037793,
+        "geocode_precision": "city",
+        "geocode_source": "",
+        "address": "Bridgwater, ENG, United Kingdom",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Agratas Somerset / Bridgwater, United Kingdom"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-tesla-gruenheide-18",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.7957909,
+          52.3914177
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-tesla-gruenheide-18",
+        "status": "future_zero",
+        "site": "Tesla Grünheide",
+        "site_ascii": "Tesla Gruenheide",
+        "country": "Germany",
+        "owner": "Tesla",
+        "ownership": "Tesla",
+        "type": "EV cells",
+        "chemistry": "4680/cell plan",
+        "announced_capacity_gwh": "up to 8 from 2027",
+        "announced_capacity_gwh_numeric": 8,
+        "investment": "nearly EUR 1bn local cell-factory investment",
+        "current_output": "Production capacity targeted from 2027; no current EV-cell output at scale.",
+        "current_output_verdict": "Zero current output for 2026 totals.",
+        "source_refs": [
+          "S19"
+        ],
+        "lat": 52.3914177,
+        "lon": 13.7957909,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Tesla Grünheide, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "france-prologium-dunkirk-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2080653,
+          50.9736624
+        ]
+      },
+      "properties": {
+        "asset_id": "france-prologium-dunkirk-19",
+        "status": "future_zero",
+        "site": "ProLogium Dunkirk",
+        "site_ascii": "ProLogium Dunkirk",
+        "country": "France",
+        "owner": "ProLogium",
+        "ownership": "ProLogium",
+        "type": "Solid-state cells",
+        "chemistry": "Solid-state lithium ceramic",
+        "announced_capacity_gwh": "0.8 in 2028 phase; 48 long-term ambition",
+        "announced_capacity_gwh_numeric": 48,
+        "investment": "EUR 5.2bn planned",
+        "current_output": "Groundbreaking in 2026; mass production roadmap starts 2028.",
+        "current_output_verdict": "Zero current output; high technology/execution risk.",
+        "source_refs": [
+          "S20",
+          "S21"
+        ],
+        "lat": 50.9736624,
+        "lon": 2.2080653,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "ProLogium Dunkirk, France"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "serbia-elevenes-subotica-20",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.670283,
+          46.097766
+        ]
+      },
+      "properties": {
+        "asset_id": "serbia-elevenes-subotica-20",
+        "status": "future_zero",
+        "site": "ElevenEs Subotica",
+        "site_ascii": "ElevenEs Subotica",
+        "country": "Serbia",
+        "owner": "ElevenEs",
+        "ownership": "ElevenEs",
+        "type": "Cells; industrial/EV/BESS intended",
+        "chemistry": "LFP",
+        "announced_capacity_gwh": "1 first phase",
+        "announced_capacity_gwh_numeric": 1,
+        "investment": "Series B; amount not clearly disclosed",
+        "current_output": "Construction of 1 GWh factory starts 2026; first deliveries expected 2027.",
+        "current_output_verdict": "Zero current GWh-scale output.",
+        "source_refs": [
+          "S22"
+        ],
+        "lat": 46.097766,
+        "lon": 19.670283,
+        "geocode_precision": "city",
+        "geocode_source": "",
+        "address": "Subotica, Serbia",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "ElevenEs Subotica, Serbia"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "slovakia-gotion-inobat-surany-21",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.176,
+          48.0736
+        ]
+      },
+      "properties": {
+        "asset_id": "slovakia-gotion-inobat-surany-21",
+        "status": "future_zero",
+        "site": "Gotion InoBat Šurany",
+        "site_ascii": "Gotion InoBat Surany",
+        "country": "Slovakia",
+        "owner": "Gotion InoBat Batteries",
+        "ownership": "Gotion High-Tech + InoBat JV",
+        "type": "EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "20 initial; up to 40 potential",
+        "announced_capacity_gwh_numeric": 20,
+        "investment": "EUR 1.2bn+ / >EUR 1bn",
+        "current_output": "Construction underway; test production 2026, SOP/full production 2027.",
+        "current_output_verdict": "Zero current output. Future capacity only.",
+        "source_refs": [
+          "S34",
+          "S35"
+        ],
+        "lat": 48.0736,
+        "lon": 18.176,
+        "geocode_precision": "industrial_park_area_approx",
+        "geocode_source": "official_public_procurement_eia_manual_lookup",
+        "address": "GIB EnergyX / Gotion InoBat Batteries 94 ha battery-cell site within Šurany Industrial Park, south of Šurany, near the Muchová, Za krížom, Panské, and Kapustnica localities; approximate site centroid from public procurement/EIA locality descriptions.",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Gotion InoBat Šurany, Slovakia"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "spain-basquevolt-alava-minano-22",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.6722,
+          42.9092825
+        ]
+      },
+      "properties": {
+        "asset_id": "spain-basquevolt-alava-minano-22",
+        "status": "future_zero",
+        "site": "Basquevolt Álava / Miñano",
+        "site_ascii": "Basquevolt Alava / Minano",
+        "country": "Spain",
+        "owner": "Basquevolt consortium",
+        "ownership": "Basque Govt / Iberdrola / CIE / Enagas / EIT InnoEnergy / CIC energiGUNE",
+        "type": "Solid-state cells",
+        "chemistry": "Solid-state lithium metal",
+        "announced_capacity_gwh": "10 target by 2027",
+        "announced_capacity_gwh_numeric": 10,
+        "investment": "~EUR 700m planned",
+        "current_output": "Pilot line / development stage; no industrial EV output found.",
+        "current_output_verdict": "Zero current output. Track as technology option, not current supply.",
+        "source_refs": [
+          "S37",
+          "S38"
+        ],
+        "lat": 42.9092825,
+        "lon": -2.6722,
+        "geocode_precision": "address",
+        "geocode_source": "official_address_osm_lookup",
+        "address": "Basquevolt, Parque Tecnológico, C/Albert Einstein 35, 01510 Vitoria-Gasteiz / Miñano Mayor, Álava, Spain",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Basquevolt Álava / Miñano, Spain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hungary-sunwoda-nyiregyhaza-23",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.7438983,
+          47.8935498
+        ]
+      },
+      "properties": {
+        "asset_id": "hungary-sunwoda-nyiregyhaza-23",
+        "status": "research",
+        "site": "Sunwoda Nyíregyháza",
+        "site_ascii": "Sunwoda Nyiregyhaza",
+        "country": "Hungary",
+        "owner": "Sunwoda Automotive Energy",
+        "ownership": "Sunwoda",
+        "type": "Lithium-ion batteries and power battery systems",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "capacity not cleanly public in this pass",
+        "announced_capacity_gwh_numeric": null,
+        "investment": "EUR 245m initial / EUR 1.5bn reported broader; EUR 264m state aid approved",
+        "current_output": "Under construction/phase I; no current output evidence found.",
+        "current_output_verdict": "Do not include in current EV-cell output. Flag for further source validation before public website totals.",
+        "source_refs": [
+          "S39",
+          "S40"
+        ],
+        "lat": 47.8935498,
+        "lon": 21.7438983,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "research",
+        "output_evidence_level": "unknown",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Sunwoda Nyíregyháza, Hungary"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-northvolt-drei-heide-24",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.056103,
+          54.195311
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-northvolt-drei-heide-24",
+        "status": "future_zero",
+        "site": "Northvolt Drei Heide",
+        "site_ascii": "Northvolt Drei Heide",
+        "country": "Germany",
+        "owner": "now Lyten; formerly Northvolt",
+        "ownership": "Lyten acquiring/restructuring former Northvolt project",
+        "type": "Cells; broader applications under Lyten",
+        "chemistry": "Li-ion initially / lithium-sulfur ambition",
+        "announced_capacity_gwh": "legacy 60 plan; revised plan unclear",
+        "announced_capacity_gwh_numeric": 60,
+        "investment": "legacy EUR 4.5bn planned; public aid partly recovered/restructured",
+        "current_output": "No plant output. Lyten targets production around 2028.",
+        "current_output_verdict": "Zero current output. Treat as future/restructured, not bankable current EV supply.",
+        "source_refs": [
+          "S26"
+        ],
+        "lat": 54.195311,
+        "lon": 9.056103,
+        "geocode_precision": "amenity",
+        "geocode_source": "",
+        "address": "Batteriefabrik Northvolt Drei, Kirchspielslandgemeinde Heider Umland, 25746 Heide, Germany",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "future",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Northvolt Drei Heide, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sweden-northvolt-ett-skelleftea-25",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.0870825,
+          64.7340328
+        ]
+      },
+      "properties": {
+        "asset_id": "sweden-northvolt-ett-skelleftea-25",
+        "status": "ramping_haircut",
+        "site": "Northvolt Ett Skellefteå",
+        "site_ascii": "Northvolt Ett Skelleftea",
+        "country": "Sweden",
+        "owner": "now Lyten assets; formerly Northvolt",
+        "ownership": "Lyten acquired Northvolt Ett/Ett Expansion after Northvolt bankruptcy",
+        "type": "Cells; restart initially for BESS/data centres/defence",
+        "chemistry": "Li-ion restart; lithium-sulfur ambition",
+        "announced_capacity_gwh": "16 existing capacity acquired; 60 original ambition",
+        "announced_capacity_gwh_numeric": 16,
+        "investment": "multi-billion prior Northvolt financing; asset value complex",
+        "current_output": "Lyten acquired 16 GWh existing capacity, but restart targeted H2 2026 and automotive supply takes time.",
+        "current_output_verdict": "Do not count as current EV output. Possible restart output later, initially non-auto markets.",
+        "source_refs": [
+          "S23",
+          "S24",
+          "S27"
+        ],
+        "lat": 64.7340328,
+        "lon": 21.0870825,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "ramping",
+        "output_evidence_level": "ramping",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Northvolt Ett Skellefteå, Sweden"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "poland-northvolt-dwa-gdansk-26",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.6964447,
+          54.3689542
+        ]
+      },
+      "properties": {
+        "asset_id": "poland-northvolt-dwa-gdansk-26",
+        "status": "non_ev_cell",
+        "site": "Northvolt Dwa Gdańsk",
+        "site_ascii": "Northvolt Dwa Gdansk",
+        "country": "Poland",
+        "owner": "now Lyten; formerly Northvolt",
+        "ownership": "Lyten acquired Northvolt Dwa BESS",
+        "type": "BESS / systems, not EV cells",
+        "chemistry": "Systems integration",
+        "announced_capacity_gwh": "~6 systems; expandable ~10-12",
+        "announced_capacity_gwh_numeric": 6,
+        "investment": "~USD 200m original expansion reported elsewhere",
+        "current_output": "BESS/systems facility; Lyten restart/sales targeted. Not cell manufacturing for EVs.",
+        "current_output_verdict": "Exclude from EV-cell output totals; show blue category only.",
+        "source_refs": [
+          "S25"
+        ],
+        "lat": 54.3689542,
+        "lon": 18.6964447,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "non_ev",
+        "output_evidence_level": "excluded",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Northvolt Dwa Gdańsk, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-acc-kaiserslautern-27",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.760953,
+          49.439283
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-acc-kaiserslautern-27",
+        "status": "cancelled_zero",
+        "site": "ACC Kaiserslautern",
+        "site_ascii": "ACC Kaiserslautern",
+        "country": "Germany",
+        "owner": "cancelled by ACC",
+        "ownership": "formerly ACC project",
+        "type": "Planned EV cells",
+        "chemistry": "NMC / future LFP pivot discussed",
+        "announced_capacity_gwh": "13.4 initial; 40 planned",
+        "announced_capacity_gwh_numeric": 40,
+        "investment": "EUR 437m grant approved previously; project cancelled",
+        "current_output": "No production; project dropped.",
+        "current_output_verdict": "Zero. Cancelled/inactive.",
+        "source_refs": [
+          "S08",
+          "S16"
+        ],
+        "lat": 49.439283,
+        "lon": 7.760953,
+        "geocode_precision": "city",
+        "geocode_source": "",
+        "address": "Kaiserslautern, RP, Germany",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "ACC Kaiserslautern, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "italy-acc-termoli-28",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.9993718,
+          41.9504918
+        ]
+      },
+      "properties": {
+        "asset_id": "italy-acc-termoli-28",
+        "status": "cancelled_zero",
+        "site": "ACC Termoli",
+        "site_ascii": "ACC Termoli",
+        "country": "Italy",
+        "owner": "cancelled by ACC",
+        "ownership": "formerly ACC project",
+        "type": "Planned EV cells",
+        "chemistry": "NMC / future LFP pivot discussed",
+        "announced_capacity_gwh": "40 planned",
+        "announced_capacity_gwh_numeric": 40,
+        "investment": "part of ACC financing plan",
+        "current_output": "No production; project dropped.",
+        "current_output_verdict": "Zero. Cancelled/inactive.",
+        "source_refs": [
+          "S08",
+          "S16"
+        ],
+        "lat": 41.9504918,
+        "lon": 14.9993718,
+        "geocode_precision": "",
+        "geocode_source": "",
+        "address": "",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "ACC Termoli, Italy"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "united-kingdom-britishvolt-blyth-29",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.528611,
+          55.141667
+        ]
+      },
+      "properties": {
+        "asset_id": "united-kingdom-britishvolt-blyth-29",
+        "status": "cancelled_zero",
+        "site": "Britishvolt Blyth",
+        "site_ascii": "Britishvolt Blyth",
+        "country": "United Kingdom",
+        "owner": "formerly Britishvolt",
+        "ownership": "collapsed project",
+        "type": "Planned EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "~30 planned",
+        "announced_capacity_gwh_numeric": 30,
+        "investment": "~GBP 3.8bn planned",
+        "current_output": "No production; company collapsed.",
+        "current_output_verdict": "Zero. Failed project.",
+        "source_refs": [
+          "S28"
+        ],
+        "lat": 55.141667,
+        "lon": -1.528611,
+        "geocode_precision": "former_power_station_site",
+        "geocode_source": "global_energy_monitor_manual_lookup",
+        "address": "Former Blyth Power Station / Cambois brownfield site associated with the cancelled Britishvolt gigafactory, Northumberland, UK",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Britishvolt Blyth, United Kingdom"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "italy-italvolt-scarmagno-30",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.841119,
+          45.384456
+        ]
+      },
+      "properties": {
+        "asset_id": "italy-italvolt-scarmagno-30",
+        "status": "cancelled_zero",
+        "site": "Italvolt Scarmagno",
+        "site_ascii": "Italvolt Scarmagno",
+        "country": "Italy",
+        "owner": "formerly Italvolt",
+        "ownership": "effectively inactive / postponed",
+        "type": "Planned EV cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "~45 planned",
+        "announced_capacity_gwh_numeric": 45,
+        "investment": "~EUR 3.4bn planned",
+        "current_output": "No current industrial output; inactive/postponed.",
+        "current_output_verdict": "Zero / inactive. Do not count.",
+        "source_refs": [
+          "S16"
+        ],
+        "lat": 45.384456,
+        "lon": 7.841119,
+        "geocode_precision": "city",
+        "geocode_source": "",
+        "address": "Scarmagno, PIE, Italy",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Italvolt Scarmagno, Italy"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "norway-freyr-mo-i-rana-giga-arctic-31",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.1159268,
+          66.3051259
+        ]
+      },
+      "properties": {
+        "asset_id": "norway-freyr-mo-i-rana-giga-arctic-31",
+        "status": "cancelled_zero",
+        "site": "Freyr Mo i Rana / Giga Arctic",
+        "site_ascii": "Freyr Mo i Rana / Giga Arctic",
+        "country": "Norway",
+        "owner": "Freyr / T1 Energy legacy",
+        "ownership": "Freyr plan deprioritised/abandoned",
+        "type": "Planned cells",
+        "chemistry": "Li-ion",
+        "announced_capacity_gwh": "~29 planned",
+        "announced_capacity_gwh_numeric": 29,
+        "investment": "~USD 1.7bn plan / assets written down",
+        "current_output": "No production; European plan abandoned/deprioritised.",
+        "current_output_verdict": "Zero. Exclude from current European EV-cell output.",
+        "source_refs": [
+          "S16"
+        ],
+        "lat": 66.3051259,
+        "lon": 14.1159268,
+        "geocode_precision": "address",
+        "geocode_source": "business_register_osm_lookup",
+        "address": "FREYR Battery Giga Arctic AS, Terminalveien 22, 8624 Mo i Rana, Norway",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "Freyr Mo i Rana / Giga Arctic, Norway"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-svolt-ueberherrn-linslerfeld-32",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7248,
+          49.2439
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-svolt-ueberherrn-linslerfeld-32",
+        "status": "cancelled_zero",
+        "site": "SVOLT Überherrn / Linslerfeld",
+        "site_ascii": "SVOLT Ueberherrn / Linslerfeld",
+        "country": "Germany",
+        "owner": "SVOLT / Great Wall Motor legacy",
+        "ownership": "SVOLT European operations ended / Saarland cell factory cancelled",
+        "type": "Planned EV cells",
+        "chemistry": "Li-ion / NMX plans",
+        "announced_capacity_gwh": "24 planned",
+        "announced_capacity_gwh_numeric": 24,
+        "investment": "part of EUR 2bn Saarland plan",
+        "current_output": "No production; planned Linslerfeld cell factory cancelled as SVOLT ceased European operations effective Jan 2025.",
+        "current_output_verdict": "Zero. Exclude from current and future count unless project is revived under a new owner.",
+        "source_refs": [
+          "S41",
+          "S42"
+        ],
+        "lat": 49.2439,
+        "lon": 6.7248,
+        "geocode_precision": "planned_site_centroid_approx",
+        "geocode_source": "official_ueberherrn_planning_map_osm_manual_lookup",
+        "address": "Planned SVOLT cell factory area at Industriegebiet Linsler Feld, east of Überherrn between B 269, L 168, and L 279, Saarland; project cancelled.",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "SVOLT Überherrn / Linslerfeld, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-svolt-heusweiler-eiweiler-33",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9322995,
+          49.3630035
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-svolt-heusweiler-eiweiler-33",
+        "status": "cancelled_zero",
+        "site": "SVOLT Heusweiler / Eiweiler",
+        "site_ascii": "SVOLT Heusweiler / Eiweiler",
+        "country": "Germany",
+        "owner": "SVOLT / Great Wall Motor legacy",
+        "ownership": "SVOLT European operations ended / Saarland module-pack facility cancelled",
+        "type": "Planned modules/packs",
+        "chemistry": "Li-ion battery modules/packs",
+        "announced_capacity_gwh": "module/pack assembly only; no separate cell GWh",
+        "announced_capacity_gwh_numeric": null,
+        "investment": "part of EUR 2bn Saarland plan",
+        "current_output": "No production; planned Heusweiler/Eiweiler module and pack assembly cancelled as SVOLT ceased European operations effective Jan 2025.",
+        "current_output_verdict": "Zero. Do not add separate cell capacity; capacity belonged to the Saarland cell plan.",
+        "source_refs": [
+          "S41",
+          "S42"
+        ],
+        "lat": 49.3630035,
+        "lon": 6.9322995,
+        "geocode_precision": "industrial_road_area",
+        "geocode_source": "official_heusweiler_planning_osm_manual_lookup",
+        "address": "Former Laminate Park / Industrie- und Gewerbepark Eiweiler Nord, Werkstraße, 66265 Heusweiler-Eiweiler, Saarland; planned SVOLT module and pack assembly facility; project cancelled.",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "SVOLT Heusweiler / Eiweiler, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "germany-svolt-lauchhammer-34",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.7779604,
+          51.4748633
+        ]
+      },
+      "properties": {
+        "asset_id": "germany-svolt-lauchhammer-34",
+        "status": "cancelled_zero",
+        "site": "SVOLT Lauchhammer",
+        "site_ascii": "SVOLT Lauchhammer",
+        "country": "Germany",
+        "owner": "SVOLT / Great Wall Motor legacy",
+        "ownership": "SVOLT European operations ended / Brandenburg cell factory cancelled",
+        "type": "Planned EV cells",
+        "chemistry": "Li-ion / NMX plans",
+        "announced_capacity_gwh": "16 planned",
+        "announced_capacity_gwh_numeric": 16,
+        "investment": "Brandenburg conversion of former Vestas site; capex not clearly disclosed",
+        "current_output": "No production; planned Lauchhammer cell factory cancelled in 2024 before SVOLT ceased European operations.",
+        "current_output_verdict": "Zero. Exclude from current and future count unless project is revived under a new owner.",
+        "source_refs": [
+          "S41",
+          "S42"
+        ],
+        "lat": 51.4748633,
+        "lon": 13.7779604,
+        "geocode_precision": "address",
+        "geocode_source": "osm_manual_lookup",
+        "address": "Former Vestas site, John-Schehr-Straße 7, 01979 Lauchhammer, Brandenburg; planned SVOLT cell factory; project cancelled.",
+        "city": "",
+        "admin1": "",
+        "nuts2": "",
+        "nuts3": "",
+        "operating_state": "cancelled",
+        "output_evidence_level": "zero",
+        "current_output_gwh_estimate": "",
+        "current_output_estimate_method": "",
+        "owner_origin": "",
+        "oem_customers": "",
+        "nearest_oem_cluster_km": "",
+        "nearest_port_km": "",
+        "grid_or_energy_note": "",
+        "geocode_query": "SVOLT Lauchhammer, Germany"
+      }
+    }
+  ]
+}
