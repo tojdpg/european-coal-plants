@@ -21,7 +21,7 @@
     --muted:#94a3b8;
     --accent:#5eead4;
     --accent-2:#fbbf24;
-    --aside-w:380px;
+    --aside-w:300px;
     --header-h:58px;
   }
   * { box-sizing:border-box; }
@@ -50,6 +50,14 @@
     background:var(--panel);
     border-bottom:1px solid var(--border);
   }
+  .back-link {
+    flex-shrink:0;
+    color:var(--accent);
+    font-size:12px;
+    font-weight:650;
+    text-decoration:none;
+  }
+  .back-link:hover { text-decoration:underline; }
   header h1 {
     margin:0;
     min-width:0;
@@ -77,7 +85,7 @@
     font-variant-numeric:tabular-nums;
   }
   aside {
-    padding:16px;
+    padding:14px 12px;
     overflow-y:auto;
     background:var(--panel);
     border-right:1px solid var(--border);
@@ -100,18 +108,18 @@
   .summary {
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:8px;
+    gap:6px;
     margin-bottom:4px;
   }
   .stat {
-    padding:10px 12px;
+    padding:8px 10px;
     background:var(--panel-2);
     border:1px solid rgba(255,255,255,0.04);
     border-radius:6px;
   }
   .stat .num {
     color:var(--fg);
-    font-size:18px;
+    font-size:17px;
     font-weight:700;
     font-variant-numeric:tabular-nums;
   }
@@ -123,9 +131,9 @@
   .row {
     display:flex;
     align-items:center;
-    gap:8px;
-    margin-bottom:6px;
-    font-size:13px;
+    gap:7px;
+    margin-bottom:5px;
+    font-size:12px;
   }
   .row label {
     flex:1;
@@ -163,7 +171,7 @@
   .toggle-all:hover { background:var(--panel-2); }
   .toggle-all .sep { margin:0 4px; color:var(--muted); }
   .country-filter {
-    max-height:220px;
+    max-height:150px;
     overflow-y:auto;
     padding-right:4px;
   }
@@ -234,11 +242,41 @@
     border-radius:4px;
     font-size:11px;
   }
+  .map-legend {
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    z-index:2;
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px 10px;
+    max-width:min(680px, calc(100% - 260px));
+    padding:8px 10px;
+    color:var(--fg);
+    background:rgba(16,21,27,0.82);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:6px;
+    box-shadow:0 8px 28px rgba(0,0,0,0.25);
+    font-size:11px;
+  }
+  .map-legend .item {
+    display:flex;
+    align-items:center;
+    gap:5px;
+    white-space:nowrap;
+  }
+  .map-legend .swatch {
+    width:9px;
+    height:9px;
+    border:1px solid rgba(255,255,255,0.55);
+    border-radius:50%;
+  }
   .drawer-handle { display:none; }
 
   @media (max-width:760px) {
     body { grid-template-columns:1fr; grid-template-rows:var(--header-h) 1fr; }
     header { padding:0 12px; gap:10px; }
+    .back-link { display:none; }
     header h1 { font-size:13px; }
     header h1 small { display:none; }
     header .totals { gap:10px; font-size:11px; }
@@ -289,12 +327,20 @@
     }
     aside.open .drawer-handle span { display:none; }
     footer { top:8px; bottom:auto; right:8px; font-size:10px; }
+    .map-legend {
+      left:8px;
+      right:8px;
+      bottom:66px;
+      max-width:none;
+      font-size:10px;
+    }
   }
 </style>
 </head>
 <body>
 
 <header>
+  <a class="back-link" href="https://tojdpg.github.io/european-coal-plants/reports/">All projects</a>
   <h1>European EV Battery Asset Tracker <small>vector basemap · live, ramping, future, cancelled</small></h1>
   <div class="totals" id="totals"></div>
 </header>
@@ -343,6 +389,7 @@
 
 <main>
   <div id="map"></div>
+  <div class="map-legend" id="map-legend" aria-label="Status legend"></div>
   <footer>Basemap: OpenFreeMap vector tiles, OpenStreetMap data. Geometry updated 2026-05-06.</footer>
 </main>
 
@@ -420,7 +467,7 @@ function renderSummary() {
 
   document.getElementById("rank-cap").innerHTML = [...visible]
     .sort((a, b) => cap(b.properties) - cap(a.properties))
-    .slice(0, 9)
+    .slice(0, 6)
     .map(f => `<div class="item" data-id="${f.id}"><span class="name">${f.properties.site}</span><span class="val">${fmt1(cap(f.properties))}</span></div>`)
     .join("");
 
@@ -428,7 +475,7 @@ function renderSummary() {
   for (const f of visible) countries[f.properties.country] = (countries[f.properties.country] || 0) + cap(f.properties);
   document.getElementById("rank-country").innerHTML = Object.entries(countries)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 9)
+    .slice(0, 6)
     .map(([name, gwh]) => `<div class="item"><span class="name">${name}</span><span class="val">${fmt1(gwh)}</span></div>`)
     .join("");
 
@@ -439,7 +486,7 @@ function renderSummary() {
   }
   document.getElementById("rank-owner").innerHTML = Object.entries(owners)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 9)
+    .slice(0, 6)
     .map(([name, gwh]) => `<div class="item"><span class="name">${name}</span><span class="val">${fmt1(gwh)}</span></div>`)
     .join("");
 
@@ -494,6 +541,12 @@ function renderFilters() {
       renderAll();
     };
   });
+}
+
+function renderLegend() {
+  document.getElementById("map-legend").innerHTML = Object.values(STATUS_META)
+    .map(meta => `<span class="item"><span class="swatch" style="background:${meta.color}"></span>${meta.label}</span>`)
+    .join("");
 }
 
 function renderTotals() {
@@ -622,6 +675,7 @@ async function init() {
     fitToSites();
     renderTotals();
     renderFilters();
+    renderLegend();
     renderAll();
   });
 
