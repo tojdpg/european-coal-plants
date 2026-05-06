@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>European EV Battery Asset Tracker</title>
+<title>EV Battery Europe Map</title>
 <meta name="description" content="Interactive vector map of European EV battery manufacturing sites, planned capacity, operating status, and geocoding confidence.">
-<meta property="og:title" content="European EV Battery Asset Tracker">
+<meta property="og:title" content="EV Battery Europe Map">
 <meta property="og:description" content="Interactive vector map of European EV battery manufacturing sites, planned capacity, operating status, and geocoding confidence.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://tojdpg.github.io/european-coal-plants/reports/ev-battery-europe/Assets/ev-battery-logo.png">
@@ -344,6 +344,7 @@
     font-size:11px;
   }
   .drawer-handle { display:none; }
+  .mobile-filter-button { display:none; }
 
   @media (max-width:760px) {
     body { grid-template-columns:1fr; grid-template-rows:var(--header-h) 1fr; }
@@ -360,14 +361,14 @@
       right:0;
       bottom:0;
       z-index:5;
-      height:40vh;
-      max-height:72vh;
-      padding-top:42px;
+      height:74vh;
+      max-height:calc(100dvh - var(--header-h) - 8px);
+      padding-top:56px;
       border-right:none;
       border-top:1px solid var(--border);
       border-radius:14px 14px 0 0;
       box-shadow:0 -8px 24px rgba(0,0,0,0.4);
-      transform:translateY(calc(100% - 58px));
+      transform:translateY(calc(100% - 76px));
       transition:transform 0.25s ease;
     }
     aside.open { transform:translateY(0); }
@@ -376,7 +377,7 @@
       top:0;
       left:0;
       right:0;
-      height:44px;
+      height:56px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -399,6 +400,30 @@
     }
     aside.open .drawer-handle span { display:none; }
     footer { top:8px; bottom:auto; right:8px; font-size:10px; }
+    .mobile-filter-button {
+      position:absolute;
+      left:50%;
+      bottom:18px;
+      z-index:4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width:156px;
+      min-height:44px;
+      padding:0 18px;
+      color:#10151b;
+      background:var(--accent);
+      border:1px solid rgba(255,255,255,0.42);
+      border-radius:999px;
+      box-shadow:0 10px 28px rgba(0,0,0,0.34);
+      cursor:pointer;
+      font:700 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      transform:translateX(-50%);
+    }
+    aside.open + main .mobile-filter-button {
+      bottom:calc(74vh + 10px);
+      background:var(--accent-2);
+    }
   }
 </style>
 </head>
@@ -457,6 +482,7 @@
 
 <main>
   <div id="map"></div>
+  <button class="mobile-filter-button" id="mobile-filter-button" type="button" aria-controls="aside" aria-expanded="false">Filters</button>
   <footer>Basemap: OpenFreeMap vector tiles, OpenStreetMap data. Geometry updated 2026-05-06.</footer>
 </main>
 
@@ -704,6 +730,18 @@ function setCountryChecked(checked) {
   renderAll();
 }
 
+function setPanelOpen(open) {
+  const aside = document.getElementById("aside");
+  const button = document.getElementById("mobile-filter-button");
+  aside.classList.toggle("open", open);
+  button.setAttribute("aria-expanded", open ? "true" : "false");
+  button.textContent = open ? "Close filters" : "Filters";
+}
+
+function togglePanel() {
+  setPanelOpen(!document.getElementById("aside").classList.contains("open"));
+}
+
 function addSiteLayers() {
   map.addSource("sites", {
     type:"geojson",
@@ -812,7 +850,8 @@ async function init() {
   document.querySelector("[data-action='none-status']").onclick = () => setStatusChecked(false);
   document.querySelector("[data-action='all-country']").onclick = () => setCountryChecked(true);
   document.querySelector("[data-action='none-country']").onclick = () => setCountryChecked(false);
-  document.getElementById("drawer-handle").onclick = () => document.getElementById("aside").classList.toggle("open");
+  document.getElementById("drawer-handle").onclick = togglePanel;
+  document.getElementById("mobile-filter-button").onclick = togglePanel;
 }
 
 init().catch(error => {
