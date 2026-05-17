@@ -75,11 +75,11 @@ def main() -> int:
     required_order = [
         "Berlin Fusion: Weather, Pollution + Clay Spectral Evidence",
         "Clay / NDVI Context",
+        "Interpretation",
         "Spectral Evidence",
         "Nearest GFS Weather",
         "Pollution Context",
         "How To Read The Numbers",
-        "Interpretation",
         "Caveats",
     ]
 
