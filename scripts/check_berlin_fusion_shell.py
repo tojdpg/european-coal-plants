@@ -10,6 +10,7 @@ values, embedded images, and interpretation text.
 from __future__ import annotations
 
 import re
+import struct
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
@@ -17,6 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "berlin-fusion" / "index.html"
+PREVIEW = ROOT / "reports" / "berlin-fusion" / "berlin-deep-weather-preview.png"
 
 
 class ReportParser(HTMLParser):
@@ -66,6 +68,16 @@ def appears_in_order(items: list[str], required: list[str]) -> bool:
     return True
 
 
+def png_size(path: Path) -> tuple[int, int] | None:
+    try:
+        data = path.read_bytes()
+    except FileNotFoundError:
+        return None
+    if not data.startswith(b"\x89PNG\r\n\x1a\n") or data[12:16] != b"IHDR":
+        return None
+    return struct.unpack(">II", data[16:24])
+
+
 def main() -> int:
     html = REPORT.read_text(encoding="utf-8")
     parser = ReportParser()
@@ -73,7 +85,7 @@ def main() -> int:
 
     errors: list[str] = []
     required_order = [
-        "Berlin Fusion: Weather, Pollution + Clay Spectral Evidence",
+        "Berlin Deep Weather",
         "Clay / NDVI Context",
         "Interpretation",
         "Spectral Evidence",
@@ -99,6 +111,18 @@ def main() -> int:
         errors,
     )
     require("Evidence Hub" in html, "Missing Evidence Hub link.", errors)
+    require("<title>Berlin Deep Weather</title>" in html, "Missing short Berlin Deep Weather title.", errors)
+    require(
+        'property="og:image" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/berlin-deep-weather-preview.png"' in html
+        and 'name="twitter:card" content="summary_large_image"' in html,
+        "Missing social sharing preview metadata.",
+        errors,
+    )
+    require(
+        png_size(PREVIEW) == (1200, 1200),
+        "Social preview PNG must exist and be 1200 x 1200.",
+        errors,
+    )
     require('id="lightbox"' in html, "Missing click-to-enlarge lightbox.", errors)
     require(
         "PAUL_INTERPRETATION_START" in html and "PAUL_INTERPRETATION_END" in html,
@@ -135,6 +159,12 @@ def main() -> int:
         "Missing protected reader explainer markers.",
         errors,
     )
+    explainer_match = re.search(
+        r"BERLIN_FUSION_EXPLAINER_LOCK_START(?P<body>.*?)BERLIN_FUSION_EXPLAINER_LOCK_END",
+        html,
+        re.S,
+    )
+    explainer_body = explainer_match.group("body") if explainer_match else ""
     require(
         "How To Read The Numbers" in html
         and "Benchmarks here are orientation bands" in html
@@ -145,6 +175,11 @@ def main() -> int:
         and "Source / kind / timestamp" in html
         and "Weather / Earth2Studio GFS" in html,
         "Reader explainer definitions or benchmarks are missing.",
+        errors,
+    )
+    require(
+        "Here " not in explainer_body and "sits in" not in explainer_body,
+        "Protected reader explainer should be value-neutral, not tied to refreshed table values.",
         errors,
     )
 

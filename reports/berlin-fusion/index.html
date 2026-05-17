@@ -3,7 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Berlin Fusion: Weather, Pollution + Clay Spectral Evidence</title>
+  <title>Berlin Deep Weather</title>
+  <meta name="description" content="Berlin Deep Weather combines Clay/Sentinel-2 surface evidence, Earth2Studio GFS weather, and Open-Meteo air-quality context for the Moabit / Tiergarten AOI.">
+  <link rel="canonical" href="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Berlin Deep Weather">
+  <meta property="og:description" content="Clay/Sentinel-2 surface evidence, Earth2Studio GFS weather, and Open-Meteo air-quality context for Berlin Moabit / Tiergarten.">
+  <meta property="og:url" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/">
+  <meta property="og:image" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/berlin-deep-weather-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:alt" content="Berlin Deep Weather preview card with a Berlin bear motif.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Berlin Deep Weather">
+  <meta name="twitter:description" content="Clay/Sentinel-2 surface evidence, Earth2Studio GFS weather, and Open-Meteo air-quality context for Berlin Moabit / Tiergarten.">
+  <meta name="twitter:image" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/berlin-deep-weather-preview.png">
   <style>
     :root {
       color-scheme: light;
@@ -88,7 +102,7 @@
   -->
   <main>
     <section>
-      <h1>Berlin Fusion: Weather, Pollution + Clay Spectral Evidence</h1>
+      <h1>Berlin Deep Weather</h1>
       <p>Berlin AOI at 52.5332, 13.3598.</p>
       <ul class="context-list">
         <li><strong>Weather:</strong> Earth2Studio GFS forecast valid 2026-05-17T21:00:00Z / 2026-05-17T23:00:00+02:00.</li>
@@ -170,10 +184,10 @@
           <h3>Weather / Earth2Studio GFS</h3>
           <ul>
             <li><strong>GFS run / lead / valid time:</strong> when the forecast was started, how far ahead it predicts, and the exact hour the values describe.</li>
-            <li><strong>t2m_c / t2m_k:</strong> air temperature 2 m above ground, shown in Celsius and Kelvin. Here 17.15 °C is mild; roughly 15-25 °C is a comfortable outdoor band.</li>
+            <li><strong>t2m_c / t2m_k:</strong> air temperature 2 m above ground, shown in Celsius and Kelvin. Roughly 15-25 °C is a comfortable outdoor band.</li>
             <li><strong>u10m_m_s / v10m_m_s:</strong> east-west and north-south wind components. They are model variables; the combined wind speed is easier to read.</li>
-            <li><strong>wind_speed_10m_m_s:</strong> wind speed 10 m above ground. Here 3.41 m/s is a light to gentle breeze; below 5 m/s is usually not a strong-wind situation.</li>
-            <li><strong>r2m_pct:</strong> relative humidity near 2 m. Here 34.6% is on the dry side; about 40-60% is a common comfort range.</li>
+            <li><strong>wind_speed_10m_m_s:</strong> wind speed 10 m above ground. Below 5 m/s is usually light wind rather than a strong-wind situation.</li>
+            <li><strong>r2m_pct:</strong> relative humidity near 2 m. About 40-60% is a common comfort range; much lower reads dry, much higher reads humid.</li>
             <li><strong>grid distance / status:</strong> distance from the AOI to the model grid cell and whether data came from cache or a fresh connector fetch. Smaller distance is better; this is context, not a street-corner reading.</li>
           </ul>
         </div>
@@ -181,10 +195,10 @@
           <h3>Pollution / Open-Meteo Air Quality</h3>
           <ul>
             <li><strong>Source / kind / timestamp:</strong> tells us this is a gridded forecast/API value and the exact hour it describes, not an in-situ monitoring-station measurement.</li>
-            <li><strong>PM10:</strong> larger inhalable particles. 7.7 µg/m³ sits in the European AQI good band for PM10.</li>
-            <li><strong>PM2.5:</strong> fine particles that penetrate deeper into lungs. 4.3 µg/m³ sits in the European AQI good band for PM2.5.</li>
-            <li><strong>NO2:</strong> nitrogen dioxide, often traffic-combustion related. 2.7 µg/m³ sits in the European AQI good band.</li>
-            <li><strong>O3:</strong> ground-level ozone, often higher in sunny photochemical conditions. 112 µg/m³ sits in the European AQI moderate band.</li>
+            <li><strong>PM10:</strong> larger inhalable particles. In the European AQI orientation bands, 0-20 µg/m³ is good.</li>
+            <li><strong>PM2.5:</strong> fine particles that penetrate deeper into lungs. In the European AQI orientation bands, 0-10 µg/m³ is good.</li>
+            <li><strong>NO2:</strong> nitrogen dioxide, often traffic-combustion related. In the European AQI orientation bands, 0-40 µg/m³ is good.</li>
+            <li><strong>O3:</strong> ground-level ozone, often higher in sunny photochemical conditions. In the European AQI orientation bands, 0-50 µg/m³ is good and O3 100-130 µg/m³ is moderate.</li>
             <li><strong>Benchmark:</strong> Open-Meteo's European AQI bands mark PM10 0-20, PM2.5 0-10, and NO2 0-40 µg/m³ as good; O3 100-130 µg/m³ is moderate.</li>
           </ul>
         </div>
@@ -192,10 +206,10 @@
           <h3>Clay / Sentinel-2 Spectral Indices</h3>
           <ul>
             <li><strong>NDVI:</strong> vegetation greenness index from red and near-infrared light. It usually ranges from -1 to 1; higher means stronger live vegetation signal.</li>
-            <li><strong>NDVI benchmark:</strong> values around 0.2-0.3 often indicate sparse to moderate vegetation; 0.6-0.8 suggests dense green vegetation. This urban tile's average NDVI of 0.252 is mixed urban/green surface context.</li>
-            <li><strong>Vegetation share:</strong> pixels above NDVI 0.3. Here 37.94% means a substantial green component, not a forest classification.</li>
+            <li><strong>NDVI benchmark:</strong> values around 0.2-0.3 often indicate sparse to moderate vegetation; 0.6-0.8 suggests dense green vegetation.</li>
+            <li><strong>Vegetation share:</strong> pixels above NDVI 0.3. This is a simple green-surface share, not a forest classification.</li>
             <li><strong>NDWI green/NIR:</strong> water or surface-moisture proxy. Positive values can indicate water/moist surfaces; negative values usually mean vegetation, built surfaces, bare soil, or shadow.</li>
-            <li><strong>NDWI benchmark:</strong> 0 is the practical divider here. Only 1.11% of pixels are positive, so the tile has little open-water or wet-surface signal.</li>
+            <li><strong>NDWI benchmark:</strong> 0 is the practical divider here. A small positive share means little open-water or wet-surface signal.</li>
             <li><strong>p05 / p95 / valid pixels:</strong> p05 and p95 show the low and high ends while ignoring the most extreme 5% of pixels; valid pixels tells whether the whole tile was usable.</li>
           </ul>
         </div>
