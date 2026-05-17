@@ -1,0 +1,21 @@
+name: Berlin Fusion Shell Guard
+
+on:
+  push:
+    paths:
+      - "reports/berlin-fusion/index.html"
+      - "scripts/check_berlin_fusion_shell.py"
+      - ".github/workflows/berlin-fusion-guard.yml"
+  pull_request:
+    paths:
+      - "reports/berlin-fusion/index.html"
+      - "scripts/check_berlin_fusion_shell.py"
+      - ".github/workflows/berlin-fusion-guard.yml"
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Berlin Fusion shell
+        run: python3 scripts/check_berlin_fusion_shell.py
