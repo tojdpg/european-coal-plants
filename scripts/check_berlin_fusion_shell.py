@@ -78,6 +78,7 @@ def main() -> int:
         "Spectral Evidence",
         "Nearest GFS Weather",
         "Pollution Context",
+        "How To Read The Numbers",
         "Interpretation",
         "Caveats",
     ]
@@ -126,6 +127,24 @@ def main() -> int:
         and "ranges from -1 to 1" in html
         and "NDVI above 0.3" in html,
         "NDVI explanation is missing or unclear.",
+        errors,
+    )
+    require(
+        "BERLIN_FUSION_EXPLAINER_LOCK_START" in html
+        and "BERLIN_FUSION_EXPLAINER_LOCK_END" in html,
+        "Missing protected reader explainer markers.",
+        errors,
+    )
+    require(
+        "How To Read The Numbers" in html
+        and "Benchmarks here are orientation bands" in html
+        and "O3 100-130" in html
+        and "NDVI benchmark" in html
+        and "NDWI benchmark" in html
+        and "p05 / p95 / valid pixels" in html
+        and "Source / kind / timestamp" in html
+        and "Weather / Earth2Studio GFS" in html,
+        "Reader explainer definitions or benchmarks are missing.",
         errors,
     )
 

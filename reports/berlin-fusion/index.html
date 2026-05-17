@@ -29,6 +29,9 @@
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; min-width: 0; }
     .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; min-width: 0; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px; margin-top: 14px; min-width: 0; }
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 18px; min-width: 0; }
+    .guide-block { min-width: 0; }
+    .guide-block h3 { border-bottom: 1px solid #e6e9ef; padding-bottom: 8px; }
     .mini { padding: 12px; background: #fbfcfd; }
     .mini table { margin-top: 8px; }
     .compact th { width: 170px; }
@@ -81,6 +84,7 @@
     values, embedded images, spectral evidence, and interpretation copy, but must
     not replace the full HTML with a generated artifact. Keep this order:
     Clay / NDVI Context -> Spectral Evidence -> Weather/Pollution -> Interpretation -> Caveats.
+    Keep the protected reader explainer between Weather/Pollution and Interpretation.
   -->
   <main>
     <section>
@@ -145,6 +149,51 @@
       </section>
     </div>
 
+    <!-- BERLIN_FUSION_EXPLAINER_LOCK_START
+      This reader guide is part of the Berlin Fusion website shell. Paul may
+      update measured/forecast values elsewhere, but should not remove this
+      explainer or the benchmark ranges without Thorsten explicitly asking.
+    -->
+    <section id="value-guide">
+      <h2>How To Read The Numbers</h2>
+      <p class="notice">Benchmarks here are orientation bands, not regulatory findings. Weather comes from the nearest GFS grid point, pollution from Open-Meteo Air Quality, and spectral indices from the Clay/Sentinel-2 surface tile.</p>
+      <div class="guide-grid">
+        <div class="guide-block">
+          <h3>Weather / Earth2Studio GFS</h3>
+          <ul>
+            <li><strong>GFS run / lead / valid time:</strong> when the forecast was started, how far ahead it predicts, and the exact hour the values describe.</li>
+            <li><strong>t2m_c / t2m_k:</strong> air temperature 2 m above ground, shown in Celsius and Kelvin. Here 17.15 °C is mild; roughly 15-25 °C is a comfortable outdoor band.</li>
+            <li><strong>u10m_m_s / v10m_m_s:</strong> east-west and north-south wind components. They are model variables; the combined wind speed is easier to read.</li>
+            <li><strong>wind_speed_10m_m_s:</strong> wind speed 10 m above ground. Here 3.41 m/s is a light to gentle breeze; below 5 m/s is usually not a strong-wind situation.</li>
+            <li><strong>r2m_pct:</strong> relative humidity near 2 m. Here 34.6% is on the dry side; about 40-60% is a common comfort range.</li>
+            <li><strong>grid distance / status:</strong> distance from the AOI to the model grid cell and whether data came from cache or a fresh connector fetch. Smaller distance is better; this is context, not a street-corner reading.</li>
+          </ul>
+        </div>
+        <div class="guide-block">
+          <h3>Pollution / Open-Meteo Air Quality</h3>
+          <ul>
+            <li><strong>Source / kind / timestamp:</strong> tells us this is a gridded forecast/API value and the exact hour it describes, not an in-situ monitoring-station measurement.</li>
+            <li><strong>PM10:</strong> larger inhalable particles. 7.7 µg/m³ sits in the European AQI good band for PM10.</li>
+            <li><strong>PM2.5:</strong> fine particles that penetrate deeper into lungs. 4.3 µg/m³ sits in the European AQI good band for PM2.5.</li>
+            <li><strong>NO2:</strong> nitrogen dioxide, often traffic-combustion related. 2.7 µg/m³ sits in the European AQI good band.</li>
+            <li><strong>O3:</strong> ground-level ozone, often higher in sunny photochemical conditions. 112 µg/m³ sits in the European AQI moderate band.</li>
+            <li><strong>Benchmark:</strong> Open-Meteo's European AQI bands mark PM10 0-20, PM2.5 0-10, and NO2 0-40 µg/m³ as good; O3 100-130 µg/m³ is moderate.</li>
+          </ul>
+        </div>
+        <div class="guide-block">
+          <h3>Clay / Sentinel-2 Spectral Indices</h3>
+          <ul>
+            <li><strong>NDVI:</strong> vegetation greenness index from red and near-infrared light. It usually ranges from -1 to 1; higher means stronger live vegetation signal.</li>
+            <li><strong>NDVI benchmark:</strong> values around 0.2-0.3 often indicate sparse to moderate vegetation; 0.6-0.8 suggests dense green vegetation. This urban tile's average NDVI of 0.252 is mixed urban/green surface context.</li>
+            <li><strong>Vegetation share:</strong> pixels above NDVI 0.3. Here 37.94% means a substantial green component, not a forest classification.</li>
+            <li><strong>NDWI green/NIR:</strong> water or surface-moisture proxy. Positive values can indicate water/moist surfaces; negative values usually mean vegetation, built surfaces, bare soil, or shadow.</li>
+            <li><strong>NDWI benchmark:</strong> 0 is the practical divider here. Only 1.11% of pixels are positive, so the tile has little open-water or wet-surface signal.</li>
+            <li><strong>p05 / p95 / valid pixels:</strong> p05 and p95 show the low and high ends while ignoring the most extreme 5% of pixels; valid pixels tells whether the whole tile was usable.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- BERLIN_FUSION_EXPLAINER_LOCK_END -->
 
     <section class="interpretation" id="paul-interpretation">
       <h2>Interpretation</h2>
