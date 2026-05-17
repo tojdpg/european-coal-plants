@@ -91,8 +91,8 @@
       <h1>Berlin Fusion: Weather, Pollution + Clay Spectral Evidence</h1>
       <p>Berlin AOI at 52.5332, 13.3598.</p>
       <ul class="context-list">
-        <li><strong>Weather:</strong> Earth2Studio GFS forecast valid 2026-05-17T12:00:00Z / 2026-05-17T14:00:00+02:00.</li>
-        <li><strong>Pollution:</strong> Open-Meteo Air Quality forecast/API value for 2026-05-17T12:00:00Z / 2026-05-17T14:00:00+02:00.</li>
+        <li><strong>Weather:</strong> Earth2Studio GFS forecast valid 2026-05-17T21:00:00Z / 2026-05-17T23:00:00+02:00.</li>
+        <li><strong>Pollution:</strong> Open-Meteo Air Quality forecast/API value for 2026-05-17T21:00:00Z / 2026-05-17T23:00:00+02:00.</li>
         <li><strong>Surface imagery:</strong> Clay/Sentinel-2 scene captured 2026-05-02T10:10:19Z.</li>
       </ul>
       <p class="hub-link"><a href="../">Evidence Hub</a></p>
@@ -111,8 +111,8 @@
     <section class="interpretation" id="paul-interpretation">
       <h2>Interpretation</h2>
       <!-- PAUL_INTERPRETATION_START -->
-      <p>At this matched hour, the gridded forecast context is low for PM10, PM2.5, and NO2, while ozone is the main air-quality signal. The Clay/Sentinel spectral layer adds surface context: NDVI mean 0.252 with about 37.9% of pixels above the vegetation threshold.</p>
-      <p>The green/NIR NDWI proxy is mostly negative, with about 1.1% positive pixels, so the tile reads as predominantly urban/vegetated surface context rather than open-water or wet-surface context. These spectral values describe the satellite surface tile; they are not in-situ pollution measurements and should not be used for street-canyon exposure claims.</p>
+      <p>At the refreshed matched hour, the nearest GFS forecast is cooler and calmer than the earlier daytime snapshot: about 11.2 °C, 1.24 m/s wind, and 67.4% relative humidity for 23:00 Berlin time. Open-Meteo's lightweight air-quality grid shows modest particulates, higher NO2 than the daytime value, and ozone easing back to 52.0 µg/m³.</p>
+      <p>The Clay/Sentinel spectral layer is unchanged because it comes from the cached 2026-05-02 surface tile: NDVI mean 0.252 with about 37.9% of pixels above the vegetation threshold, and green/NIR NDWI mean -0.2465 with about 1.1% positive pixels. These spectral values describe satellite surface proxies, not in-situ pollution measurements, and should not be used for street-canyon exposure claims.</p>
       <!-- PAUL_INTERPRETATION_END -->
     </section>
 
@@ -136,11 +136,11 @@
       <section>
         <h2>Nearest GFS Weather</h2>
         <table>
-          <tr><th>GFS run</th><td>2026-05-17T06:00:00Z / lead 6 h</td></tr>
-          <tr><th>Valid time</th><td>2026-05-17T12:00:00Z / 2026-05-17T14:00:00+02:00</td></tr>
+          <tr><th>GFS run</th><td>2026-05-17T12:00:00Z / lead 9 h</td></tr>
+          <tr><th>Valid time</th><td>2026-05-17T21:00:00Z / 2026-05-17T23:00:00+02:00</td></tr>
           <tr><th>Grid distance</th><td>8.296 km</td></tr>
           <tr><th>Status</th><td>fresh_fetch_or_cache_hit_from_gfs_connector</td></tr>
-          <tr><th>t2m_c</th><td>17.150000000000034</td></tr><tr><th>t2m_k</th><td>290.3</td></tr><tr><th>u10m_m_s</th><td>0.589638671875</td></tr><tr><th>v10m_m_s</th><td>3.3566162109375</td></tr><tr><th>wind_speed_10m_m_s</th><td>3.4080120526340476</td></tr><tr><th>r2m_pct</th><td>34.6</td></tr>
+          <tr><th>t2m_c</th><td>11.203027343750023</td></tr><tr><th>t2m_k</th><td>284.35302734375</td></tr><tr><th>u10m_m_s</th><td>-0.47548828125000003</td></tr><tr><th>v10m_m_s</th><td>1.14892822265625</td></tr><tr><th>wind_speed_10m_m_s</th><td>1.2434328154034415</td></tr><tr><th>r2m_pct</th><td>67.4</td></tr>
         </table>
       </section>
       <section>
@@ -148,11 +148,11 @@
         <table>
           <tr><th>Source</th><td>Open-Meteo Air Quality API</td></tr>
           <tr><th>Kind</th><td>lightweight gridded air-quality forecast/API value</td></tr>
-          <tr><th>Timestamp UTC</th><td>2026-05-17T12:00:00Z</td></tr>
-          <tr><th>Berlin time</th><td>2026-05-17T14:00:00+02:00</td></tr>
+          <tr><th>Timestamp UTC</th><td>2026-05-17T21:00:00Z</td></tr>
+          <tr><th>Berlin time</th><td>2026-05-17T23:00:00+02:00</td></tr>
           <tr><th>Grid coordinate</th><td>52.5, 13.400002</td></tr>
           <tr><th>Grid distance</th><td>4.586 km</td></tr>
-          <tr><th>pm10</th><td>7.7 μg/m³</td></tr><tr><th>pm2_5</th><td>4.3 μg/m³</td></tr><tr><th>nitrogen_dioxide</th><td>2.7 μg/m³</td></tr><tr><th>ozone</th><td>112.0 μg/m³</td></tr>
+          <tr><th>pm10</th><td>13.7 μg/m³</td></tr><tr><th>pm2_5</th><td>8.3 μg/m³</td></tr><tr><th>nitrogen_dioxide</th><td>32.2 μg/m³</td></tr><tr><th>ozone</th><td>52.0 μg/m³</td></tr>
         </table>
       </section>
     </div>
