@@ -18,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "berlin-fusion" / "index.html"
-PREVIEW = ROOT / "reports" / "berlin-fusion" / "berlin-deep-weather-preview.png"
+PREVIEW = ROOT / "reports" / "berlin-fusion" / "berlin-deep-weather-preview.jpg"
 
 
 class ReportParser(HTMLParser):
@@ -68,14 +68,30 @@ def appears_in_order(items: list[str], required: list[str]) -> bool:
     return True
 
 
-def png_size(path: Path) -> tuple[int, int] | None:
+def raster_size(path: Path) -> tuple[int, int] | None:
     try:
         data = path.read_bytes()
     except FileNotFoundError:
         return None
-    if not data.startswith(b"\x89PNG\r\n\x1a\n") or data[12:16] != b"IHDR":
-        return None
-    return struct.unpack(">II", data[16:24])
+    if data.startswith(b"\x89PNG\r\n\x1a\n") and data[12:16] == b"IHDR":
+        return struct.unpack(">II", data[16:24])
+    if data.startswith(b"\xff\xd8"):
+        i = 2
+        while i + 9 < len(data):
+            if data[i] != 0xFF:
+                i += 1
+                continue
+            marker = data[i + 1]
+            i += 2
+            if marker in {0xD8, 0xD9}:
+                continue
+            length = int.from_bytes(data[i : i + 2], "big")
+            if marker in range(0xC0, 0xC4):
+                height = int.from_bytes(data[i + 3 : i + 5], "big")
+                width = int.from_bytes(data[i + 5 : i + 7], "big")
+                return (width, height)
+            i += length
+    return None
 
 
 def main() -> int:
@@ -101,6 +117,11 @@ def main() -> int:
         errors,
     )
     require(
+        "Wetter, Luftqualität und Satellitenbild-Evidence für Berlin Moabit / Tiergarten." in html,
+        "Missing intuitive social preview description.",
+        errors,
+    )
+    require(
         appears_in_order(parser.headings, required_order),
         "Required Berlin Fusion heading order changed.",
         errors,
@@ -113,14 +134,15 @@ def main() -> int:
     require("Evidence Hub" in html, "Missing Evidence Hub link.", errors)
     require("<title>Berlin Deep Weather</title>" in html, "Missing short Berlin Deep Weather title.", errors)
     require(
-        'property="og:image" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/berlin-deep-weather-preview.png"' in html
+        'property="og:image" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/berlin-deep-weather-preview.jpg"' in html
+        and 'property="og:image:type" content="image/jpeg"' in html
         and 'name="twitter:card" content="summary_large_image"' in html,
         "Missing social sharing preview metadata.",
         errors,
     )
     require(
-        png_size(PREVIEW) == (1200, 1200),
-        "Social preview PNG must exist and be 1200 x 1200.",
+        raster_size(PREVIEW) == (1200, 630),
+        "Social preview image must exist and be 1200 x 630.",
         errors,
     )
     require('id="lightbox"' in html, "Missing click-to-enlarge lightbox.", errors)
