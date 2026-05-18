@@ -117,7 +117,7 @@ def main() -> int:
         errors,
     )
     require(
-        "Wetter, Luftqualität und Satellitenbild-Evidence für Berlin Moabit / Tiergarten." in html,
+        "Wetter, Luftqualität und Satellitenbild-Evidence für Berlin Mitte / Tiergarten." in html,
         "Missing intuitive social preview description.",
         errors,
     )
