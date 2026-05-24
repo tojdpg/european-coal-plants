@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Berlin Deep Weather — geospatial evidence dossier</title>
+  <meta name="description" content="A fused geospatial dossier of central Berlin — Sentinel-2 satellite surface, GFS weather, and air-quality indicators. Worked example for Jelinek, Qiu & Guo (2026), Big Earth Data.">
+
+  <link rel="canonical" href="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/share/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Berlin Deep Weather — geospatial evidence dossier">
+  <meta property="og:description" content="Sentinel-2 surface, GFS weather, air-quality indicators — fused over central Berlin. Worked example for Jelinek, Qiu & Guo (2026), Big Earth Data.">
+  <meta property="og:url" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/share/">
+  <meta property="og:image" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/share/og-berlin-sat.jpg">
+  <meta property="og:image:secure_url" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/share/og-berlin-sat.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sentinel-2 satellite view of central Berlin — Brandenburg Gate and Tiergarten, 2 May 2026.">
+  <meta property="og:site_name" content="Berlin Deep Weather">
+  <meta property="article:author" content="Thorsten Jelinek">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Berlin Deep Weather — geospatial evidence dossier">
+  <meta name="twitter:description" content="Sentinel-2 surface, GFS weather, air-quality indicators — fused over central Berlin. Worked example for Jelinek, Qiu & Guo (2026), Big Earth Data.">
+  <meta name="twitter:image" content="https://tojdpg.github.io/european-coal-plants/reports/berlin-fusion/share/og-berlin-sat.jpg">
+
+  <script>
+    if (!navigator.userAgent.match(/(facebookexternalhit|LinkedInBot|Twitterbot|Slackbot|Discordbot|WhatsApp|TelegramBot|Googlebot|bingbot|Baiduspider)/i)) {
+      setTimeout(function () { window.location.replace('../'); }, 250);
+    }
+  </script>
+
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      color: #1a1a1a;
+      background: #fafafa;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0 0 0.35rem;
+    }
+    .sub {
+      color: #555;
+      font-size: 0.95rem;
+      margin: 0 0 1.75rem;
+    }
+    .hero {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 1200 / 630;
+      border-radius: 8px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+      background: #e6e6e6;
+      object-fit: cover;
+    }
+    .body p { font-size: 1rem; margin: 0 0 1rem; }
+    .cta {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      background: #0a3d62;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .cta:hover { background: #082f4a; }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #e2e2e2;
+      font-size: 0.85rem;
+      color: #555;
+    }
+    footer p { margin: 0.35rem 0; }
+    footer a { color: inherit; }
+    .caveat { font-style: italic; color: #6a6a6a; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #111; color: #e8e8e8; }
+      .sub, footer { color: #aaa; }
+      footer { border-color: #2a2a2a; }
+      .caveat { color: #9a9a9a; }
+      .hero { background: #1d1d1d; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Berlin Deep Weather</h1>
+    <p class="sub">Geospatial evidence dossier — Mitte / Tiergarten, central Berlin</p>
+
+    <img class="hero"
+         src="og-berlin-sat.jpg"
+         alt="Sentinel-2 satellite view of central Berlin — Brandenburg Gate and Tiergarten, 2 May 2026."
+         width="1200" height="630">
+
+    <div class="body">
+      <p>This page combines a 2 May 2026 Sentinel-2 satellite view of central Berlin with current weather and air-quality indicators — a fused snapshot of city and park surfaces, not a real-time pollution measurement.</p>
+
+      <p>It is a worked example for our paper in <em>Big Earth Data</em>: <strong>Towards Earth intelligence: the co-evolution of AI models and agents for digital sustainable development</strong> (Jelinek, Qiu &amp; Guo, 2026).</p>
+
+      <a class="cta" href="../">Open the full report →</a>
+    </div>
+
+    <footer>
+      <p>Authors: Thorsten Jelinek, Yubao Qiu, Huadong Guo.</p>
+      <p>DOI: <a href="https://doi.org/10.1080/20964471.2026.2672225">10.1080/20964471.2026.2672225</a> — <em>Big Earth Data</em>, 2026.</p>
+      <p>Built with OpenClaw — a local agent stack orchestrating Clay (open-source geospatial foundation model) and NVIDIA Earth2Studio.</p>
+      <p class="caveat">A geospatial evidence dossier. Pollution and weather values are orientation indicators unless backed by pollutant-specific datasets.</p>
+    </footer>
+  </main>
+</body>
+</html>
