@@ -107,8 +107,8 @@
       <h1>Berlin Deep Weather</h1>
       <p>Berlin Mitte / Tiergarten AOI at 52.5163, 13.3777, near Brandenburg Gate / central Tiergarten.</p>
       <ul class="context-list">
-        <li><strong>Weather:</strong> Earth2Studio GFS forecast run 2026-05-24T00:00:00Z / lead 8 h, valid 2026-05-24T08:00:00Z / 2026-05-24T10:00:00+02:00.</li>
-        <li><strong>Pollution:</strong> Open-Meteo Air Quality forecast/API value for 2026-05-24T08:00:00Z / 2026-05-24T10:00:00+02:00.</li>
+        <li><strong>Weather:</strong> Earth2Studio GFS forecast run 2026-05-24T00:00:00Z / lead 20 h, valid 2026-05-24T20:00:00Z / 2026-05-24T22:00:00+02:00.</li>
+        <li><strong>Pollution:</strong> Open-Meteo Air Quality forecast/API value for 2026-05-24T20:00:00Z / 2026-05-24T22:00:00+02:00.</li>
         <li><strong>Surface imagery:</strong> Clay/Sentinel-2 L2A scene captured 2026-05-02T10:10:19.024000Z.</li>
       </ul>
       <p class="hub-link"><a href="../">Evidence Hub</a></p>
@@ -127,9 +127,9 @@
     <section class="interpretation" id="paul-interpretation">
       <h2>Interpretation</h2>
       <!-- PAUL_INTERPRETATION_START -->
-      <p><strong>Central Mitte / Tiergarten is refreshed for the current Berlin morning context.</strong> The nearest GFS grid point for 2026-05-24T10:00:00+02:00 shows 24.8 °C, light 2.99 m/s wind, and 54.3% relative humidity. The Open-Meteo air-quality grid reports PM10 at 16.9 µg/m³, PM2.5 at 10.6 µg/m³, low NO2 at 3.4 µg/m³, and ozone at 95.0 µg/m³.</p>
+      <p><strong>Central Mitte / Tiergarten is refreshed for the Berlin 22:00 context.</strong> The nearest GFS grid point for 2026-05-24T22:00:00+02:00 shows 17.2 °C, light 3.60 m/s wind, and 60.5% relative humidity. The Open-Meteo air-quality grid reports PM10 at 5.9 µg/m³, PM2.5 at 3.4 µg/m³, low NO2 at 5.6 µg/m³, and ozone at 74.0 µg/m³.</p>
       <p>The shifted 1024 px Sentinel-2/Clay tile covers the Brandenburg Gate / central Tiergarten area. Its NDVI mean is 0.2476, with 36.13% of pixels above NDVI 0.3, so vegetation is substantial but mixed with roads, roofs, stone surfaces, and shadows. The green/NIR NDWI mean is -0.2433, with only 0.95% positive NDWI pixels, so open-water or wet-surface signal is limited in this window.</p>
-      <p>These image-derived indices are surface spectral proxies, not in-situ pollution measurements. Weather and air quality describe 2026-05-24T10:00:00+02:00, while the Sentinel-2 surface scene is from 2026-05-02T10:10:19Z, so the page is a fusion context view rather than a same-minute observation.</p>
+      <p>These image-derived indices are surface spectral proxies, not in-situ pollution measurements. Weather and air quality describe 2026-05-24T22:00:00+02:00, while the Sentinel-2 surface scene is from 2026-05-02T10:10:19Z, so the page is a fusion context view rather than a same-minute observation.</p>
       <!-- PAUL_INTERPRETATION_END -->
     </section>
 
@@ -154,17 +154,17 @@
       <section>
         <h2>Nearest GFS Weather</h2>
         <table>
-          <tr><th>GFS run</th><td>2026-05-24T00:00:00Z / lead 8 h</td></tr>
-          <tr><th>Valid time</th><td>2026-05-24T08:00:00Z / 2026-05-24T10:00:00+02:00</td></tr>
+          <tr><th>GFS run</th><td>2026-05-24T00:00:00Z / lead 20 h</td></tr>
+          <tr><th>Valid time</th><td>2026-05-24T20:00:00Z / 2026-05-24T22:00:00+02:00</td></tr>
           <tr><th>Grid coordinate</th><td>52.5, 13.5</td></tr>
           <tr><th>Grid distance</th><td>8.473 km</td></tr>
           <tr><th>Status</th><td>fresh_fetch_or_cache_hit_from_gfs_connector</td></tr>
-          <tr><th>t2m_c</th><td>24.847460937500045</td></tr>
-          <tr><th>t2m_k</th><td>297.9974609375</td></tr>
-          <tr><th>u10m_m_s</th><td>2.960390625</td></tr>
-          <tr><th>v10m_m_s</th><td>-0.45365478515625</td></tr>
-          <tr><th>wind_speed_10m_m_s</th><td>2.9949482995008534</td></tr>
-          <tr><th>r2m_pct</th><td>54.300000000000004</td></tr>
+          <tr><th>t2m_c</th><td>17.151611328125057</td></tr>
+          <tr><th>t2m_k</th><td>290.30161132812503</td></tr>
+          <tr><th>u10m_m_s</th><td>0.43690185546875</td></tr>
+          <tr><th>v10m_m_s</th><td>-3.56854248046875</td></tr>
+          <tr><th>wind_speed_10m_m_s</th><td>3.595188265754951</td></tr>
+          <tr><th>r2m_pct</th><td>60.5</td></tr>
         </table>
       </section>
       <section>
@@ -172,14 +172,14 @@
         <table>
           <tr><th>Source</th><td>Open-Meteo Air Quality API</td></tr>
           <tr><th>Kind</th><td>lightweight gridded air-quality forecast/API value</td></tr>
-          <tr><th>Timestamp UTC</th><td>2026-05-24T08:00:00Z</td></tr>
-          <tr><th>Berlin time</th><td>2026-05-24T10:00:00+02:00</td></tr>
+          <tr><th>Timestamp UTC</th><td>2026-05-24T20:00:00Z</td></tr>
+          <tr><th>Berlin time</th><td>2026-05-24T22:00:00+02:00</td></tr>
           <tr><th>Grid coordinate</th><td>52.5, 13.400002</td></tr>
           <tr><th>Grid distance</th><td>2.359 km</td></tr>
-          <tr><th>pm10</th><td>16.9 μg/m³</td></tr>
-          <tr><th>pm2_5</th><td>10.6 μg/m³</td></tr>
-          <tr><th>nitrogen_dioxide</th><td>3.4 μg/m³</td></tr>
-          <tr><th>ozone</th><td>95 μg/m³</td></tr>
+          <tr><th>pm10</th><td>5.9 μg/m³</td></tr>
+          <tr><th>pm2_5</th><td>3.4 μg/m³</td></tr>
+          <tr><th>nitrogen_dioxide</th><td>5.6 μg/m³</td></tr>
+          <tr><th>ozone</th><td>74 μg/m³</td></tr>
         </table>
       </section>
     </div>
