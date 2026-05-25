@@ -107,8 +107,8 @@
       <h1>Berlin Deep Weather</h1>
       <p>Berlin Mitte / Tiergarten AOI at 52.5163, 13.3777, near Brandenburg Gate / central Tiergarten.</p>
       <ul class="context-list">
-        <li><strong>Weather:</strong> Earth2Studio GFS forecast run 2026-05-24T12:00:00Z / lead 4 h, valid 2026-05-24T16:00:00Z / 2026-05-24T18:00:00+02:00.</li>
-        <li><strong>Pollution:</strong> Open-Meteo Air Quality forecast/API value for 2026-05-24T16:00:00Z / 2026-05-24T18:00:00+02:00.</li>
+        <li><strong>Weather:</strong> Earth2Studio GFS forecast run 2026-05-25T12:00:00Z / lead 8 h, valid 2026-05-25T20:00:00Z / 2026-05-25T22:00:00+02:00.</li>
+        <li><strong>Pollution:</strong> Open-Meteo Air Quality forecast/API value for 2026-05-25T20:00:00Z / 2026-05-25T22:00:00+02:00.</li>
         <li><strong>Surface imagery:</strong> Clay/Sentinel-2 L2A scene captured 2026-05-02T10:10:19.024000Z.</li>
       </ul>
       <p class="hub-link"><a href="../">Evidence Hub</a></p>
@@ -127,9 +127,9 @@
     <section class="interpretation" id="paul-interpretation">
       <h2>Interpretation</h2>
       <!-- PAUL_INTERPRETATION_START -->
-      <p><strong>Central Mitte / Tiergarten is refreshed for the Berlin 18:00 context.</strong> The nearest GFS grid point for 2026-05-24T18:00:00+02:00 shows 24.8 °C, moderate 5.69 m/s wind, and 48.8% relative humidity. The Open-Meteo air-quality grid reports PM10 at 5.1 µg/m³, PM2.5 at 3.4 µg/m³, low NO2 at 1.9 µg/m³, and ozone at 89.0 µg/m³.</p>
-      <p>The shifted 1024 px Sentinel-2/Clay tile covers the Brandenburg Gate / central Tiergarten area. Its NDVI mean is 0.2476, with 36.13% of pixels above NDVI 0.3, so vegetation is substantial but mixed with roads, roofs, stone surfaces, and shadows. The green/NIR NDWI mean is -0.2433, with only 0.95% positive NDWI pixels, so open-water or wet-surface signal is limited in this window.</p>
-      <p>These image-derived indices are surface spectral proxies, not in-situ pollution measurements. Weather and air quality describe 2026-05-24T18:00:00+02:00, while the Sentinel-2 surface scene is from 2026-05-02T10:10:19Z, so the page is a fusion context view rather than a same-minute observation.</p>
+      <p><strong>Central Mitte / Tiergarten is refreshed for the Berlin 22:00 context.</strong> The nearest GFS grid point for 2026-05-25T22:00:00+02:00 shows 20.0 °C, light 2.28 m/s wind, and 66.9% relative humidity. The Open-Meteo air-quality grid reports PM10 at 8.9 µg/m³, PM2.5 at 5.3 µg/m³, NO2 at 10.8 µg/m³, and ozone at 66.0 µg/m³.</p>
+      <p>The weather pattern reads as a mild late-evening urban boundary layer: cooler than the previous warm evening update, more humid, and less windy. That means dispersion is still present but gentler, so near-road NO2 can show up more clearly even while particle levels remain low.</p>
+      <p>The shifted 1024 px Sentinel-2/Clay tile still provides the surface context, not a same-hour observation. Its NDVI mean is 0.2476, with 36.13% of pixels above NDVI 0.3, and the green/NIR NDWI mean is -0.2433 with only 0.95% positive NDWI pixels. These image-derived indices are satellite spectral proxies, not in-situ pollution measurements; weather and air quality describe 2026-05-25T22:00:00+02:00, while the Sentinel-2 surface scene is from 2026-05-02T10:10:19Z.</p>
       <!-- PAUL_INTERPRETATION_END -->
     </section>
 
@@ -154,17 +154,17 @@
       <section>
         <h2>Nearest GFS Weather</h2>
         <table>
-          <tr><th>GFS run</th><td>2026-05-24T12:00:00Z / lead 4 h</td></tr>
-          <tr><th>Valid time</th><td>2026-05-24T16:00:00Z / 2026-05-24T18:00:00+02:00</td></tr>
+          <tr><th>GFS run</th><td>2026-05-25T12:00:00Z / lead 8 h</td></tr>
+          <tr><th>Valid time</th><td>2026-05-25T20:00:00Z / 2026-05-25T22:00:00+02:00</td></tr>
           <tr><th>Grid coordinate</th><td>52.5, 13.5</td></tr>
           <tr><th>Grid distance</th><td>8.473 km</td></tr>
           <tr><th>Status</th><td>fresh_fetch_or_cache_hit_from_gfs_connector</td></tr>
-          <tr><th>t2m_c</th><td>24.770751953125057</td></tr>
-          <tr><th>t2m_k</th><td>297.92075195312503</td></tr>
-          <tr><th>u10m_m_s</th><td>1.96341064453125</td></tr>
-          <tr><th>v10m_m_s</th><td>-5.34052734375</td></tr>
-          <tr><th>wind_speed_10m_m_s</th><td>5.690009988427089</td></tr>
-          <tr><th>r2m_pct</th><td>48.800000000000004</td></tr>
+          <tr><th>t2m_c</th><td>19.98151855468751</td></tr>
+          <tr><th>t2m_k</th><td>293.1315185546875</td></tr>
+          <tr><th>u10m_m_s</th><td>1.69431396484375</td></tr>
+          <tr><th>v10m_m_s</th><td>-1.5254370117187501</td></tr>
+          <tr><th>wind_speed_10m_m_s</th><td>2.2798372503724864</td></tr>
+          <tr><th>r2m_pct</th><td>66.9</td></tr>
         </table>
       </section>
       <section>
@@ -172,14 +172,14 @@
         <table>
           <tr><th>Source</th><td>Open-Meteo Air Quality API</td></tr>
           <tr><th>Kind</th><td>lightweight gridded air-quality forecast/API value</td></tr>
-          <tr><th>Timestamp UTC</th><td>2026-05-24T16:00:00Z</td></tr>
-          <tr><th>Berlin time</th><td>2026-05-24T18:00:00+02:00</td></tr>
+          <tr><th>Timestamp UTC</th><td>2026-05-25T20:00:00Z</td></tr>
+          <tr><th>Berlin time</th><td>2026-05-25T22:00:00+02:00</td></tr>
           <tr><th>Grid coordinate</th><td>52.5, 13.400002</td></tr>
           <tr><th>Grid distance</th><td>2.359 km</td></tr>
-          <tr><th>pm10</th><td>5.1 μg/m³</td></tr>
-          <tr><th>pm2_5</th><td>3.4 μg/m³</td></tr>
-          <tr><th>nitrogen_dioxide</th><td>1.9 μg/m³</td></tr>
-          <tr><th>ozone</th><td>89 μg/m³</td></tr>
+          <tr><th>pm10</th><td>8.9 μg/m³</td></tr>
+          <tr><th>pm2_5</th><td>5.3 μg/m³</td></tr>
+          <tr><th>nitrogen_dioxide</th><td>10.8 μg/m³</td></tr>
+          <tr><th>ozone</th><td>66.0 μg/m³</td></tr>
         </table>
       </section>
     </div>
@@ -233,7 +233,7 @@
     <section>
       <h2>Caveats</h2>
       <p>This is a nearest Open-Meteo air-quality grid/API forecast value, not a physical OpenAQ station observation. It is suitable for pipeline smoke testing and context display, not for regulatory or street-canyon exposure claims.</p>
-      <p><code>https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.5163&amp;longitude=13.3777&amp;hourly=pm10%2Cpm2_5%2Cnitrogen_dioxide%2Cozone&amp;start_date=2026-05-24&amp;end_date=2026-05-24&amp;timezone=UTC</code></p>
+      <p><code>https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.5163&amp;longitude=13.3777&amp;hourly=pm10%2Cpm2_5%2Cnitrogen_dioxide%2Cozone&amp;start_date=2026-05-25&amp;end_date=2026-05-25&amp;timezone=UTC</code></p>
     </section>
   </main>
 
