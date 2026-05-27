@@ -4,7 +4,7 @@
   "subtitle": "A controlled Earth-observation and simulation evidence workflow for the GEO Geneva demo.",
   "status": "draft_demo_not_decision_evidence",
   "location": "Geneva, Switzerland",
-  "latest_phase": "geneva-uts-v1.4q",
+  "latest_phase": "geneva-uts-v1.4r",
   "updated_local": "2026-05-27",
   "evidence_stack": [
     "SITG/FITNAH modeled teacher fields",
@@ -15,7 +15,8 @@
     "SUEWS local physics pilot",
     "NASA ECOSTRESS L2T LSTE",
     "Torch PINO-style neural-operator sandbox",
-    "SITG orthophoto and building-focus Thermal-Wealth proxy"
+    "SITG orthophoto and building-focus Thermal-Wealth proxy",
+    "OCSTAT 2024 sector-level real-estate price proxy"
   ],
   "current_metrics": {
     "hot_event_count": 4,
@@ -34,7 +35,13 @@
     "pino_sandbox_physics_residual_rmse": 0.0856,
     "thermal_wealth_proxy_built_pixels": 592771,
     "thermal_wealth_proxy_cool_candidate_share": 0.1005,
-    "thermal_wealth_proxy_heat_burden_share": 0.1005
+    "thermal_wealth_proxy_heat_burden_share": 0.1005,
+    "real_estate_price_proxy_sector_count": 9,
+    "real_estate_price_proxy_pearson_price_vs_cool_share": -0.7584,
+    "real_estate_price_proxy_spearman_price_vs_cool_share": -0.7249,
+    "real_estate_price_proxy_pearson_price_vs_heat_burden_share": 0.7608,
+    "real_estate_price_proxy_max_median_chf_m2": 16812,
+    "real_estate_price_proxy_min_median_chf_m2": 9747
   },
   "claim_limits": {
     "publishable_decision_evidence": false,
@@ -45,6 +52,8 @@
     "supports_neural_operator_training": false,
     "supports_pino_sandbox_demo": true,
     "supports_thermal_wealth_proxy_demo": true,
+    "supports_aggregate_price_proxy_test": true,
+    "supports_parcel_level_valuation": false,
     "supports_measured_thermal_wealth_gradient": false,
     "supports_cooling_premium_claim": false
   }

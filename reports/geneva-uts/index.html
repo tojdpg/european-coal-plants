@@ -201,8 +201,8 @@
         </div>
         <aside class="status-box">
           <h3>Current Gate</h3>
-          <p><strong>Passed for demo evidence.</strong> ECOSTRESS authenticated ingest, station evidence, Clay context, Landsat LST, SUEWS pilots, and a Torch neural-operator sandbox are present.</p>
-          <p><strong>Blocked for scientific claims.</strong> No PET labels, no 2 m citywide dynamic air-temperature labels, no SUEWS flux calibration, and no operational PINO or validated neural-operator claims are authorized.</p>
+          <p><strong>Passed for demo evidence.</strong> ECOSTRESS authenticated ingest, station evidence, Clay context, Landsat LST, SUEWS pilots, an OCSTAT sector-level price proxy, and a Torch neural-operator sandbox are present.</p>
+          <p><strong>Blocked for scientific claims.</strong> No PET labels, no 2 m citywide dynamic air-temperature labels, no SUEWS flux calibration, no parcel-level valuation, and no operational PINO or validated neural-operator claims are authorized.</p>
         </aside>
       </div>
     </section>
@@ -214,7 +214,7 @@
         <article class="step">
           <small>Research question</small>
           <h3>Thermal-Wealth Hypothesis</h3>
-          <p>The first proxy map colors building fabric by likely cool-value or heat-burden conditions. The final analytic target is to test those candidates against parcel value, rent, income proxies, building type, and expected cooling demand per square meter.</p>
+          <p>The first proxy map colors building fabric by likely cool-value or heat-burden conditions. A first OCSTAT 2024 sector-level test challenges the simple story that cooler proxy areas are automatically the expensive areas. The final target still requires parcel value, rent, income proxies, building type, and expected cooling demand per square meter.</p>
         </article>
         <article class="step">
           <small>Official modeled teacher</small>
@@ -258,6 +258,13 @@
       <h2>Visual Evidence</h2>
       <p>The images below are copied from the local OpenClaw run artifacts. Each caption says what to look for in plain terms. They are meant to support a live presentation story, not to stand alone as validated public decision evidence.</p>
       <div class="gallery">
+        <figure class="wide">
+          <a class="image-link" href="real-estate-price-proxy-vs-cool-value.png" target="_blank" rel="noopener" aria-label="Open full-size real-estate price proxy versus cool-value proxy">
+            <img src="real-estate-price-proxy-vs-cool-value.png" alt="OCSTAT 2024 real-estate price proxy compared with cool-value candidate buildings" loading="lazy">
+          </a>
+          <figcaption><strong>Role:</strong> first economic proxy test. <strong>Shows:</strong> OCSTAT 2024 median CHF per square meter by Geneva city sector compared with cool-value candidate buildings. In this crop, higher-price sectors do not align with the simple cool-value proxy. <strong>Does not prove:</strong> parcel-level value, income, causality, or a measured cooling premium.</figcaption>
+          <div class="image-action"><a href="real-estate-price-proxy-vs-cool-value.png" target="_blank" rel="noopener">Open full-size image</a></div>
+        </figure>
         <figure class="wide">
           <a class="image-link" href="thermal-wealth-hypothesis-building-focus.png" target="_blank" rel="noopener" aria-label="Open full-size Thermal-Wealth building-focus hypothesis proxy">
             <img src="thermal-wealth-hypothesis-building-focus.png" alt="Building-focus Thermal-Wealth Hypothesis proxy over Geneva building fabric" loading="lazy">
@@ -341,11 +348,12 @@
       <div class="source-row"><b>SUEWS</b><span>Local urban energy-balance simulation pilot for counterfactual screening.</span></div>
       <div class="source-row"><b>PINO sandbox</b><span>Torch Fourier neural-operator runtime test on synthetic advection-diffusion-cooling proxy dynamics.</span></div>
       <div class="source-row"><b>SITG orthophoto / buildings</b><span>Human-readable base imagery and building fabric for the Thermal-Wealth Hypothesis proxy map.</span></div>
+      <div class="source-row"><b>OCSTAT / GIREC</b><span>2024 apartment PPE median CHF/m2 by Geneva city sector, joined to SITG statistical-sector geometry for an aggregate price proxy test.</span></div>
     </section>
   </main>
 
   <footer>
-    <p>Geneva UTS is a draft OpenClaw evidence workflow for GEO Geneva. It is not yet a validated operational heat-risk product. Latest local package: <code>geneva-uts-v1.4p-mps</code>. <a href="report.json">Machine-readable summary</a>.</p>
+    <p>Geneva UTS is a draft OpenClaw evidence workflow for GEO Geneva. It is not yet a validated operational heat-risk product. Latest local package: <code>geneva-uts-v1.4r</code>. <a href="report.json">Machine-readable summary</a>.</p>
   </footer>
 </body>
 </html>
