@@ -4,7 +4,7 @@
   "subtitle": "A controlled Earth-observation and simulation evidence workflow for the GEO Geneva demo.",
   "status": "draft_demo_not_decision_evidence",
   "location": "Geneva, Switzerland",
-  "latest_phase": "geneva-uts-v1.4p-mps",
+  "latest_phase": "geneva-uts-v1.4q",
   "updated_local": "2026-05-27",
   "evidence_stack": [
     "SITG/FITNAH modeled teacher fields",
@@ -14,7 +14,8 @@
     "MeteoSwiss and GExplore point weather evidence",
     "SUEWS local physics pilot",
     "NASA ECOSTRESS L2T LSTE",
-    "Torch PINO-style neural-operator sandbox"
+    "Torch PINO-style neural-operator sandbox",
+    "SITG orthophoto and building-focus Thermal-Wealth proxy"
   ],
   "current_metrics": {
     "hot_event_count": 4,
@@ -30,7 +31,10 @@
     "pino_sandbox_epochs": 90,
     "pino_sandbox_test_rmse": 0.0139,
     "pino_sandbox_persistence_rmse": 0.0941,
-    "pino_sandbox_physics_residual_rmse": 0.0856
+    "pino_sandbox_physics_residual_rmse": 0.0856,
+    "thermal_wealth_proxy_built_pixels": 592771,
+    "thermal_wealth_proxy_cool_candidate_share": 0.1005,
+    "thermal_wealth_proxy_heat_burden_share": 0.1005
   },
   "claim_limits": {
     "publishable_decision_evidence": false,
@@ -39,6 +43,9 @@
     "supports_suews_flux_calibration": false,
     "supports_pino_training": false,
     "supports_neural_operator_training": false,
-    "supports_pino_sandbox_demo": true
+    "supports_pino_sandbox_demo": true,
+    "supports_thermal_wealth_proxy_demo": true,
+    "supports_measured_thermal_wealth_gradient": false,
+    "supports_cooling_premium_claim": false
   }
 }
