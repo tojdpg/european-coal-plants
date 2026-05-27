@@ -1,0 +1,44 @@
+{
+  "id": "geneva-uts",
+  "title": "Geneva Urban Thermal Sinking",
+  "subtitle": "A controlled Earth-observation and simulation evidence workflow for the GEO Geneva demo.",
+  "status": "draft_demo_not_decision_evidence",
+  "location": "Geneva, Switzerland",
+  "latest_phase": "geneva-uts-v1.4p-mps",
+  "updated_local": "2026-05-27",
+  "evidence_stack": [
+    "SITG/FITNAH modeled teacher fields",
+    "SITG urban context rasters",
+    "Landsat land-surface temperature",
+    "Clay/Sentinel-2 EO context",
+    "MeteoSwiss and GExplore point weather evidence",
+    "SUEWS local physics pilot",
+    "NASA ECOSTRESS L2T LSTE",
+    "Torch PINO-style neural-operator sandbox"
+  ],
+  "current_metrics": {
+    "hot_event_count": 4,
+    "meteoswiss_gve_10min_rows": 576,
+    "gexplore_prairie_rows": 96,
+    "ecostress_downloaded_assets": 4,
+    "ecostress_valid_pixels": 330000,
+    "ecostress_valid_fraction": 1.0,
+    "ecostress_lst_mean_c": 22.18,
+    "ecostress_lst_p95_c": 23.56,
+    "pino_sandbox_device": "mps",
+    "pino_sandbox_samples": 384,
+    "pino_sandbox_epochs": 90,
+    "pino_sandbox_test_rmse": 0.0139,
+    "pino_sandbox_persistence_rmse": 0.0941,
+    "pino_sandbox_physics_residual_rmse": 0.0856
+  },
+  "claim_limits": {
+    "publishable_decision_evidence": false,
+    "supports_2m_air_temperature_training": false,
+    "supports_pet_training": false,
+    "supports_suews_flux_calibration": false,
+    "supports_pino_training": false,
+    "supports_neural_operator_training": false,
+    "supports_pino_sandbox_demo": true
+  }
+}
