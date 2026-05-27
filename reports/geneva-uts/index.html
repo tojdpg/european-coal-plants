@@ -173,13 +173,13 @@
       <div class="lead-grid">
         <div>
           <h2>What This Demonstrates</h2>
-          <p>Urban Thermal Sinking studies how Geneva stores, releases, and ventilates heat across concrete, lake, rivers, parks, tree canopy, and dense urban form. The research question is economic as well as physical: do cooler micro-climates, lake access, parks, shade, and ventilation corridors line up with wealth, real-estate value, and lower energy demand? The current system does not claim a finished street-level prediction model. It demonstrates a controlled pipeline that can gather, align, validate, and gate the evidence needed before a weather-conditioned model or operational PINO is justified.</p>
+          <p>Urban Thermal Sinking studies how Geneva stores, releases, and ventilates heat across concrete, lake, rivers, parks, tree canopy, and dense urban form. The research question is economic as well as physical: do cooler micro-climates, lake access, parks, shade, and ventilation corridors line up with wealth, real-estate value, and lower energy demand? This is a hypothesis to test, not a finding yet. The current system does not claim a finished street-level prediction model. It demonstrates a controlled pipeline that can gather, align, validate, and gate the evidence needed before a weather-conditioned model or operational PINO is justified.</p>
           <div class="metrics">
             <div class="metric"><b>4</b><span>selected hot events joined across EO and weather evidence</span></div>
             <div class="metric"><b>576</b><span>MeteoSwiss GVE 10-minute observations in the hot-event package</span></div>
             <div class="metric"><b>4/4</b><span>NASA ECOSTRESS protected assets downloaded and recorded</span></div>
             <div class="metric"><b>1.0</b><span>valid ECOSTRESS LST fraction over the Geneva prediction grid</span></div>
-            <div class="metric"><b>0.0139</b><span>Apple GPU PINO-sandbox RMSE on synthetic proxy dynamics</span></div>
+            <div class="metric"><b>0.0139</b><span>synthetic PINO-sandbox RMSE, not Geneva validation</span></div>
           </div>
         </div>
         <aside class="status-box">
@@ -196,8 +196,8 @@
       <div class="ladder">
         <article class="step">
           <small>Research question</small>
-          <h3>Thermal-Wealth Gradient</h3>
-          <p>The final analytic target is to compare heat refuges and heat traps with parcel value, rent, income proxies, building type, and expected cooling demand per square meter.</p>
+          <h3>Thermal-Wealth Hypothesis</h3>
+          <p>The final analytic target is to test whether heat refuges and heat traps correlate with parcel value, rent, income proxies, building type, and expected cooling demand per square meter.</p>
         </article>
         <article class="step">
           <small>Official modeled teacher</small>
@@ -243,35 +243,35 @@
       <div class="gallery">
         <figure class="wide">
           <img src="geneva-heat-trap-context.png" alt="Geneva heat-trap teacher field with water, green, building, and impervious context">
-          <figcaption><strong>Heat-trap context.</strong> The blue shapes are Lake Geneva and the river corridors; the warmer yellow-orange areas mark built, sealed, and denser urban fabric; greener/canopy areas are expected cooling structures. This is the first readable map of where Geneva is likely to hold or release heat.</figcaption>
+          <figcaption><strong>Role:</strong> heat-trap teacher/context layer. <strong>Shows:</strong> blue Lake Geneva and river corridors, warmer yellow-orange built/sealed fabric, and greener/canopy cooling structures. <strong>Does not prove:</strong> observed street-level air temperature, PET, or real-estate value.</figcaption>
         </figure>
         <figure>
           <img src="landsat-lst-stack-mean-vs-heat-trap.png" alt="Landsat land-surface-temperature stack compared with the heat-trap teacher field">
-          <figcaption><strong>Landsat surface heat.</strong> This compares satellite-observed land-surface temperature patterns with the modeled heat-trap teacher layer. It helps show whether roofs, roads, parks, and water behave thermally as expected, but it is surface temperature, not pedestrian air temperature.</figcaption>
+          <figcaption><strong>Role:</strong> surface-temperature observation. <strong>Shows:</strong> how Landsat land-surface heat patterns compare with the modeled heat-trap teacher layer. <strong>Does not prove:</strong> pedestrian air temperature, PET, or indoor cooling demand.</figcaption>
         </figure>
         <figure>
           <img src="clay-hot-event-scene-analysis.png" alt="Clay Sentinel-2 hot-event scene analysis for Geneva points">
-          <figcaption><strong>Clay/Sentinel-2 context.</strong> These tiles show what the EO model sees around selected hot-event points: dense core, lake edge, and park refuge. Use this as spatial context and representation, not as a thermometer.</figcaption>
+          <figcaption><strong>Role:</strong> EO representation/context. <strong>Shows:</strong> what Clay/Sentinel-2 sees around dense-core, lake-edge, and park-refuge points. <strong>Does not prove:</strong> thermal comfort or physical heat flux.</figcaption>
         </figure>
         <figure>
           <img src="hot-event-station-10min.png" alt="Hot-event 10-minute station ingest summary">
-          <figcaption><strong>Hot-day station evidence.</strong> This shows the time structure of selected heat events using 10-minute MeteoSwiss observations and GExplore probe records. It tells us when the city was under hot weather stress, but it does not map every street.</figcaption>
+          <figcaption><strong>Role:</strong> point weather sanity check. <strong>Shows:</strong> 10-minute MeteoSwiss and GExplore probe behavior during selected hot events. <strong>Does not prove:</strong> a 10 m citywide validation field.</figcaption>
         </figure>
         <figure>
           <img src="ecostress-ingest-probe.png" alt="NASA ECOSTRESS authenticated ingest probe over Geneva">
-          <figcaption><strong>ECOSTRESS surface-temperature scene.</strong> This proves the NASA Earthdata pipeline works and shows a valid land-surface-temperature pass over the Geneva grid. The value is coverage and thermal pattern evidence, not direct PET or 2 m air-temperature validation.</figcaption>
+          <figcaption><strong>Role:</strong> NASA surface-temperature evidence. <strong>Shows:</strong> a valid ECOSTRESS land-surface-temperature pass over the Geneva grid and a working authenticated ingest route. <strong>Does not prove:</strong> PET, 2 m air temperature, or operational heat risk.</figcaption>
         </figure>
         <figure>
           <img src="suews-gridded-batch-land-adjusted.png" alt="SUEWS gridded batch land-adjusted cooling-potential evidence">
-          <figcaption><strong>SUEWS cooling-potential pilot.</strong> This is the physics-screening view: places with water, vegetation, shade, and less sealed surface are treated as more cooling-capable. It is useful for counterfactual thinking, but still needs local calibration before becoming evidence.</figcaption>
+          <figcaption><strong>Role:</strong> local physics screening. <strong>Shows:</strong> where water, vegetation, shade, and less sealed surface imply stronger cooling potential. <strong>Does not prove:</strong> calibrated energy fluxes or a publishable cooling premium.</figcaption>
         </figure>
         <figure>
           <img src="suews-gridded-uncertainty-gate.png" alt="SUEWS gridded uncertainty gate">
-          <figcaption><strong>SUEWS uncertainty gate.</strong> This map says where the physics pilot is more or less trustworthy. High uncertainty usually means missing calibration, weak local observations, edge effects, or source-resolution mismatch.</figcaption>
+          <figcaption><strong>Role:</strong> uncertainty gate. <strong>Shows:</strong> where the SUEWS pilot is more or less trustworthy because of calibration, observations, edge effects, or source-resolution mismatch. <strong>Does not prove:</strong> that the physics pilot is ready for public decision use.</figcaption>
         </figure>
         <figure class="wide">
           <img src="pino-sandbox-dynamics-mps.png" alt="Apple GPU PINO sandbox dynamics run over Geneva context layers">
-          <figcaption><strong>PINO-style dynamics sandbox.</strong> The top row shows an initial heat-anomaly field, a synthetic next-step physics target, and the neural-operator prediction. The lower panels show where the operator is wrong and where the physics residual remains high. This demonstrates Apple GPU tool integration, not validated Geneva heat prediction.</figcaption>
+          <figcaption><strong>Role:</strong> neural-operator runtime sandbox. <strong>Shows:</strong> an initial heat-anomaly field, a synthetic next-step physics target, the operator prediction, error, and physics residual. <strong>Does not prove:</strong> validated Geneva heat dynamics, PET, 2 m air temperature, or a real-estate cooling premium.</figcaption>
         </figure>
       </div>
     </section>
