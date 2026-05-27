@@ -63,6 +63,7 @@
       color: #fff;
     }
     main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 26px 0 56px; }
+    main:has(.gallery) { width: min(1320px, calc(100% - 32px)); }
     section { padding: 34px 0; border-top: 1px solid var(--line); }
     section:first-child { border-top: 0; }
     h2 { margin: 0 0 14px; font-size: clamp(24px, 3vw, 38px); line-height: 1.12; letter-spacing: 0; }
@@ -111,14 +112,30 @@
     .step p { font-size: 14px; color: #3b444b; }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: 1fr;
+      gap: 22px;
       margin-top: 18px;
     }
     figure { margin: 0; background: var(--surface); border: 1px solid var(--line); }
     figure img { width: 100%; border-bottom: 1px solid var(--line); }
     figcaption { padding: 12px 14px 14px; color: var(--muted); font-size: 14px; }
     .wide { grid-column: 1 / -1; }
+    .image-link {
+      display: block;
+      background: #ebe8df;
+      cursor: zoom-in;
+    }
+    .image-action {
+      display: flex;
+      justify-content: flex-end;
+      border-top: 1px solid var(--line);
+      padding: 10px 14px 12px;
+    }
+    .image-action a {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
     .gate-list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -242,36 +259,60 @@
       <p>The images below are copied from the local OpenClaw run artifacts. Each caption says what to look for in plain terms. They are meant to support a live presentation story, not to stand alone as validated public decision evidence.</p>
       <div class="gallery">
         <figure class="wide">
-          <img src="geneva-heat-trap-context.png" alt="Geneva heat-trap teacher field with water, green, building, and impervious context">
+          <a class="image-link" href="geneva-heat-trap-context.png" target="_blank" rel="noopener" aria-label="Open full-size heat-trap context image">
+            <img src="geneva-heat-trap-context.png" alt="Geneva heat-trap teacher field with water, green, building, and impervious context" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> heat-trap teacher/context layer. <strong>Shows:</strong> blue Lake Geneva and river corridors, warmer yellow-orange built/sealed fabric, and greener/canopy cooling structures. <strong>Does not prove:</strong> observed street-level air temperature, PET, or real-estate value.</figcaption>
+          <div class="image-action"><a href="geneva-heat-trap-context.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
         <figure>
-          <img src="landsat-lst-stack-mean-vs-heat-trap.png" alt="Landsat land-surface-temperature stack compared with the heat-trap teacher field">
+          <a class="image-link" href="landsat-lst-stack-mean-vs-heat-trap.png" target="_blank" rel="noopener" aria-label="Open full-size Landsat surface heat image">
+            <img src="landsat-lst-stack-mean-vs-heat-trap.png" alt="Landsat land-surface-temperature stack compared with the heat-trap teacher field" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> surface-temperature observation. <strong>Shows:</strong> how Landsat land-surface heat patterns compare with the modeled heat-trap teacher layer. <strong>Does not prove:</strong> pedestrian air temperature, PET, or indoor cooling demand.</figcaption>
+          <div class="image-action"><a href="landsat-lst-stack-mean-vs-heat-trap.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
         <figure>
-          <img src="clay-hot-event-scene-analysis.png" alt="Clay Sentinel-2 hot-event scene analysis for Geneva points">
+          <a class="image-link" href="clay-hot-event-scene-analysis.png" target="_blank" rel="noopener" aria-label="Open full-size Clay hot-event scene image">
+            <img src="clay-hot-event-scene-analysis.png" alt="Clay Sentinel-2 hot-event scene analysis for Geneva points" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> EO representation/context. <strong>Shows:</strong> what Clay/Sentinel-2 sees around dense-core, lake-edge, and park-refuge points. <strong>Does not prove:</strong> thermal comfort or physical heat flux.</figcaption>
+          <div class="image-action"><a href="clay-hot-event-scene-analysis.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
         <figure>
-          <img src="hot-event-station-10min.png" alt="Hot-event 10-minute station ingest summary">
+          <a class="image-link" href="hot-event-station-10min.png" target="_blank" rel="noopener" aria-label="Open full-size hot-event station image">
+            <img src="hot-event-station-10min.png" alt="Hot-event 10-minute station ingest summary" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> point weather sanity check. <strong>Shows:</strong> 10-minute MeteoSwiss and GExplore probe behavior during selected hot events. <strong>Does not prove:</strong> a 10 m citywide validation field.</figcaption>
+          <div class="image-action"><a href="hot-event-station-10min.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
         <figure>
-          <img src="ecostress-ingest-probe.png" alt="NASA ECOSTRESS authenticated ingest probe over Geneva">
+          <a class="image-link" href="ecostress-ingest-probe.png" target="_blank" rel="noopener" aria-label="Open full-size ECOSTRESS ingest image">
+            <img src="ecostress-ingest-probe.png" alt="NASA ECOSTRESS authenticated ingest probe over Geneva" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> NASA surface-temperature evidence. <strong>Shows:</strong> a valid ECOSTRESS land-surface-temperature pass over the Geneva grid and a working authenticated ingest route. <strong>Does not prove:</strong> PET, 2 m air temperature, or operational heat risk.</figcaption>
+          <div class="image-action"><a href="ecostress-ingest-probe.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
         <figure>
-          <img src="suews-gridded-batch-land-adjusted.png" alt="SUEWS gridded batch land-adjusted cooling-potential evidence">
+          <a class="image-link" href="suews-gridded-batch-land-adjusted.png" target="_blank" rel="noopener" aria-label="Open full-size SUEWS cooling-potential image">
+            <img src="suews-gridded-batch-land-adjusted.png" alt="SUEWS gridded batch land-adjusted cooling-potential evidence" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> local physics screening. <strong>Shows:</strong> where water, vegetation, shade, and less sealed surface imply stronger cooling potential. <strong>Does not prove:</strong> calibrated energy fluxes or a publishable cooling premium.</figcaption>
+          <div class="image-action"><a href="suews-gridded-batch-land-adjusted.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
         <figure>
-          <img src="suews-gridded-uncertainty-gate.png" alt="SUEWS gridded uncertainty gate">
+          <a class="image-link" href="suews-gridded-uncertainty-gate.png" target="_blank" rel="noopener" aria-label="Open full-size SUEWS uncertainty gate image">
+            <img src="suews-gridded-uncertainty-gate.png" alt="SUEWS gridded uncertainty gate" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> uncertainty gate. <strong>Shows:</strong> where the SUEWS pilot is more or less trustworthy because of calibration, observations, edge effects, or source-resolution mismatch. <strong>Does not prove:</strong> that the physics pilot is ready for public decision use.</figcaption>
+          <div class="image-action"><a href="suews-gridded-uncertainty-gate.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
         <figure class="wide">
-          <img src="pino-sandbox-dynamics-mps.png" alt="Apple GPU PINO sandbox dynamics run over Geneva context layers">
+          <a class="image-link" href="pino-sandbox-dynamics-mps.png" target="_blank" rel="noopener" aria-label="Open full-size PINO sandbox dynamics image">
+            <img src="pino-sandbox-dynamics-mps.png" alt="Apple GPU PINO sandbox dynamics run over Geneva context layers" loading="lazy">
+          </a>
           <figcaption><strong>Role:</strong> neural-operator runtime sandbox. <strong>Shows:</strong> an initial heat-anomaly field, a synthetic next-step physics target, the operator prediction, error, and physics residual. <strong>Does not prove:</strong> validated Geneva heat dynamics, PET, 2 m air temperature, or a real-estate cooling premium.</figcaption>
+          <div class="image-action"><a href="pino-sandbox-dynamics-mps.png" target="_blank" rel="noopener">Open full-size image</a></div>
         </figure>
       </div>
     </section>
