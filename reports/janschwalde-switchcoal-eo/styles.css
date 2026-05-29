@@ -533,6 +533,24 @@ code {
   padding: 0.08em 0.28em;
 }
 
+.page-record {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 254, 247, 0.7);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.page-record p {
+  margin: 0;
+}
+
+.page-record p + p {
+  margin-top: 4px;
+}
+
 @media (max-width: 820px) {
   main.content {
     padding: 14px 12px 38px;
