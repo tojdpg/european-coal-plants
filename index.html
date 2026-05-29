@@ -192,6 +192,20 @@ const filters = { statuses:new Set(), countries:new Set(), minCap:0 };
 const fmt0 = n => n==null?"-":Math.round(n).toLocaleString();
 const fmt1 = n => n==null?"-":(Math.round(n*10)/10).toLocaleString();
 function radius(mw) { if(!mw||mw<=0) return 4; return Math.max(4, Math.min(28, Math.sqrt(mw/100)*3)); }
+function copernicusBrowserUrl(p) {
+  const params = new URLSearchParams({
+    zoom: "14",
+    lat: Number(p.lat).toFixed(5),
+    lng: Number(p.lon).toFixed(5),
+    themeId: "DEFAULT-THEME",
+    datasetId: "S2_L2A_CDAS",
+    layerId: "1_TRUE_COLOR",
+    demSource3D: "\"MAPZEN\"",
+    cloudCoverage: "30",
+    dateMode: "MOSAIC"
+  });
+  return `https://browser.dataspace.copernicus.eu/?${params.toString()}`;
+}
 function popupHtml(p) {
   const co2 = p.annual_co2_mt||0;
   return `<div class="popup"><b>${p.name}</b><br>
@@ -203,7 +217,7 @@ function popupHtml(p) {
     ${p.phaseout_year?`Phaseout: <b>${p.phaseout_year}</b><br>`:""}
     ${p.owner?`Owner: ${p.owner}<br>`:""}
     ${p.parent?`Parent: ${p.parent}<br>`:""}<hr>
-    <a href="${p.eo_browser}" target="_blank">-> View live Sentinel-2 imagery</a></div>`;
+    <a href="${copernicusBrowserUrl(p)}" target="_blank" rel="noopener">-> Open Sentinel-2 in Copernicus Browser</a></div>`;
 }
 function visiblePlants() {
   return DATA.plants.filter(p => filters.statuses.has(p.status) &&
