@@ -327,11 +327,23 @@ p > img.map-image,
   font-size: 0.82rem;
 }
 
-.legend-grid span {
+.legend-grid > span {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 28px;
+}
+
+.legend-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.2;
+}
+
+.legend-copy small {
+  color: var(--muted);
+  font-size: 0.72rem;
 }
 
 .legend-grid i {
