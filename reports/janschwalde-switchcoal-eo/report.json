@@ -1,0 +1,43 @@
+{
+  "title": "SwitchCoal + Earth Observation: Janschwalde",
+  "slug": "janschwalde-switchcoal-eo",
+  "created_at": "2026-05-29",
+  "source_format": "quarto",
+  "asset": {
+    "name": "Janschwalde power station",
+    "country": "Germany",
+    "country_iso2": "DE",
+    "lat": 51.835666,
+    "lon": 14.457808,
+    "capacity_mw": 5210,
+    "status": "operating",
+    "annual_co2_mt": 8.04
+  },
+  "switchcoal_assumption": "Coal generation could be replaced by a nearby renewable mix within roughly a 100 x 100 km search area while reusing or building on existing energy infrastructure.",
+  "zones": {
+    "switchcoal_outer_box_km": "100 x 100",
+    "tee_existing_viewport_km": "5 x 5",
+    "geojson": "search-zones.geojson"
+  },
+  "tee": {
+    "viewport": "Janschwalde_Power_Station",
+    "url": "https://tee.cl.cam.ac.uk/viewer.html?viewport=Janschwalde_Power_Station",
+    "role": "Detailed plant-footprint embedding exploration, not full-region suitability modelling."
+  },
+  "resource_stack": {
+    "land_cover": "ESA WorldCover 10m 2021 v200",
+    "solar": "PVGIS v5_3 PVcalc sampled on a 5 x 5 grid",
+    "wind": "Open-Meteo Historical Weather API / ERA5 2023 daily 100 m mean wind speed",
+    "water_storage": "WorldCover water/open/built surface context and water proximity",
+    "metadata": "assets/janschwalde-renewable-stack-metadata.json"
+  },
+  "mix_summary": [
+    {"category": "low_or_constrained", "area_km2": 6190.03, "share_pct": 61.9},
+    {"category": "solar_leaning", "area_km2": 1099.47, "share_pct": 10.99},
+    {"category": "wind_leaning", "area_km2": 1060.93, "share_pct": 10.61},
+    {"category": "storage_water_grid_context", "area_km2": 694.23, "share_pct": 6.94},
+    {"category": "mixed_solar_wind", "area_km2": 955.23, "share_pct": 9.55}
+  ],
+  "interpretation": "The first pass points toward a selective hybrid replacement logic: a large low/constrained share, with solar, wind, mixed solar-wind, and storage-context pockets that deserve closer screening.",
+  "caveat": "This is a first-pass evidence stack. It is not a permitting, grid-capacity, land-ownership, turbine-setback, financial, or investment model. OpenStreetMap grid/water/protected context overlays were unavailable in the current build."
+}

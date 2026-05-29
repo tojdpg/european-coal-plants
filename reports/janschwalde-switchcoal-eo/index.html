@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-05-29">
+
+<title>SwitchCoal + Earth Observation: Janschwalde</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SwitchCoal + Earth Observation: Janschwalde</h1>
+<p class="subtitle lead">A repeatable 100 x 100 km renewable resource stack</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<nav class="top-links" aria-label="Project links">
+<a href="../../">European Coal Asset Tracker</a> <a href="../">Evidence hub</a> <a href="https://tee.cl.cam.ac.uk/viewer.html?viewport=Janschwalde_Power_Station">TEE viewport</a>
+</nav>
+<div class="hero">
+<section id="janschwalde-can-the-coal-site-become-a-renewable-search-zone" class="level1 hero-copy">
+<h1>Janschwalde: Can The Coal Site Become A Renewable Search Zone?</h1>
+<p><strong><a href="https://www.switchcoal.org/">SwitchCoal</a>’s core assumption is simple:</strong> a coal plant is not only a power station. It is also a grid connection, an industrial landscape, and a regional energy anchor. The question is whether nearby wind, solar, batteries, and other flexibility assets could replace coal generation within roughly a <strong>100 x 100 km</strong> search area.</p>
+<p>This page does not claim that the whole area should be covered with renewables. It shows a first Earth-observation evidence stack for asking where a plausible renewable mix might begin to make sense.</p>
+</section>
+<div class="fact-strip">
+<div class="fact">
+<dl>
+<dt>Capacity</dt>
+<dd>
+<strong>5,210 MW</strong>
+</dd>
+</dl>
+</div>
+<div class="fact">
+<dl>
+<dt>Status</dt>
+<dd>
+<strong>operating</strong>
+</dd>
+</dl>
+</div>
+<div class="fact">
+<dl>
+<dt>Annual CO2 estimate</dt>
+<dd>
+<strong>8.04 Mt</strong>
+</dd>
+</dl>
+</div>
+<div class="fact">
+<dl>
+<dt>Frame</dt>
+<dd>
+<strong>100 x 100 km</strong>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<section id="what-is-shown" class="level2">
+<h2 data-anchor-id="what-is-shown">What Is Shown</h2>
+<p>The page combines five layers for a first-pass screening view:</p>
+<ul>
+<li><strong>ESA WorldCover land cover</strong> for the actual surface pattern.</li>
+<li><strong>Photovoltaic Geographical Information System (PVGIS) solar resource</strong> as a solar potential proxy.</li>
+<li><strong>Open-Meteo / European Centre for Medium-Range Weather Forecasts Reanalysis v5 (ERA5) 100 m wind speed</strong> as a coarse wind proxy.</li>
+<li><strong>Water and storage context</strong> from land cover and proximity to water/open/built surfaces.</li>
+<li><strong>A tentative renewable mix interpretation</strong> that keeps the language cautious.</li>
+</ul>
+<p>It also links the smaller <strong><a href="https://tee.cl.cam.ac.uk/viewer.html?viewport=Janschwalde_Power_Station">TEE/Tessera viewport</a></strong> for detailed 5 x 5 km surface exploration around the plant footprint.</p>
+</section>
+<section id="coal-asset-and-search-frame" class="level2">
+<h2 data-anchor-id="coal-asset-and-search-frame">Coal Asset And Search Frame</h2>
+<div class="split">
+<div class="panel">
+<p><strong>Plant:</strong> Janschwalde power station<br>
+<strong>Coordinates:</strong> <a href="https://earth.google.com/web/search/51.835666,14.457808"><code>51.835666, 14.457808</code></a><br>
+<strong>Coal tracker status:</strong> operating<br>
+<strong>Annual CO2 estimate:</strong> 8.04 Mt<br>
+<strong>SwitchCoal frame:</strong> 100 x 100 km search box centered on the plant</p>
+<p><a href="../../" class="button">Open the main coal tracker</a> <a href="https://tee.cl.cam.ac.uk/viewer.html?viewport=Janschwalde_Power_Station" class="button secondary">Open the TEE viewport</a></p>
+</div>
+<div class="panel">
+<p><strong>How to read the 100 km frame</strong></p>
+<p>The frame is a search area, not a construction footprint. It helps ask: where are there open or disturbed surfaces, agricultural mosaics, existing water bodies, settlements, protected landscapes, and possible grid corridors?</p>
+<p>This is a first screen. It should narrow attention, not decide a project.</p>
+</div>
+</div>
+<figure class="map-main figure">
+<div class="ortho-hotspot-wrap">
+  <img src="assets/janschwalde-cottbus-ortho-context-25x20km-v1.png" class="map-image img-fluid figure-img" alt="Focused orthophoto context image showing Cottbus, Janschwalde power station, mining surfaces, lakes, forest, and agricultural land in an approximately 25 by 20 kilometre window.">
+  <a class="ortho-tee-hotspot" style="--hotspot-left: 67.04%; --hotspot-top: 27.90%;" href="https://tee.cl.cam.ac.uk/viewer.html?viewport=Janschwalde_Power_Station" aria-label="Open the TEE 5 x 5 kilometre viewport at Janschwalde power station" title="Open TEE viewport"></a>
+</div>
+<figcaption>Orthophoto context image showing Cottbus, Janschwalde power station, open-cast mining surfaces, lakes, forest, and agricultural land. The small hotspot over the plant opens the TEE detail viewport.</figcaption>
+</figure>
+</section>
+<section id="land-cover-what-the-search-box-is-made-of" class="level2">
+<h2 data-anchor-id="land-cover-what-the-search-box-is-made-of">Land Cover: What The Search Box Is Made Of</h2>
+<div class="tee-map-figure">
+<img src="assets/janschwalde-worldcover-100km-report-map-v1.png" class="map-image img-fluid figure-img" alt="ESA WorldCover land-cover classes for a 100 by 100 kilometre area around Janschwalde power station, with the 25 by 20 kilometre orthophoto context window indicated.">
+<div class="worldcover-legend" aria-label="ESA WorldCover classes shown in the map">
+<p class="legend-title">ESA WorldCover classes shown</p>
+<div class="legend-grid">
+<span><i style="background:#006400"></i>Tree cover</span>
+<span><i style="background:#ffff4c"></i>Grassland</span>
+<span><i style="background:#f096ff"></i>Cropland</span>
+<span><i style="background:#fa0000"></i>Built-up</span>
+<span><i style="background:#b4b4b4"></i>Bare / sparse vegetation</span>
+<span><i style="background:#0064c8"></i>Permanent water bodies</span>
+<span><i style="background:#0096a0"></i>Herbaceous wetland</span>
+</div>
+<p class="map-caption">Black-ring marker = Janschwalde power station. Orange box = approx. 25 x 20 km orthophoto context window shown above.</p>
+</div>
+</div>
+<p><a href="https://tee.cl.cam.ac.uk/viewer.html?viewport=Janschwalde_Power_Station" class="inline-link">Open the TEE 5 x 5 km viewport</a></p>
+<p>The region is a mixed landscape: large forest areas, grassland and cropland mosaics, water bodies, mining and industrial surfaces, towns, and transport corridors. That makes the SwitchCoal assumption more interesting but also more conditional. The opportunity is not “fill the box”; it is to identify suitable pieces within the box.</p>
+</section>
+<section id="solar-suitability" class="level2">
+<h2 data-anchor-id="solar-suitability">Solar Suitability</h2>
+<figure class="map-main figure">
+<img src="assets/janschwalde-solar-suitability-100km-report-map-v1.png" class="map-image img-fluid figure-img" alt="Full-frame 100 by 100 kilometre solar suitability screening map based on PVGIS, GHI, and ESA WorldCover land-cover weights.">
+<figcaption>
+Full-frame 100 x 100 km solar suitability screen.
+</figcaption>
+</figure>
+<p>Solar looks like the cleanest first component of the replacement mix, but not as a blanket solution. The map points most naturally toward open, built, bare, disturbed, or selected agricultural surfaces. Forest-heavy areas and sensitive wetlands should be treated as constraints unless a more detailed planning layer proves otherwise.</p>
+</section>
+<section id="wind-suitability" class="level2">
+<h2 data-anchor-id="wind-suitability">Wind Suitability</h2>
+<figure class="map-main figure">
+<img src="assets/janschwalde-wind-suitability-100km-report-map-v1.png" class="map-image img-fluid figure-img" alt="Full-frame 100 by 100 kilometre wind suitability screening map based on Open-Meteo 100 metre wind speed and ESA WorldCover land-cover weights.">
+<figcaption>
+Full-frame 100 x 100 km wind suitability screen.
+</figcaption>
+</figure>
+<p>The wind signal is present but modest in this coarse screen. At 100 m height the sampled 2023 mean wind range is roughly <strong>5.90 to 6.32 m/s</strong>. That suggests wind could matter, especially in more open areas, but it needs a much stricter second pass: settlement buffers, turbine setbacks, forest constraints, protected areas, aviation, grid connection, and local acceptance.</p>
+</section>
+<section id="water-grid-and-storage-context" class="level2">
+<h2 data-anchor-id="water-grid-and-storage-context">Water, Grid, And Storage Context</h2>
+<figure class="map-main figure">
+<img src="assets/janschwalde-water-storage-context-100km-report-map-v1.png" class="map-image img-fluid figure-img" alt="Full-frame 100 by 100 kilometre water and storage context map based on WorldCover water, built surfaces, open surfaces, and water proximity.">
+<figcaption>
+Full-frame 100 x 100 km water and storage context screen.
+</figcaption>
+</figure>
+<p>Water in this stack is not treated as a simple hydro resource. Around a lignite landscape it is more useful as context: cooling legacy, post-mining lakes, water-management constraints, possible pumped or battery-storage siting clues, and landscape transition evidence. Grid context is still only preliminary here; official transmission and substation capacity must be added before making a strong infrastructure claim.</p>
+</section>
+<section id="tentative-renewable-mix" class="level2">
+<h2 data-anchor-id="tentative-renewable-mix">Tentative Renewable Mix</h2>
+<figure class="map-main figure">
+<img src="assets/janschwalde-renewable-mix-firstpass-100km-report-map-v1.png" class="map-image img-fluid figure-img" alt="Full-frame 100 by 100 kilometre combined first-pass renewable mix map showing low or constrained, solar leaning, wind leaning, storage water context, and mixed solar wind categories.">
+<figcaption>
+Full-frame 100 x 100 km combined renewable-mix screen.
+</figcaption>
+<div class="worldcover-legend mix-legend" aria-label="Combined renewable mix class legend">
+<p class="legend-title">Combined first-pass renewable mix classes</p>
+<div class="legend-grid">
+<span><i style="background:#d8d6c9"></i>Low or constrained</span>
+<span><i style="background:#f4a90b"></i>Solar leaning</span>
+<span><i style="background:#367bd6"></i>Wind leaning</span>
+<span><i style="background:#18a596"></i>Storage / water / grid context</span>
+<span><i style="background:#7b5ac8"></i>Mixed solar and wind</span>
+</div>
+<p class="map-caption">Classes are first-pass screening labels derived from the combined resource stack, not siting recommendations.</p>
+</div>
+</figure>
+<p>This first pass points toward a <strong>selective hybrid</strong> story rather than a single technology answer. A large part of the frame remains low or constrained in this screen, mostly because forest and other land-cover constraints are treated conservatively. Solar, wind, mixed solar-wind, and storage-context areas appear as pockets to investigate, not as a ready-made replacement plan.</p>
+<p>The current combined screen divides the 100 km frame as follows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th style="text-align: right;">Area</th>
+<th style="text-align: right;">Share</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Low or constrained</td>
+<td style="text-align: right;">6,190.03 km2</td>
+<td style="text-align: right;">61.90%</td>
+</tr>
+<tr class="even">
+<td>Solar leaning</td>
+<td style="text-align: right;">1,099.47 km2</td>
+<td style="text-align: right;">10.99%</td>
+</tr>
+<tr class="odd">
+<td>Wind leaning</td>
+<td style="text-align: right;">1,060.93 km2</td>
+<td style="text-align: right;">10.61%</td>
+</tr>
+<tr class="even">
+<td>Storage / water / grid context</td>
+<td style="text-align: right;">694.23 km2</td>
+<td style="text-align: right;">6.94%</td>
+</tr>
+<tr class="odd">
+<td>Mixed solar and wind</td>
+<td style="text-align: right;">955.23 km2</td>
+<td style="text-align: right;">9.55%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="method-and-tools" class="level2">
+<h2 data-anchor-id="method-and-tools">Method And Tools</h2>
+<div class="method-grid">
+<div class="method">
+<p><strong>ESA WorldCover</strong></p>
+<p>Used as the primary land-cover label layer. This keeps the labels product-based rather than visually guessed from a satellite background.</p>
+</div>
+<div class="method">
+<p><strong>Photovoltaic Geographical Information System (PVGIS)</strong></p>
+<p>Used for sampled annual PV potential and irradiation. This is a screening proxy, not a project design or yield forecast.</p>
+</div>
+<div class="method">
+<p><strong>Open-Meteo / European Centre for Medium-Range Weather Forecasts Reanalysis v5 (ERA5)</strong></p>
+<p>Used for 2023 daily mean wind speed at 100 m. This is a coarse regional wind proxy, not a bankable wind assessment.</p>
+</div>
+<div class="method">
+<p><strong>Clay / Sentinel-2</strong></p>
+<p>Used for smaller visual EO context around the plant. The 100 km labelled layer comes from ESA WorldCover, not manual image annotation.</p>
+</div>
+<div class="method">
+<p><strong>TEE / Tessera</strong></p>
+<p>Linked for detailed 5 x 5 km embedding exploration of the plant footprint. TEE is better for small interpretable windows than for the full 100 km screen.</p>
+</div>
+<div class="method">
+<p><strong>Quarto</strong></p>
+<p>This page is generated from a Quarto source document so the evidence page can be reviewed, edited, rebuilt, and republished with a clear source trail.</p>
+</div>
+</div>
+</section>
+<section id="related-tracker" class="level2">
+<h2 data-anchor-id="related-tracker">Related Tracker</h2>
+<a class="tracker-preview" href="../../" aria-label="Open the European Coal Asset Tracker">
+  <img src="assets/european-coal-asset-tracker-thumbnail.png" alt="Thumbnail preview of the European Coal Asset Tracker map.">
+  <span class="tracker-preview-copy">
+    <strong>European Coal Asset Tracker</strong>
+    <span>The Janschwalde page is one evidence layer linked back to the main coal-plant map and asset database.</span>
+    <span class="tracker-preview-action">Open the tracker</span>
+  </span>
+</a>
+</section>
+<section id="caveats" class="level2">
+<h2 data-anchor-id="caveats">Caveats</h2>
+<p>This is a first-pass evidence stack. It does <strong>not</strong> yet include official protected-area masks, settlement buffers, land ownership, slope and aspect, grid-capacity data, grid queue status, turbine setback rules, permitting risk, operator strategy, financing, or project economics. In the current build, OpenStreetMap grid/water/protected context overlays were unavailable, so the maps should be read as land-cover and resource screens with grid/protection layers still pending.</p>
+<p>The right interpretation is therefore tentative: this page says where the SwitchCoal assumption looks worth investigating, not where renewable assets should be built.</p>
+</section>
+<section id="disclaimer" class="level2">
+<h2 data-anchor-id="disclaimer">Disclaimer</h2>
+<p>This page is an exploratory evidence screen, not legal, engineering, permitting, financial, or investment advice. The maps use public and model-derived datasets at screening resolution; they may be incomplete, out of date, or unsuitable for site-level decisions. Any project claim would need verification against official planning data, grid-operator information, environmental constraints, land ownership, local regulation, and expert field assessment.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

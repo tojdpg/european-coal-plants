@@ -1,0 +1,145 @@
+{
+  "created_at": "2026-05-29T13:04:14Z",
+  "plant": {
+    "name": "Janschwalde power station",
+    "lat": 51.835666,
+    "lon": 14.457808,
+    "capacity_mw": 5210,
+    "status": "operating",
+    "annual_co2_mt": 8.04
+  },
+  "bbox100_wgs84": [
+    13.73092385598735,
+    51.38651041250449,
+    15.18469214401265,
+    52.284821587495514
+  ],
+  "sources": {
+    "land_cover": "ESA WorldCover 10m 2021 v200",
+    "solar": "PVGIS v5_3 PVcalc, fixed 1 kWp system, 14% loss",
+    "wind": "Open-Meteo Historical Weather API, 2023 daily wind_speed_100m_mean",
+    "grid_water_protected_context": "OpenStreetMap/Overpass context features; proxy overlay, not authoritative permitting data"
+  },
+  "resource_sampling": {
+    "grid": "5x5",
+    "interpolation": "inverse-distance weighted"
+  },
+  "osm_feature_counts": {
+    "grid": 0,
+    "water_river": 0,
+    "protected_area": 0
+  },
+  "worldcover_suitability_weights": {
+    "10": {
+      "name": "Tree cover",
+      "solar": 0.05,
+      "wind": 0.2,
+      "storage": 0.15
+    },
+    "20": {
+      "name": "Shrubland",
+      "solar": 0.55,
+      "wind": 0.55,
+      "storage": 0.35
+    },
+    "30": {
+      "name": "Grassland",
+      "solar": 0.7,
+      "wind": 0.7,
+      "storage": 0.55
+    },
+    "40": {
+      "name": "Cropland",
+      "solar": 0.55,
+      "wind": 0.65,
+      "storage": 0.35
+    },
+    "50": {
+      "name": "Built-up",
+      "solar": 0.8,
+      "wind": 0.15,
+      "storage": 0.95
+    },
+    "60": {
+      "name": "Bare / sparse vegetation",
+      "solar": 0.85,
+      "wind": 0.75,
+      "storage": 0.85
+    },
+    "80": {
+      "name": "Permanent water bodies",
+      "solar": 0.2,
+      "wind": 0.05,
+      "storage": 0.7
+    },
+    "90": {
+      "name": "Herbaceous wetland",
+      "solar": 0.05,
+      "wind": 0.05,
+      "storage": 0.05
+    },
+    "95": {
+      "name": "Mangroves",
+      "solar": 0.05,
+      "wind": 0.05,
+      "storage": 0.05
+    },
+    "100": {
+      "name": "Moss and lichen",
+      "solar": 0.25,
+      "wind": 0.3,
+      "storage": 0.2
+    }
+  },
+  "sample_ranges": {
+    "pv_kwh_kwp_y": [
+      854.82,
+      900.78
+    ],
+    "ghi_kwh_m2_y": [
+      1092.12,
+      1146.69
+    ],
+    "wind100_ms_mean_2023": [
+      5.903068493150685,
+      6.318109589041095
+    ]
+  },
+  "mix_summary": [
+    {
+      "category": "low_or_constrained",
+      "area_km2": 6190.03,
+      "share_pct": 61.9
+    },
+    {
+      "category": "solar_leaning",
+      "area_km2": 1099.47,
+      "share_pct": 10.99
+    },
+    {
+      "category": "wind_leaning",
+      "area_km2": 1060.93,
+      "share_pct": 10.61
+    },
+    {
+      "category": "storage_water_grid_context",
+      "area_km2": 694.23,
+      "share_pct": 6.94
+    },
+    {
+      "category": "mixed_solar_wind",
+      "area_km2": 955.23,
+      "share_pct": 9.55
+    }
+  ],
+  "outputs": [
+    "janschwalde-solar-suitability-100km.png",
+    "janschwalde-wind-suitability-100km.png",
+    "janschwalde-water-storage-context-100km.png",
+    "janschwalde-renewable-mix-firstpass-100km.png",
+    "janschwalde-osm-grid-water-protected-context.geojson",
+    "janschwalde-renewable-resource-samples.csv",
+    "janschwalde-renewable-mix-summary.csv"
+  ],
+  "caveat": "First-pass resource screening. OpenStreetMap is used for grid/protected/water context only; official grid capacity, protected-area datasets, settlement buffers, land ownership, slope/aspect, turbine setbacks, permitting, and economics are not yet applied."
+}

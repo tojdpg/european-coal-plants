@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "plant",
+        "name": "Janschwalde power station",
+        "kind": "coal_asset"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.457808, 51.835666]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "switchcoal_100km_box",
+        "name": "100 x 100 km SwitchCoal search box",
+        "kind": "outer_search_box"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[13.730107, 51.386006], [15.185509, 51.386006], [15.185509, 52.285326], [13.730107, 52.285326], [13.730107, 51.386006]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tee_existing_5km_box",
+        "name": "5 x 5 km TEE viewport",
+        "kind": "tee_viewport"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[14.421423, 51.813183], [14.494193, 51.813183], [14.494193, 51.858149], [14.421423, 51.858149], [14.421423, 51.813183]]]
+      }
+    }
+  ]
+}
