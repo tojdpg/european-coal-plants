@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>European Coal Asset Tracker</title>
 <meta property="og:title" content="European Coal Asset Tracker">
-<meta property="og:description" content="Interactive map of operating, construction, and mothballed coal plants across Europe. Climate transition risk monitor.">
+<meta property="og:description" content="Interactive map of operating, construction, mothballed, and hibernating coal plants across Europe. Climate transition risk monitor.">
 <meta property="og:image" content="https://tojdpg.github.io/european-coal-plants/og-preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="European Coal Asset Tracker">
-<meta name="twitter:description" content="Interactive map of operating, construction, and mothballed coal plants across Europe.">
+<meta name="twitter:description" content="Interactive map of operating, construction, mothballed, and hibernating coal plants across Europe.">
 <meta name="twitter:image" content="https://tojdpg.github.io/european-coal-plants/og-preview.png">
 <meta name="theme-color" content="#0f1419">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -133,7 +133,7 @@
 <body>
 
 <header>
-  <h1>European Coal Asset Tracker <small>operating - construction - mothballed</small></h1>
+  <h1>European Coal Asset Tracker <small>operating - construction - mothballed - hibernating</small></h1>
   <a class="nav-link" href="reports/">Clay reports</a>
   <div class="totals" id="totals"></div>
 </header>
@@ -180,17 +180,21 @@
 
 <main>
   <div id="map"></div>
-  <footer>Data: <a href="https://globalenergymonitor.org/projects/global-coal-plant-tracker/" target="_blank">GEM GCPT</a>.
-    Built with Clay v1.5 + MCP. Hero image: <a href="https://www.nasa.gov/image-article/earthset/" target="_blank">NASA</a>. <span id="gen-date"></span></footer>
+  <footer>Data: <a href="https://globalenergymonitor.org/projects/global-coal-plant-tracker/" target="_blank">GEM GCPT</a>
+    with reviewed overrides. <span id="scope-note"></span> <span id="gen-date"></span></footer>
 </main>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const STATUS_COLORS = { "operating":"#ff5252", "construction":"#ff9800", "mothballed":"#ffd54f" };
+const STATUS_COLORS = { "operating":"#ff5252", "construction":"#ff9800", "mothballed":"#ffd54f", "hibernating":"#64b5f6" };
 let DATA = null, map, markerLayer;
 const filters = { statuses:new Set(), countries:new Set(), minCap:0 };
 const fmt0 = n => n==null?"-":Math.round(n).toLocaleString();
 const fmt1 = n => n==null?"-":(Math.round(n*10)/10).toLocaleString();
+const fmtStatusCounts = counts => {
+  if (!counts) return "";
+  return Object.entries(counts).map(([status, n]) => `${status}: ${n}`).join(", ");
+};
 function radius(mw) { if(!mw||mw<=0) return 4; return Math.max(4, Math.min(28, Math.sqrt(mw/100)*3)); }
 function copernicusBrowserUrl(p) {
   const params = new URLSearchParams({
@@ -207,7 +211,11 @@ function copernicusBrowserUrl(p) {
   return `https://browser.dataspace.copernicus.eu/?${params.toString()}`;
 }
 function popupHtml(p) {
-  const co2 = p.annual_co2_mt||0;
+  const co2 = p.annual_co2_mt;
+  const browserUrl = p.eo_browser || copernicusBrowserUrl(p);
+  const sourceStatuses = fmtStatusCounts(p.source_statuses);
+  const sourceLink = p.source_url ? `<a href="${p.source_url}" target="_blank" rel="noopener">Source note / record</a><br>` : "";
+  const gemLink = p.gem_url && p.gem_url !== p.source_url ? `<a href="${p.gem_url}" target="_blank" rel="noopener">GEM plant page</a><br>` : "";
   return `<div class="popup"><b>${p.name}</b><br>
     <span style="color:var(--muted)">${p.country} - ${p.status}</span><hr>
     Capacity: <b>${fmt0(p.capacity_mw)} MW</b> (${p.n_units} units)<br>
@@ -215,9 +223,14 @@ function popupHtml(p) {
     Lifetime CO2: <b>${fmt1(p.lifetime_co2_mt)} Mt</b><br>
     ${p.earliest_start?`Online since: <b>${p.earliest_start}</b><br>`:""}
     ${p.phaseout_year?`Phaseout: <b>${p.phaseout_year}</b><br>`:""}
+    ${p.subnational?`Region: ${p.subnational}<br>`:""}
+    ${p.source_name?`GEM name: ${p.source_name}<br>`:""}
+    ${sourceStatuses?`GEM unit status: <b>${sourceStatuses}</b><br>`:""}
+    ${p.status_note?`Status note: ${p.status_note}<br>`:""}
     ${p.owner?`Owner: ${p.owner}<br>`:""}
     ${p.parent?`Parent: ${p.parent}<br>`:""}<hr>
-    <a href="${copernicusBrowserUrl(p)}" target="_blank" rel="noopener">-> Open Sentinel-2 in Copernicus Browser</a></div>`;
+    ${sourceLink}${gemLink}
+    <a href="${browserUrl}" target="_blank" rel="noopener">-> Open Sentinel-2 in EO Browser</a></div>`;
 }
 function visiblePlants() {
   return DATA.plants.filter(p => filters.statuses.has(p.status) &&
@@ -331,6 +344,11 @@ async function init() {
      <span><b>${(DATA.totals.total_capacity_mw/1000).toFixed(1)}</b> GW</span>
      <span><b>${DATA.totals.total_annual_co2_mt.toFixed(0)}</b> Mt CO2/yr</span>`;
   document.getElementById("gen-date").textContent = "- " + DATA.totals.generated_at;
+  const scopeNote = document.getElementById("scope-note");
+  if (DATA.totals.scope_note) {
+    scopeNote.textContent = "Scope: Europe + Türkiye, excluding Russia.";
+    scopeNote.title = DATA.totals.scope_note;
+  }
   map = L.map("map", {preferCanvas:true, zoomControl:true}).setView([51,12], 5);
   L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
     { attribution:"© OSM, © CARTO", maxZoom:18 }).addTo(map);
