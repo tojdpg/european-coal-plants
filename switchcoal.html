@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SwitchCoal Conversion Tracker — Europe</title>
+<meta property="og:title" content="SwitchCoal Conversion Tracker — Europe">
+<meta property="og:description" content="Coal-to-clean conversion case per European coal site: solar+wind+battery replacement, investment and 30-year profit (SwitchCoal model), with current GEM-2026 status overlay.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f1419">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root { --bg:#0f1419; --panel:#1a2028; --panel-2:#232b35; --border:#2f3a47;
+    --fg:#e8edf3; --muted:#8a96a8; --accent:#ff5252; --accent-2:#ffd54f; --green:#66bb6a;
+    --aside-w: 360px; --header-h: 56px; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--fg);
+    font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; overscroll-behavior:none; }
+  body { display:grid; grid-template-columns: var(--aside-w) 1fr;
+    grid-template-rows: var(--header-h) 1fr; height:100vh; height:100dvh; }
+  header { grid-column:1/3; display:flex; align-items:center; justify-content:space-between;
+    padding:0 18px; border-bottom:1px solid var(--border); background:var(--panel); gap:12px; }
+  header h1 { font-size:15px; margin:0; font-weight:600; flex:1; min-width:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  header h1 small { color:var(--muted); font-weight:400; margin-left:10px; }
+  header .nav-link { color:var(--accent-2); text-decoration:none; font-size:12px; flex-shrink:0; }
+  header .nav-link:hover { text-decoration:underline; }
+  header .totals { display:flex; gap:22px; font-size:12px; flex-shrink:0; }
+  header .totals span { color:var(--muted); }
+  header .totals b { color:var(--fg); font-weight:600; }
+  aside { background:var(--panel); border-right:1px solid var(--border); overflow-y:auto; padding:16px;
+    -webkit-overflow-scrolling: touch; }
+  main { position:relative; }
+  #map { position:absolute; inset:0; }
+  .banner { background:var(--panel-2); border:1px solid var(--border); border-radius:6px;
+    padding:8px 10px; font-size:11px; color:var(--muted); margin-bottom:14px; line-height:1.5; }
+  .banner b { color:var(--accent-2); }
+  h2 { font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted);
+    margin:18px 0 8px; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  h2:first-child { margin-top:0; }
+  .toggle-all { font-size:10px; text-transform:none; letter-spacing:0; color:var(--accent-2);
+    cursor:pointer; user-select:none; padding:2px 6px; border-radius:3px; }
+  .toggle-all:hover { background:var(--panel-2); }
+  .toggle-all .sep { color:var(--muted); margin:0 4px; }
+  .row { display:flex; align-items:center; gap:8px; margin-bottom:6px; font-size:13px; }
+  .row label { flex:1; color:var(--fg); cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .row .count { color:var(--muted); font-variant-numeric:tabular-nums; font-size:12px; }
+  input[type=checkbox] { accent-color:var(--accent); flex-shrink:0; }
+  input[type=range] { width:100%; accent-color:var(--accent); }
+  .slider-labels { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+  .ranking { font-size:12px; }
+  .ranking .item { display:flex; justify-content:space-between; padding:4px 0;
+    border-bottom:1px solid var(--border); cursor:pointer; gap:8px; }
+  .ranking .item:hover, .ranking .item:active { background:var(--panel-2); }
+  .ranking .name { color:var(--fg); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ranking .val { color:var(--green); font-variant-numeric:tabular-nums; font-weight:600; flex-shrink:0; }
+  .summary { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:4px; }
+  .summary .stat { background:var(--panel-2); padding:10px 12px; border-radius:6px; }
+  .summary .stat .num { font-size:18px; font-weight:600; color:var(--fg); font-variant-numeric:tabular-nums; }
+  .summary .stat .lbl { font-size:11px; color:var(--muted); margin-top:2px; }
+  .leaflet-popup-content-wrapper { background:var(--panel); color:var(--fg); border:1px solid var(--border); border-radius:6px; }
+  .leaflet-popup-tip { background:var(--panel); }
+  .leaflet-popup-content { margin:12px 14px; min-width:240px; }
+  .popup b { color:var(--accent-2); }
+  .popup .conv { color:var(--green); }
+  .popup a { color:var(--accent-2); text-decoration:none; }
+  .popup a:hover { text-decoration:underline; }
+  .popup hr { border:none; border-top:1px solid var(--border); margin:6px 0; }
+  .popup .pill { display:inline-block; padding:1px 6px; border-radius:10px; font-size:11px; font-weight:600; }
+  footer { position:absolute; bottom:6px; right:10px; font-size:11px; color:var(--muted);
+    background:rgba(15,20,25,0.85); padding:4px 8px; border-radius:4px; z-index:1000; max-width:calc(100% - 20px); }
+  footer a { color:var(--muted); text-decoration:underline; }
+  .country-filter { max-height:200px; overflow-y:auto; padding-right:4px; -webkit-overflow-scrolling:touch; }
+  .drawer-handle { display:none; }
+  @media (max-width: 720px) {
+    body { grid-template-columns: 1fr; grid-template-rows: var(--header-h) 1fr; }
+    header { padding:0 12px; } header h1 { font-size:13px; } header h1 small { display:none; }
+    header .totals { gap:10px; font-size:11px; } header .totals span:nth-child(3) { display:none; }
+    main { grid-row:2; }
+    aside { position:fixed; left:0; right:0; bottom:0; max-height:70vh; height:38vh;
+      border-right:none; border-top:1px solid var(--border); border-radius:14px 14px 0 0;
+      transform:translateY(calc(100% - 56px)); transition:transform 0.25s ease, height 0.25s ease;
+      z-index:1500; padding-top:40px; box-shadow:0 -8px 24px rgba(0,0,0,0.4); }
+    aside.open { transform:translateY(0); }
+    .drawer-handle { display:flex; flex-direction:column; align-items:center; justify-content:center;
+      position:absolute; top:0; left:0; right:0; height:44px; cursor:pointer; user-select:none; gap:4px; }
+    .drawer-handle::before { content:""; width:48px; height:4px; background:var(--border); border-radius:2px; }
+    .drawer-cta { font-size:12px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:1px; animation:pulse 1.6s ease-in-out infinite; }
+    aside.open .drawer-cta { display:none; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.55;} }
+    .country-filter { max-height:30vh; } footer { font-size:10px; bottom:auto; top:8px; right:8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SwitchCoal Conversion Tracker <small>Europe · coal → solar + wind + battery</small></h1>
+  <a class="nav-link" href="index.html">← Coal asset tracker</a>
+  <div class="totals" id="totals"></div>
+</header>
+
+<aside id="aside">
+  <div class="drawer-handle" id="drawer-handle"><span class="drawer-cta">↑ tap to expand · filters &amp; rankings</span></div>
+
+  <div class="banner">
+    <b>v1 — SwitchCoal-Originalwerte.</b> Conversion economics are SwitchCoal's own model figures
+    (plant census = GEM Global Coal Plant Tracker <b>January 2023</b>). Each site carries a
+    <b>GEM-2026 status overlay</b> (availability) so you can see which sites still run vs. are already
+    closed. Counts/CO₂ are 2023 vintage — not current-emission figures.
+  </div>
+
+  <div class="summary">
+    <div class="stat"><div class="num" id="vis-count">-</div><div class="lbl">sites visible</div></div>
+    <div class="stat"><div class="num" id="vis-replgw">-</div><div class="lbl">GW PV+wind replace</div></div>
+  </div>
+  <div class="summary">
+    <div class="stat"><div class="num" id="vis-invest">-</div><div class="lbl">bn $ investment</div></div>
+    <div class="stat"><div class="num" id="vis-profit">-</div><div class="lbl">bn $ profit / 30 yr</div></div>
+  </div>
+
+  <h2>Availability (GEM-2026)
+    <span class="toggle-all"><span data-action="all-avail">all</span><span class="sep">·</span><span data-action="none-avail">none</span></span>
+  </h2>
+  <div id="avail-filter"></div>
+
+  <h2>Min coal capacity (MW)</h2>
+  <input type="range" id="cap-slider" min="0" max="6000" step="50" value="0">
+  <div class="slider-labels"><span>0</span><span id="cap-val">0</span><span>6000</span></div>
+
+  <h2>Country
+    <span class="toggle-all"><span data-action="all-country">all</span><span class="sep">·</span><span data-action="none-country">none</span></span>
+  </h2>
+  <div class="country-filter" id="country-filter"></div>
+
+  <h2>Top by profit / 30 yr (visible)</h2>
+  <div class="ranking" id="rank-profit"></div>
+
+  <h2>Top by investment (visible)</h2>
+  <div class="ranking" id="rank-invest"></div>
+
+  <h2>By country (profit / 30 yr)</h2>
+  <div class="ranking" id="rank-owner"></div>
+</aside>
+
+<main>
+  <div id="map"></div>
+  <footer>Spine: <a href="https://switchcoal.org" target="_blank">SwitchCoal</a> model (GEM-2023 + conversion economics).
+    Status overlay: <a href="https://globalenergymonitor.org/projects/global-coal-plant-tracker/" target="_blank">GEM GCPT Jan-2026</a>.
+    <span id="scope-note"></span> <span id="gen-date"></span></footer>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const AVAIL = {
+  running:   { color:"#ff5252", label:"running (future site)" },
+  reserve:   { color:"#ffd54f", label:"reserve / mothballed" },
+  closed:    { color:"#66bb6a", label:"closed (available now)" },
+  untracked: { color:"#8a96a8", label:"untracked (<30 MW)" },
+  unknown:   { color:"#8a96a8", label:"unknown" },
+};
+let DATA = null, map, markerLayer;
+const filters = { avail:new Set(), countries:new Set(), minCap:0 };
+const fmt0 = n => n==null?"-":Math.round(n).toLocaleString();
+const fmt1 = n => n==null?"-":(Math.round(n*10)/10).toLocaleString();
+function radius(mw) { if(!mw||mw<=0) return 4; return Math.max(4, Math.min(28, Math.sqrt(mw/100)*3)); }
+function copernicusBrowserUrl(p) {
+  const params = new URLSearchParams({ zoom:"14", lat:Number(p.lat).toFixed(5), lng:Number(p.lon).toFixed(5),
+    themeId:"DEFAULT-THEME", datasetId:"S2_L2A_CDAS", layerId:"1_TRUE_COLOR", demSource3D:"\"MAPZEN\"",
+    cloudCoverage:"30", dateMode:"MOSAIC" });
+  return `https://browser.dataspace.copernicus.eu/?${params.toString()}`;
+}
+function popupHtml(p) {
+  const a = AVAIL[p.availability] || AVAIL.unknown;
+  const gemStat = p.gem2026_status==="absent" ? "not in GEM-2026" : p.gem2026_status
+    + (p.gem2026_capacity_mw>0 ? ` (${fmt0(p.gem2026_capacity_mw)} MW operating)` : "");
+  const wiki = p.wiki ? `<a href="${p.wiki}" target="_blank" rel="noopener">GEM plant page</a><br>` : "";
+  return `<div class="popup"><b>${p.name}</b><br>
+    <span style="color:var(--muted)">${p.country}${p.subnational?` · ${p.subnational}`:""}</span>
+    <span class="pill" style="background:${a.color};color:#0f1419">${a.label}</span><hr>
+    <span style="color:var(--muted)">Coal plant (SwitchCoal / GEM-2023):</span><br>
+    Capacity: <b>${fmt0(p.capacity_mw)} MW</b>${p.coal_type?` · ${p.coal_type}`:""}<br>
+    Annual CO₂: <b>${fmt1(p.annual_co2_mt)} Mt/yr</b> · Coal cost: <b>${fmt1(p.opex_coal_ct_kwh)} ct/kWh</b><br>
+    GEM-2026 status: <b>${gemStat}</b><hr>
+    ${p.data_quality?`<span style="color:var(--accent)">⚠ ${p.data_quality}</span><hr>`:""}
+    <span class="conv">SwitchCoal conversion case (Originalwerte):</span><br>
+    Replace with: <b class="conv">${fmt0(p.repl_pv_mw)} MW PV + ${fmt0(p.repl_wind_mw)} MW wind + ${fmt0(p.repl_bat_mw)} MW battery</b><br>
+    Investment: <b>${fmt1(p.wsb_invest_bn)} bn $</b> · Profit/30yr: <b class="conv">${fmt1(p.total_profit_30y_bn)} bn $</b><br>
+    Cost: PV <b>${fmt1(p.pv_cost_ct_kwh)}</b> · wind <b>${fmt1(p.wind_cost_ct_kwh)}</b> · +storage <b>${fmt1(p.storage_cost_ct_kwh)}</b> ct/kWh vs coal <b>${fmt1(p.opex_coal_ct_kwh)}</b><br>
+    Area: ${fmt0(p.area_need_km2)} km²${p.switch_profitable==="Yes"?' · <b class="conv">profitable ✓</b>':''}<hr>
+    ${p.parent?`Parent: ${p.parent}<br>`:""}${p.owner?`Owner: ${p.owner}<br>`:""}
+    ${wiki}<a href="${copernicusBrowserUrl(p)}" target="_blank" rel="noopener">→ Open Sentinel-2 in EO Browser</a></div>`;
+}
+function visiblePlants() {
+  return DATA.plants.filter(p => filters.avail.has(p.availability) &&
+    filters.countries.has(p.iso2) && (p.capacity_mw||0) >= filters.minCap);
+}
+function renderMap() {
+  markerLayer.clearLayers();
+  for (const p of visiblePlants()) {
+    if (p.lat==null||p.lon==null) continue;
+    L.circleMarker([p.lat, p.lon], { radius:radius(p.capacity_mw),
+      color:(AVAIL[p.availability]||AVAIL.unknown).color, weight:1, fillOpacity:0.78 })
+      .bindPopup(popupHtml(p))
+      .bindTooltip(`${p.name} · ${fmt1(p.total_profit_30y_bn)} bn$ /30yr`)
+      .addTo(markerLayer);
+  }
+}
+function renderSummary() {
+  const v = visiblePlants();
+  const repl = v.reduce((a,p)=>a+((p.repl_pv_mw||0)+(p.repl_wind_mw||0)),0);
+  const inv  = v.reduce((a,p)=>a+(p.wsb_invest_bn||0),0);
+  const prof = v.reduce((a,p)=>a+(p.total_profit_30y_bn||0),0);
+  document.getElementById("vis-count").textContent = v.length;
+  document.getElementById("vis-replgw").textContent = fmt1(repl/1000);
+  document.getElementById("vis-invest").textContent = fmt0(inv);
+  document.getElementById("vis-profit").textContent = fmt0(prof);
+  const byProfit = [...v].filter(p=>p.total_profit_30y_bn>0).sort((a,b)=>b.total_profit_30y_bn-a.total_profit_30y_bn).slice(0,8);
+  document.getElementById("rank-profit").innerHTML = byProfit.map(p =>
+    `<div class="item" data-name="${p.name}"><span class="name">${p.name}</span><span class="val">${fmt1(p.total_profit_30y_bn)} bn</span></div>`).join("");
+  const byInv = [...v].filter(p=>p.wsb_invest_bn>0).sort((a,b)=>b.wsb_invest_bn-a.wsb_invest_bn).slice(0,8);
+  document.getElementById("rank-invest").innerHTML = byInv.map(p =>
+    `<div class="item" data-name="${p.name}"><span class="name">${p.name}</span><span class="val">${fmt1(p.wsb_invest_bn)} bn</span></div>`).join("");
+  const byCountry = {};
+  for (const p of v) byCountry[p.country] = (byCountry[p.country]||0) + (p.total_profit_30y_bn||0);
+  const topP = Object.entries(byCountry).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  document.getElementById("rank-owner").innerHTML = topP.map(([k,val]) =>
+    `<div class="item"><span class="name">${k}</span><span class="val">${fmt0(val)} bn</span></div>`).join("");
+  document.querySelectorAll(".ranking .item[data-name]").forEach(el => {
+    el.onclick = () => { const p = DATA.plants.find(x=>x.name===el.dataset.name);
+      if (p&&p.lat!=null){ map.flyTo([p.lat,p.lon],11); document.getElementById("aside").classList.remove("open"); } };
+  });
+}
+function renderAll() { renderMap(); renderSummary(); }
+function setAll(attr, set, checked) {
+  document.querySelectorAll(`[data-${attr}]`).forEach(cb => { cb.checked=checked;
+    checked ? set.add(cb.dataset[attr]) : set.delete(cb.dataset[attr]); });
+  renderAll();
+}
+function buildFilters() {
+  const av = DATA.totals.by_availability || {};
+  document.getElementById("avail-filter").innerHTML = Object.keys(AVAIL).filter(k=>av[k]).map(k =>
+    `<div class="row"><input type="checkbox" id="a-${k}" data-avail="${k}" checked>
+     <label for="a-${k}"><span style="color:${AVAIL[k].color}">●</span> ${AVAIL[k].label}</label>
+     <span class="count">${av[k]}</span></div>`).join("");
+  filters.avail = new Set(Object.keys(AVAIL).filter(k=>av[k]));
+  document.querySelectorAll('[data-avail]').forEach(cb => {
+    cb.onchange = () => { cb.checked?filters.avail.add(cb.dataset.avail):filters.avail.delete(cb.dataset.avail); renderAll(); }; });
+  const cc = {};
+  for (const p of DATA.plants) { cc[p.iso2]=cc[p.iso2]||{name:p.country,n:0}; cc[p.iso2].n++; }
+  const countries = Object.entries(cc).sort((a,b)=>b[1].n-a[1].n);
+  document.getElementById("country-filter").innerHTML = countries.map(([iso,info]) =>
+    `<div class="row"><input type="checkbox" id="c-${iso}" data-country="${iso}" checked>
+     <label for="c-${iso}">${info.name}</label><span class="count">${info.n}</span></div>`).join("");
+  filters.countries = new Set(countries.map(c=>c[0]));
+  document.querySelectorAll('[data-country]').forEach(cb => {
+    cb.onchange = () => { cb.checked?filters.countries.add(cb.dataset.country):filters.countries.delete(cb.dataset.country); renderAll(); }; });
+  document.querySelector('[data-action="all-avail"]').onclick = () => setAll("avail", filters.avail, true);
+  document.querySelector('[data-action="none-avail"]').onclick = () => setAll("avail", filters.avail, false);
+  document.querySelector('[data-action="all-country"]').onclick = () => setAll("country", filters.countries, true);
+  document.querySelector('[data-action="none-country"]').onclick = () => setAll("country", filters.countries, false);
+  const slider = document.getElementById("cap-slider"), capVal = document.getElementById("cap-val");
+  slider.oninput = () => { filters.minCap = +slider.value; capVal.textContent = slider.value; renderAll(); };
+  document.getElementById("drawer-handle").onclick = () => document.getElementById("aside").classList.toggle("open");
+}
+async function init() {
+  DATA = await fetch("switchcoal-europe.json").then(r=>r.json());
+  const t = DATA.totals;
+  document.getElementById("totals").innerHTML =
+    `<span><b>${t.n_plants}</b> sites</span>
+     <span><b>${((t.sum_repl_pv_mw+t.sum_repl_wind_mw)/1000).toFixed(0)}</b> GW replace</span>
+     <span><b>${t.sum_wsb_invest_bn.toFixed(0)}</b> bn$ invest</span>
+     <span><b>${t.sum_total_profit_30y_bn.toFixed(0)}</b> bn$ profit/30yr</span>`;
+  document.getElementById("gen-date").textContent = "· " + t.generated_at;
+  const sn = document.getElementById("scope-note");
+  if (t.scope_note) { sn.textContent = "Scope: Europe (excl. Türkiye, excl. Russia)."; sn.title = t.scope_note; }
+  map = L.map("map", {preferCanvas:true, zoomControl:true}).setView([51,12], 5);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png", { attribution:"© OSM, © CARTO", maxZoom:18 }).addTo(map);
+  markerLayer = L.layerGroup().addTo(map);
+  buildFilters(); renderAll();
+  setTimeout(() => map.invalidateSize(), 100);
+}
+init();
+</script>
+</body>
+</html>
