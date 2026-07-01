@@ -81,15 +81,23 @@ const models = [
   {lab:'Inflection', model:'Inflection 3', lat:37.444, lng:-122.161, params:0, open:false, costOut:10, onOR:true, desc:'Pi model builder. Palo Alto.'},
 
   // === Europe ===
-  {lab:'Mistral AI', model:'Mistral Large 2512', lat:48.856, lng:2.352, params:123, open:true, costOut:1.5, onOR:true, desc:'Flagship open/closed hybrid. Paris. $0.50/$1.50.'},
-  {lab:'Mistral AI', model:'Mistral Small 3.1 24B', lat:48.856, lng:2.352, params:24, open:true, costOut:0, onOR:true, desc:'Open small model. Free tier.'},
-  {lab:'Poolside', model:'Laguna XS.2', lat:48.856, lng:2.352, params:0, open:false, costOut:0, onOR:true, desc:'Coding-focused model. Paris/SF. Free tier.'},
+  {lab:'Mistral AI', model:'Mistral Large 2512', lat:48.856, lng:2.352, params:123, open:true, costOut:1.5, onOR:true, desc:'Flagship open/closed hybrid. Paris. $0.50/$1.50. Served from EU + US.'},
+  {lab:'Mistral AI', model:'Mistral Small 3.1 24B', lat:48.856, lng:2.352, params:24, open:true, costOut:0, onOR:true, desc:'Open small model. Free tier. Paris.'},
+  {lab:'Poolside', model:'Laguna XS.2', lat:48.856, lng:2.352, params:0, open:false, costOut:0, onOR:true, desc:'Coding model. Paris/SF. Free tier.'},
   {lab:'Reka AI', model:'Reka Edge', lat:51.507, lng:-0.127, params:0, open:true, costOut:0.1, onOR:true, desc:'London-based open multimodal model.'},
+  {lab:'Aleph Alpha', model:'Luminous (not on OR)', lat:49.416, lng:8.678, params:0, open:false, costOut:0, onOR:false, desc:'Heidelberg, Germany. European sovereign AI. Not on OpenRouter — direct API.'},
+  {lab:'DeepL', model:'DeepL Translate (not on OR)', lat:50.938, lng:6.957, params:0, open:false, costOut:0, onOR:false, desc:'Cologne, Germany. Language AI. Not on OpenRouter.'},
+  {lab:'Stability AI', model:'Stable Diffusion (not on OR)', lat:51.507, lng:-0.127, params:0, open:true, costOut:0, onOR:false, desc:'London. Image gen pioneer. Open weights. Not on OpenRouter.'},
+  {lab:'Black Forest Labs', model:'Flux (not on OR)', lat:48.775, lng:9.182, params:0, open:true, costOut:0, onOR:false, desc:'Stuttgart/Berlin, Germany. Flux image models. Open weights. Not on OpenRouter.'},
+  {lab:'LightOn', model:'LightOn (not on OR)', lat:48.856, lng:2.352, params:0, open:false, costOut:0, onOR:false, desc:'Paris, France. European AI lab. Not on OpenRouter.'},
+  {lab:'DeepCogito', model:'Cogito V2.1 671B', lat:48.856, lng:2.352, params:671, open:false, costOut:1.25, onOR:true, desc:'France/USA. Reasoning model. $1.25/$1.25'},
+
+  // === Japan ===
   {lab:'Sakana AI', model:'Fugu Ultra', lat:35.676, lng:139.650, params:0, open:false, costOut:30, onOR:true, desc:'Tokyo. Multi-agent orchestration system.'},
 
   // === China ===
-  {lab:'DeepSeek', model:'DeepSeek V4 Pro', lat:30.274, lng:120.155, params:671, open:true, costOut:0.87, onOR:true, desc:'Hangzhou. Open reasoning giant. $0.44/$0.87.'},
-  {lab:'Qwen (Alibaba)', model:'Qwen 3.5 Plus', lat:30.274, lng:120.155, params:0, open:true, costOut:1.8, onOR:true, desc:'Hangzhou. Alibaba\'s flagship. $0.30/$1.80.'},
+  {lab:'DeepSeek', model:'DeepSeek V4 Pro', lat:30.274, lng:120.155, params:671, open:true, costOut:0.87, onOR:true, desc:'Hangzhou. Open reasoning giant. $0.44/$0.87. Served from CN + US (Together/DeepInfra).'},
+  {lab:'Qwen (Alibaba)', model:'Qwen 3.5 Plus', lat:30.274, lng:120.155, params:0, open:true, costOut:1.8, onOR:true, desc:'Hangzhou. Alibaba flagship. $0.30/$1.80. Served from CN + US providers.'},
   {lab:'ByteDance', model:'Seed 1.6 Flash', lat:39.904, lng:116.407, params:0, open:false, costOut:0.3, onOR:true, desc:'Beijing. Doubao parent.'},
   {lab:'Moonshot AI', model:'Kimi K2.7', lat:39.904, lng:116.407, params:0, open:false, costOut:2.03, onOR:true, desc:'Beijing. Kimi flagship.'},
   {lab:'MiniMax', model:'MiniMax M2.5', lat:31.230, lng:121.473, params:0, open:false, costOut:0.48, onOR:true, desc:'Shanghai.'},
