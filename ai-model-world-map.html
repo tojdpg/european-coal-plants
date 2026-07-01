@@ -3,122 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>World Map of AI Models — OpenRouter + Beyond</title>
+<title>World Map of AI Models — Origin, Hosting, Cost & Capability</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e1a; color: #e0e4f0; }
 #map { height: 100vh; width: 100vw; }
-.legend { position: absolute; bottom: 30px; left: 20px; z-index: 1000; background: rgba(10,14,26,0.92); border: 1px solid #2a3050; border-radius: 12px; padding: 16px 20px; min-width: 220px; }
-.legend h3 { font-size: 13px; color: #8899bb; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-.legend-item { display: flex; align-items: center; gap: 10px; margin: 4px 0; font-size: 13px; }
+.panel { position: absolute; z-index: 1000; background: rgba(10,14,26,0.92); border: 1px solid #2a3050; border-radius: 12px; }
+.legend { bottom: 30px; left: 20px; padding: 14px 18px; min-width: 230px; }
+.legend h3 { font-size: 12px; color: #8899bb; margin: 10px 0 6px; text-transform: uppercase; letter-spacing: 1px; }
+.legend h3:first-child { margin-top: 0; }
+.legend-item { display: flex; align-items: center; gap: 10px; margin: 4px 0; font-size: 12.5px; }
 .legend-dot { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.15); }
-.header { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: rgba(10,14,26,0.92); border: 1px solid #2a3050; border-radius: 12px; padding: 12px 24px; text-align: center; }
+.legend-size { display: inline-block; background: #8899bb; border-radius: 50%; flex-shrink: 0; }
+.legend hr { border: none; border-top: 1px solid #2a3050; margin: 8px 0; }
+.header { top: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; text-align: center; }
 .header h1 { font-size: 16px; color: #c0d0ff; letter-spacing: 0.5px; }
 .header span { font-size: 11px; color: #6678aa; }
-.controls { position: absolute; top: 80px; right: 20px; z-index: 1000; background: rgba(10,14,26,0.92); border: 1px solid #2a3050; border-radius: 12px; padding: 12px 16px; }
-.controls label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #8899bb; cursor: pointer; margin: 3px 0; }
+.controls { top: 84px; right: 20px; padding: 12px 16px; min-width: 190px; }
+.controls .grp { margin-bottom: 10px; }
+.controls .grp:last-child { margin-bottom: 0; }
+.controls .cap { font-size: 10px; color: #6678aa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.controls label { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #8899bb; cursor: pointer; margin: 3px 0; }
 .controls input[type="checkbox"] { accent-color: #5588ff; }
+.controls select { width: 100%; background: #141a2e; color: #c0d0ff; border: 1px solid #2a3050; border-radius: 7px; padding: 5px 7px; font-size: 12.5px; }
 .popup-content { font-size: 13px; line-height: 1.6; }
-.popup-content .model-name { font-weight: 600; font-size: 15px; }
-.popup-content .tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; margin: 2px; }
+.popup-content .model-name { font-weight: 600; font-size: 15px; color: #fff; }
+.popup-content .tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; margin: 2px 2px 2px 0; }
 .tag-open { background: #1a4a2a; color: #66dd88; }
 .tag-closed { background: #3a1a2a; color: #dd6688; }
-.tag-or { background: #1a2a4a; color: #6688dd; }
-.tag-not-or { background: #4a3a1a; color: #ddbb66; }
-.popup-content .price { color: #aabbdd; }
+.tag-frontier { background: #2a2050; color: #b0a4ff; }
+.tag-strong { background: #17304a; color: #7fb4ff; }
+.tag-mid { background: #123a30; color: #6fd4a8; }
+.tag-spec { background: #3a2e12; color: #e8c878; }
+.tag-host { background: #10352a; color: #5fd49a; }
+.popup-content .price { color: #aabbdd; margin-top: 4px; }
+.leaflet-popup-content-wrapper { background: #10162a; color: #e0e4f0; border: 1px solid #2a3050; }
+.leaflet-popup-tip { background: #10162a; }
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>🌍 AI Model World Map</h1>
-  <span>Size = parameters · Color = cost · Dots = on OpenRouter · Rings = elsewhere</span>
+<div class="panel header">
+  <h1>AI Model World Map</h1>
+  <span>Position = origin &middot; Size = capability &middot; Color = cost &middot; &#9679; open / &#9678; closed &middot; dashed line = hostable in the West</span>
 </div>
-<div class="controls">
-  <label><input type="checkbox" id="showOpen" checked onchange="toggleFilter()"> 🟢 Open weights</label>
-  <label><input type="checkbox" id="showClosed" checked onchange="toggleFilter()"> 🔴 Closed weights</label>
-  <label><input type="checkbox" id="showNotOR" checked onchange="toggleFilter()"> ⭕ Not on OpenRouter</label>
+<div class="panel controls">
+  <div class="grp">
+    <div class="cap">Weights</div>
+    <label><input type="checkbox" id="showOpen" checked onchange="buildMarkers()"> Open weights</label>
+    <label><input type="checkbox" id="showClosed" checked onchange="buildMarkers()"> Closed weights</label>
+    <label><input type="checkbox" id="showNotOR" checked onchange="buildMarkers()"> Not on OpenRouter</label>
+  </div>
+  <div class="grp">
+    <div class="cap">Origin</div>
+    <select id="region" onchange="buildMarkers()">
+      <option value="all">All regions</option>
+      <option value="US">United States</option>
+      <option value="China">China</option>
+      <option value="Europe">Europe</option>
+      <option value="Other">Other (CA/IL/JP/KR)</option>
+    </select>
+  </div>
+  <div class="grp">
+    <div class="cap">Capability</div>
+    <select id="tier" onchange="buildMarkers()">
+      <option value="all">All tiers</option>
+      <option value="Frontier">Frontier</option>
+      <option value="Strong">Strong</option>
+      <option value="Mid">Mid</option>
+      <option value="Specialist">Specialist</option>
+    </select>
+  </div>
+  <div class="grp">
+    <div class="cap">Hosting flows</div>
+    <label><input type="checkbox" id="showFlows" checked onchange="buildMarkers()"> Show West-hosting arcs</label>
+  </div>
 </div>
 <div id="map"></div>
-<div class="legend">
-  <h3>Cost (Output $/1M tokens)</h3>
-  <div class="legend-item"><span class="legend-dot" style="background:#2d8a4e"></span> &lt; $1 (free – cheap)</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#8ab832"></span> $1 – $5</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#e8a838"></span> $5 – $15</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#d44a2a"></span> $15 – $50</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#a01020"></span> &gt; $50 (very expensive)</div>
-  <div style="margin-top:8px;border-top:1px solid #2a3050;padding-top:6px;font-size:12px;color:#6678aa;">
-    ● Solid = open weights · ◉ Ring = closed weights
-  </div>
+<div class="panel legend">
+  <h3>Cost (output $/1M)</h3>
+  <div class="legend-item"><span class="legend-dot" style="background:#2d8a4e"></span> free &ndash; &lt; $1</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#8ab832"></span> $1 &ndash; $5</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#e8a838"></span> $5 &ndash; $15</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#d44a2a"></span> $15 &ndash; $50</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#a01020"></span> &gt; $50</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#5a6a8a"></span> not token-priced</div>
+  <hr>
+  <h3>Capability = size</h3>
+  <div class="legend-item"><span class="legend-size" style="width:22px;height:22px"></span> Frontier</div>
+  <div class="legend-item"><span class="legend-size" style="width:16px;height:16px"></span> Strong</div>
+  <div class="legend-item"><span class="legend-size" style="width:11px;height:11px"></span> Mid</div>
+  <div class="legend-item"><span class="legend-size" style="width:8px;height:8px"></span> Specialist</div>
+  <hr>
+  <div class="legend-item">&#9679; open (solid) &nbsp; &#9678; closed (ring)</div>
+  <div class="legend-item"><span style="display:inline-block;width:22px;border-top:2px dashed #3fae7a"></span> &nbsp; open model hostable in US/EU</div>
 </div>
 
 <script>
-// Core data: lab, model name, lat, lng, params(B), open?, output $/M, on OR?, color, size
-// Params are best-estimates from public info
+// Fields: lab, model, lat, lng, params(B, 0=unknown), open, tier, region, costIn, costOut(null=not token-priced),
+//          onOR, host(null | 'US' = open model routinely served from Western infra), desc
 const models = [
-  // === USA — West Coast ===
-  {lab:'OpenAI', model:'GPT-5.4 Pro', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:180, onOR:true, desc:'Flagship reasoning model. $30/$180 per M tokens.'},
-  {lab:'OpenAI', model:'o3 Deep Research', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:60, onOR:true, desc:'Deep research reasoning model.'},
-  {lab:'Anthropic', model:'Claude Sonnet 5', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:10, onOR:true, desc:'Anthropic\'s latest sonnet-class model. $2/$10.'},
-  {lab:'Anthropic', model:'Claude Fable 5', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:50, onOR:true, desc:'Anthropic\'s Mythos-class flagship. $10/$50 — sehr teuer!'},
-  {lab:'Anthropic', model:'Claude Opus 4.8', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:75, onOR:true, desc:'Anthropic\'s previous flagship. Still available.'},
-  {lab:'Google', model:'Gemini 3.5 Flash', lat:37.422, lng:-122.084, params:0, open:false, costOut:9, onOR:true, desc:'Fast multimodal reasoning. $1.50/$9.'},
-  {lab:'Google', model:'Gemma 4 26B', lat:37.422, lng:-122.084, params:26, open:true, costOut:0, onOR:true, desc:'Open-weight model from Google. Free tier.'},
-  {lab:'Meta', model:'Llama 4 Maverick', lat:37.485, lng:-122.148, params:400, open:true, costOut:0.4, onOR:true, desc:'Meta\'s latest open model. MoE 400B total.'},
-  {lab:'xAI', model:'Grok Build 0.1', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:2, onOR:true, desc:'xAI Grok latest. $1/$2.'},
-  {lab:'Perplexity', model:'Sonar Pro Search', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:15, onOR:true, desc:'Perplexity\'s search-augmented model. $3/$15.'},
-  {lab:'Writer', model:'Palmyra X5', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:6, onOR:true, desc:'Enterprise focused model. $0.60/$6.'},
-  {lab:'Nvidia', model:'Nemotron 3.5', lat:37.395, lng:-121.963, params:4, open:true, costOut:0, onOR:true, desc:'Nvidia\'s open guardrail model. 4B. Free.'},
-
-  // === USA — Other ===
-  {lab:'AI2 (Allen)', model:'OLMo 3 32B Think', lat:47.606, lng:-122.332, params:32, open:true, costOut:0.5, onOR:true, desc:'Fully open LLM from AI2. $0.15/$0.50.'},
-  {lab:'Microsoft', model:'Phi-4', lat:47.674, lng:-122.121, params:14, open:true, costOut:0.14, onOR:true, desc:'Microsoft\'s open small language model.'},
-  {lab:'IBM', model:'Granite 4.1 8B', lat:41.203, lng:-73.722, params:8, open:true, costOut:0.1, onOR:true, desc:'IBM\'s open enterprise model.'},
-  {lab:'Liquid', model:'LFM 2.5 1.2B', lat:40.728, lng:-73.997, params:1.2, open:true, costOut:0, onOR:true, desc:'Liquid Foundation Model. Free tier.'},
-  {lab:'Cohere', model:'Command A', lat:43.653, lng:-79.383, params:0, open:false, costOut:10, onOR:true, desc:'Cohere\'s enterprise flagship. Toronto/SF.'},
-  {lab:'Nous Research', model:'Hermes 4 405B', lat:34.052, lng:-118.243, params:405, open:true, costOut:3, onOR:true, desc:'Open model from Nous. Los Angeles / remote.'},
-  {lab:'Inflection', model:'Inflection 3', lat:37.444, lng:-122.161, params:0, open:false, costOut:10, onOR:true, desc:'Pi model builder. Palo Alto.'},
+  // === United States ===
+  {lab:'OpenAI', model:'GPT-5.4 Pro', lat:37.7749, lng:-122.4194, params:0, open:false, tier:'Frontier', region:'US', costIn:30, costOut:180, onOR:true, host:null, desc:'Flagship reasoning model.'},
+  {lab:'OpenAI', model:'o3 Deep Research', lat:37.7749, lng:-122.4194, params:0, open:false, tier:'Frontier', region:'US', costIn:null, costOut:60, onOR:true, host:null, desc:'Deep-research reasoning model.'},
+  {lab:'Anthropic', model:'Claude Fable 5', lat:37.7749, lng:-122.4194, params:0, open:false, tier:'Frontier', region:'US', costIn:10, costOut:50, onOR:true, host:null, desc:'Mythos-class flagship.'},
+  {lab:'Anthropic', model:'Claude Sonnet 5', lat:37.7749, lng:-122.4194, params:0, open:false, tier:'Strong', region:'US', costIn:2, costOut:10, onOR:true, host:null, desc:'Sonnet-class workhorse.'},
+  {lab:'Google', model:'Gemini 3.5 Flash', lat:37.422, lng:-122.084, params:0, open:false, tier:'Strong', region:'US', costIn:1.5, costOut:9, onOR:true, host:null, desc:'Fast multimodal reasoning.'},
+  {lab:'Google', model:'Gemma 4 26B', lat:37.422, lng:-122.084, params:26, open:true, tier:'Mid', region:'US', costIn:0, costOut:0, onOR:true, host:null, desc:'Open-weight model from Google.'},
+  {lab:'Meta', model:'Llama 4 Maverick', lat:37.485, lng:-122.148, params:400, open:true, tier:'Strong', region:'US', costIn:0.18, costOut:0.4, onOR:true, host:null, desc:'Open MoE, 400B total.'},
+  {lab:'xAI', model:'Grok Build 0.1', lat:37.7749, lng:-122.4194, params:0, open:false, tier:'Strong', region:'US', costIn:1, costOut:2, onOR:true, host:null, desc:'xAI coding/agent build.'},
+  {lab:'Perplexity', model:'Sonar Pro Search', lat:37.7749, lng:-122.4194, params:0, open:false, tier:'Specialist', region:'US', costIn:3, costOut:15, onOR:true, host:null, desc:'Search-augmented answering.'},
+  {lab:'Writer', model:'Palmyra X5', lat:37.7749, lng:-122.4194, params:0, open:false, tier:'Strong', region:'US', costIn:0.6, costOut:6, onOR:true, host:null, desc:'Enterprise-focused model.'},
+  {lab:'Inflection', model:'Inflection 3', lat:37.444, lng:-122.161, params:0, open:false, tier:'Strong', region:'US', costIn:2.5, costOut:10, onOR:true, host:null, desc:'Pi model builder. Palo Alto.'},
+  {lab:'Nvidia', model:'Nemotron 3.5 4B', lat:37.395, lng:-121.963, params:4, open:true, tier:'Mid', region:'US', costIn:0, costOut:0, onOR:true, host:null, desc:'Open guardrail model.'},
+  {lab:'AI2 (Allen)', model:'OLMo 3 32B Think', lat:47.606, lng:-122.332, params:32, open:true, tier:'Mid', region:'US', costIn:0.15, costOut:0.5, onOR:true, host:null, desc:'Fully open reasoning LLM.'},
+  {lab:'Microsoft', model:'Phi-4', lat:47.674, lng:-122.121, params:14, open:true, tier:'Mid', region:'US', costIn:0.07, costOut:0.14, onOR:true, host:null, desc:'Open small language model.'},
+  {lab:'IBM', model:'Granite 4.1 8B', lat:41.203, lng:-73.722, params:8, open:true, tier:'Mid', region:'US', costIn:0.05, costOut:0.1, onOR:true, host:null, desc:'Open enterprise model.'},
+  {lab:'Liquid', model:'LFM 2.5 1.2B', lat:40.728, lng:-73.997, params:1.2, open:true, tier:'Mid', region:'US', costIn:0, costOut:0, onOR:true, host:null, desc:'Edge-class Liquid Foundation Model.'},
+  {lab:'Nous Research', model:'Hermes 4 405B', lat:34.052, lng:-118.243, params:405, open:true, tier:'Strong', region:'US', costIn:1, costOut:3, onOR:true, host:null, desc:'Open model from Nous.'},
 
   // === Europe ===
-  {lab:'Mistral AI', model:'Mistral Large 2512', lat:48.856, lng:2.352, params:123, open:true, costOut:1.5, onOR:true, desc:'Flagship open/closed hybrid. Paris. $0.50/$1.50. Served from EU + US.'},
-  {lab:'Mistral AI', model:'Mistral Small 3.1 24B', lat:48.856, lng:2.352, params:24, open:true, costOut:0, onOR:true, desc:'Open small model. Free tier. Paris.'},
-  {lab:'Poolside', model:'Laguna XS.2', lat:48.856, lng:2.352, params:0, open:false, costOut:0, onOR:true, desc:'Coding model. Paris/SF. Free tier.'},
-  {lab:'Reka AI', model:'Reka Edge', lat:51.507, lng:-0.127, params:0, open:true, costOut:0.1, onOR:true, desc:'London-based open multimodal model.'},
-  {lab:'Aleph Alpha', model:'Luminous (not on OR)', lat:49.416, lng:8.678, params:0, open:false, costOut:0, onOR:false, desc:'Heidelberg, Germany. European sovereign AI. Not on OpenRouter — direct API.'},
-  {lab:'DeepL', model:'DeepL Translate (not on OR)', lat:50.938, lng:6.957, params:0, open:false, costOut:0, onOR:false, desc:'Cologne, Germany. Language AI. Not on OpenRouter.'},
-  {lab:'Stability AI', model:'Stable Diffusion (not on OR)', lat:51.507, lng:-0.127, params:0, open:true, costOut:0, onOR:false, desc:'London. Image gen pioneer. Open weights. Not on OpenRouter.'},
-  {lab:'Black Forest Labs', model:'Flux (not on OR)', lat:48.775, lng:9.182, params:0, open:true, costOut:0, onOR:false, desc:'Stuttgart/Berlin, Germany. Flux image models. Open weights. Not on OpenRouter.'},
-  {lab:'LightOn', model:'LightOn (not on OR)', lat:48.856, lng:2.352, params:0, open:false, costOut:0, onOR:false, desc:'Paris, France. European AI lab. Not on OpenRouter.'},
-  {lab:'DeepCogito', model:'Cogito V2.1 671B', lat:48.856, lng:2.352, params:671, open:false, costOut:1.25, onOR:true, desc:'France/USA. Reasoning model. $1.25/$1.25'},
-
-  // === Japan ===
-  {lab:'Sakana AI', model:'Fugu Ultra', lat:35.676, lng:139.650, params:0, open:false, costOut:30, onOR:true, desc:'Tokyo. Multi-agent orchestration system.'},
+  {lab:'Mistral AI', model:'Mistral Large 2512', lat:48.856, lng:2.352, params:123, open:true, tier:'Strong', region:'Europe', costIn:0.5, costOut:1.5, onOR:true, host:null, desc:'Open/closed hybrid flagship. Paris.'},
+  {lab:'Mistral AI', model:'Mistral Small 3.1 24B', lat:48.856, lng:2.352, params:24, open:true, tier:'Mid', region:'Europe', costIn:0, costOut:0, onOR:true, host:null, desc:'Open small model. Paris.'},
+  {lab:'Poolside', model:'Laguna XS.2', lat:48.856, lng:2.352, params:0, open:false, tier:'Strong', region:'Europe', costIn:0, costOut:0, onOR:true, host:null, desc:'Coding model. Paris/SF.'},
+  {lab:'DeepCogito', model:'Cogito V2.1 671B', lat:48.856, lng:2.352, params:671, open:false, tier:'Strong', region:'Europe', costIn:1.25, costOut:1.25, onOR:true, host:null, desc:'Reasoning model. Paris/USA.'},
+  {lab:'Reka AI', model:'Reka Edge', lat:51.507, lng:-0.127, params:0, open:true, tier:'Mid', region:'Europe', costIn:0.05, costOut:0.1, onOR:true, host:null, desc:'Open multimodal. London.'},
+  {lab:'Aleph Alpha', model:'Luminous', lat:49.416, lng:8.678, params:0, open:false, tier:'Mid', region:'Europe', costIn:null, costOut:null, onOR:false, host:null, desc:'European sovereign AI. Heidelberg. Direct API only.'},
+  {lab:'LightOn', model:'LightOn', lat:48.856, lng:2.352, params:0, open:false, tier:'Mid', region:'Europe', costIn:null, costOut:null, onOR:false, host:null, desc:'European enterprise AI. Paris. Direct API only.'},
+  {lab:'DeepL', model:'DeepL Translate', lat:50.938, lng:6.957, params:0, open:false, tier:'Specialist', region:'Europe', costIn:null, costOut:null, onOR:false, host:null, desc:'Language/translation AI. Cologne. Direct API only.'},
+  {lab:'Stability AI', model:'Stable Diffusion', lat:51.507, lng:-0.127, params:0, open:true, tier:'Specialist', region:'Europe', costIn:null, costOut:null, onOR:false, host:null, desc:'Open image generation. London.'},
+  {lab:'Black Forest Labs', model:'Flux', lat:48.775, lng:9.182, params:0, open:true, tier:'Specialist', region:'Europe', costIn:null, costOut:null, onOR:false, host:null, desc:'Open image models. Stuttgart/Berlin.'},
 
   // === China ===
-  {lab:'DeepSeek', model:'DeepSeek V4 Pro', lat:30.274, lng:120.155, params:671, open:true, costOut:0.87, onOR:true, desc:'Hangzhou. Open reasoning giant. $0.44/$0.87. Served from CN + US (Together/DeepInfra).'},
-  {lab:'Qwen (Alibaba)', model:'Qwen 3.5 Plus', lat:30.274, lng:120.155, params:0, open:true, costOut:1.8, onOR:true, desc:'Hangzhou. Alibaba flagship. $0.30/$1.80. Served from CN + US providers.'},
-  {lab:'ByteDance', model:'Seed 1.6 Flash', lat:39.904, lng:116.407, params:0, open:false, costOut:0.3, onOR:true, desc:'Beijing. Doubao parent.'},
-  {lab:'Moonshot AI', model:'Kimi K2.7', lat:39.904, lng:116.407, params:0, open:false, costOut:2.03, onOR:true, desc:'Beijing. Kimi flagship.'},
-  {lab:'MiniMax', model:'MiniMax M2.5', lat:31.230, lng:121.473, params:0, open:false, costOut:0.48, onOR:true, desc:'Shanghai.'},
-  {lab:'Z.AI', model:'GLM 5.2', lat:31.230, lng:121.473, params:0, open:true, costOut:3, onOR:true, desc:'Shanghai. Open-weight GLM series.'},
-  {lab:'Tencent', model:'Hunyuan 3', lat:22.543, lng:114.057, params:0, open:false, costOut:0.21, onOR:true, desc:'Shenzhen. Most affordable major model.'},
-  {lab:'Baidu', model:'ERNIE 4.5 VL', lat:39.904, lng:116.407, params:0, open:false, costOut:1.25, onOR:true, desc:'Beijing. Multimodal vision.'},
-  {lab:'StepFun', model:'Step 3.5 Flash', lat:39.904, lng:116.407, params:0, open:false, costOut:0.3, onOR:true, desc:'Beijing.'},
-  {lab:'Xiaomi', model:'MiMo 2.5 Pro', lat:39.904, lng:116.407, params:0, open:false, costOut:0.87, onOR:true, desc:'Beijing. Xiaomi\'s entry.'},
+  {lab:'DeepSeek', model:'DeepSeek V4 Pro', lat:30.274, lng:120.155, params:671, open:true, tier:'Frontier', region:'China', costIn:0.44, costOut:0.87, onOR:true, host:'US', desc:'Open reasoning giant. Hangzhou. Also served from US (Together/DeepInfra).'},
+  {lab:'Qwen (Alibaba)', model:'Qwen 3.5 Plus', lat:30.274, lng:120.155, params:0, open:true, tier:'Frontier', region:'China', costIn:0.3, costOut:1.8, onOR:true, host:'US', desc:'Alibaba flagship. Hangzhou. Also served from US providers.'},
+  {lab:'Z.AI', model:'GLM 5.2', lat:31.230, lng:121.473, params:0, open:true, tier:'Frontier', region:'China', costIn:0.93, costOut:3, onOR:true, host:'US', desc:'Open-weight GLM series. Shanghai. Hostable in the West.'},
+  {lab:'Moonshot AI', model:'Kimi K2.7', lat:39.904, lng:116.407, params:0, open:false, tier:'Frontier', region:'China', costIn:0.38, costOut:2.03, onOR:true, host:null, desc:'Kimi flagship. Beijing. Closed — served from CN.'},
+  {lab:'MiniMax', model:'MiniMax M2.5', lat:31.230, lng:121.473, params:0, open:false, tier:'Strong', region:'China', costIn:0.12, costOut:0.48, onOR:true, host:null, desc:'Shanghai. Closed — served from CN.'},
+  {lab:'Tencent', model:'Hunyuan 3', lat:22.543, lng:114.057, params:0, open:false, tier:'Strong', region:'China', costIn:0.06, costOut:0.21, onOR:true, host:null, desc:'Shenzhen. Most affordable major model. Served from CN.'},
+  {lab:'Baidu', model:'ERNIE 4.5 VL', lat:39.904, lng:116.407, params:424, open:false, tier:'Strong', region:'China', costIn:0.42, costOut:1.25, onOR:true, host:null, desc:'Multimodal vision. Beijing. Served from CN.'},
+  {lab:'ByteDance', model:'Seed 1.6 Flash', lat:39.904, lng:116.407, params:0, open:false, tier:'Mid', region:'China', costIn:0.08, costOut:0.3, onOR:true, host:null, desc:'Doubao parent. Beijing. Served from CN.'},
+  {lab:'StepFun', model:'Step 3.5 Flash', lat:39.904, lng:116.407, params:0, open:false, tier:'Mid', region:'China', costIn:0.08, costOut:0.3, onOR:true, host:null, desc:'Beijing. Served from CN.'},
+  {lab:'Xiaomi', model:'MiMo 2.5 Pro', lat:39.904, lng:116.407, params:0, open:false, tier:'Strong', region:'China', costIn:0.3, costOut:0.87, onOR:true, host:null, desc:"Xiaomi's entry. Beijing. Served from CN."},
 
-  // === Middle East / Asia ===
-  {lab:'AI21', model:'Jamba Large 1.7', lat:32.085, lng:34.781, params:0, open:false, costOut:8, onOR:true, desc:'Tel Aviv. Jamba architecture.'},
-  {lab:'Upstage', model:'Solar Pro 3', lat:37.456, lng:127.148, params:0, open:true, costOut:0.6, onOR:true, desc:'Seongnam, South Korea.'},
-
-  // === Not on OpenRouter (rings) ===
-  {lab:'OpenAI', model:'o1 Pro (not on OR)', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:0, onOR:false, desc:'OpenAI\'s o1 Pro only via direct API.'},
-  {lab:'Anthropic', model:'Claude Opus (old)', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:0, onOR:false, desc:'Older Claude Opus, not on OR.'},
-  {lab:'Google', model:'Gemini Ultra (direct)', lat:37.422, lng:-122.084, params:0, open:false, costOut:0, onOR:false, desc:'Only via Google AI Studio / Vertex.'},
-  {lab:'xAI', model:'Grok 3 (direct)', lat:37.7749, lng:-122.4194, params:0, open:false, costOut:0, onOR:false, desc:'xAI flagship not on OpenRouter.'},
+  // === Other (Canada / Israel / Japan / Korea) ===
+  {lab:'Cohere', model:'Command A', lat:43.653, lng:-79.383, params:0, open:false, tier:'Strong', region:'Other', costIn:2.5, costOut:10, onOR:true, host:null, desc:'Enterprise flagship. Toronto/SF.'},
+  {lab:'AI21', model:'Jamba Large 1.7', lat:32.085, lng:34.781, params:0, open:false, tier:'Strong', region:'Other', costIn:2, costOut:8, onOR:true, host:null, desc:'Jamba (SSM-Transformer) architecture. Tel Aviv.'},
+  {lab:'Sakana AI', model:'Fugu Ultra', lat:35.676, lng:139.650, params:0, open:false, tier:'Specialist', region:'Other', costIn:5, costOut:30, onOR:true, host:null, desc:'Multi-agent orchestration system. Tokyo.'},
+  {lab:'Upstage', model:'Solar Pro 3', lat:37.456, lng:127.148, params:0, open:true, tier:'Mid', region:'Other', costIn:0.15, costOut:0.6, onOR:true, host:null, desc:'Open model. Seongnam, South Korea.'},
 ];
 
+// US hosting hub (US-East, e.g. Virginia) — arc target for open models routinely served from the West.
+const HOST_HUB = { US: { lat: 39.0, lng: -77.5 } };
+
 function getColor(cost) {
+  if (cost === null || cost === undefined) return '#5a6a8a';
   if (cost === 0) return '#2d8a4e';
   if (cost < 1) return '#3da55e';
   if (cost < 5) return '#8ab832';
@@ -127,76 +167,97 @@ function getColor(cost) {
   return '#a01020';
 }
 
-function getSize(params) {
-  if (!params || params === 0) return 14;
-  if (params < 10) return 8;
-  if (params < 50) return 12;
-  if (params < 200) return 16;
-  if (params < 500) return 20;
-  return 24;
+function getSize(tier) {
+  if (tier === 'Frontier') return 22;
+  if (tier === 'Strong') return 16;
+  if (tier === 'Mid') return 11;
+  return 8;
+}
+
+function arcPoints(from, to) {
+  const pts = [];
+  const midLat = (from.lat + to.lat) / 2 + 22;
+  const midLng = (from.lng + to.lng) / 2;
+  for (let i = 0; i <= 24; i++) {
+    const t = i / 24, u = 1 - t;
+    const lat = u*u*from.lat + 2*u*t*midLat + t*t*to.lat;
+    const lng = u*u*from.lng + 2*u*t*midLng + t*t*to.lng;
+    pts.push([lat, lng]);
+  }
+  return pts;
 }
 
 const map = L.map('map', {
-  center: [20, 0],
-  zoom: 2,
-  minZoom: 2,
-  maxZoom: 6,
-  worldCopyJump: true,
-  zoomControl: true,
-  attributionControl: false
+  center: [30, 10], zoom: 2, minZoom: 2, maxZoom: 6,
+  worldCopyJump: true, zoomControl: true, attributionControl: false
 });
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  maxZoom: 19
-}).addTo(map);
-
+const flowGroup = L.layerGroup().addTo(map);
 const markerGroup = L.layerGroup().addTo(map);
+const TIER_RANK = { Frontier: 0, Strong: 1, Mid: 2, Specialist: 3 };
 
-function buildMarkers() {
-  markerGroup.clearLayers();
-  
+function visible(m) {
   const showOpen = document.getElementById('showOpen').checked;
   const showClosed = document.getElementById('showClosed').checked;
   const showNotOR = document.getElementById('showNotOR').checked;
+  const region = document.getElementById('region').value;
+  const tier = document.getElementById('tier').value;
+  if (m.open && !showOpen) return false;
+  if (!m.open && !showClosed) return false;
+  if (!m.onOR && !showNotOR) return false;
+  if (region !== 'all' && m.region !== region) return false;
+  if (tier !== 'all' && m.tier !== tier) return false;
+  return true;
+}
 
-  models.forEach(m => {
-    if (m.open && !showOpen) return;
-    if (!m.open && !showClosed) return;
-    if (!m.onOR && !showNotOR) return;
+window.buildMarkers = function() {
+  markerGroup.clearLayers();
+  flowGroup.clearLayers();
+  const showFlows = document.getElementById('showFlows').checked;
+  const rows = models.filter(visible).sort((a,b) => TIER_RANK[b.tier] - TIER_RANK[a.tier]);
 
-    const size = getSize(m.params);
+  rows.forEach(m => {
+    if (showFlows && m.open && m.host && HOST_HUB[m.host]) {
+      L.polyline(arcPoints({lat:m.lat,lng:m.lng}, HOST_HUB[m.host]),
+        { color:'#3fae7a', weight:1.4, opacity:0.5, dashArray:'4 6' }).addTo(flowGroup);
+    }
+  });
+
+  rows.forEach(m => {
+    const size = getSize(m.tier);
     const color = getColor(m.costOut);
-    const shape = m.open ? 'circle' : 'ring';
+    const priceLine = m.costOut === null ? 'Not token-priced'
+      : (m.costOut === 0 ? 'Free tier'
+      : `${m.costIn !== null && m.costIn !== undefined ? '$'+m.costIn+' / ' : ''}$${m.costOut} per 1M out`);
+    const hostTag = (m.open && m.host) ? `<span class="tag tag-host">hostable in ${m.host}</span>` : '';
+    const tierCls = 'tag-' + (m.tier === 'Specialist' ? 'spec' : m.tier.toLowerCase());
 
     const html = `
       <div class="popup-content">
         <div class="model-name">${m.lab}: ${m.model}</div>
-        <div style="margin:4px 0">
-          <span class="tag ${m.open ? 'tag-open' : 'tag-closed'}">${m.open ? '🟢 Open weights' : '🔴 Closed weights'}</span>
-          <span class="tag ${m.onOR ? 'tag-or' : 'tag-not-or'}">${m.onOR ? 'On OpenRouter' : 'Not on OpenRouter'}</span>
+        <div style="margin:5px 0">
+          <span class="tag ${m.open ? 'tag-open' : 'tag-closed'}">${m.open ? 'Open weights' : 'Closed weights'}</span>
+          <span class="tag ${tierCls}">${m.tier}</span>
+          ${hostTag}
         </div>
-        ${m.params ? `<div>Parameters: ${m.params}B</div>` : ''}
-        <div class="price">${m.costOut > 0 ? `Output: $${m.costOut}/1M tokens` : 'Free tier'}</div>
+        <div style="color:#8899bb;font-size:12px">Origin: ${m.region}${m.params ? ' &middot; '+m.params+'B params' : ''} &middot; ${m.onOR ? 'on OpenRouter' : 'direct API only'}</div>
+        <div class="price">${priceLine}</div>
         <div style="margin-top:4px;color:#8899bb;font-size:12px">${m.desc}</div>
-      </div>
-    `;
+      </div>`;
 
     const icon = L.divIcon({
-      html: shape === 'circle'
-        ? `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid rgba(255,255,255,0.4);opacity:0.9;box-shadow:0 0 8px ${color}44"></div>`
-        : `<div style="width:${size}px;height:${size}px;border-radius:50%;background:transparent;border:3px solid ${color};opacity:0.85;display:flex;align-items:center;justify-content:center"><div style="width:${size*0.35}px;height:${size*0.35}px;border-radius:50%;background:${color};opacity:0.5"></div></div>`,
-      className: '',
-      iconSize: [size, size],
-      iconAnchor: [size/2, size/2]
+      html: m.open
+        ? `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid rgba(255,255,255,0.4);opacity:0.92;box-shadow:0 0 8px ${color}44"></div>`
+        : `<div style="width:${size}px;height:${size}px;border-radius:50%;background:transparent;border:3px solid ${color};opacity:0.9;display:flex;align-items:center;justify-content:center"><div style="width:${size*0.32}px;height:${size*0.32}px;border-radius:50%;background:${color};opacity:0.55"></div></div>`,
+      className: '', iconSize: [size, size], iconAnchor: [size/2, size/2]
     });
 
-    const marker = L.marker([m.lat, m.lng], { icon });
-    marker.bindPopup(html, { className: 'dark-popup', maxWidth: 320 });
-    markerGroup.addLayer(marker);
+    L.marker([m.lat, m.lng], { icon })
+      .bindPopup(html, { maxWidth: 300 })
+      .addTo(markerGroup);
   });
-}
-
-window.toggleFilter = function() { buildMarkers(); };
+};
 
 buildMarkers();
 </script>
