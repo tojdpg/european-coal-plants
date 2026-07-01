@@ -35,7 +35,7 @@ routinely **hostable in the West** even though its origin is elsewhere.
 | 27 | Black Forest Labs | Flux | ✅ | Specialist | — | — | — | — | Stuttgart / Berlin, DE | anywhere | ❌ |
 | 28 | DeepSeek | DeepSeek V4 Pro | ✅ | Frontier | $0.44 | $0.87 | 1.05M | 671B MoE | Hangzhou, CN | **CN + US/EU** | ✅ |
 | 29 | Qwen (Alibaba) | Qwen 3.5 Plus | ✅ | Frontier | $0.30 | $1.80 | 1M | — | Hangzhou, CN | **CN + US/EU** | ✅ |
-| 30 | Z.AI | GLM 5.2 | ✅ | Frontier | $0.93 | $3 | 1.05M | — | Shanghai, CN | **CN + US** | ✅ |
+| 30 | Z.AI | GLM 5.2 | ✅ | Frontier | $0.93 | $3 | 1.05M | — | Shanghai, CN | **CN + US/EU** | ✅ |
 | 31 | Moonshot AI | Kimi K2.7 | ❌ | Frontier | $0.38 | $2.03 | 262K | — | Beijing, CN | CN | ✅ |
 | 32 | MiniMax | MiniMax M2.5 | ❌ | Strong | $0.12 | $0.48 | 205K | — | Shanghai, CN | CN | ✅ |
 | 33 | Tencent | Hunyuan 3 | ❌ | Strong | $0.06 | $0.21 | 262K | — | Shenzhen, CN | CN | ✅ |

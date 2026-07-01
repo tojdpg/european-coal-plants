@@ -42,7 +42,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .leaflet-popup-content-wrapper { background: #10162a; color: #e0e4f0; border: 1px solid #2a3050; }
 .leaflet-popup-tip { background: #10162a; }
 .mobile-tabs { display: none; }
-@media (max-width: 640px) {
+@media (max-width: 640px), (max-height: 520px) {
   .header { top: 8px; padding: 8px 14px; max-width: 92vw; }
   .header h1 { font-size: 14px; }
   .header span { font-size: 10px; line-height: 1.4; }
@@ -163,9 +163,9 @@ const models = [
   {lab:'Black Forest Labs', model:'Flux', lat:48.775, lng:9.182, params:0, open:true, tier:'Specialist', region:'Europe', costIn:null, costOut:null, onOR:false, host:null, desc:'Open image models. Stuttgart/Berlin.'},
 
   // === China ===
-  {lab:'DeepSeek', model:'DeepSeek V4 Pro', lat:30.274, lng:120.155, params:671, open:true, tier:'Frontier', region:'China', costIn:0.44, costOut:0.87, onOR:true, host:'US', desc:'Open reasoning giant. Hangzhou. Also served from US (Together/DeepInfra).'},
-  {lab:'Qwen (Alibaba)', model:'Qwen 3.5 Plus', lat:30.274, lng:120.155, params:0, open:true, tier:'Frontier', region:'China', costIn:0.3, costOut:1.8, onOR:true, host:'US', desc:'Alibaba flagship. Hangzhou. Also served from US providers.'},
-  {lab:'Z.AI', model:'GLM 5.2', lat:31.230, lng:121.473, params:0, open:true, tier:'Frontier', region:'China', costIn:0.93, costOut:3, onOR:true, host:'US', desc:'Open-weight GLM series. Shanghai. Hostable in the West.'},
+  {lab:'DeepSeek', model:'DeepSeek V4 Pro', lat:30.274, lng:120.155, params:671, open:true, tier:'Frontier', region:'China', costIn:0.44, costOut:0.87, onOR:true, host:['US','EU'], desc:'Open reasoning giant. Hangzhou. Also served from US and EU providers (Together, DeepInfra, Nebius, OVHcloud).'},
+  {lab:'Qwen (Alibaba)', model:'Qwen 3.5 Plus', lat:30.274, lng:120.155, params:0, open:true, tier:'Frontier', region:'China', costIn:0.3, costOut:1.8, onOR:true, host:['US','EU'], desc:'Alibaba flagship. Hangzhou. Also served from US and EU providers.'},
+  {lab:'Z.AI', model:'GLM 5.2', lat:31.230, lng:121.473, params:0, open:true, tier:'Frontier', region:'China', costIn:0.93, costOut:3, onOR:true, host:['US','EU'], desc:'Open-weight GLM series. Shanghai. Hostable on US and EU infra.'},
   {lab:'Moonshot AI', model:'Kimi K2.7', lat:39.904, lng:116.407, params:0, open:false, tier:'Frontier', region:'China', costIn:0.38, costOut:2.03, onOR:true, host:null, desc:'Kimi flagship. Beijing. Closed — served from CN.'},
   {lab:'MiniMax', model:'MiniMax M2.5', lat:31.230, lng:121.473, params:0, open:false, tier:'Strong', region:'China', costIn:0.12, costOut:0.48, onOR:true, host:null, desc:'Shanghai. Closed — served from CN.'},
   {lab:'Tencent', model:'Hunyuan 3', lat:22.543, lng:114.057, params:0, open:false, tier:'Strong', region:'China', costIn:0.06, costOut:0.21, onOR:true, host:null, desc:'Shenzhen. Most affordable major model. Served from CN.'},
@@ -181,8 +181,9 @@ const models = [
   {lab:'Upstage', model:'Solar Pro 3', lat:37.456, lng:127.148, params:0, open:true, tier:'Mid', region:'Other', costIn:0.15, costOut:0.6, onOR:true, host:null, desc:'Open model. Seongnam, South Korea.'},
 ];
 
-// US hosting hub (US-East, e.g. Virginia) — arc target for open models routinely served from the West.
-const HOST_HUB = { US: { lat: 39.0, lng: -77.5 } };
+// Western hosting hubs — arc targets for open models routinely served outside their origin.
+// US-East (Virginia) and EU (Frankfurt). EU providers (Nebius, OVHcloud, Scaleway) serve the open Chinese models too.
+const HOST_HUB = { US: { lat: 39.0, lng: -77.5 }, EU: { lat: 50.11, lng: 8.68 } };
 
 function getColor(cost) {
   if (cost === null || cost === undefined) return '#5a6a8a';
@@ -270,9 +271,11 @@ window.buildMarkers = function() {
 
   rows.forEach(m => {
     if (m._leg) L.polyline(m._leg, { color:'#3a4260', weight:1, opacity:0.5 }).addTo(markerGroup);
-    if (showFlows && m.open && m.host && HOST_HUB[m.host]) {
-      L.polyline(arcPoints({lat:m._pos[0],lng:m._pos[1]}, HOST_HUB[m.host]),
-        { color:'#3fae7a', weight:1.4, opacity:0.5, dashArray:'4 6' }).addTo(flowGroup);
+    if (showFlows && m.open && Array.isArray(m.host)) {
+      m.host.forEach(h => {
+        if (HOST_HUB[h]) L.polyline(arcPoints({lat:m._pos[0],lng:m._pos[1]}, HOST_HUB[h]),
+          { color:'#3fae7a', weight:1.4, opacity:0.5, dashArray:'4 6' }).addTo(flowGroup);
+      });
     }
   });
 
@@ -282,7 +285,7 @@ window.buildMarkers = function() {
     const priceLine = m.costOut === null ? 'Not token-priced'
       : (m.costOut === 0 ? 'Free tier'
       : `${m.costIn !== null && m.costIn !== undefined ? '$'+m.costIn+' / ' : ''}$${m.costOut} per 1M out`);
-    const hostTag = (m.open && m.host) ? `<span class="tag tag-host">hostable in ${m.host}</span>` : '';
+    const hostTag = (m.open && Array.isArray(m.host)) ? `<span class="tag tag-host">hostable in ${m.host.join('/')}</span>` : '';
     const tierCls = 'tag-' + (m.tier === 'Specialist' ? 'spec' : m.tier.toLowerCase());
 
     const html = `

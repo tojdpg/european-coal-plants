@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Model World Map — One Page</title>
+<style>
+@page { size: A4 landscape; margin: 7mm; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; background: #fff; width: 283mm; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #0f172a; padding-bottom: 4px; margin-bottom: 5px; }
+.head h1 { font-size: 17px; color: #0f172a; letter-spacing: 0.2px; }
+.head .sub { font-size: 9px; color: #64748b; margin-top: 1px; }
+.head .date { font-size: 9px; color: #64748b; text-align: right; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 8.5px; color: #475569; margin: 4px 0 5px; align-items: center; }
+.legend b { color: #0f172a; }
+.legend .it { display: flex; align-items: center; gap: 4px; }
+.sw { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.szdot { background: #64748b; border-radius: 50%; display: inline-block; }
+#map { width: 100%; height: 96mm; }
+.wmland { fill: #eef2f7; stroke: #cbd5e1; stroke-width: 0.5; }
+.wmflow { fill: none; stroke: #0d9488; stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.75; }
+.wmlabel { font-size: 7px; fill: #0f172a; font-weight: 600; }
+.tables { display: flex; gap: 8px; margin-top: 5px; }
+.tables table { width: 50%; border-collapse: collapse; font-size: 7px; }
+.tables th { text-align: left; background: #0f172a; color: #fff; padding: 2px 3px; font-weight: 600; font-size: 6.5px; text-transform: uppercase; letter-spacing: 0.3px; }
+.tables td { padding: 1.6px 3px; border-bottom: 0.4px solid #e2e8f0; white-space: nowrap; }
+.tables tr:nth-child(even) td { background: #f8fafc; }
+.mdl { font-weight: 600; color: #0f172a; }
+.lab { color: #64748b; }
+.pill { display: inline-block; padding: 0 4px; border-radius: 5px; font-size: 6px; font-weight: 700; }
+.p-open { background: #dcfce7; color: #15803d; }
+.p-closed { background: #f1f5f9; color: #64748b; }
+.tier { font-weight: 600; }
+.t-Frontier { color: #6d28d9; }
+.t-Strong { color: #1d4ed8; }
+.t-Mid { color: #0f766e; }
+.t-Specialist { color: #b45309; }
+.cdot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; vertical-align: -1px; margin-right: 2px; }
+.foot { font-size: 7px; color: #94a3b8; margin-top: 4px; text-align: right; }
+</style>
+</head>
+<body>
+<div class="head">
+  <div>
+    <h1>AI Model World Map</h1>
+    <div class="sub">41 models &middot; origin, hosting, capability &amp; cost &middot; where open Chinese models can be run in the West</div>
+  </div>
+  <div class="date">July 2026<br>tojdpg.github.io/european-coal-plants</div>
+</div>
+<div class="legend">
+  <span class="it"><b>Cost (out $/M):</b></span>
+  <span class="it"><span class="sw" style="background:#16a34a"></span>&lt;1</span>
+  <span class="it"><span class="sw" style="background:#84cc16"></span>1–5</span>
+  <span class="it"><span class="sw" style="background:#f59e0b"></span>5–15</span>
+  <span class="it"><span class="sw" style="background:#ef4444"></span>15–50</span>
+  <span class="it"><span class="sw" style="background:#b91c1c"></span>&gt;50</span>
+  <span class="it"><span class="sw" style="background:#94a3b8"></span>not priced</span>
+  <span class="it"><b>Size = capability:</b> <span class="szdot" style="width:14px;height:14px;background:#64748b"></span>Frontier <span class="szdot" style="width:7px;height:7px;background:#64748b"></span>Spec.</span>
+  <span class="it"><b>&#9679;</b> open <b>&#9678;</b> closed</span>
+  <span class="it"><span style="display:inline-block;width:16px;border-top:1.5px dashed #0d9488"></span> hostable in US/EU</span>
+</div>
+<svg id="map" viewBox="0 0 1000 372" preserveAspectRatio="xMidYMid meet"></svg>
+<div class="tables">
+  <table id="tbl-left"></table>
+  <table id="tbl-right"></table>
+</div>
+<div class="foot">Source: OpenRouter /api/v1/models (Jul 2026) + lab HQ &amp; known inference providers (incl. EU: Nebius, OVHcloud, Scaleway). Capability = model-class estimate, not a benchmark ranking.</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson@3.0.2/dist/topojson.min.js"></script>
+<script>
+const M = [
+  {lab:'OpenAI',model:'GPT-5.4 Pro',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:30,cout:180,host:null},
+  {lab:'OpenAI',model:'o3 Deep Research',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:null,cout:60,host:null},
+  {lab:'Anthropic',model:'Claude Fable 5',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:10,cout:50,host:null},
+  {lab:'Anthropic',model:'Claude Sonnet 5',lat:37.77,lng:-122.42,open:0,tier:'Strong',region:'US',cin:2,cout:10,host:null},
+  {lab:'Google',model:'Gemini 3.5 Flash',lat:37.42,lng:-122.08,open:0,tier:'Strong',region:'US',cin:1.5,cout:9,host:null},
+  {lab:'Google',model:'Gemma 4 26B',lat:37.42,lng:-122.08,open:1,tier:'Mid',region:'US',cin:0,cout:0,host:null},
+  {lab:'Meta',model:'Llama 4 Maverick',lat:37.48,lng:-122.15,open:1,tier:'Strong',region:'US',cin:0.18,cout:0.4,host:null},
+  {lab:'xAI',model:'Grok Build 0.1',lat:37.77,lng:-122.42,open:0,tier:'Strong',region:'US',cin:1,cout:2,host:null},
+  {lab:'Perplexity',model:'Sonar Pro Search',lat:37.77,lng:-122.42,open:0,tier:'Specialist',region:'US',cin:3,cout:15,host:null},
+  {lab:'Writer',model:'Palmyra X5',lat:37.77,lng:-122.42,open:0,tier:'Strong',region:'US',cin:0.6,cout:6,host:null},
+  {lab:'Inflection',model:'Inflection 3',lat:37.44,lng:-122.16,open:0,tier:'Strong',region:'US',cin:2.5,cout:10,host:null},
+  {lab:'Nvidia',model:'Nemotron 3.5 4B',lat:37.40,lng:-121.96,open:1,tier:'Mid',region:'US',cin:0,cout:0,host:null},
+  {lab:'AI2 (Allen)',model:'OLMo 3 32B Think',lat:47.61,lng:-122.33,open:1,tier:'Mid',region:'US',cin:0.15,cout:0.5,host:null},
+  {lab:'Microsoft',model:'Phi-4',lat:47.67,lng:-122.12,open:1,tier:'Mid',region:'US',cin:0.07,cout:0.14,host:null},
+  {lab:'IBM',model:'Granite 4.1 8B',lat:41.20,lng:-73.72,open:1,tier:'Mid',region:'US',cin:0.05,cout:0.1,host:null},
+  {lab:'Liquid',model:'LFM 2.5 1.2B',lat:40.73,lng:-74.00,open:1,tier:'Mid',region:'US',cin:0,cout:0,host:null},
+  {lab:'Nous Research',model:'Hermes 4 405B',lat:34.05,lng:-118.24,open:1,tier:'Strong',region:'US',cin:1,cout:3,host:null},
+  {lab:'Mistral AI',model:'Mistral Large 2512',lat:48.86,lng:2.35,open:1,tier:'Strong',region:'Europe',cin:0.5,cout:1.5,host:null},
+  {lab:'Mistral AI',model:'Mistral Small 3.1 24B',lat:48.86,lng:2.35,open:1,tier:'Mid',region:'Europe',cin:0,cout:0,host:null},
+  {lab:'Poolside',model:'Laguna XS.2',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:0,cout:0,host:null},
+  {lab:'DeepCogito',model:'Cogito V2.1 671B',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:1.25,cout:1.25,host:null},
+  {lab:'Reka AI',model:'Reka Edge',lat:51.51,lng:-0.13,open:1,tier:'Mid',region:'Europe',cin:0.05,cout:0.1,host:null},
+  {lab:'Aleph Alpha',model:'Luminous',lat:49.42,lng:8.68,open:0,tier:'Mid',region:'Europe',cin:null,cout:null,host:null},
+  {lab:'LightOn',model:'LightOn',lat:48.86,lng:2.35,open:0,tier:'Mid',region:'Europe',cin:null,cout:null,host:null},
+  {lab:'DeepL',model:'DeepL Translate',lat:50.94,lng:6.96,open:0,tier:'Specialist',region:'Europe',cin:null,cout:null,host:null},
+  {lab:'Stability AI',model:'Stable Diffusion',lat:51.51,lng:-0.13,open:1,tier:'Specialist',region:'Europe',cin:null,cout:null,host:null},
+  {lab:'Black Forest Labs',model:'Flux',lat:48.78,lng:9.18,open:1,tier:'Specialist',region:'Europe',cin:null,cout:null,host:null},
+  {lab:'DeepSeek',model:'DeepSeek V4 Pro',lat:30.27,lng:120.16,open:1,tier:'Frontier',region:'China',cin:0.44,cout:0.87,host:['US','EU']},
+  {lab:'Qwen (Alibaba)',model:'Qwen 3.5 Plus',lat:30.27,lng:120.16,open:1,tier:'Frontier',region:'China',cin:0.3,cout:1.8,host:['US','EU']},
+  {lab:'Z.AI',model:'GLM 5.2',lat:31.23,lng:121.47,open:1,tier:'Frontier',region:'China',cin:0.93,cout:3,host:['US','EU']},
+  {lab:'Moonshot AI',model:'Kimi K2.7',lat:39.90,lng:116.41,open:0,tier:'Frontier',region:'China',cin:0.38,cout:2.03,host:null},
+  {lab:'MiniMax',model:'MiniMax M2.5',lat:31.23,lng:121.47,open:0,tier:'Strong',region:'China',cin:0.12,cout:0.48,host:null},
+  {lab:'Tencent',model:'Hunyuan 3',lat:22.54,lng:114.06,open:0,tier:'Strong',region:'China',cin:0.06,cout:0.21,host:null},
+  {lab:'Baidu',model:'ERNIE 4.5 VL',lat:39.90,lng:116.41,open:0,tier:'Strong',region:'China',cin:0.42,cout:1.25,host:null},
+  {lab:'ByteDance',model:'Seed 1.6 Flash',lat:39.90,lng:116.41,open:0,tier:'Mid',region:'China',cin:0.08,cout:0.3,host:null},
+  {lab:'StepFun',model:'Step 3.5 Flash',lat:39.90,lng:116.41,open:0,tier:'Mid',region:'China',cin:0.08,cout:0.3,host:null},
+  {lab:'Xiaomi',model:'MiMo 2.5 Pro',lat:39.90,lng:116.41,open:0,tier:'Strong',region:'China',cin:0.3,cout:0.87,host:null},
+  {lab:'Cohere',model:'Command A',lat:43.65,lng:-79.38,open:0,tier:'Strong',region:'Other',cin:2.5,cout:10,host:null},
+  {lab:'AI21',model:'Jamba Large 1.7',lat:32.09,lng:34.78,open:0,tier:'Strong',region:'Other',cin:2,cout:8,host:null},
+  {lab:'Sakana AI',model:'Fugu Ultra',lat:35.68,lng:139.65,open:0,tier:'Specialist',region:'Other',cin:5,cout:30,host:null},
+  {lab:'Upstage',model:'Solar Pro 3',lat:37.46,lng:127.15,open:1,tier:'Mid',region:'Other',cin:0.15,cout:0.6,host:null}
+];
+const HUB = { US:{lat:39.0,lng:-77.5}, EU:{lat:50.11,lng:8.68} };
+const TR = {Frontier:8,Strong:6,Mid:4.5,Specialist:3.5};
+function cc(v){ if(v===null||v===undefined) return '#94a3b8'; if(v<1) return '#16a34a'; if(v<5) return '#84cc16'; if(v<15) return '#f59e0b'; if(v<50) return '#ef4444'; return '#b91c1c'; }
+function fmt(v){ return v===null||v===undefined ? '—' : (v===0 ? 'free' : '$'+v); }
+
+function buildTables(){
+  const cols = '<tr><th>Model</th><th>Open</th><th>Tier</th><th>In</th><th>Out</th><th>Origin</th><th>Host</th></tr>';
+  function row(m){
+    const host = Array.isArray(m.host) ? m.host.join('/') : (m.region==='China'?'CN':m.region==='US'?'US':m.region==='Europe'?'EU':m.region);
+    return '<tr><td><span class="mdl">'+m.model+'</span> <span class="lab">'+m.lab+'</span></td>'+
+      '<td><span class="pill '+(m.open?'p-open':'p-closed')+'">'+(m.open?'open':'closed')+'</span></td>'+
+      '<td class="tier t-'+m.tier+'">'+m.tier+'</td>'+
+      '<td>'+fmt(m.cin)+'</td>'+
+      '<td><span class="cdot" style="background:'+cc(m.cout)+'"></span>'+fmt(m.cout)+'</td>'+
+      '<td>'+m.region+'</td><td>'+host+'</td></tr>';
+  }
+  document.getElementById('tbl-left').innerHTML = cols + M.slice(0,21).map(row).join('');
+  document.getElementById('tbl-right').innerHTML = cols + M.slice(21).map(row).join('');
+}
+buildTables();
+
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(topo){
+  const W=1000,H=372, svg=d3.select('#map');
+  const land=topojson.feature(topo,topo.objects.countries);
+  const proj=d3.geoNaturalEarth1().fitExtent([[8,6],[W-8,H-6]],land);
+  const path=d3.geoPath(proj);
+  svg.append('g').selectAll('path').data(land.features).join('path').attr('class','wmland').attr('d',path);
+  const flowG=svg.append('g'), dotG=svg.append('g');
+  const groups={};
+  M.forEach(m=>{ const p=proj([m.lng,m.lat]); m._x=p[0]; m._y=p[1]; const k=Math.round(p[0]/7)+','+Math.round(p[1]/7); (groups[k]=groups[k]||[]).push(m); });
+  Object.values(groups).forEach(g=>{ if(g.length>1){ const R=Math.min(5+g.length*1.7,16); g.forEach((m,i)=>{ const a=(i/g.length)*2*Math.PI-Math.PI/2; m._x+=Math.cos(a)*R; m._y+=Math.sin(a)*R; }); } });
+  M.forEach(m=>{ if(m.open && Array.isArray(m.host)){ m.host.forEach(h=>{ const t=proj([HUB[h].lng,HUB[h].lat]); const mx=(m._x+t[0])/2, my=(m._y+t[1])/2-42; flowG.append('path').attr('class','wmflow').attr('d','M'+m._x+','+m._y+' Q'+mx+','+my+' '+t[0]+','+t[1]); }); } });
+  dotG.selectAll('circle').data(M).join('circle')
+    .attr('cx',m=>m._x).attr('cy',m=>m._y).attr('r',m=>TR[m.tier])
+    .attr('fill',m=>m.open?cc(m.cout):'#fff')
+    .attr('stroke',m=>cc(m.cout)).attr('stroke-width',m=>m.open?0.6:1.8).attr('opacity',0.95);
+  document.title='AI-Model-World-Map';
+});
+</script>
+</body>
+</html>
