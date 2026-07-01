@@ -33,7 +33,6 @@ body { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-se
 .t-Frontier { color: #6d28d9; } .t-Strong { color: #1d4ed8; } .t-Mid { color: #0f766e; } .t-Specialist { color: #b45309; }
 .cdot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; vertical-align: -1px; margin-right: 2px; }
 .foot { font-size: 7px; color: #94a3b8; margin-top: 4px; text-align: right; }
-h2.pt { font-size: 12px; color: #0f172a; margin: 4px 0 3px; }
 </style>
 </head>
 <body>
@@ -41,7 +40,7 @@ h2.pt { font-size: 12px; color: #0f172a; margin: 4px 0 3px; }
   <div class="head">
     <div>
       <h1>AI Model World Map — where models come from, and where you can run them</h1>
-      <div class="sub">44 models across the US, Europe, China and other hubs &middot; bubble size = est. scale &middot; colour = output cost &middot; ring = closed weights</div>
+      <div class="sub">46 models &middot; prices = OpenRouter hosted inference (Jul 2026) &middot; bubble size = est. scale &middot; colour = output cost &middot; ring = closed weights</div>
     </div>
     <div class="date">July 2026<br>tojdpg.github.io/european-coal-plants</div>
   </div>
@@ -52,7 +51,7 @@ h2.pt { font-size: 12px; color: #0f172a; margin: 4px 0 3px; }
     <span class="it"><span class="sw" style="background:#f59e0b"></span>5–15</span>
     <span class="it"><span class="sw" style="background:#ef4444"></span>15–50</span>
     <span class="it"><span class="sw" style="background:#b91c1c"></span>&gt;50</span>
-    <span class="it"><span class="sw" style="background:#94a3b8"></span>not priced</span>
+    <span class="it"><span class="sw" style="background:#94a3b8"></span>not on OpenRouter</span>
     <span class="it"><b>Size = scale:</b> <span class="szdot" style="width:15px;height:15px;background:#64748b"></span>~1–2T <span class="szdot" style="width:9px;height:9px;background:#64748b"></span>~400B <span class="szdot" style="width:5px;height:5px;background:#64748b"></span>~10–30B</span>
     <span class="it"><b>&#9679;</b> open (hostable in US/EU) &nbsp; <b>&#9678;</b> closed (bound to origin)</span>
   </div>
@@ -60,89 +59,91 @@ h2.pt { font-size: 12px; color: #0f172a; margin: 4px 0 3px; }
 </div>
 <div class="page">
   <div class="head">
-    <div><h1>AI Model World Map — facts &amp; figures</h1><div class="sub">44 models &middot; input / output price per 1M tokens, capability tier, origin and hosting</div></div>
+    <div><h1>AI Model World Map — facts &amp; figures</h1><div class="sub">46 models &middot; OpenRouter price per 1M tokens (in / out), capability tier, origin and hosting</div></div>
     <div class="date">July 2026</div>
   </div>
   <div class="tables"><table id="tbl-left"></table><table id="tbl-right"></table></div>
-  <div class="foot">Source: OpenRouter /api/v1/models (Jul 2026) + lab HQ &amp; known inference providers (incl. EU: Nebius, OVHcloud, Scaleway). Capability = model-class estimate; closed-model scale figures are public estimates, not exact specs.</div>
+  <div class="foot">Prices from OpenRouter /api/v1/models (Jul 2026). Open-weight models are only free if you self-host. "n/a" = not on OpenRouter (image, translation, or sovereign/direct-API labs). Capability &amp; scale = model-class estimates, not benchmarks.</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson@3.0.2/dist/topojson.min.js"></script>
 <script>
 const M = [
-  {lab:'OpenAI',model:'GPT-5.4 Pro',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:30,cout:180,host:null},
-  {lab:'OpenAI',model:'o3 Deep Research',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:null,cout:60,host:null},
+  {lab:'OpenAI',model:'GPT-5.5 Pro',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:30,cout:180,host:null},
+  {lab:'OpenAI',model:'GPT-5.5',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:5,cout:30,host:null},
   {lab:'Anthropic',model:'Claude Fable 5',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:10,cout:50,host:null},
+  {lab:'Anthropic',model:'Claude Opus 4.8',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:5,cout:25,host:null},
   {lab:'Anthropic',model:'Claude Sonnet 5',lat:37.77,lng:-122.42,open:0,tier:'Strong',region:'US',cin:2,cout:10,host:null},
+  {lab:'Google',model:'Gemini 3 Pro',lat:37.42,lng:-122.08,open:0,tier:'Frontier',region:'US',cin:2,cout:12,host:null},
   {lab:'Google',model:'Gemini 3.5 Flash',lat:37.42,lng:-122.08,open:0,tier:'Strong',region:'US',cin:1.5,cout:9,host:null},
-  {lab:'Google',model:'Gemma 4 26B',lat:37.42,lng:-122.08,open:1,tier:'Mid',region:'US',cin:0,cout:0,host:null},
-  {lab:'Meta',model:'Llama 4 Maverick',lat:37.48,lng:-122.15,open:1,tier:'Strong',region:'US',cin:0.18,cout:0.4,host:null},
-  {lab:'xAI',model:'Grok Build 0.1',lat:37.77,lng:-122.42,open:0,tier:'Strong',region:'US',cin:1,cout:2,host:null},
+  {lab:'Google',model:'Gemma 4 26B',lat:37.42,lng:-122.08,open:1,tier:'Mid',region:'US',cin:0.06,cout:0.33,host:null},
+  {lab:'Meta',model:'Llama 4 Maverick',lat:37.48,lng:-122.15,open:1,tier:'Strong',region:'US',cin:0.15,cout:0.6,host:null},
+  {lab:'xAI',model:'Grok 4.3',lat:37.77,lng:-122.42,open:0,tier:'Frontier',region:'US',cin:1.25,cout:2.5,host:null},
   {lab:'Perplexity',model:'Sonar Pro Search',lat:37.77,lng:-122.42,open:0,tier:'Specialist',region:'US',cin:3,cout:15,host:null},
   {lab:'Writer',model:'Palmyra X5',lat:37.77,lng:-122.42,open:0,tier:'Strong',region:'US',cin:0.6,cout:6,host:null},
   {lab:'Inflection',model:'Inflection 3',lat:37.44,lng:-122.16,open:0,tier:'Strong',region:'US',cin:2.5,cout:10,host:null},
-  {lab:'Nvidia',model:'Nemotron 3.5 4B',lat:37.40,lng:-121.96,open:1,tier:'Mid',region:'US',cin:0,cout:0,host:null},
+  {lab:'Nvidia',model:'Nemotron 3 Ultra 550B',lat:37.40,lng:-121.96,open:1,tier:'Strong',region:'US',cin:0.5,cout:2.2,host:null},
   {lab:'AI2 (Allen)',model:'OLMo 3 32B Think',lat:47.61,lng:-122.33,open:1,tier:'Mid',region:'US',cin:0.15,cout:0.5,host:null},
   {lab:'Microsoft',model:'Phi-4',lat:47.67,lng:-122.12,open:1,tier:'Mid',region:'US',cin:0.07,cout:0.14,host:null},
   {lab:'IBM',model:'Granite 4.1 8B',lat:41.20,lng:-73.72,open:1,tier:'Mid',region:'US',cin:0.05,cout:0.1,host:null},
-  {lab:'Liquid',model:'LFM 2.5 1.2B',lat:40.73,lng:-74.00,open:1,tier:'Mid',region:'US',cin:0,cout:0,host:null},
+  {lab:'Liquid',model:'LFM 2 24B',lat:40.73,lng:-74.00,open:1,tier:'Mid',region:'US',cin:0.03,cout:0.12,host:null},
   {lab:'Nous Research',model:'Hermes 4 405B',lat:34.05,lng:-118.24,open:1,tier:'Strong',region:'US',cin:1,cout:3,host:null},
-  {lab:'Cohere',model:'Command A',lat:43.65,lng:-79.38,open:0,tier:'Strong',region:'US',cin:2.5,cout:10,host:null},
-  {lab:'Mistral AI',model:'Mistral Large 2512',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:0.5,cout:1.5,host:null},
-  {lab:'Mistral AI',model:'Mistral Small 3.1 24B',lat:48.86,lng:2.35,open:1,tier:'Mid',region:'Europe',cin:0,cout:0,host:null},
-  {lab:'Poolside',model:'Laguna XS.2',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:0,cout:0,host:null},
-  {lab:'DeepCogito',model:'Cogito V2.1 671B',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:1.25,cout:1.25,host:null},
-  {lab:'Reka AI',model:'Reka Edge',lat:51.51,lng:-0.13,open:1,tier:'Mid',region:'Europe',cin:0.05,cout:0.1,host:null},
-  {lab:'Aleph Alpha',model:'Luminous',lat:49.42,lng:8.68,open:0,tier:'Mid',region:'Europe',cin:null,cout:null,host:null},
-  {lab:'LightOn',model:'LightOn',lat:48.86,lng:2.35,open:0,tier:'Mid',region:'Europe',cin:null,cout:null,host:null},
+  {lab:'Cohere',model:'Command A',lat:43.65,lng:-79.38,open:0,tier:'Strong',region:'US',country:'Canada',cin:2.5,cout:10,host:null},
+  {lab:'Mistral AI',model:'Mistral Large 2512',lat:48.86,lng:2.35,open:1,tier:'Strong',region:'Europe',cin:0.5,cout:1.5,host:null},
+  {lab:'Mistral AI',model:'Mistral Medium 3.5',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:1.5,cout:7.5,host:null},
+  {lab:'DeepCogito',model:'Cogito V2.1 671B',lat:48.86,lng:2.35,open:1,tier:'Strong',region:'Europe',cin:1.25,cout:1.25,host:null},
+  {lab:'Poolside',model:'Laguna XS.2',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:0.1,cout:0.2,host:null},
+  {lab:'Reka AI',model:'Reka Edge',lat:51.51,lng:-0.13,open:1,tier:'Mid',region:'Europe',cin:0.1,cout:0.1,host:null},
+  {lab:'Aleph Alpha',model:'Luminous / Pharia',lat:49.42,lng:8.68,open:0,tier:'Strong',region:'Europe',cin:null,cout:null,host:null},
+  {lab:'LightOn',model:'Paradigm',lat:48.86,lng:2.35,open:0,tier:'Mid',region:'Europe',cin:null,cout:null,host:null},
   {lab:'DeepL',model:'DeepL Translate',lat:50.94,lng:6.96,open:0,tier:'Specialist',region:'Europe',cin:null,cout:null,host:null},
   {lab:'Stability AI',model:'Stable Diffusion',lat:51.51,lng:-0.13,open:1,tier:'Specialist',region:'Europe',cin:null,cout:null,host:null},
   {lab:'Black Forest Labs',model:'Flux',lat:48.78,lng:9.18,open:1,tier:'Specialist',region:'Europe',cin:null,cout:null,host:null},
-  {lab:'DeepSeek',model:'DeepSeek V4 Pro',lat:30.27,lng:120.16,open:1,tier:'Frontier',region:'China',cin:0.44,cout:0.87,host:1},
-  {lab:'Qwen (Alibaba)',model:'Qwen 3.5 Plus',lat:30.27,lng:120.16,open:1,tier:'Frontier',region:'China',cin:0.3,cout:1.8,host:1},
-  {lab:'Z.AI',model:'GLM 5.2',lat:31.23,lng:121.47,open:1,tier:'Frontier',region:'China',cin:0.93,cout:3,host:1},
-  {lab:'Moonshot AI',model:'Kimi K2.7',lat:39.90,lng:116.41,open:0,tier:'Frontier',region:'China',cin:0.38,cout:2.03,host:null},
-  {lab:'MiniMax',model:'MiniMax M2.5',lat:31.23,lng:121.47,open:0,tier:'Strong',region:'China',cin:0.12,cout:0.48,host:null},
+  {lab:'DeepSeek',model:'DeepSeek V4 Pro',lat:30.27,lng:120.16,open:1,tier:'Frontier',region:'China',cin:0.43,cout:0.87,host:1},
+  {lab:'Qwen (Alibaba)',model:'Qwen 3.7 Plus',lat:30.27,lng:120.16,open:1,tier:'Frontier',region:'China',cin:0.32,cout:1.28,host:1},
+  {lab:'Z.AI (Zhipu)',model:'GLM 5.2',lat:39.90,lng:116.41,open:1,tier:'Frontier',region:'China',cin:0.93,cout:3,host:1},
+  {lab:'Baidu',model:'ERNIE 4.5 VL',lat:39.90,lng:116.41,open:1,tier:'Strong',region:'China',cin:0.42,cout:1.25,host:1},
+  {lab:'Moonshot AI',model:'Kimi K2.7',lat:39.90,lng:116.41,open:0,tier:'Frontier',region:'China',cin:0.74,cout:3.5,host:null},
+  {lab:'MiniMax',model:'MiniMax M3',lat:31.23,lng:121.47,open:0,tier:'Strong',region:'China',cin:0.3,cout:1.2,host:null},
   {lab:'Tencent',model:'Hunyuan 3',lat:22.54,lng:114.06,open:0,tier:'Strong',region:'China',cin:0.06,cout:0.21,host:null},
-  {lab:'Baidu',model:'ERNIE 4.5 VL',lat:39.90,lng:116.41,open:0,tier:'Strong',region:'China',cin:0.42,cout:1.25,host:null},
-  {lab:'ByteDance',model:'Seed 1.6 Flash',lat:39.90,lng:116.41,open:0,tier:'Mid',region:'China',cin:0.08,cout:0.3,host:null},
-  {lab:'StepFun',model:'Step 3.5 Flash',lat:39.90,lng:116.41,open:0,tier:'Mid',region:'China',cin:0.08,cout:0.3,host:null},
-  {lab:'Xiaomi',model:'MiMo 2.5 Pro',lat:39.90,lng:116.41,open:0,tier:'Strong',region:'China',cin:0.3,cout:0.87,host:null},
+  {lab:'ByteDance',model:'Seed 2.0',lat:39.90,lng:116.41,open:0,tier:'Strong',region:'China',cin:0.25,cout:2,host:null},
+  {lab:'StepFun',model:'Step 3.7 Flash',lat:39.90,lng:116.41,open:0,tier:'Mid',region:'China',cin:0.2,cout:1.15,host:null},
+  {lab:'Xiaomi',model:'MiMo v2.5 Pro',lat:39.90,lng:116.41,open:0,tier:'Strong',region:'China',cin:0.43,cout:0.87,host:null},
   {lab:'AI21',model:'Jamba Large 1.7',lat:32.09,lng:34.78,open:0,tier:'Strong',region:'Other',country:'Israel',cin:2,cout:8,host:null},
-  {lab:'TII (UAE)',model:'Falcon H2',lat:24.45,lng:54.38,open:1,tier:'Strong',region:'Other',country:'UAE',cin:0.1,cout:0.3,host:null},
-  {lab:'G42 (UAE)',model:'Jais 2',lat:24.45,lng:54.38,open:1,tier:'Mid',region:'Other',country:'UAE',cin:0.15,cout:0.5,host:null},
-  {lab:'SDAIA (Saudi)',model:'ALLaM 2',lat:24.71,lng:46.68,open:0,tier:'Mid',region:'Other',country:'Saudi Arabia',cin:0.4,cout:1,host:null},
+  {lab:'TII',model:'Falcon H2',lat:24.45,lng:54.38,open:1,tier:'Strong',region:'Other',country:'UAE',cin:null,cout:null,host:null},
+  {lab:'G42',model:'Jais 2',lat:24.45,lng:54.38,open:1,tier:'Mid',region:'Other',country:'UAE',cin:null,cout:null,host:null},
+  {lab:'SDAIA',model:'ALLaM 2',lat:24.71,lng:46.68,open:0,tier:'Mid',region:'Other',country:'Saudi Arabia',cin:null,cout:null,host:null},
   {lab:'Sakana AI',model:'Fugu Ultra',lat:35.68,lng:139.65,open:0,tier:'Specialist',region:'Other',country:'Japan',cin:5,cout:30,host:null},
   {lab:'Upstage',model:'Solar Pro 3',lat:37.46,lng:127.15,open:1,tier:'Mid',region:'Other',country:'South Korea',cin:0.15,cout:0.6,host:null}
 ];
 const SCALE = {
-  'GPT-5.4 Pro':2000,'o3 Deep Research':2000,'Claude Fable 5':2000,'Claude Sonnet 5':450,
-  'Gemini 3.5 Flash':150,'Gemma 4 26B':26,'Llama 4 Maverick':400,'Grok Build 0.1':900,
-  'Sonar Pro Search':150,'Palmyra X5':180,'Inflection 3':175,'Nemotron 3.5 4B':4,
-  'OLMo 3 32B Think':32,'Phi-4':14,'Granite 4.1 8B':8,'LFM 2.5 1.2B':1.2,'Hermes 4 405B':405,
-  'Mistral Large 2512':123,'Mistral Small 3.1 24B':24,'Laguna XS.2':80,'Cogito V2.1 671B':671,
-  'Reka Edge':21,'Luminous':70,'LightOn':40,'DeepL Translate':12,'Stable Diffusion':8,'Flux':12,
-  'DeepSeek V4 Pro':671,'Qwen 3.5 Plus':600,'GLM 5.2':400,'Kimi K2.7':1000,'MiniMax M2.5':456,
-  'Hunyuan 3':389,'ERNIE 4.5 VL':424,'Seed 1.6 Flash':200,'Step 3.5 Flash':200,'MiMo 2.5 Pro':300,
-  'Command A':111,'Jamba Large 1.7':398,'Fugu Ultra':120,'Solar Pro 3':31,
-  'Falcon H2':256,'Jais 2':70,'ALLaM 2':70
+  'GPT-5.5 Pro':2000,'GPT-5.5':1000,'Claude Fable 5':2000,'Claude Opus 4.8':1500,'Claude Sonnet 5':450,
+  'Gemini 3 Pro':1500,'Gemini 3.5 Flash':200,'Gemma 4 26B':26,'Llama 4 Maverick':400,'Grok 4.3':1200,
+  'Sonar Pro Search':150,'Palmyra X5':180,'Inflection 3':175,'Nemotron 3 Ultra 550B':550,
+  'OLMo 3 32B Think':32,'Phi-4':14,'Granite 4.1 8B':8,'LFM 2 24B':24,'Hermes 4 405B':405,'Command A':111,
+  'Mistral Large 2512':123,'Mistral Medium 3.5':200,'Cogito V2.1 671B':671,'Laguna XS.2':80,'Reka Edge':21,
+  'Luminous / Pharia':70,'Paradigm':40,'DeepL Translate':12,'Stable Diffusion':8,'Flux':12,
+  'DeepSeek V4 Pro':671,'Qwen 3.7 Plus':600,'GLM 5.2':400,'ERNIE 4.5 VL':424,'Kimi K2.7':1000,
+  'MiniMax M3':456,'Hunyuan 3':389,'Seed 2.0':200,'Step 3.7 Flash':200,'MiMo v2.5 Pro':300,
+  'Jamba Large 1.7':398,'Fugu Ultra':120,'Solar Pro 3':31,'Falcon H2':256,'Jais 2':70,'ALLaM 2':70
 };
 function cc(v){if(v==null)return'#94a3b8';if(v<1)return'#16a34a';if(v<5)return'#84cc16';if(v<15)return'#f59e0b';if(v<50)return'#ef4444';return'#b91c1c';}
 function rad(m){return Math.min(2.5+0.32*Math.sqrt(SCALE[m.model]||10),15);}
-function priceLbl(m){return m.cout==null?'—':'$'+m.cout;}
-function shortName(m){return m.model.replace(' 2512','').replace(' 3.1 24B','').replace(' V2.1','').replace(' Think','').replace(' Pro Search',' Search');}
+function priceLbl(m){return m.cout==null?'n/a':'$'+m.cout;}
+function shortName(m){return m.model.replace(' 2512','').replace(' 3.5','').replace(' V2.1',' ').replace(' Think','').replace(' Pro Search',' Search').replace(' 3 Ultra 550B',' Ultra').replace(' 4 405B',' 405B').replace(' / Pharia','');}
 
 function buildTables(){
   const cols='<tr><th>Model</th><th>Open</th><th>Tier</th><th>In</th><th>Out</th><th>Origin</th><th>Host</th></tr>';
-  function hostOf(m){ if(m.host) return 'US/EU'; if(m.region==='China') return 'CN'; if(m.region==='US') return 'US'; if(m.region==='Europe') return 'EU'; return m.country||'—'; }
+  function hostOf(m){ if(m.host) return 'US/EU'; if(m.cout==null) return 'direct'; if(m.region==='China') return 'CN'; if(m.region==='US') return 'US'; if(m.region==='Europe') return 'EU'; return m.country||'—'; }
+  function pr(v){ return v==null?'n/a':'$'+v; }
   function row(m){return '<tr><td><span class="mdl">'+m.model+'</span> <span class="lab">'+m.lab+'</span></td>'+
     '<td><span class="pill '+(m.open?'p-open':'p-closed')+'">'+(m.open?'open':'closed')+'</span></td>'+
-    '<td class="tier t-'+m.tier+'">'+m.tier+'</td><td>'+(m.cin==null?'—':(m.cin===0?'free':'$'+m.cin))+'</td>'+
-    '<td><span class="cdot" style="background:'+cc(m.cout)+'"></span>'+(m.cout==null?'—':(m.cout===0?'free':'$'+m.cout))+'</td>'+
+    '<td class="tier t-'+m.tier+'">'+m.tier+'</td><td>'+pr(m.cin)+'</td>'+
+    '<td><span class="cdot" style="background:'+cc(m.cout)+'"></span>'+pr(m.cout)+'</td>'+
     '<td>'+(m.country||m.region)+'</td><td>'+hostOf(m)+'</td></tr>';}
-  document.getElementById('tbl-left').innerHTML=cols+M.slice(0,22).map(row).join('');
-  document.getElementById('tbl-right').innerHTML=cols+M.slice(22).map(row).join('');
+  document.getElementById('tbl-left').innerHTML=cols+M.slice(0,23).map(row).join('');
+  document.getElementById('tbl-right').innerHTML=cols+M.slice(23).map(row).join('');
 }
 buildTables();
 
@@ -164,14 +165,14 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(f
     svg.append('text').attr('x',x+7).attr('y',y+14).attr('font-size',11).attr('font-weight',600).attr('fill','#0f172a').text(title);
     const groups={};
     models.forEach(d=>{const p=proj([d.lng,d.lat]);d.cx=p[0];d.cy=p[1];const k=Math.round(p[0]/6)+','+Math.round(p[1]/6);(groups[k]=groups[k]||[]).push(d);});
-    Object.values(groups).forEach(gr=>{const mr=Math.max.apply(null,gr.map(d=>rad(d)));const Rf=gr.length===1?0:mr+5+gr.length*2.4;gr.forEach((d,i)=>{const a=gr.length===1?0:(-Math.PI/2+i*2*Math.PI/gr.length);d.x=d.cx+Math.cos(a)*Rf;d.y=d.cy+Math.sin(a)*Rf;});});
+    Object.values(groups).forEach(gr=>{const mr=Math.max.apply(null,gr.map(d=>rad(d)));const Rf=gr.length===1?0:Math.min(mr,5)+1+gr.length*1.2;gr.forEach((d,i)=>{const a=gr.length===1?0:(-Math.PI/2+i*2*Math.PI/gr.length);d.x=d.cx+Math.cos(a)*Rf;d.y=d.cy+Math.sin(a)*Rf;});});
     const midX=x+w/2;
     const left=models.filter(d=>d.x<midX).sort((a,b)=>a.y-b.y);
     const right=models.filter(d=>d.x>=midX).sort((a,b)=>a.y-b.y);
     function gut(arr,lx,anchor){const n=arr.length;if(!n)return;const top=y+22,bot=y+h-7,step=n>1?(bot-top)/(n-1):0;arr.forEach((d,i)=>{const ly=n>1?top+i*step:(y+h/2);g.append('path').attr('d','M'+lx+','+ly+'L'+d.x+','+d.y).attr('stroke','#c3cdd8').attr('stroke-width',0.4).attr('fill','none');g.append('text').attr('x',lx).attr('y',ly+2).attr('text-anchor',anchor).attr('font-size',6.6).attr('fill','#0f172a').text(shortName(d)+' '+priceLbl(d));});}
     gut(left,x+gutter-5,'end');
     gut(right,x+w-gutter+5,'start');
-    g.append('g').selectAll('circle').data(models).join('circle').attr('cx',d=>d.x).attr('cy',d=>d.y).attr('r',d=>rad(d)).attr('fill',d=>d.o=d.open?cc(d.cout):'#fff').attr('stroke',d=>cc(d.cout)).attr('stroke-width',d=>d.open?0.5:1.5);
+    g.append('g').selectAll('circle').data(models).join('circle').attr('cx',d=>d.x).attr('cy',d=>d.y).attr('r',d=>rad(d)).attr('fill',d=>d.open?cc(d.cout):'#fff').attr('stroke',d=>cc(d.cout)).attr('stroke-width',d=>d.open?0.5:1.5);
   }
   function listPanel(models,rect,title){
     const [x,y,w,h]=rect;
@@ -201,7 +202,7 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(f
   panel(eu,[-11,59,20,40],[0,308,335,322],'Europe');
   panel(cn,[105,45,136,17],[340,308,335,322],'China');
   listPanel(other,[680,308,320,322],'Other AI hubs');
-  svg.append('text').attr('x',347).attr('y',300).attr('font-size',7).attr('fill','#0d9488').text('Open (●) Chinese models — DeepSeek, Qwen, GLM — are hostable on US/EU infra; closed (○) ones stay in China.');
+  svg.append('text').attr('x',347).attr('y',300).attr('font-size',7).attr('fill','#0d9488').text('Open (●) Chinese models — DeepSeek, Qwen, GLM, ERNIE — are hostable on US/EU infra; closed (○) ones stay in China.');
   document.title='AI-Model-World-Map';
 });
 </script>
