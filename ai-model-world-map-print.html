@@ -55,7 +55,7 @@ body { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-se
   <span class="it"><span class="sw" style="background:#ef4444"></span>15–50</span>
   <span class="it"><span class="sw" style="background:#b91c1c"></span>&gt;50</span>
   <span class="it"><span class="sw" style="background:#94a3b8"></span>not priced</span>
-  <span class="it"><b>Size = capability:</b> <span class="szdot" style="width:14px;height:14px;background:#64748b"></span>Frontier <span class="szdot" style="width:7px;height:7px;background:#64748b"></span>Spec.</span>
+  <span class="it"><b>Size = est. scale:</b> <span class="szdot" style="width:15px;height:15px;background:#64748b"></span>~1–2T <span class="szdot" style="width:9px;height:9px;background:#64748b"></span>~400B <span class="szdot" style="width:5px;height:5px;background:#64748b"></span>~10–30B</span>
   <span class="it"><b>&#9679;</b> open <b>&#9678;</b> closed</span>
   <span class="it"><span style="display:inline-block;width:16px;border-top:1.5px dashed #0d9488"></span> hostable in US/EU</span>
 </div>
@@ -87,7 +87,7 @@ const M = [
   {lab:'IBM',model:'Granite 4.1 8B',lat:41.20,lng:-73.72,open:1,tier:'Mid',region:'US',cin:0.05,cout:0.1,host:null},
   {lab:'Liquid',model:'LFM 2.5 1.2B',lat:40.73,lng:-74.00,open:1,tier:'Mid',region:'US',cin:0,cout:0,host:null},
   {lab:'Nous Research',model:'Hermes 4 405B',lat:34.05,lng:-118.24,open:1,tier:'Strong',region:'US',cin:1,cout:3,host:null},
-  {lab:'Mistral AI',model:'Mistral Large 2512',lat:48.86,lng:2.35,open:1,tier:'Strong',region:'Europe',cin:0.5,cout:1.5,host:null},
+  {lab:'Mistral AI',model:'Mistral Large 2512',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:0.5,cout:1.5,host:null},
   {lab:'Mistral AI',model:'Mistral Small 3.1 24B',lat:48.86,lng:2.35,open:1,tier:'Mid',region:'Europe',cin:0,cout:0,host:null},
   {lab:'Poolside',model:'Laguna XS.2',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:0,cout:0,host:null},
   {lab:'DeepCogito',model:'Cogito V2.1 671B',lat:48.86,lng:2.35,open:0,tier:'Strong',region:'Europe',cin:1.25,cout:1.25,host:null},
@@ -113,7 +113,18 @@ const M = [
   {lab:'Upstage',model:'Solar Pro 3',lat:37.46,lng:127.15,open:1,tier:'Mid',region:'Other',cin:0.15,cout:0.6,host:null}
 ];
 const HUB = { US:{lat:39.0,lng:-77.5}, EU:{lat:50.11,lng:8.68} };
-const TR = {Frontier:8,Strong:6,Mid:4.5,Specialist:3.5};
+const SCALE = {
+  'GPT-5.4 Pro':2000,'o3 Deep Research':2000,'Claude Fable 5':2000,'Claude Sonnet 5':450,
+  'Gemini 3.5 Flash':150,'Gemma 4 26B':26,'Llama 4 Maverick':400,'Grok Build 0.1':900,
+  'Sonar Pro Search':150,'Palmyra X5':180,'Inflection 3':175,'Nemotron 3.5 4B':4,
+  'OLMo 3 32B Think':32,'Phi-4':14,'Granite 4.1 8B':8,'LFM 2.5 1.2B':1.2,'Hermes 4 405B':405,
+  'Mistral Large 2512':123,'Mistral Small 3.1 24B':24,'Laguna XS.2':80,'Cogito V2.1 671B':671,
+  'Reka Edge':21,'Luminous':70,'LightOn':40,'DeepL Translate':12,'Stable Diffusion':8,'Flux':12,
+  'DeepSeek V4 Pro':671,'Qwen 3.5 Plus':600,'GLM 5.2':400,'Kimi K2.7':1000,'MiniMax M2.5':456,
+  'Hunyuan 3':389,'ERNIE 4.5 VL':424,'Seed 1.6 Flash':200,'Step 3.5 Flash':200,'MiMo 2.5 Pro':300,
+  'Command A':111,'Jamba Large 1.7':398,'Fugu Ultra':120,'Solar Pro 3':31
+};
+function rad(m){ return Math.min(3 + 0.42*Math.sqrt(SCALE[m.model]||10), 22); }
 function cc(v){ if(v===null||v===undefined) return '#94a3b8'; if(v<1) return '#16a34a'; if(v<5) return '#84cc16'; if(v<15) return '#f59e0b'; if(v<50) return '#ef4444'; return '#b91c1c'; }
 function fmt(v){ return v===null||v===undefined ? '—' : (v===0 ? 'free' : '$'+v); }
 
@@ -145,7 +156,7 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(f
   Object.values(groups).forEach(g=>{ if(g.length>1){ const R=Math.min(5+g.length*1.7,16); g.forEach((m,i)=>{ const a=(i/g.length)*2*Math.PI-Math.PI/2; m._x+=Math.cos(a)*R; m._y+=Math.sin(a)*R; }); } });
   M.forEach(m=>{ if(m.open && Array.isArray(m.host)){ m.host.forEach(h=>{ const t=proj([HUB[h].lng,HUB[h].lat]); const mx=(m._x+t[0])/2, my=(m._y+t[1])/2-42; flowG.append('path').attr('class','wmflow').attr('d','M'+m._x+','+m._y+' Q'+mx+','+my+' '+t[0]+','+t[1]); }); } });
   dotG.selectAll('circle').data(M).join('circle')
-    .attr('cx',m=>m._x).attr('cy',m=>m._y).attr('r',m=>TR[m.tier])
+    .attr('cx',m=>m._x).attr('cy',m=>m._y).attr('r',m=>rad(m))
     .attr('fill',m=>m.open?cc(m.cout):'#fff')
     .attr('stroke',m=>cc(m.cout)).attr('stroke-width',m=>m.open?0.6:1.8).attr('opacity',0.95);
   document.title='AI-Model-World-Map';

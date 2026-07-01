@@ -1,6 +1,6 @@
 # AI Model World Map — Data Table
 
-Position on the map = **origin (lab HQ)**. Size = **capability tier**. Colour = **output cost**.
+Position on the map = **origin (lab HQ)**. Size = **estimated model scale (parameters)**. Colour = **output cost**.
 Filled dot = **open weights**, ring = **closed**. A dashed arc marks an open model that is
 routinely **hostable in the West** even though its origin is elsewhere.
 
@@ -23,7 +23,7 @@ routinely **hostable in the West** even though its origin is elsewhere.
 | 15 | IBM | Granite 4.1 8B | ✅ | Mid | $0.05 | $0.10 | 131K | 8B | US | anywhere | ✅ |
 | 16 | Liquid | LFM 2.5 1.2B | ✅ | Mid | free | free | 33K | 1.2B | NYC / Zürich | anywhere | ✅ |
 | 17 | Nous Research | Hermes 4 405B | ✅ | Strong | $1 | $3 | 131K | 405B | Remote / US | anywhere | ✅ |
-| 18 | Mistral AI | Mistral Large 2512 | ✅ | Strong | $0.50 | $1.50 | 262K | 123B | Paris, FR | EU / US | ✅ |
+| 18 | Mistral AI | Mistral Large 2512 | ❌ | Strong | $0.50 | $1.50 | 262K | 123B | Paris, FR | EU / US | ✅ |
 | 19 | Mistral AI | Mistral Small 3.1 24B | ✅ | Mid | free | free | 128K | 24B | Paris, FR | anywhere | ✅ |
 | 20 | Poolside | Laguna XS.2 | ❌ | Strong | free | free | 128K | — | Paris / SF | EU / US | ✅ |
 | 21 | DeepCogito | Cogito V2.1 671B | ❌ | Strong | $1.25 | $1.25 | 128K | 671B | Paris / US | EU / US | ✅ |

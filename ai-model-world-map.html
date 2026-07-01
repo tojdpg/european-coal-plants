@@ -69,7 +69,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <body>
 <div class="panel header">
   <h1>AI Model World Map</h1>
-  <span>Position = origin &middot; Size = capability &middot; Color = cost &middot; &#9679; open / &#9678; closed &middot; dashed line = hostable in the West</span>
+  <span>Position = origin &middot; Size = est. scale (params) &middot; Color = cost &middot; &#9679; open / &#9678; closed &middot; dashed line = hostable in the West</span>
 </div>
 <div class="panel controls" id="controls">
   <div class="grp">
@@ -113,11 +113,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <div class="legend-item"><span class="legend-dot" style="background:#a01020"></span> &gt; $50</div>
   <div class="legend-item"><span class="legend-dot" style="background:#5a6a8a"></span> not token-priced</div>
   <hr>
-  <h3>Capability = size</h3>
-  <div class="legend-item"><span class="legend-size" style="width:22px;height:22px"></span> Frontier</div>
-  <div class="legend-item"><span class="legend-size" style="width:16px;height:16px"></span> Strong</div>
-  <div class="legend-item"><span class="legend-size" style="width:11px;height:11px"></span> Mid</div>
-  <div class="legend-item"><span class="legend-size" style="width:8px;height:8px"></span> Specialist</div>
+  <h3>Size = scale (est. params)</h3>
+  <div class="legend-item"><span class="legend-size" style="width:34px;height:34px"></span> ~1&ndash;2T flagship</div>
+  <div class="legend-item"><span class="legend-size" style="width:20px;height:20px"></span> ~400&ndash;700B</div>
+  <div class="legend-item"><span class="legend-size" style="width:12px;height:12px"></span> ~100B</div>
+  <div class="legend-item"><span class="legend-size" style="width:8px;height:8px"></span> ~10&ndash;30B</div>
   <hr>
   <div class="legend-item">&#9679; open (solid) &nbsp; &#9678; closed (ring)</div>
   <div class="legend-item"><span style="display:inline-block;width:22px;border-top:2px dashed #3fae7a"></span> &nbsp; open model hostable in US/EU</div>
@@ -151,7 +151,7 @@ const models = [
   {lab:'Nous Research', model:'Hermes 4 405B', lat:34.052, lng:-118.243, params:405, open:true, tier:'Strong', region:'US', costIn:1, costOut:3, onOR:true, host:null, desc:'Open model from Nous.'},
 
   // === Europe ===
-  {lab:'Mistral AI', model:'Mistral Large 2512', lat:48.856, lng:2.352, params:123, open:true, tier:'Strong', region:'Europe', costIn:0.5, costOut:1.5, onOR:true, host:null, desc:'Open/closed hybrid flagship. Paris.'},
+  {lab:'Mistral AI', model:'Mistral Large 2512', lat:48.856, lng:2.352, params:123, open:false, tier:'Strong', region:'Europe', costIn:0.5, costOut:1.5, onOR:true, host:null, desc:'Commercial flagship, closed weights. Paris. (Mistral Small stays open.)'},
   {lab:'Mistral AI', model:'Mistral Small 3.1 24B', lat:48.856, lng:2.352, params:24, open:true, tier:'Mid', region:'Europe', costIn:0, costOut:0, onOR:true, host:null, desc:'Open small model. Paris.'},
   {lab:'Poolside', model:'Laguna XS.2', lat:48.856, lng:2.352, params:0, open:false, tier:'Strong', region:'Europe', costIn:0, costOut:0, onOR:true, host:null, desc:'Coding model. Paris/SF.'},
   {lab:'DeepCogito', model:'Cogito V2.1 671B', lat:48.856, lng:2.352, params:671, open:false, tier:'Strong', region:'Europe', costIn:1.25, costOut:1.25, onOR:true, host:null, desc:'Reasoning model. Paris/USA.'},
@@ -195,11 +195,22 @@ function getColor(cost) {
   return '#a01020';
 }
 
-function getSize(tier) {
-  if (tier === 'Frontier') return 22;
-  if (tier === 'Strong') return 16;
-  if (tier === 'Mid') return 11;
-  return 8;
+// Estimated total scale in billions of parameters (MoE totals). Closed-model figures are
+// rough public estimates — used only for relative bubble size, not as exact specs.
+const SCALE = {
+  'GPT-5.4 Pro':2000,'o3 Deep Research':2000,'Claude Fable 5':2000,'Claude Sonnet 5':450,
+  'Gemini 3.5 Flash':150,'Gemma 4 26B':26,'Llama 4 Maverick':400,'Grok Build 0.1':900,
+  'Sonar Pro Search':150,'Palmyra X5':180,'Inflection 3':175,'Nemotron 3.5 4B':4,
+  'OLMo 3 32B Think':32,'Phi-4':14,'Granite 4.1 8B':8,'LFM 2.5 1.2B':1.2,'Hermes 4 405B':405,
+  'Mistral Large 2512':123,'Mistral Small 3.1 24B':24,'Laguna XS.2':80,'Cogito V2.1 671B':671,
+  'Reka Edge':21,'Luminous':70,'LightOn':40,'DeepL Translate':12,'Stable Diffusion':8,'Flux':12,
+  'DeepSeek V4 Pro':671,'Qwen 3.5 Plus':600,'GLM 5.2':400,'Kimi K2.7':1000,'MiniMax M2.5':456,
+  'Hunyuan 3':389,'ERNIE 4.5 VL':424,'Seed 1.6 Flash':200,'Step 3.5 Flash':200,'MiMo 2.5 Pro':300,
+  'Command A':111,'Jamba Large 1.7':398,'Fugu Ultra':120,'Solar Pro 3':31
+};
+// Radius ~ sqrt(scale) so bubble AREA tracks model size: trillion-param flagships dwarf small models.
+function getSize(m) {
+  return Math.min(6 + 0.75 * Math.sqrt(SCALE[m.model] || 10), 42);
 }
 
 function arcPoints(from, to) {
@@ -251,7 +262,7 @@ function computePositions(rows) {
   Object.values(groups).forEach(g => {
     if (g.length === 1) { g[0]._pos = [g[0].lat, g[0].lng]; g[0]._leg = null; return; }
     const center = map.project([g[0].lat, g[0].lng], zoom);
-    const maxSize = Math.max.apply(null, g.map(x => getSize(x.tier)));
+    const maxSize = Math.max.apply(null, g.map(x => getSize(x)));
     const R = maxSize / 2 + 8 + g.length * 1.6;
     g.forEach((m, i) => {
       const a = (i / g.length) * 2 * Math.PI - Math.PI / 2;
@@ -280,7 +291,7 @@ window.buildMarkers = function() {
   });
 
   rows.forEach(m => {
-    const size = getSize(m.tier);
+    const size = getSize(m);
     const color = getColor(m.costOut);
     const priceLine = m.costOut === null ? 'Not token-priced'
       : (m.costOut === 0 ? 'Free tier'
@@ -296,7 +307,7 @@ window.buildMarkers = function() {
           <span class="tag ${tierCls}">${m.tier}</span>
           ${hostTag}
         </div>
-        <div style="color:#8899bb;font-size:12px">Origin: ${m.region}${m.params ? ' &middot; '+m.params+'B params' : ''} &middot; ${m.onOR ? 'on OpenRouter' : 'direct API only'}</div>
+        <div style="color:#8899bb;font-size:12px">Origin: ${m.region}${SCALE[m.model] ? ' &middot; ~'+SCALE[m.model]+'B (est. scale)' : ''} &middot; ${m.onOR ? 'on OpenRouter' : 'direct API only'}</div>
         <div class="price">${priceLine}</div>
         <div style="margin-top:4px;color:#8899bb;font-size:12px">${m.desc}</div>
       </div>`;
