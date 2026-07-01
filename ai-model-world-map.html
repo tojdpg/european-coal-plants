@@ -211,15 +211,40 @@ function visible(m) {
   return true;
 }
 
+// Fan co-located labs (same city) into a ring, computed in pixel space so the
+// spread stays constant on screen at any zoom. Sets m._pos (display latlng) and m._leg.
+function computePositions(rows) {
+  const zoom = map.getZoom();
+  const groups = {};
+  rows.forEach(m => {
+    const key = m.lat.toFixed(3) + ',' + m.lng.toFixed(3);
+    (groups[key] = groups[key] || []).push(m);
+  });
+  Object.values(groups).forEach(g => {
+    if (g.length === 1) { g[0]._pos = [g[0].lat, g[0].lng]; g[0]._leg = null; return; }
+    const center = map.project([g[0].lat, g[0].lng], zoom);
+    const maxSize = Math.max.apply(null, g.map(x => getSize(x.tier)));
+    const R = maxSize / 2 + 8 + g.length * 1.6;
+    g.forEach((m, i) => {
+      const a = (i / g.length) * 2 * Math.PI - Math.PI / 2;
+      const ll = map.unproject(L.point(center.x + Math.cos(a) * R, center.y + Math.sin(a) * R), zoom);
+      m._pos = [ll.lat, ll.lng];
+      m._leg = [[g[0].lat, g[0].lng], [ll.lat, ll.lng]];
+    });
+  });
+}
+
 window.buildMarkers = function() {
   markerGroup.clearLayers();
   flowGroup.clearLayers();
   const showFlows = document.getElementById('showFlows').checked;
   const rows = models.filter(visible).sort((a,b) => TIER_RANK[b.tier] - TIER_RANK[a.tier]);
+  computePositions(rows);
 
   rows.forEach(m => {
+    if (m._leg) L.polyline(m._leg, { color:'#3a4260', weight:1, opacity:0.5 }).addTo(markerGroup);
     if (showFlows && m.open && m.host && HOST_HUB[m.host]) {
-      L.polyline(arcPoints({lat:m.lat,lng:m.lng}, HOST_HUB[m.host]),
+      L.polyline(arcPoints({lat:m._pos[0],lng:m._pos[1]}, HOST_HUB[m.host]),
         { color:'#3fae7a', weight:1.4, opacity:0.5, dashArray:'4 6' }).addTo(flowGroup);
     }
   });
@@ -253,12 +278,13 @@ window.buildMarkers = function() {
       className: '', iconSize: [size, size], iconAnchor: [size/2, size/2]
     });
 
-    L.marker([m.lat, m.lng], { icon })
+    L.marker(m._pos, { icon })
       .bindPopup(html, { maxWidth: 300 })
       .addTo(markerGroup);
   });
 };
 
+map.on('zoomend', buildMarkers);
 buildMarkers();
 </script>
 </body>
