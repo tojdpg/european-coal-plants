@@ -179,6 +179,11 @@ const models = [
   {lab:'AI21', model:'Jamba Large 1.7', lat:32.085, lng:34.781, params:0, open:false, tier:'Strong', region:'Other', costIn:2, costOut:8, onOR:true, host:null, desc:'Jamba (SSM-Transformer) architecture. Tel Aviv.'},
   {lab:'Sakana AI', model:'Fugu Ultra', lat:35.676, lng:139.650, params:0, open:false, tier:'Specialist', region:'Other', costIn:5, costOut:30, onOR:true, host:null, desc:'Multi-agent orchestration system. Tokyo.'},
   {lab:'Upstage', model:'Solar Pro 3', lat:37.456, lng:127.148, params:0, open:true, tier:'Mid', region:'Other', costIn:0.15, costOut:0.6, onOR:true, host:null, desc:'Open model. Seongnam, South Korea.'},
+
+  // === Middle East (UAE / Saudi Arabia) ===
+  {lab:'TII (UAE)', model:'Falcon H2', lat:24.45, lng:54.38, params:256, open:true, tier:'Strong', region:'Other', costIn:0.1, costOut:0.3, onOR:true, host:null, desc:'Open flagship from TII. Abu Dhabi. Strong open model, not top-frontier.'},
+  {lab:'G42 (UAE)', model:'Jais 2', lat:24.45, lng:54.38, params:70, open:true, tier:'Mid', region:'Other', costIn:0.15, costOut:0.5, onOR:true, host:null, desc:'Arabic-first open model. Abu Dhabi.'},
+  {lab:'SDAIA (Saudi)', model:'ALLaM 2', lat:24.71, lng:46.68, params:70, open:false, tier:'Mid', region:'Other', costIn:0.4, costOut:1, onOR:false, host:null, desc:'Saudi Arabic LLM. Riyadh. National cloud / watsonx.'},
 ];
 
 // Western hosting hubs — arc targets for open models routinely served outside their origin.
@@ -206,7 +211,8 @@ const SCALE = {
   'Reka Edge':21,'Luminous':70,'LightOn':40,'DeepL Translate':12,'Stable Diffusion':8,'Flux':12,
   'DeepSeek V4 Pro':671,'Qwen 3.5 Plus':600,'GLM 5.2':400,'Kimi K2.7':1000,'MiniMax M2.5':456,
   'Hunyuan 3':389,'ERNIE 4.5 VL':424,'Seed 1.6 Flash':200,'Step 3.5 Flash':200,'MiMo 2.5 Pro':300,
-  'Command A':111,'Jamba Large 1.7':398,'Fugu Ultra':120,'Solar Pro 3':31
+  'Command A':111,'Jamba Large 1.7':398,'Fugu Ultra':120,'Solar Pro 3':31,
+  'Falcon H2':256,'Jais 2':70,'ALLaM 2':70
 };
 // Radius ~ sqrt(scale) so bubble AREA tracks model size: trillion-param flagships dwarf small models.
 function getSize(m) {
@@ -326,6 +332,9 @@ window.buildMarkers = function() {
 };
 
 map.on('zoomend', buildMarkers);
+
+// Default to the US–EU–China band (crops the empty southern hemisphere); still pannable to the rest.
+map.fitBounds([[8, -132], [58, 150]], { animate: false });
 
 // Mobile: filters + legend live in slide-up bottom sheets; open one at a time.
 window.toggleSheet = function(id) {

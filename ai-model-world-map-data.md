@@ -47,6 +47,9 @@ routinely **hostable in the West** even though its origin is elsewhere.
 | 39 | AI21 | Jamba Large 1.7 | ❌ | Strong | $2 | $8 | 256K | — | Tel Aviv, IL | US / IL | ✅ |
 | 40 | Sakana AI | Fugu Ultra | ❌ | Specialist | $5 | $30 | 1M | multi-agent | Tokyo, JP | JP | ✅ |
 | 41 | Upstage | Solar Pro 3 | ✅ | Mid | $0.15 | $0.60 | 128K | — | Seongnam, KR | KR / US | ✅ |
+| 42 | TII (UAE) | Falcon H2 | ✅ | Strong | $0.10 | $0.30 | 262K | ~256B MoE | Abu Dhabi, AE | anywhere | ✅ |
+| 43 | G42 (UAE) | Jais 2 | ✅ | Mid | $0.15 | $0.50 | 131K | 70B | Abu Dhabi, AE | anywhere | ✅ |
+| 44 | SDAIA (Saudi) | ALLaM 2 | ❌ | Mid | $0.40 | $1 | 131K | 70B | Riyadh, SA | SA / watsonx | ❌ |
 
 ## Kapabilität (Größe der Punkte)
 
