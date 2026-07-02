@@ -28,6 +28,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .controls label { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #8899bb; cursor: pointer; margin: 3px 0; }
 .controls input[type="checkbox"] { accent-color: #5588ff; }
 .controls select { width: 100%; background: #141a2e; color: #c0d0ff; border: 1px solid #2a3050; border-radius: 7px; padding: 5px 7px; font-size: 12.5px; }
+.leaflet-tooltip.spider-label { background: #10162a; color: #cfe0ff; border: 1px solid #2a3050; border-radius: 6px; font-size: 11px; font-weight: 500; padding: 1px 6px; box-shadow: none; white-space: nowrap; }
+.leaflet-tooltip.spider-label::before { display: none; }
+.panel-toggle { position: absolute; top: 7px; right: 8px; width: 20px; height: 20px; padding: 0; line-height: 1; font-size: 14px; background: transparent; color: #8899bb; border: 1px solid #2a3050; border-radius: 6px; cursor: pointer; z-index: 3; }
+.panel-title { display: none; font-size: 12px; font-weight: 600; color: #8899bb; }
+.panel.min { padding: 8px 34px 8px 12px !important; min-width: 0 !important; }
+.panel.min .grp, .panel.min h3, .panel.min hr, .panel.min .legend-item { display: none; }
+.panel.min .panel-title { display: block; }
+.header .panel-toggle, .header .panel-title { display: none; }
 .popup-content { font-size: 13px; line-height: 1.6; }
 .popup-content .model-name { font-weight: 600; font-size: 15px; color: #fff; }
 .popup-content .tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; margin: 2px 2px 2px 0; }
@@ -72,6 +80,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <span>Position = origin &middot; Size = est. scale (params) &middot; Color = cost &middot; &#9679; open / &#9678; closed &middot; dashed line = hostable in the West</span>
 </div>
 <div class="panel controls" id="controls">
+  <span class="panel-title">Filters</span>
+  <button class="panel-toggle" onclick="toggleMin('controls')" aria-label="Collapse filters">&ndash;</button>
   <div class="grp">
     <div class="cap">Weights</div>
     <label><input type="checkbox" id="showOpen" checked onchange="buildMarkers()"> Open weights</label>
@@ -105,13 +115,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 </div>
 <div id="map"></div>
 <div class="panel legend" id="legend">
+  <span class="panel-title">Legend</span>
+  <button class="panel-toggle" onclick="toggleMin('legend')" aria-label="Collapse legend">&ndash;</button>
   <h3>Cost (output $/1M)</h3>
-  <div class="legend-item"><span class="legend-dot" style="background:#2d8a4e"></span> free &ndash; &lt; $1</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#2d8a4e"></span> &lt; $1</div>
   <div class="legend-item"><span class="legend-dot" style="background:#8ab832"></span> $1 &ndash; $5</div>
   <div class="legend-item"><span class="legend-dot" style="background:#e8a838"></span> $5 &ndash; $15</div>
   <div class="legend-item"><span class="legend-dot" style="background:#d44a2a"></span> $15 &ndash; $50</div>
   <div class="legend-item"><span class="legend-dot" style="background:#a01020"></span> &gt; $50</div>
-  <div class="legend-item"><span class="legend-dot" style="background:#5a6a8a"></span> not token-priced</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#5a6a8a"></span> not on OpenRouter</div>
   <hr>
   <h3>Size = scale (est. params)</h3>
   <div class="legend-item"><span class="legend-size" style="width:34px;height:34px"></span> ~1&ndash;2T flagship</div>
@@ -242,8 +254,11 @@ const map = L.map('map', {
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
 
 const flowGroup = L.layerGroup().addTo(map);
+const spiderGroup = L.layerGroup().addTo(map);
+const padGroup = L.layerGroup().addTo(map);
 const markerGroup = L.layerGroup().addTo(map);
 const TIER_RANK = { Frontier: 0, Strong: 1, Mid: 2, Specialist: 3 };
+let clusters = [];
 
 function visible(m) {
   const showOpen = document.getElementById('showOpen').checked;
@@ -259,78 +274,102 @@ function visible(m) {
   return true;
 }
 
-// Fan co-located labs (same city) into a ring, computed in pixel space so the
-// spread stays constant on screen at any zoom. Sets m._pos (display latlng) and m._leg.
-function computePositions(rows) {
-  const zoom = map.getZoom();
-  const groups = {};
-  rows.forEach(m => {
-    const key = m.lat.toFixed(3) + ',' + m.lng.toFixed(3);
-    (groups[key] = groups[key] || []).push(m);
+function makeIcon(m) {
+  const size = getSize(m), color = getColor(m.costOut);
+  return L.divIcon({
+    html: m.open
+      ? `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid rgba(255,255,255,0.4);opacity:0.92;box-shadow:0 0 8px ${color}44"></div>`
+      : `<div style="width:${size}px;height:${size}px;border-radius:50%;background:transparent;border:3px solid ${color};opacity:0.9;display:flex;align-items:center;justify-content:center"><div style="width:${size*0.32}px;height:${size*0.32}px;border-radius:50%;background:${color};opacity:0.55"></div></div>`,
+    className: '', iconSize: [size, size], iconAnchor: [size/2, size/2]
   });
-  Object.values(groups).forEach(g => {
-    if (g.length === 1) { g[0]._pos = [g[0].lat, g[0].lng]; g[0]._leg = null; return; }
-    const center = map.project([g[0].lat, g[0].lng], zoom);
-    const maxSize = Math.max.apply(null, g.map(x => getSize(x)));
-    const R = Math.min(maxSize / 2, 10) + 3 + g.length * 1.1;
-    g.forEach((m, i) => {
-      const a = (i / g.length) * 2 * Math.PI - Math.PI / 2;
-      const ll = map.unproject(L.point(center.x + Math.cos(a) * R, center.y + Math.sin(a) * R), zoom);
-      m._pos = [ll.lat, ll.lng];
-      m._leg = [[g[0].lat, g[0].lng], [ll.lat, ll.lng]];
-    });
+}
+function popupHtml(m) {
+  const priceLine = m.costOut === null ? 'Not on OpenRouter (no per-token price)'
+    : `${m.costIn !== null && m.costIn !== undefined ? '$'+m.costIn+' / ' : ''}$${m.costOut} per 1M out`;
+  const hostTag = (m.open && Array.isArray(m.host)) ? `<span class="tag tag-host">hostable in ${m.host.join('/')}</span>` : '';
+  const tierCls = 'tag-' + (m.tier === 'Specialist' ? 'spec' : m.tier.toLowerCase());
+  return `
+    <div class="popup-content">
+      <div class="model-name">${m.lab}: ${m.model}</div>
+      <div style="margin:5px 0">
+        <span class="tag ${m.open ? 'tag-open' : 'tag-closed'}">${m.open ? 'Open weights' : 'Closed weights'}</span>
+        <span class="tag ${tierCls}">${m.tier}</span>
+        ${hostTag}
+      </div>
+      <div style="color:#8899bb;font-size:12px">Origin: ${m.region}${SCALE[m.model] ? ' &middot; ~'+SCALE[m.model]+'B (est. scale)' : ''} &middot; ${m.onOR ? 'on OpenRouter' : 'direct API only'}</div>
+      <div class="price">${priceLine}</div>
+      <div style="margin-top:4px;color:#8899bb;font-size:12px">${m.desc}</div>
+    </div>`;
+}
+function llFromPt(cpt, R, a, zoom) {
+  const ll = map.unproject(L.point(cpt.x + Math.cos(a) * R, cpt.y + Math.sin(a) * R), zoom);
+  return [ll.lat, ll.lng];
+}
+// Bubbles sit in a tight collapsed ring; hovering a cluster spiders them apart
+// with straight leader lines back to the city and name labels, then collapses.
+function expandCluster(c) {
+  if (c.timer) { clearTimeout(c.timer); c.timer = null; }
+  if (c.expanded) return;
+  c.expanded = true;
+  c.members.forEach(mem => {
+    mem.marker.setLatLng(mem.ep);
+    const line = L.polyline([c.center, mem.ep], { color:'#7d8bb0', weight:1, opacity:0.75 });
+    line.addTo(spiderGroup); c.lines.push(line);
+    const right = Math.cos(mem.a) >= 0;
+    mem.marker.bindTooltip(mem.m.model, { permanent:true, direction: right?'right':'left', className:'spider-label', offset:[right?7:-7,0] }).openTooltip();
   });
+}
+function collapseCluster(c) {
+  c.expanded = false;
+  c.members.forEach(mem => { mem.marker.setLatLng(mem.cp); if (mem.marker.getTooltip()) mem.marker.unbindTooltip(); });
+  c.lines.forEach(l => spiderGroup.removeLayer(l)); c.lines = [];
+}
+function scheduleCollapse(c) {
+  if (c.timer) clearTimeout(c.timer);
+  c.timer = setTimeout(() => { c.timer = null; collapseCluster(c); }, 260);
 }
 
 window.buildMarkers = function() {
-  markerGroup.clearLayers();
-  flowGroup.clearLayers();
+  markerGroup.clearLayers(); flowGroup.clearLayers(); spiderGroup.clearLayers(); padGroup.clearLayers();
+  clusters = [];
   const showFlows = document.getElementById('showFlows').checked;
   const rows = models.filter(visible).sort((a,b) => TIER_RANK[b.tier] - TIER_RANK[a.tier]);
-  computePositions(rows);
+  const zoom = map.getZoom();
 
-  rows.forEach(m => {
-    if (m._leg) L.polyline(m._leg, { color:'#3a4260', weight:1, opacity:0.5 }).addTo(markerGroup);
-    if (showFlows && m.open && Array.isArray(m.host)) {
-      m.host.forEach(h => {
-        if (HOST_HUB[h]) L.polyline(arcPoints({lat:m._pos[0],lng:m._pos[1]}, HOST_HUB[h]),
-          { color:'#3fae7a', weight:1.4, opacity:0.5, dashArray:'4 6' }).addTo(flowGroup);
-      });
-    }
-  });
+  const groups = {};
+  rows.forEach(m => { const k = m.lat.toFixed(3)+','+m.lng.toFixed(3); (groups[k] = groups[k]||[]).push(m); });
 
-  rows.forEach(m => {
-    const size = getSize(m);
-    const color = getColor(m.costOut);
-    const priceLine = m.costOut === null ? 'Not token-priced'
-      : (m.costOut === 0 ? 'Free tier'
-      : `${m.costIn !== null && m.costIn !== undefined ? '$'+m.costIn+' / ' : ''}$${m.costOut} per 1M out`);
-    const hostTag = (m.open && Array.isArray(m.host)) ? `<span class="tag tag-host">hostable in ${m.host.join('/')}</span>` : '';
-    const tierCls = 'tag-' + (m.tier === 'Specialist' ? 'spec' : m.tier.toLowerCase());
+  Object.values(groups).forEach(g => {
+    const center = [g[0].lat, g[0].lng];
+    const cpt = map.project(center, zoom);
+    const n = g.length;
+    const maxR = Math.max.apply(null, g.map(getSize)) / 2;
+    const Rc = n === 1 ? 0 : Math.min(maxR, 7) + n * 0.8;      // collapsed (tight)
+    const Re = n === 1 ? 0 : maxR + 16 + n * 4.5;              // expanded (spread out)
+    const c = { center, members: [], expanded: false, timer: null, lines: [] };
 
-    const html = `
-      <div class="popup-content">
-        <div class="model-name">${m.lab}: ${m.model}</div>
-        <div style="margin:5px 0">
-          <span class="tag ${m.open ? 'tag-open' : 'tag-closed'}">${m.open ? 'Open weights' : 'Closed weights'}</span>
-          <span class="tag ${tierCls}">${m.tier}</span>
-          ${hostTag}
-        </div>
-        <div style="color:#8899bb;font-size:12px">Origin: ${m.region}${SCALE[m.model] ? ' &middot; ~'+SCALE[m.model]+'B (est. scale)' : ''} &middot; ${m.onOR ? 'on OpenRouter' : 'direct API only'}</div>
-        <div class="price">${priceLine}</div>
-        <div style="margin-top:4px;color:#8899bb;font-size:12px">${m.desc}</div>
-      </div>`;
-
-    const icon = L.divIcon({
-      html: m.open
-        ? `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid rgba(255,255,255,0.4);opacity:0.92;box-shadow:0 0 8px ${color}44"></div>`
-        : `<div style="width:${size}px;height:${size}px;border-radius:50%;background:transparent;border:3px solid ${color};opacity:0.9;display:flex;align-items:center;justify-content:center"><div style="width:${size*0.32}px;height:${size*0.32}px;border-radius:50%;background:${color};opacity:0.55"></div></div>`,
-      className: '', iconSize: [size, size], iconAnchor: [size/2, size/2]
+    g.forEach((m, i) => {
+      const a = n === 1 ? 0 : (i / n) * 2 * Math.PI - Math.PI / 2;
+      const cp = n === 1 ? center : llFromPt(cpt, Rc, a, zoom);
+      const ep = n === 1 ? center : llFromPt(cpt, Re, a, zoom);
+      const marker = L.marker(cp, { icon: makeIcon(m) }).bindPopup(popupHtml(m), { maxWidth: 300 }).addTo(markerGroup);
+      if (n > 1) {
+        marker.on('mouseover', () => expandCluster(c));
+        marker.on('mouseout', () => scheduleCollapse(c));
+      }
+      c.members.push({ m, marker, cp, ep, a });
+      if (showFlows && m.open && Array.isArray(m.host)) {
+        m.host.forEach(h => { if (HOST_HUB[h]) L.polyline(arcPoints({lat:center[0],lng:center[1]}, HOST_HUB[h]), { color:'#3fae7a', weight:1.4, opacity:0.5, dashArray:'4 6' }).addTo(flowGroup); });
+      }
     });
 
-    L.marker(m._pos, { icon })
-      .bindPopup(html, { maxWidth: 300 })
-      .addTo(markerGroup);
+    if (n > 1) {
+      const pad = L.circleMarker(center, { radius: Re + maxR + 12, opacity: 0, fillOpacity: 0, interactive: true }).addTo(padGroup);
+      pad.on('mouseover', () => expandCluster(c));
+      pad.on('mouseout', () => scheduleCollapse(c));
+      c.pad = pad;
+    }
+    clusters.push(c);
   });
 };
 
@@ -339,12 +378,28 @@ map.on('zoomend', buildMarkers);
 // Default to the US–EU–China band (crops the empty southern hemisphere); still pannable to the rest.
 map.fitBounds([[8, -132], [58, 150]], { animate: false });
 
+// Desktop: collapse a panel to just its title so it stops covering the map.
+window.toggleMin = function(id) {
+  const p = document.getElementById(id);
+  const min = p.classList.toggle('min');
+  p.querySelector('.panel-toggle').innerHTML = min ? '+' : '&ndash;';
+};
+// Start with filters + legend collapsed on desktop so the map loads unobstructed.
+if (window.innerWidth > 640) {
+  ['controls', 'legend'].forEach(id => {
+    document.getElementById(id).classList.add('min');
+    document.querySelector('#' + id + ' .panel-toggle').textContent = '+';
+  });
+}
+
 // Mobile: filters + legend live in slide-up bottom sheets; open one at a time.
 window.toggleSheet = function(id) {
   const otherId = id === 'controls' ? 'legend' : 'controls';
   document.getElementById(otherId).classList.remove('open');
   document.getElementById('tab-' + otherId).classList.remove('active');
-  const open = document.getElementById(id).classList.toggle('open');
+  const p = document.getElementById(id);
+  p.classList.remove('min');  // expanded sheet always shows full content on mobile
+  const open = p.classList.toggle('open');
   document.getElementById('tab-' + id).classList.toggle('active', open);
 };
 
