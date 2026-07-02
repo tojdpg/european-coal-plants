@@ -29,7 +29,7 @@ Position on the map = **origin (lab HQ)** · size = **estimated model scale** ·
 | 20 | Cohere | Command A | ❌ | Strong | $2.50 | $10 | 256K | Toronto, CA | US | ✅ |
 | 21 | Mistral AI | Mistral Large 2512 | ✅ | Strong | $0.50 | $1.50 | 262K | Paris, FR | EU / US | ✅ |
 | 22 | Mistral AI | Mistral Medium 3.5 | ❌ | Strong | $1.50 | $7.50 | 262K | Paris, FR | EU / US | ✅ |
-| 23 | DeepCogito | Cogito V2.1 671B | ✅ | Strong | $1.25 | $1.25 | 128K | Paris / US | EU / US | ✅ |
+| 23 | DeepCogito | Cogito V2.1 (DeepSeek-derived) | ✅ | Strong | $1.25 | $1.25 | 128K | Paris / US | EU / US | ✅ |
 | 24 | Poolside | Laguna XS.2 | ❌ | Strong | $0.10 | $0.20 | 262K | Paris / SF | EU / US | ✅ |
 | 25 | Reka AI | Reka Edge | ✅ | Mid | $0.10 | $0.10 | 16K | London, UK | anywhere | ✅ |
 | 26 | Aleph Alpha | Luminous / Pharia | ❌ | Strong | — | — | — | Heidelberg, DE | DE (direct API) | ❌ nicht auf OR (Sovereign) |
