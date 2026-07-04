@@ -111,7 +111,8 @@
       <ul class="context-list">
         <li><strong>Weather:</strong> Earth2Studio GFS forecast run 2026-05-25T12:00:00Z / lead 8 h, valid 2026-05-25T20:00:00Z / 2026-05-25T22:00:00+02:00.</li>
         <li><strong>Pollution:</strong> Open-Meteo Air Quality forecast/API value for 2026-05-25T20:00:00Z / 2026-05-25T22:00:00+02:00.</li>
-        <li><strong>Surface imagery:</strong> Clay/Sentinel-2 L2A scene captured 2026-05-25T10:15:59.024000Z.</li>
+        <li><strong>Clay analytical imagery:</strong> Clay/Sentinel-2 L2A scene captured 2026-05-25T10:15:59.024000Z; 256 x 256 px model chip (analytical use only).</li>
+        <li><strong>Visual context imagery:</strong> Berlin DOP20RGBI orthophoto 2024 via official WMS; 1024 x 1024 px, 10240 m bbox.</li>
       </ul>
       <p class="hub-link"><a href="../">Evidence Hub</a></p>
     </section>
@@ -123,6 +124,7 @@
         <figure><a href="assets/berlin-clay-true-color.png" data-fullsrc="assets/berlin-clay-true-color.png"><img src="assets/berlin-clay-true-color.png" data-fullsrc="assets/berlin-clay-true-color.png" alt="Native 256 pixel Clay true-color preview for Berlin Mitte / Tiergarten"></a><figcaption>Clay/Sentinel-2 true-color preview for Berlin Mitte / Tiergarten. Native 256 x 256 px, not an upscale. Click image to enlarge.</figcaption></figure>
         <figure><a href="assets/berlin-ndvi-map.png" data-fullsrc="assets/berlin-ndvi-map.png"><img src="assets/berlin-ndvi-map.png" data-fullsrc="assets/berlin-ndvi-map.png" alt="NDVI vegetation map for Berlin Mitte / Tiergarten"></a><figcaption>NDVI vegetation proxy from B08 NIR and B04 red. Click image to enlarge.</figcaption></figure>
         <figure><a href="assets/berlin-vegetation-mask.png" data-fullsrc="assets/berlin-vegetation-mask.png"><img src="assets/berlin-vegetation-mask.png" data-fullsrc="assets/berlin-vegetation-mask.png" alt="Vegetation mask for Berlin Mitte / Tiergarten"></a><figcaption>Vegetation mask using NDVI &gt; 0.3. Click image to enlarge.</figcaption></figure>
+        <figure><a href="assets/berlin-orthophoto-1024.png" data-fullsrc="assets/berlin-orthophoto-1024.png"><img src="assets/berlin-orthophoto-1024.png" data-fullsrc="assets/berlin-orthophoto-1024.png" alt="Berlin DOP20RGBI orthophoto 2024 for Berlin Mitte / Tiergarten"></a><figcaption>Berlin DOP20RGBI orthophoto 2024 (1024 x 1024 px, 10240 m bbox). High-resolution visual context from Berlin official WMS. Click image to enlarge.</figcaption></figure>
       </div>
     </section>
 
@@ -131,7 +133,7 @@
       <!-- PAUL_INTERPRETATION_START -->
       <p><strong>Central Mitte / Tiergarten is refreshed for the Berlin 22:00 context.</strong> The nearest GFS grid point for 2026-07-04T22:00:00+02:00 shows 15.9 °C, light 2.28 m/s wind, and 66.9% relative humidity. The Open-Meteo air-quality grid reports PM10 at 7.8 µg/m³, PM2.5 at 3.8 µg/m³, NO2 at 10.8 µg/m³, and ozone at 66.0 µg/m³.</p>
       <p>The weather pattern reads as a mild late-evening urban boundary layer: cooler than the previous warm evening update, more humid, and less windy. That means dispersion is still present but gentler, so near-road NO2 can show up more clearly even while particle levels remain low.</p>
-      <p>The shifted 256 px Sentinel-2/Clay tile still provides the surface context, not a same-hour observation. Its NDVI mean is 0.2238, with 30.8% of pixels above NDVI 0.3. <strong>NDWI is not available for this update — no NDWI command exists in openclaw-geo; a named wrapper would need to be added.</strong> These image-derived indices are satellite spectral proxies, not in-situ pollution measurements; weather and air quality describe 2026-07-04T22:00:00+02:00, while the Sentinel-2 surface scene is from 2026-05-25T10:15:59Z.</p>
+      <p>The shifted 256 px Sentinel-2/Clay tile still provides the surface context, not a same-hour observation. Its NDVI mean is 0.2238, with 30.8% of pixels above NDVI 0.3. <strong>NDWI is not available for this update — no NDWI command exists in openclaw-geo; a named wrapper would need to be added.</strong> The orthophoto below (1024 x 1024 px, Berlin DOP20RGBI 2024 via official WMS) provides high-resolution visual context. These image-derived indices are satellite spectral proxies, not in-situ pollution measurements; weather and air quality describe 2026-07-04T22:00:00+02:00, while the Sentinel-2 surface scene is from 2026-05-25T10:15:59Z.</p>
       <!-- PAUL_INTERPRETATION_END -->
     </section>
 
