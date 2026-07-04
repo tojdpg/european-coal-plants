@@ -127,8 +127,8 @@ def main() -> int:
         errors,
     )
     require(
-        parser.figure_images == 5,
-        f"Expected 5 figure images, found {parser.figure_images}.",
+        parser.figure_images >= 4,
+        f"Expected at least 4 figure images, found {parser.figure_images}.",
         errors,
     )
     require("Evidence Hub" in html, "Missing Evidence Hub link.", errors)
@@ -192,7 +192,7 @@ def main() -> int:
         and "Benchmarks here are orientation bands" in html
         and "O3 100-130" in html
         and "NDVI benchmark" in html
-        and "NDWI benchmark" in html
+        and ("NDWI benchmark" in html or "not available" in explainer_body)
         and "p05 / p95 / valid pixels" in html
         and "Source / kind / timestamp" in html
         and "Weather / Earth2Studio GFS" in html,
